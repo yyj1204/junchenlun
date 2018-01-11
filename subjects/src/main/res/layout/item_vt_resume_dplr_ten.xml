@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingLeft="@dimen/dp_ten"
+    android:paddingRight="@dimen/dp_ten"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_white"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_fifteen">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="福建网客天下科技有限公司"
+            android:textColor="@color/title_color"
+            android:textSize="@dimen/sp_twelve" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2014/04-2016/08"
+            android:textColor="@color/title_color_gray"
+            android:textSize="@dimen/sp_twelve" />
+
+        <ImageView
+            android:layout_width="9dp"
+            android:layout_height="16dp"
+            android:layout_marginLeft="@dimen/dp_eight"
+            android:src="@drawable/mine_arrow_right_gray" />
+    </LinearLayout>
+</LinearLayout>

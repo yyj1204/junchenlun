@@ -1,0 +1,56 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/dp_ten"
+        android:layout_marginRight="@dimen/dp_ten"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_img_num"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:background="@drawable/shape_top_lr"
+            android:textSize="@dimen/dp_twelve"
+            android:textColor="@color/title_color_gray"
+            android:text="您确定退出登录吗？" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:gravity="center"
+            android:background="@color/dividerLine"
+             />
+        <TextView
+            android:id="@+id/outTvSure"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:background="@color/main_white"
+            android:textSize="@dimen/sp_fifteen"
+            android:textColor="@color/tab_text_normal"
+            android:text="退出确定" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:gravity="center"
+            android:background="@color/dividerLine"
+        />
+        <TextView
+            android:id="@+id/outTvCancel"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:background="@drawable/shape_bottom_lr"
+            android:textSize="@dimen/sp_fifteen"
+            android:layout_marginBottom="55dp"
+            android:textColor="@color/tab_text_selected"
+            android:text="取消" />
+    </LinearLayout>
+
+</RelativeLayout>

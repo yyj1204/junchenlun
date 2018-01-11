@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffb321</color>
+    <color name="colorPrimaryDark">#ffb321</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#f0f0f0</color>
+    <color name="dividerLine">#e5e5e5</color>
+    <color name="main_white">#ffffff</color>
+    <color name="tab_text_normal">#000000</color>
+    <color name="tab_text_selected">#ffb321</color>
+    <color name="mask_color">#88888888</color>
+    <color name="check_bg">#f2f2f2</color>
+    <color name="gray">#cccccc</color>
+    <color name="title_color">#000000</color>
+    <color name="title_gray_5d">#5d5d5d</color>
+    <color name="title_color_gray">#888888</color>
+    <color name="text_enabled">#FFFFFF</color>
+    <color name="text_disabled">#C2E6FC</color>
+    <color name="icon_enabled">#FFFFFF</color>
+    <color name="icon_disabled">#C2E6FC</color>
+    <color name="textColorHint">#b2b2b2</color>
+    <color name="red_fa716f">#fa716f</color>
+    <color name="submit_unenable">#FFBC2F</color>
+    <color name="shape_gray">#cccccc</color>
+    <color name="bg_white">#f4f4f4</color>
+    <color name="text_red">#fa716f</color>
+    <color name="transparent">#33000000</color>
+
+    <color name="color_ffffff">#ffffff</color>
+    <color name="color_f0f0f0">#f0f0f0</color>
+    <color name="color_ffb321">#ffb321</color>
+    <color name="color_000000">#000000</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_a0a0a0">#a0a0a0</color>
+    <color name="color_fa716f">#fa716f</color>
+    <color name="color_e1e1e1">#e1e1e1</color>
+</resources>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar_activity" />
+
+    <LinearLayout
+        android:id="@+id/favorLlUnFavor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="177dp"
+            android:layout_height="114dp"
+            android:layout_marginBottom="100dp"
+            android:src="@drawable/un_favor" />
+    </LinearLayout>
+
+    <com.wktx.www.emperor.Widget.DropDownMenu
+        android:id="@+id/dropDownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:dddividerColor="@color/gray"
+        app:ddmaskColor="@color/mask_color"
+        app:ddmenuBackgroundColor="@color/white"
+        app:ddmenuIconOrientation="right"
+        app:ddmenuSelectedIcon="@drawable/down_pull_selected"
+        app:ddmenuTextSize="13sp"
+        app:ddmenuUnselectedIcon="@drawable/down_pull_normal"
+        app:ddtextSelectedColor="@color/colorPrimary"
+        app:ddtextUnselectedColor="@color/title_color"
+        app:ddunderlineColor="@color/gray"></com.wktx.www.emperor.Widget.DropDownMenu>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:drawablePadding="@dimen/dp_ten"
+            android:drawableRight="@drawable/selector_pull_down"
+            android:gravity="center"
+            android:text="全部岗位"
+            android:textColor="@color/title_gray_5d" />
+    </LinearLayout>
+</LinearLayout>

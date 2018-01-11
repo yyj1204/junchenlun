@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dp_ten"
+    android:paddingRight="@dimen/dp_ten">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_white"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/dp_eighteen"
+        android:paddingLeft="@dimen/dp_ten"
+        android:paddingRight="@dimen/dp_ten"
+        android:paddingTop="@dimen/dp_eighteen">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2014/04-2016/08"
+            android:textColor="@color/title_color_gray"
+            android:textSize="@dimen/sp_twelve" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/dp_ten"
+            android:paddingTop="@dimen/dp_ten">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="福建网客天下科技有限公司"
+                android:textColor="@color/title_color"
+                android:textSize="@dimen/sp_thirteen" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_ten"
+                android:background="@drawable/shape_solid_unstroke_yellow_eight"
+                android:text="服装内衣"
+                android:textColor="@color/title_color"
+                android:textSize="@dimen/sp_twelve" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="视觉传达设计师"
+            android:textColor="@color/title_color_gray"
+            android:textSize="@dimen/sp_twelve" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_ten"
+            android:text="负责整个店铺页面装修，活动页面制作，商品详情"
+            android:textColor="@color/title_color_gray"
+            android:textSize="@dimen/sp_twelve" />
+    </LinearLayout>
+</LinearLayout>

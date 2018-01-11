@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_about_us"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:fitsSystemWindows="true"
+    android:background="@color/white">
+    <include layout="@layout/include_toolbar_activity"/>
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sp_sixteen"
+        android:padding="@dimen/dp_ten"
+        android:layout_margin="@dimen/dp_twenty"
+        android:textColor="@color/title_color"
+        android:lineSpacingExtra="5dp"
+        android:text="    君臣论是一款专门做招聘的APP，多样化潮鞋款式在线定制，这里的每双鞋子都有你想要的样子。独创的个性定制器，操作简单，所见即所得，你可以亲身参与商品的设计与制作，你所购买的每件商品都有你的标签，无论是个性签名，创意配色，还是原创图案，在艳岛的定制器上都能完美实现。
+"/>
+
+</LinearLayout>

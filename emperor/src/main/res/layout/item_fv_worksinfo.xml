@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+ <TextView
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:textSize="@dimen/sp_fifteen"
+     android:textColor="@color/title_color"
+     android:background="@color/main_white"
+     android:paddingLeft="@dimen/dp_fifteen"
+     android:paddingRight="@dimen/dp_fifteen"
+     android:paddingTop="@dimen/dp_thirty"
+     android:text="女性用品店铺首页"/>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_white"
+        android:paddingLeft="@dimen/dp_fifteen"
+        android:paddingRight="@dimen/dp_fifteen"
+        android:paddingTop="@dimen/dp_thirteen"
+        android:paddingBottom="@dimen/dp_thirteen"
+        android:text="生活用品/个人护理/女性用品"
+        android:textColor="@color/title_color_gray"
+        android:textSize="@dimen/sp_thirteen" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sp_thirteen"
+        android:textColor="@color/title_color_gray"
+        android:padding="@dimen/dp_fifteen"
+        android:layout_marginTop="@dimen/dp_one"
+        android:background="@color/main_white"
+        android:text="女性用品店铺首页设计，突出产品健康"/>
+    <TextView
+        android:id="@+id/worksDetailTvCheckResume"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_fifty"
+        android:text="查看美工简历"
+        android:textColor="@color/main_white"
+        android:gravity="center"
+        android:textSize="@dimen/sp_fifteen"
+        android:background="@color/colorPrimary"/>
+</LinearLayout>

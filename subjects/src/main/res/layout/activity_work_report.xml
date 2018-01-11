@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.wktx.www.subjects.Activity.WorkReportActivity">
+
+    <include layout="@layout/include_toolbar_activity" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_fifteen"
+        android:text="累计销售总额"
+        android:textSize="@dimen/sp_twelve" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@color/main_white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_fifteen"
+        android:paddingRight="@dimen/dp_fifteen" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_fifteen"
+        android:text="上个月销售额"
+        android:textSize="@dimen/sp_twelve" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@color/main_white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_fifteen"
+        android:paddingRight="@dimen/dp_fifteen" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_fifteen"
+        android:text="上个月销售额数据"
+        android:textSize="@dimen/sp_twelve" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="224dp"
+        android:layout_below="@id/toolbar"
+        android:layout_marginBottom="21dp"
+        android:layout_marginLeft="@dimen/dp_fifteen"
+        android:layout_marginRight="@dimen/dp_fifteen"
+        android:background="@color/main_white"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="66dp"
+            android:layout_height="66dp"
+            android:src="@drawable/resume_add" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="@dimen/sp_eighteen"
+        android:background="@drawable/submit_selected"
+        android:gravity="center"
+        android:text="保存"
+        android:textColor="@color/main_white"
+        android:textSize="@dimen/sp_sixteen" />
+</LinearLayout>

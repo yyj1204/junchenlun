@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="@color/color_f0f0f0"
+    tools:context="com.wktx.www.emperor.com.wktx.www.emperor.Activity.SalaryTrusteeshipActivity">
+
+    <include layout="@layout/include_toolbar_activity" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/color_ffffff"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="53dp"
+            android:layout_height="53dp"
+            android:scaleType="fitXY"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/head_women" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="胡图图"
+                    android:textColor="@color/title_color"
+                    android:textSize="15sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1年"
+                    android:textColor="@color/title_color"
+                    android:layout_marginLeft="@dimen/dp_ten"
+                    android:background="@drawable/shape_buttom_nine"
+                    android:layout_gravity="bottom"
+                    android:textSize="@dimen/sp_twelve" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="服装内衣/母婴用品、生活百货"
+                    android:textColor="@color/title_color"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="包月"
+                    android:textColor="@color/title_color"
+                    android:layout_marginLeft="@dimen/dp_ten"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:gravity="center_vertical"
+        android:background="@color/color_ffffff">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="雇佣周期："
+            android:textSize="13sp"
+            android:textColor="@color/color_a0a0a0"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1个月"
+            android:textSize="13sp"
+            android:textColor="@color/color_000000"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="1dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:gravity="center_vertical"
+        android:background="@color/color_ffffff">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017.10.16"
+            android:textSize="18sp"
+            android:textColor="@color/color_000000"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_employcycle_arrows"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017.11.15"
+            android:textSize="18sp"
+            android:textColor="@color/color_000000"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="1dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:gravity="center_vertical"
+        android:background="@color/color_ffffff">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="托管工资："
+            android:textSize="13sp"
+            android:textColor="@color/color_a0a0a0"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4800元"
+            android:textSize="13sp"
+            android:textColor="@color/color_fa716f"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/paywayRlBalance"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="1dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:gravity="center_vertical"
+        android:background="@color/color_ffffff">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="可用余额："
+            android:textSize="13sp"
+            android:textColor="@color/color_a0a0a0"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="0元"
+            android:textSize="13sp"
+            android:textColor="@color/color_000000"/>
+
+        <ImageView
+            android:id="@+id/img_balance"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:clickable="true"
+            app:srcCompat="@drawable/selector_radiobutton" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:background="@color/main_white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_fifteen"
+        android:paddingRight="@dimen/dp_fifteen"
+        android:text="快捷支付"
+        android:layout_marginTop="@dimen/dp_ten"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_fifteen" />
+
+    <RelativeLayout
+        android:id="@+id/paywayRlAliPay"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView56"
+        android:background="@color/main_white"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dp_one"
+        android:paddingTop="@dimen/dp_ten"
+        android:paddingBottom="@dimen/dp_ten"
+        android:paddingLeft="@dimen/dp_fifteen"
+        android:paddingRight="@dimen/dp_fifteen">
+
+        <ImageView
+            android:id="@+id/imageViewfff31"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_centerVertical="true"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ali_pay" />
+
+        <TextView
+            android:id="@+id/textVigggew57"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageViewfff31"
+            android:layout_weight="1"
+            android:paddingLeft="18px"
+            android:text="支付宝支付"
+            android:textColor="@color/title_color"
+            android:textSize="@dimen/sp_thirteen" />
+
+        <ImageView
+            android:id="@+id/img_Ali"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_weight="1"
+            android:clickable="true"
+            app:srcCompat="@drawable/selector_radiobutton" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/paywayRlWxPay"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@+id/paywayRlAliPay"
+        android:background="@color/main_white"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dp_one"
+        android:paddingTop="@dimen/dp_ten"
+        android:paddingBottom="@dimen/dp_ten"
+        android:paddingLeft="@dimen/dp_fifteen"
+        android:paddingRight="@dimen/dp_fifteen">
+
+        <ImageView
+            android:id="@+id/imageView31"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/weichat_pay" />
+
+        <TextView
+            android:id="@+id/textView57"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="18px"
+            android:layout_toRightOf="@+id/imageView31"
+            android:layout_weight="1"
+            android:text="微信支付"
+            android:textColor="@color/title_color"
+            android:textSize="@dimen/sp_thirteen" />
+
+        <ImageView
+            android:id="@+id/img_wechat"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_weight="1"
+            android:clickable="true"
+            app:srcCompat="@drawable/selector_radiobutton" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/tv_pay_sure"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_fifty"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="确定支付"
+        android:textColor="@color/main_white"
+        android:textSize="@dimen/sp_sixteen" />
+
+</LinearLayout>

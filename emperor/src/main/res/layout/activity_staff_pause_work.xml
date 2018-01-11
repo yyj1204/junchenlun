@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="@color/color_f0f0f0"
+    tools:context="com.wktx.www.emperor.com.wktx.www.emperor.Activity.StaffPauseWorkActivity">
+
+    <include layout="@layout/include_toolbar_activity" />
+
+    <EditText
+        android:id="@+id/et_pausework_cause_"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_white"
+        android:gravity="top|left"
+        android:hint="请填写暂停原因"
+        android:minHeight="150dp"
+        android:paddingBottom="@dimen/dp_eleven"
+        android:paddingLeft="@dimen/dp_fifteen"
+        android:paddingRight="@dimen/dp_fifteen"
+        android:paddingTop="@dimen/dp_eleven"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/sp_fifteen" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:orientation="horizontal"
+        android:background="@color/color_ffffff"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="1dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂停时间"
+            android:layout_weight="1"
+            android:textSize="15sp"
+            android:textColor="@color/color_999999"/>
+
+        <RelativeLayout
+            android:id="@+id/rela_pausework_minus"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:background="@drawable/shape_stroke_gray_one">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_staff_minus"/>
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_pausework_day"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:text="1"
+            android:gravity="center"
+            android:textColor="@color/color_000000"
+            android:textSize="13sp"
+            android:background="@drawable/shape_stroke_gray_one"/>
+
+        <RelativeLayout
+            android:id="@+id/rela_pausework_add"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:background="@drawable/shape_stroke_gray_one">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_staff_add"/>
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="天"
+            android:layout_marginLeft="8dp"
+            android:textColor="@color/color_000000"
+            android:textSize="13sp"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="15sp"
+        android:textSize="12sp"
+        android:textColor="@color/color_999999"
+        android:text="最多仅能暂停一次，一次最多仅能暂停7天"/>
+
+    <TextView
+        android:id="@+id/tv_pausework_sure"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="确认"
+        android:gravity="center"
+        android:textColor="@color/color_ffffff"
+        android:textSize="16sp"
+        android:layout_marginTop="39dp"
+        android:layout_marginLeft="15sp"
+        android:layout_marginRight="15sp"
+        android:background="@drawable/shape_buttom_yellow_five"/>
+</LinearLayout>

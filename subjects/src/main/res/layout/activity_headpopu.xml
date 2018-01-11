@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/dp_ten"
+        android:layout_marginRight="@dimen/dp_ten"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/photo_take"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:background="@drawable/shape_top_lr"
+            android:textSize="@dimen/sp_fifteen"
+            android:textColor="@color/tab_text_normal"
+            android:text="拍照" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:gravity="center"
+            android:background="@color/dividerLine"
+             />
+        <TextView
+            android:id="@+id/photo_album"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:background="@drawable/shape_bottom_lr"
+            android:textSize="@dimen/sp_fifteen"
+            android:textColor="@color/tab_text_normal"
+            android:text="相册选择" />
+
+        <TextView
+            android:id="@+id/photo_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="55dp"
+            android:background="@drawable/shape_ltrb"
+            android:textSize="@dimen/sp_fifteen"
+            android:textColor="@color/tab_text_normal"
+            android:text="取消" />
+    </LinearLayout>
+
+</RelativeLayout>

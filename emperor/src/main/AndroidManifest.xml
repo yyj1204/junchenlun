@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wktx.www.emperor">
+    //网络请求权限
+    <!-- if you want to load images from the internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <application
+        android:name="com.wktx.www.emperor.Application.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="com.wktx.www.emperor.Activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.wktx.www.emperor.Activity.LoginActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.RegiestActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.ForgetActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.AccountProfileActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.UpdateNickNameActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.AboutUsActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.ServiceActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.FavorActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.PacketActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.StoreInfoActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.EmployActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.TrasactActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.PacketRuleActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.PayPswctivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.InterviewActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.CheckListActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.CashActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.PurseActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.RechargeActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.UpdateStoreActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.MessageActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.MessageDetailsActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.InviteGuideActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.CheckAccountActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.DemandActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.AddDemandActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.DemandDetailActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.ArrangeWorkActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.RecruitActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.SearchActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.StaffManageActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.StaffRenewActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.StaffArrangeWorkActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.StaffPauseWorkActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.StaffComplaintActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.StaffFireActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.StaffSalaryActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.StaffAttendanceActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.StaffReportActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.WorksActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.WorksDetailActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.StaffSaleActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.StaffReportDetaisActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.CertificateIndividualActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.CertificateStoreActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.ArtistResumeActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.ArtistEmployActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.OrdersInfoActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.SalaryTrusteeshipActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.PayResultActivity" />
+        <activity android:name="com.wktx.www.emperor.Activity.ScreeningActivity"></activity>
+    </application>
+
+</manifest>

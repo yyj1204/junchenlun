@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="@color/color_f0f0f0"
+    tools:context="com.wktx.www.emperor.com.wktx.www.emperor.Activity.StaffComplaintActivity">
+
+    <include layout="@layout/include_toolbar_activity" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_fourteen"
+        android:paddingRight="@dimen/dp_fourteen"
+        android:text="投诉问题"
+        android:textColor="@color/title_gray_5d"
+        android:textSize="@dimen/sp_twelve" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_white"
+        android:gravity="center_vertical"
+        android:hint="请填写内容，10字以内"
+        android:minHeight="36dp"
+        android:maxLength="10"
+        android:paddingLeft="@dimen/dp_fourteen"
+        android:paddingRight="@dimen/dp_fourteen"
+        android:textColor="@color/title_color_gray"
+        android:textSize="@dimen/sp_fourteen" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_fourteen"
+        android:paddingRight="@dimen/dp_fourteen"
+        android:text="投诉原因"
+        android:textColor="@color/title_gray_5d"
+        android:textSize="@dimen/sp_twelve" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_white"
+        android:gravity="top|left"
+        android:hint="请描述具体问题，100字以内"
+        android:minHeight="107dp"
+        android:maxLength="100"
+        android:paddingBottom="@dimen/dp_ten"
+        android:paddingLeft="@dimen/dp_fourteen"
+        android:paddingRight="@dimen/dp_fourteen"
+        android:paddingTop="@dimen/dp_ten"
+        android:textColor="@color/title_color_gray"
+        android:textSize="@dimen/sp_fourteen" />
+
+    <TextView
+        android:id="@+id/tv_complaint_submit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="提交投诉"
+        android:gravity="center"
+        android:textColor="@color/color_ffffff"
+        android:textSize="16sp"
+        android:layout_marginTop="38dp"
+        android:layout_marginLeft="15sp"
+        android:layout_marginRight="15sp"
+        android:background="@drawable/shape_buttom_yellow_five"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15sp"
+        android:textSize="14sp"
+        android:textColor="@color/color_999999"
+        android:text="客服将在3个工作日内介入"/>
+</LinearLayout>

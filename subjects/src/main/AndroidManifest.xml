@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wktx.www.subjects">
+    //网络请求权限
+    <!-- if you want to load images from the internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity.ScreeningActivity" />
+        <activity android:name=".Activity.MessageActivity" />
+        <activity android:name=".Activity.MessageDetailsActivity" />
+        <activity android:name=".Activity.SearchActivity" />
+        <activity android:name=".Activity.RegiestActivity" />
+        <activity android:name=".Activity.ForgetActivity" />
+        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".Activity.AccountProfileActivity" />
+        <activity android:name=".Activity.CashActivity" />
+        <activity android:name=".Activity.InterviewActivity" />
+        <activity android:name=".Activity.AboutUsActivity" />
+        <activity android:name=".Activity.TrasactActivity" />
+        <activity android:name=".Activity.ServiceActivity" />
+        <activity android:name=".Activity.FavorActivity" />
+        <activity android:name=".Activity.StaffManageActivity" />
+        <activity android:name=".Activity.StaffAttendanceActivity" />
+        <activity android:name=".Activity.StaffReportDetaisActivity" />
+        <activity android:name=".Activity.StaffRenewActivity" />
+        <activity android:name=".Activity.StaffReportActivity" />
+        <activity android:name=".Activity.StaffSalaryActivity" />
+        <activity android:name=".Activity.WorkDetailActivity" />
+        <activity android:name=".Activity.ResumeActivity" />
+        <activity android:name=".Activity.SubmitResumeActivity" />
+        <activity android:name=".Activity.PreviewResumeActivity" />
+        <activity android:name=".Activity.PersonalInfoActivity" />
+        <activity android:name=".Activity.PersonalInfoEditActivity"></activity>
+        <activity android:name=".Activity.WorkReportActivity" />
+        <activity android:name=".Activity.GoodPickActivity"></activity>
+    </application>
+
+</manifest>

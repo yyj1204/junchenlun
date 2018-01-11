@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_update_nick_name"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@color/white"
+    tools:context="com.wktx.www.emperor.Activity.UpdateNickNameActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:alpha="0.95"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    >
+        <ImageView
+            android:id="@+id/tb_IvReturn"
+            android:layout_width="@dimen/dp_sixty_three"
+            android:layout_height="@dimen/dp_fourty_three"
+            android:paddingRight="@dimen/dp_fifty"
+            android:paddingTop="@dimen/dp_ten"
+            android:paddingBottom="@dimen/dp_ten"
+            android:layout_gravity="center_vertical|left"
+            android:src="@drawable/arrow_left"/>
+
+        <TextView
+            android:id="@+id/tb_TvBarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/title_UpdateNickName"
+            android:textColor="@color/main_white"
+            android:textSize="@dimen/sp_twenty_three"
+        />
+
+        <TextView
+            android:id="@+id/updataNickNameTVSure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="@dimen/dp_ten"
+            android:textColor="@color/main_white"
+            android:textSize="@dimen/sp_twenty"
+            android:text="确定"/>
+    </android.support.v7.widget.Toolbar>
+
+    <EditText
+        android:id="@+id/updataNickNameEtNickName"
+        android:layout_width="match_parent"
+              android:layout_height="44dp"
+              android:background="@color/main_white"
+              android:hint="请输入更改的昵称"
+              android:textColorHint="@color/textColorHint"
+              android:textSize="@dimen/sp_sixteen"
+              android:padding="@dimen/dp_ten"/>
+</LinearLayout>

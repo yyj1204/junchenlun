@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:hedgehog="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp_ten"
+        android:paddingRight="@dimen/dp_ten"
+        android:paddingTop="@dimen/dp_twenty">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="雇主:"
+                android:textColor="@color/title_color"
+                android:textSize="@dimen/sp_fifteen" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_ten"
+                android:text="25*******58"
+                android:textColor="@color/title_color"
+                android:textSize="@dimen/sp_fifteen" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_ten"
+            android:layout_marginBottom="@dimen/dp_ten"
+            android:text="其他设计"
+            android:textColor="@color/title_color"
+            android:textSize="@dimen/sp_thirteen" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/main_white"
+        android:paddingLeft="@dimen/dp_ten"
+        android:paddingRight="@dimen/dp_ten"
+        android:paddingBottom="@dimen/dp_ten"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="服务态度"
+                android:textColor="@color/title_color_gray"
+                android:textSize="@dimen/sp_thirteen" />
+
+            <com.hedgehog.ratingbar.RatingBar
+                android:id="@+id/ratingbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:stepSize="1"
+                hedgehog:clickable="true"
+                hedgehog:starCount="5"
+                hedgehog:starEmpty="@drawable/star_normal"
+                hedgehog:starFill="@drawable/star_selected"
+                hedgehog:starImageHeight="@dimen/dp_twenty"
+                hedgehog:starImagePadding="5dp"
+                hedgehog:starImageWidth="@dimen/dp_twenty" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="设计能力"
+                android:textColor="@color/title_color"
+                android:textSize="@dimen/sp_thirteen" />
+
+            <com.hedgehog.ratingbar.RatingBar
+                android:id="@+id/ratingbar1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:stepSize="1"
+                hedgehog:clickable="true"
+                hedgehog:starCount="5"
+                hedgehog:starEmpty="@drawable/star_normal"
+                hedgehog:starFill="@drawable/star_selected"
+                hedgehog:starImageHeight="@dimen/dp_twenty"
+                hedgehog:starImagePadding="5dp"
+                hedgehog:starImageWidth="@dimen/dp_twenty" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="响应速度"
+                android:textColor="@color/title_color_gray"
+                android:textSize="@dimen/sp_thirteen" />
+
+            <com.hedgehog.ratingbar.RatingBar
+                android:id="@+id/ratingbar2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:stepSize="1"
+                hedgehog:clickable="true"
+                hedgehog:starCount="5"
+                hedgehog:starEmpty="@drawable/star_normal"
+                hedgehog:starFill="@drawable/star_selected"
+                hedgehog:starImageHeight="@dimen/dp_twenty"
+                hedgehog:starImagePadding="5dp"
+                hedgehog:starImageWidth="@dimen/dp_twenty" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.jaeger.ninegridimageview.NineGridImageView
+        android:id="@+id/ngl_images"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_one"
+        android:background="@color/main_white"
+        android:paddingLeft="@dimen/dp_ten"
+        android:paddingRight="@dimen/dp_ten"
+        android:paddingTop="@dimen/dp_twelve"
+        android:visibility="gone"
+        app:imgGap="3dp"
+        app:showStyle="grid"
+        app:singleImgSize="500dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_white"
+        android:paddingBottom="@dimen/dp_thirty"
+        android:paddingLeft="@dimen/dp_ten"
+        android:paddingRight="@dimen/dp_ten"
+        android:paddingTop="@dimen/dp_ten"
+        android:text="还不错，挺满意的！"
+        android:textColor="@color/title_color"
+        android:textSize="@dimen/sp_thirteen" />
+</LinearLayout>

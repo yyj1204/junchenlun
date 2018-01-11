@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">subjects</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_message">消息通知</string>
+    <string name="title_message_notice">公告详情</string>
+    <string name="title_tab_mine">我的账户</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_login">登陆</string>
+    <string name="title_forget">忘记密码</string>
+    <string name="title_regiest">注册</string>
+    <string name="title_About_us">关于我们</string>
+    <string name="title_service">联系客服</string>
+    <string name="title_favor">我的收藏</string>
+    <string name="title_storeinfo">店铺信息</string>
+    <string name="title_transact">交易记录</string>
+    <string name="title_interview">面试记录</string>
+    <string name="title_packet_rule">使用规则</string>
+    <string name="title_account">个人资料</string>
+    <string name="title_purse">提现</string>
+    <string name="title_cash">账户余额</string>
+    <string name="title_tab_manager">应聘记录</string>
+    <string name="title_staff_manager">管理我的工作</string>
+    <string name="title_staff_report">工作报告</string>
+    <string name="title_staff_renew">工资</string>
+    <string name="title_staff_salary">工资</string>
+    <string name="title_staff_report_details">发布报告</string>
+    <string name="title_staff_attendance">签到记录</string>
+    <string name="title_workdetail">工作详情</string>
+    <string name="title_resume">我的简历</string>
+    <string name="title_SubmitResume">上传简历</string>
+    <string name="title_PreviewResume">预览简历</string>
+    <string name="title_EditPersonalInfo">编辑个人信息</string>
+    <string name="title_SalesVolume">销售额</string>
+</resources>

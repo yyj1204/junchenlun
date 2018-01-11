@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_about_us"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar_activity" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_white"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/dp_ten"
+        android:paddingLeft="@dimen/dp_fifteen"
+        android:paddingRight="@dimen/dp_fifteen"
+        android:paddingTop="@dimen/dp_fifteen">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="整店装修"
+            android:textColor="@color/title_color"
+            android:textSize="@dimen/sp_fifteen" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_solid_red_five"
+            android:text="待响应"
+            android:textColor="@color/main_white"
+            android:textSize="@dimen/sp_fifteen" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_white"
+        android:lineSpacingExtra="@dimen/dp_eleven"
+        android:minLines="2"
+        android:paddingLeft="@dimen/dp_fifteen"
+        android:paddingRight="@dimen/dp_fifteen"
+        android:textColor="@color/title_color_gray"
+        android:textSize="@dimen/sp_thirteen"
+        android:text="需求的具体内容"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:paddingLeft="@dimen/dp_fifteen"
+        android:paddingRight="@dimen/dp_fifteen"
+        android:background="@color/main_white"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/dp_ten">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="800元"
+            android:drawableLeft="@drawable/demand_price"
+            android:drawablePadding="@dimen/dp_seven"
+            android:textColor="@color/title_color"
+            android:textSize="@dimen/sp_thirteen"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:paddingLeft="@dimen/dp_fifteen"
+        android:paddingRight="@dimen/dp_fifteen"
+        android:background="@color/main_white"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/dp_one">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017年10月16日"
+            android:drawableLeft="@drawable/demand_time"
+            android:drawablePadding="@dimen/dp_seven"
+            android:textColor="@color/title_color"
+            android:textSize="@dimen/sp_thirteen"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dp_fifteen"
+        android:paddingRight="@dimen/dp_fifteen"
+        android:paddingTop="@dimen/dp_ten"
+        android:paddingBottom="@dimen/dp_ten"
+        android:background="@color/main_white"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/dp_one">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="您创建了需求"
+            android:drawableLeft="@drawable/demand_circle"
+            android:drawablePadding="@dimen/dp_seven"
+            android:textColor="@color/title_color"
+            android:textSize="@dimen/sp_fifteen"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017年10月16日"
+            android:layout_marginLeft="25dp"
+            android:textColor="@color/title_color"
+            android:layout_marginTop="@dimen/dp_five"
+            android:textSize="@dimen/sp_thirteen"/>
+    </LinearLayout>
+</LinearLayout>

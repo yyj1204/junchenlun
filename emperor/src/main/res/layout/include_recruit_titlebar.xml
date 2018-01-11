@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/title_height_default"
+    android:background="@color/colorPrimary"
+    android:id="@+id/title_layout"
+    android:gravity="center"
+    >
+    <ImageView
+        android:id="@+id/tb_IvReturn"
+        android:layout_width="@dimen/dp_fourty_three"
+        android:layout_height="@dimen/dp_fourty_three"
+        android:layout_gravity="center_vertical|left"
+        android:paddingBottom="@dimen/dp_ten"
+        android:paddingLeft="@dimen/dp_ten"
+        android:paddingTop="@dimen/dp_ten"
+        android:src="@drawable/arrow_left" />
+    <TextView
+        android:background="@drawable/shape_search"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="搜索"
+        android:gravity="center|left"
+        android:textColor="#c5c5c5"
+        android:layout_marginLeft="@dimen/dp_ten"
+        android:id="@+id/title_search"
+        android:drawableLeft="@drawable/ic_search"
+        android:paddingLeft="20dp"
+        android:drawablePadding="5dp"
+        />
+    <ImageView
+        android:padding="@dimen/dp_thirteen"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/message"
+        android:id="@+id/tb_right_img"
+        />
+
+</LinearLayout>

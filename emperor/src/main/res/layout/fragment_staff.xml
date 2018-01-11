@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <TextView
+            android:id="@+id/tb_tvBarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/title_tab_mine"
+            android:textColor="@color/main_white"
+            android:textSize="@dimen/sp_twenty_three" />
+
+        <ImageView
+            android:id="@+id/tb_ivRight"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|right"
+            android:paddingLeft="@dimen/dp_fifty"
+            android:paddingRight="@dimen/dp_twenty"
+            android:src="@drawable/message" />
+    </android.support.v7.widget.Toolbar>
+
+    <com.wktx.www.emperor.Widget.DropDownMenu
+        android:id="@+id/dropDownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:dddividerColor="@color/gray"
+        app:ddmaskColor="@color/mask_color"
+        app:ddmenuBackgroundColor="@color/white"
+        app:ddmenuIconOrientation="right"
+        app:ddmenuSelectedIcon="@drawable/down_pull_selected"
+        app:ddmenuTextSize="13sp"
+        app:ddmenuUnselectedIcon="@drawable/down_pull_normal"
+        app:ddtextSelectedColor="@color/colorPrimary"
+        app:ddtextUnselectedColor="@color/title_color"
+        app:ddunderlineColor="@color/gray"></com.wktx.www.emperor.Widget.DropDownMenu>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="在线全职办公管理"
+            android:textColor="@color/title_color"
+            android:textSize="@dimen/sp_twenty" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_fifteen"
+            android:gravity="center"
+            android:text="在线入职/移动办公"
+            android:textColor="@color/title_color"
+            android:textSize="@dimen/sp_fifteen" />
+
+        <ImageView
+            android:layout_width="289dp"
+            android:layout_height="210dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_thirty"
+            android:src="@drawable/staff_administer" />
+
+        <TextView
+            android:layout_width="325dp"
+            android:layout_height="50dp"
+            android:background="@drawable/shape_buttom_yellow_five"
+            android:gravity="center"
+            android:text="在线体验办公"
+            android:textColor="@color/title_color"
+            android:textSize="@dimen/sp_eighteen" />
+
+        <TextView
+            android:layout_width="325dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/dp_twenty"
+            android:background="@drawable/shape_stroke_yellow_five"
+            android:gravity="center"
+            android:text="挑合适的员工"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/sp_eighteen" />
+    </LinearLayout>
+</LinearLayout>

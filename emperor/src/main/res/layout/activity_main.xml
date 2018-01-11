@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    android:orientation="vertical">
+    <android.support.v4.view.ViewPager
+        android:id="@+id/mViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/dividerLine" />
+
+    <com.yinglan.alphatabs.AlphaTabsIndicator
+        android:id="@+id/alphaIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/main_white"
+        android:orientation="horizontal">
+
+        <com.yinglan.alphatabs.AlphaTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            app:tabIconNormal="@drawable/tab_home_normal"
+            app:tabIconSelected="@drawable/tab_home_selected"
+            app:tabText="首页"
+            app:tabTextSize="@dimen/sp_twelve"
+            app:textColorNormal="@color/tab_text_normal"
+            app:textColorSelected="@color/tab_text_selected" />
+
+        <com.yinglan.alphatabs.AlphaTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            app:tabIconNormal="@drawable/tab_sort_normal"
+            app:tabIconSelected="@drawable/tab_sort_selected"
+            app:tabText="招聘"
+            app:tabTextSize="@dimen/sp_twelve"
+            app:textColorNormal="@color/tab_text_normal"
+            app:textColorSelected="@color/tab_text_selected" />
+
+        <com.yinglan.alphatabs.AlphaTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            app:tabIconNormal="@drawable/tab_shoppingcart_normal"
+            app:tabIconSelected="@drawable/tab_shoppingcart_selected"
+            app:tabText="员工"
+            app:tabTextSize="@dimen/sp_twelve"
+            app:textColorNormal="@color/tab_text_normal"
+            app:textColorSelected="@color/tab_text_selected" />
+
+
+        <com.yinglan.alphatabs.AlphaTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            app:tabIconNormal="@drawable/tab_mine_normal"
+            app:tabIconSelected="@drawable/tab_mine_selected"
+            app:tabText="我的"
+            app:tabTextSize="@dimen/sp_twelve"
+            app:textColorNormal="@color/tab_text_normal"
+            app:textColorSelected="@color/tab_text_selected" />
+    </com.yinglan.alphatabs.AlphaTabsIndicator>
+</LinearLayout>

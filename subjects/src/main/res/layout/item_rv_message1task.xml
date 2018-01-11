@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/color_f0f0f0"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_white"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/dp_ten"
+        android:paddingLeft="@dimen/dp_fifteen"
+        android:paddingRight="@dimen/dp_fifteen"
+        android:paddingTop="@dimen/dp_fifteen">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="整店装修"
+            android:textColor="@color/title_color"
+            android:textSize="@dimen/sp_fifteen" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_solid_red_five"
+            android:text="待响应"
+            android:textColor="@color/main_white"
+            android:textSize="@dimen/sp_twelve" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_white"
+        android:lineSpacingExtra="@dimen/dp_eleven"
+        android:minLines="2"
+        android:paddingLeft="@dimen/dp_fifteen"
+        android:paddingRight="@dimen/dp_fifteen"
+        android:textColor="@color/title_color_gray"
+        android:textSize="@dimen/sp_thirteen"
+        android:text="需求的具体内容"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginTop="@dimen/dp_one"
+        android:gravity="center_vertical"
+        android:background="@color/color_ffffff"
+        android:paddingLeft="@dimen/dp_fifteen"
+        android:paddingRight="@dimen/dp_fifteen"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/head_women" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_seven"
+            android:text="化妆品旗舰店"
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/sp_thirteen" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_seven"
+            android:text="截止至2017-11-01"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_twelve" />
+    </LinearLayout>
+
+</LinearLayout>

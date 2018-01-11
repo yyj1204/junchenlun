@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="@color/color_f0f0f0"
+    tools:context="com.wktx.www.emperor.com.wktx.www.emperor.Activity.StaffSalaryActivity">
+
+    <include layout="@layout/include_toolbar_activity" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_ffffff"
+        android:padding="22dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_salary_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7000"
+            android:textSize="15sp"
+            android:textColor="@color/color_fa716f"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="累计支出总额"
+            android:textSize="15sp"
+            android:layout_marginTop="9dp"
+            android:textColor="@color/color_000000"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="( 托管工资 + 已发工资 )"
+            android:textSize="12sp"
+            android:layout_marginTop="7dp"
+            android:textColor="@color/color_999999"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="1dp">
+
+        <LinearLayout
+            android:id="@+id/linear_salary_trusteeship"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingTop="21dp"
+            android:background="@color/color_ffffff"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="托管中工资"
+                android:textColor="@color/color_000000"
+                android:textSize="12sp"/>
+            <TextView
+                android:id="@+id/tv_salary_trusteeship"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3500"
+                android:layout_marginTop="7dp"
+                android:textColor="@color/color_fa716f"
+                android:textSize="15sp"/>
+            <TextView
+                android:id="@+id/tv_underline1"
+                android:layout_width="79dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/color_ffb321"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_salary_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingTop="21dp"
+            android:layout_marginLeft="1dp"
+            android:orientation="vertical"
+            android:background="@color/color_ffffff"
+            android:gravity="center"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已发工资"
+                android:textColor="@color/color_000000"
+                android:textSize="12sp"/>
+            <TextView
+                android:id="@+id/tv_salary_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3500"
+                android:layout_marginTop="7dp"
+                android:textColor="@color/color_fa716f"
+                android:textSize="15sp"/>
+            <TextView
+                android:id="@+id/tv_underline2"
+                android:layout_width="79dp"
+                android:layout_height="2dp"
+                android:visibility="invisible"
+                android:layout_marginTop="20dp"
+                android:background="@color/color_ffb321"/>
+        </LinearLayout>
+    </LinearLayout>
+    <include layout="@layout/include_recycleview" />
+</LinearLayout>

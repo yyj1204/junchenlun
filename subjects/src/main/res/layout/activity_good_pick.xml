@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context="com.wktx.www.subjects.Activity.GoodPickActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativelayout"
+        android:layout_width="290dp"
+        android:layout_height="400dp"
+        android:layout_gravity="center"
+        android:background="@color/main_white">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@color/main_white"></android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/goodPickTvcancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:paddingBottom="@dimen/dp_thirty"
+            android:paddingLeft="@dimen/dp_fifteen"
+            android:text="取消"
+            android:textColor="@color/title_color"
+            android:textSize="@dimen/sp_twelve" />
+
+        <TextView
+            android:id="@+id/goodPickTvSure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:paddingBottom="@dimen/dp_thirty"
+            android:paddingRight="@dimen/dp_fifteen"
+            android:text="确定"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/sp_twelve" />
+    </RelativeLayout>
+
+</RelativeLayout>
