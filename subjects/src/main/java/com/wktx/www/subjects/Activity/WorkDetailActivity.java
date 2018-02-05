@@ -1,6 +1,5 @@
 package com.wktx.www.subjects.Activity;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -12,8 +11,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.wktx.www.subjects.R;
-import com.wktx.www.subjects.Utils.MyDividerUtil;
-import com.wktx.www.subjects.Widget.MyLayoutManager;
+import com.wktx.www.subjects.widget.MyLayoutManager;
 
 import java.util.ArrayList;
 

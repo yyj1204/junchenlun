@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.wktx.www.subjects.Widget.DropDownMenu
+<com.wktx.www.subjects.widget.DropDownMenu
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dropDownMenu"
@@ -16,4 +16,4 @@
     app:ddtextSelectedColor="@color/colorPrimary"
     app:ddtextUnselectedColor="@color/title_color"
     app:ddunderlineColor="@color/gray">
-</com.wktx.www.subjects.Widget.DropDownMenu>
+</com.wktx.www.subjects.widget.DropDownMenu>

@@ -4,8 +4,7 @@
     <color name="colorPrimaryDark">#ffb321</color>
     <color name="colorAccent">#FF4081</color>
     <color name="main_white">#ffffff</color>
-    <color name="tab_text_normal">#000000</color>
-    <color name="tab_text_selected">#ffb321</color>
+
     <color name="radio_backgroud">#e3e3e3</color>
     <color name="shape_search">#ffbd31</color>
     <color name="shape_search_white">#bbfaf9f9</color>
@@ -38,14 +37,35 @@
     <color name="shape_gray">#cccccc</color>
     <color name="text_red">#fa716f</color>
 
+    <color name="tab_text_normal">#000000</color>
+    <color name="tab_text_selected">#ffb321</color>
+
+
     <color name="color_ffffff">#ffffff</color>
+    <color name="color_f7f7f7">#f7f7f7</color>
+    <color name="color_f4f4f4">#f4f4f4</color>
+    <color name="color_f2f2f2">#f2f2f2</color>
     <color name="color_f0f0f0">#f0f0f0</color>
-    <color name="color_ffb321">#ffb321</color>
-    <color name="color_000000">#000000</color>
-    <color name="color_999999">#999999</color>
-    <color name="color_a0a0a0">#a0a0a0</color>
-    <color name="color_fa716f">#fa716f</color>
+    <color name="color_e5e5e5">#e5e5e5</color>
     <color name="color_e1e1e1">#e1e1e1</color>
+    <color name="color_cccccc">#cccccc</color>
+    <color name="color_c5c5c5">#c5c5c5</color>
+    <color name="color_b2b2b2">#b2b2b2</color>
+    <color name="color_a0a0a0">#a0a0a0</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_888888">#888888</color>
+    <color name="color_5d5d5d">#5d5d5d</color>
+    <color name="color_272930">#272930</color>
+    <color name="color_c2e6fc">#c2e6fc</color>
+    <color name="color_fa716f">#fa716f</color>
+    <color name="color_fa6865">#fa6865</color>
+    <color name="color_ffb321">#ffb321</color>
+    <color name="color_ffd321">#ffd321</color>
+    <color name="color_000000">#000000</color>
+
+    <color name="color_88888888">#88888888</color>
+    <color name="color_00000000">#00000000</color>
+
 
     <color name="drop_down_selected">#7B1FA2</color>
     <color name="drop_down_unselected">#111111</color>

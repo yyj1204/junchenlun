@@ -13,7 +13,7 @@
         android:layout_width="53dp"
         android:layout_height="53dp"
         android:scaleType="fitXY"
-        android:src="@drawable/head_women" />
+        android:src="@drawable/icon_head_woman" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_marginLeft="@dimen/dp_ten"
-                android:src="@drawable/icon_women" />
+                android:src="@drawable/icon_sex_woman" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -125,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:text="一年以上"
                 android:textColor="@color/title_color_gray"
-                android:background="@drawable/shape_stroke_gray_eight"
+                android:background="@drawable/shape_stroke_a0a0a0_18"
                 android:textSize="@dimen/sp_twelve" />
 
             <TextView
@@ -135,7 +135,7 @@
                 android:text="找工作中"
                 android:textColor="@color/title_color_gray"
                 android:layout_marginLeft="@dimen/dp_ten"
-                android:background="@drawable/shape_stroke_gray_eight"
+                android:background="@drawable/shape_stroke_a0a0a0_18"
                 android:textSize="@dimen/sp_twelve" />
         </LinearLayout>
     </LinearLayout>

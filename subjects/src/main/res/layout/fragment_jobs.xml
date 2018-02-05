@@ -3,9 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.wktx.www.subjects.Fragment.JobsFragment">
+    tools:context=".ui.fragment.JobsFragment">
 
-    <com.wktx.www.subjects.Widget.TitleLayout
+    <com.wktx.www.subjects.widget.TitleLayout
         android:layout_width="match_parent"
         android:layout_height="48dp" />
     <include layout="@layout/include_dropdownmenu" />

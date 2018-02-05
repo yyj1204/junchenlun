@@ -47,7 +47,7 @@
             android:id="@+id/rela_pausework_minus"
             android:layout_width="22dp"
             android:layout_height="22dp"
-            android:background="@drawable/shape_stroke_gray_one">
+            android:background="@drawable/shape_stroke_888888_1">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_centerInParent="true"
@@ -62,13 +62,13 @@
             android:gravity="center"
             android:textColor="@color/color_000000"
             android:textSize="13sp"
-            android:background="@drawable/shape_stroke_gray_one"/>
+            android:background="@drawable/shape_stroke_888888_1"/>
 
         <RelativeLayout
             android:id="@+id/rela_pausework_add"
             android:layout_width="22dp"
             android:layout_height="22dp"
-            android:background="@drawable/shape_stroke_gray_one">
+            android:background="@drawable/shape_stroke_888888_1">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_centerInParent="true"

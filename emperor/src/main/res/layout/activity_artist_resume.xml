@@ -1,124 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context="com.wktx.www.emperor.com.wktx.www.emperor.Activity.ArtistResumeActivity">
+    android:background="@color/color_f0f0f0"
+    android:orientation="vertical"
+    tools:context="com.wktx.www.emperor.ui.activity.recruit.resume.ArtistResumeActivity">
 
     <RelativeLayout
-        android:id="@+id/relativelayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/main_white"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/dp_fifteen"
-        android:paddingRight="@dimen/dp_fifteen">
-
+        android:layout_height="@dimen/px_96"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:background="@color/color_ffffff"
+        android:gravity="center_vertical">
         <com.ogaclejapan.smarttablayout.SmartTabLayout
-            android:id="@+id/viewpagertab"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:id="@+id/layout_smartTab"
+            android:layout_width="@dimen/px_600"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/main_white"
-            android:paddingBottom="@dimen/dp_four"
-            android:paddingTop="@dimen/dp_thirteen"
+            android:background="@color/color_ffffff"
+            android:paddingBottom="@dimen/px_8"
+            android:paddingTop="@dimen/px_26"
             app:stl_distributeEvenly="true"
             app:stl_dividerThickness="0dp"
-            app:stl_indicatorColor="@color/colorPrimary"
+            app:stl_indicatorColor="@color/color_ffb321"
             app:stl_indicatorInFront="false"
             app:stl_indicatorInterpolation="smart"
-            app:stl_indicatorThickness="3dp"
+            app:stl_indicatorThickness="@dimen/px_6"
             app:stl_titleOffset="auto_center"
             android:layout_centerInParent="true"
             app:stl_underlineThickness="0dp" />
         <ImageView
-            android:id="@+id/tb_IvReturn"
-            android:layout_width="@dimen/dp_thirty_three"
-            android:layout_height="@dimen/dp_fourty_three"
+            android:id="@+id/iv_return"
+            android:layout_width="@dimen/px_66"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical|left"
-            android:paddingBottom="@dimen/dp_ten"
-            android:paddingRight="@dimen/dp_twenty"
-            android:paddingTop="@dimen/dp_ten"
+            android:paddingBottom="@dimen/px_20"
+            android:paddingRight="@dimen/px_40"
+            android:paddingTop="@dimen/px_20"
             android:layout_centerVertical="true"
             android:src="@drawable/arrow_left_gray" />
     </RelativeLayout>
+
     <TextView
-        android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/relativelayout"
-        android:background="@color/white"/>
+        android:layout_height="@dimen/px_2"
+        android:background="@color/color_f0f0f0"/>
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/textView"
-        android:layout_marginBottom="42dp"
-        android:background="@color/main_white" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/color_ffffff" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_2"
+        android:background="@color/color_f0f0f0"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/white"
-        android:orientation="vertical">
-
+        android:layout_height="@dimen/px_82"
+        android:background="@color/main_white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:layout_marginTop="@dimen/dp_one"
-            android:background="@color/main_white"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="23dp"
-                    android:layout_height="19dp"
-                    android:src="@drawable/resume_wx" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="17dp"
-                    android:layout_height="19dp"
-                    android:src="@drawable/resume_qq" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="19dp"
-                    android:layout_height="19dp"
-                    android:src="@drawable/resume_phone" />
-            </LinearLayout>
-
-
-            <TextView
-                android:id="@+id/tv_artist_employ"
-                android:layout_width="186dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
-                android:gravity="center"
-                android:text="立即雇佣（￥4800/月）"
-                android:textColor="@color/main_white"
-                android:textSize="@dimen/sp_fifteen" />
+            android:id="@+id/linear_weixin"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="@dimen/px_46"
+                android:layout_height="@dimen/px_38"
+                android:src="@drawable/resume_wx" />
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linear_qq"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="@dimen/px_34"
+                android:layout_height="@dimen/px_38"
+                android:src="@drawable/resume_qq" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linear_phone"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="@dimen/px_38"
+                android:layout_height="@dimen/px_38"
+                android:src="@drawable/resume_phone" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_employ"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:background="@drawable/selector_submit_selected"
+            android:gravity="center"
+            android:text="立即雇佣"
+            android:textColor="@color/color_ffffff"
+            android:textSize="@dimen/sp_15" />
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

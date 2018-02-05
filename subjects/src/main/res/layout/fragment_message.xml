@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/color_f0f0f0"
     android:orientation="vertical"
-    tools:context="com.wktx.www.subjects.Fragment.MessageFragment">
+    tools:context=".ui.fragment.MessageFragment">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

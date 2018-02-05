@@ -27,11 +27,19 @@
     <color name="transparent">#33000000</color>
 
     <color name="color_ffffff">#ffffff</color>
+    <color name="color_f4f4f4">#f4f4f4</color>
+    <color name="color_f2f2f2">#f2f2f2</color>
     <color name="color_f0f0f0">#f0f0f0</color>
-    <color name="color_ffb321">#ffb321</color>
-    <color name="color_000000">#000000</color>
-    <color name="color_999999">#999999</color>
-    <color name="color_a0a0a0">#a0a0a0</color>
-    <color name="color_fa716f">#fa716f</color>
+    <color name="color_e5e5e5">#e5e5e5</color>
     <color name="color_e1e1e1">#e1e1e1</color>
+    <color name="color_b2b2b2">#b2b2b2</color>
+    <color name="color_a0a0a0">#a0a0a0</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_888888">#888888</color>
+    <color name="color_272930">#272930</color>
+    <color name="color_fa716f">#fa716f</color>
+    <color name="color_fa6865">#fa6865</color>
+    <color name="color_ffb321">#ffb321</color>
+    <color name="color_ffd321">#ffd321</color>
+    <color name="color_000000">#000000</color>
 </resources>

@@ -1,53 +1,51 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/main_white"
-    tools:context="com.wktx.www.emperor.com.wktx.www.emperor.Fragment.RecruitFragment">
+    android:background="@color/color_ffffff">
 
-    <!-- TODO: Update blank fragment layout -->
-   <com.wktx.www.emperor.Widget.TitleLayout
-       android:layout_width="match_parent"
-       android:layout_height="48dp">
-   </com.wktx.www.emperor.Widget.TitleLayout>
-    <LinearLayout
+    <com.wktx.www.emperor.widget.TitleLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_96">
+    </com.wktx.www.emperor.widget.TitleLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_one"
+        android:layout_marginTop="@dimen/px_2"
         android:orientation="horizontal">
         <com.ogaclejapan.smarttablayout.SmartTabLayout
-            android:id="@+id/viewpagertab"
+            android:id="@+id/layout_smartTab"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@color/colorPrimary"
-            android:paddingBottom="@dimen/dp_four"
-            android:paddingTop="@dimen/dp_thirteen"
+            android:layout_height="@dimen/px_70"
+            android:background="@color/color_ffb321"
+            android:paddingTop="@dimen/px_20"
             app:stl_distributeEvenly="true"
             app:stl_indicatorInFront="false"
-            app:stl_indicatorColor="@color/main_white"
+            app:stl_indicatorColor="@color/color_ffffff"
             app:stl_indicatorInterpolation="smart"
-            app:stl_indicatorThickness="3dp"
+            app:stl_indicatorThickness="@dimen/px_4"
             app:stl_dividerThickness="0dp"
             app:stl_underlineThickness="0dp"
             android:layout_weight="1"/>
         <TextView
-            android:id="@+id/recruitTvDemand"
+            android:id="@+id/tv_releaseDemand"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/px_70"
             android:text="发需求"
-            android:textColor="@color/title_color"
+            android:textColor="@color/color_000000"
             android:layout_weight="3"
             android:gravity="center"
-            android:background="@color/colorPrimary"
-            android:layout_marginLeft="@dimen/dp_one"
-            android:textSize="@dimen/sp_fifteen"/>
-    </LinearLayout>
+            android:background="@color/color_ffb321"
+            android:layout_marginLeft="@dimen/px_2"
+            android:textSize="@dimen/sp_16"/>
+    </com.zhy.autolayout.AutoLinearLayout>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/main_white"
-        />
-</LinearLayout>
+        android:background="@color/color_ffffff" />
+</com.zhy.autolayout.AutoLinearLayout>

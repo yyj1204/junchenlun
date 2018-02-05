@@ -1,32 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wktx.www.emperor">
-    //网络请求权限
-    <!-- if you want to load images from the internet -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    //RxJava2+Retrofit2 网络请求框架  请求权限
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    //if you want to load images from the internet
+    <!--<uses-permission android:name="android.permission.INTERNET" />-->
+    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
+    <!--拨打电话-->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+
+
     <application
-        android:name="com.wktx.www.emperor.Application.MyApplication"
+        android:name="com.wktx.www.emperor.application.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.wktx.www.emperor.Activity.MainActivity">
+        <activity android:name="com.wktx.www.emperor.ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.wktx.www.emperor.Activity.LoginActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.RegiestActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.ForgetActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.AccountProfileActivity" />
+
+        <!--登录、注册、忘记密码-->
+        <activity android:name=".ui.activity.login.LoginActivity" />
+        <activity android:name=".ui.activity.login.RegisterActivity" />
+        <activity android:name=".ui.activity.login.ForgetPwdActivity" />
+
+        //招聘
+        <!--筛选（工作经验、性别）-->
+        <activity android:name="com.wktx.www.emperor.ui.activity.recruit.ScreeningActivity"/>
+        <!--发布需求-->
+        <activity android:name="com.wktx.www.emperor.ui.activity.recruit.demand.DemandActivity" />
+        <activity android:name="com.wktx.www.emperor.ui.activity.recruit.demand.DemandReleaseActivity" />
+        <activity android:name="com.wktx.www.emperor.ui.activity.recruit.demand.DemandDetailActivity" />
+        <!--简历-->
+        <activity android:name="com.wktx.www.emperor.ui.activity.recruit.resume.ArtistResumeActivity" />
+        <!--浏览记录-->
+        <activity android:name="com.wktx.www.emperor.ui.activity.recruit.BrowsingHistoryActivity" />
+
+        //我的账户
+        <!--公司信息-->
+        <activity android:name="com.wktx.www.emperor.ui.activity.mine.CompanyInfoActivity" />
+
+        <!--搜索-->
+        <activity android:name="com.wktx.www.emperor.ui.activity.SearchActivity" />
+
+
         <activity android:name="com.wktx.www.emperor.Activity.UpdateNickNameActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.AboutUsActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.ServiceActivity" />
@@ -38,7 +71,6 @@
         <activity android:name="com.wktx.www.emperor.Activity.PacketRuleActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.PayPswctivity" />
         <activity android:name="com.wktx.www.emperor.Activity.InterviewActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.CheckListActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.CashActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.PurseActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.RechargeActivity" />
@@ -47,12 +79,8 @@
         <activity android:name="com.wktx.www.emperor.Activity.MessageDetailsActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.InviteGuideActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.CheckAccountActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.DemandActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.AddDemandActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.DemandDetailActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.ArrangeWorkActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.RecruitActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.SearchActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.StaffManageActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.StaffRenewActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.StaffArrangeWorkActivity" />
@@ -68,12 +96,21 @@
         <activity android:name="com.wktx.www.emperor.Activity.StaffReportDetaisActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.CertificateIndividualActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.CertificateStoreActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.ArtistResumeActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.ArtistEmployActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.OrdersInfoActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.SalaryTrusteeshipActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.PayResultActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.ScreeningActivity"></activity>
+
+
+        <!-- 屏幕适配AutoLayout -->
+        <meta-data
+            android:name="design_width"
+            android:value="720" />
+        <meta-data
+            android:name="design_height"
+            android:value="1280" />
+        <!-- 屏幕适配AutoLayout -->
+
     </application>
 
 </manifest>

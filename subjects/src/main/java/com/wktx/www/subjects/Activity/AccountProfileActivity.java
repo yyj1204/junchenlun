@@ -33,14 +33,14 @@ import com.wktx.www.subjects.Model.UpdateInfo.UpdateHeadInfo;
 import com.wktx.www.subjects.Model.UpdateInfo.UpdateHeadInfoData;
 import com.wktx.www.subjects.Model.UserInfo.UserInfoDataInfoUserinfo;
 import com.wktx.www.subjects.R;
-import com.wktx.www.subjects.Utils.Bitmap2Base64Util;
-import com.wktx.www.subjects.Utils.Contants;
-import com.wktx.www.subjects.Utils.GetJsonDataUtil;
-import com.wktx.www.subjects.Utils.GsonUtils;
-import com.wktx.www.subjects.Utils.SaveObjectUtils;
-import com.wktx.www.subjects.Utils.SharedPreferenceUtil;
-import com.wktx.www.subjects.Widget.HeadPoPuWindow;
-import com.wktx.www.subjects.Widget.OutPoPuWindow;
+import com.wktx.www.subjects.utils.Bitmap2Base64Util;
+import com.wktx.www.subjects.utils.ConstantUtil;
+import com.wktx.www.subjects.utils.GetJsonDataUtil;
+import com.wktx.www.subjects.utils.GsonUtil;
+import com.wktx.www.subjects.utils.SaveObjectUtils;
+import com.wktx.www.subjects.utils.SharedPreferenceUtil;
+import com.wktx.www.subjects.widget.HeadPopup;
+import com.wktx.www.subjects.widget.LogoutPopup;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import org.json.JSONArray;
@@ -69,13 +69,13 @@ public class AccountProfileActivity extends AppCompatActivity {
     LinearLayout lLAddress;
     @BindView(R.id.accountTvAddress)
     TextView tvAddress;
-    private HeadPoPuWindow puWindow;
+    private HeadPopup puWindow;
     private LoginInfoDataInfo getSaveInfo;
     private String token;
     private int user_id;
     private String state;
     private UserInfoDataInfoUserinfo savaInfo;
-    OutPoPuWindow outPoPuWindow;
+    LogoutPopup outPoPuWindow;
     private int maxSelectNum = 1;
     private int themeId;
     private int chooseMode = PictureMimeType.ofImage();
@@ -105,7 +105,7 @@ public class AccountProfileActivity extends AppCompatActivity {
                 showHeadPopuWindow();
                 break;
             case R.id.accountLlNickName:
-//                startActivityForResult(new Intent(this, UpdateNickNameActivity.class), Contants.RESULTCODE_UPDATENICK);
+//                startActivityForResult(new Intent(this, UpdateNickNameActivity.class), ConstantUtil.RESULTCODE_UPDATENICK);
                 break;
             case R.id.accountLlAddress:
                 if (isLoaded) {
@@ -270,13 +270,13 @@ public class AccountProfileActivity extends AppCompatActivity {
 
     //更新信息的请求
     private void updateInfo(String name, String str) {
-        SharedPreferenceUtil.saveData(this, Contants.THREADSTATE, name, Contants.THREADSTATE_NAME);
+        SharedPreferenceUtil.saveData(this, ConstantUtil.THREADSTATE, name, ConstantUtil.THREADSTATE_NAME);
         Map<String, String> params = new HashMap<>();
         params.put("user_id", "" + user_id);
         params.put("token", token);
         params.put(name, str);
         OkHttpUtils.post()//
-                .url(Contants.URL_EDITUSERINFO)//
+                .url(ConstantUtil.URL_EDITUSERINFO)//
                 .params(params)//
                 .build()//
                 .execute(new MyStringCallback());
@@ -284,12 +284,12 @@ public class AccountProfileActivity extends AppCompatActivity {
 
     //退出登录请求
     private void outLogin() {
-        SharedPreferenceUtil.saveData(this, Contants.THREADSTATE, Contants.STATEOUTLOGIN, Contants.THREADSTATE_NAME);
+        SharedPreferenceUtil.saveData(this, ConstantUtil.THREADSTATE, ConstantUtil.STATEOUTLOGIN, ConstantUtil.THREADSTATE_NAME);
         Map<String, String> params = new HashMap<>();
         params.put("user_id", "" + user_id);
         params.put("token", token);
         OkHttpUtils.post()//
-                .url(Contants.URL_USER_USER_INFO_LOGOUT)//
+                .url(ConstantUtil.URL_USER_USER_INFO_LOGOUT)//
                 .params(params)//
                 .build()//
                 .execute(new MyStringCallback());
@@ -297,13 +297,13 @@ public class AccountProfileActivity extends AppCompatActivity {
 
     //更新头像的请求
     private void updateHeadImg(String base64Head) {
-        SharedPreferenceUtil.saveData(this, Contants.THREADSTATE, Contants.UPDATEHEAD, Contants.THREADSTATE_NAME);
+        SharedPreferenceUtil.saveData(this, ConstantUtil.THREADSTATE, ConstantUtil.UPDATEHEAD, ConstantUtil.THREADSTATE_NAME);
         Map<String, String> params = new HashMap<>();
         params.put("user_id", "" + user_id);
         params.put("token", token);
         params.put("base64", base64Head);
         OkHttpUtils.post()//
-                .url(Contants.URL_UPDATEHEAD)//
+                .url(ConstantUtil.URL_UPDATEHEAD)//
                 .params(params)//
                 .build()//
                 .execute(new MyStringCallback());
@@ -311,12 +311,12 @@ public class AccountProfileActivity extends AppCompatActivity {
 
     //提交获取用户信息到后台验证
     public void getUserInfo(int user_id, String token) {
-        SharedPreferenceUtil.saveData(this, Contants.THREADSTATE, Contants.GETUSERINFO, Contants.THREADSTATE_NAME);
+        SharedPreferenceUtil.saveData(this, ConstantUtil.THREADSTATE, ConstantUtil.GETUSERINFO, ConstantUtil.THREADSTATE_NAME);
         Map<String, String> params = new HashMap<>();
         params.put("user_id", "" + user_id);
         params.put("token", token);
         OkHttpUtils.post()//
-                .url(Contants.URL_GETUSERINFO)//
+                .url(ConstantUtil.URL_GETUSERINFO)//
                 .params(params)//
                 .build()//
                 .execute(new MyStringCallback());
@@ -331,16 +331,16 @@ public class AccountProfileActivity extends AppCompatActivity {
 
         @Override
         public void onResponse(String response, int id) {
-            state = (String) SharedPreferenceUtil.getData(AccountProfileActivity.this, Contants.THREADSTATE, "", Contants.THREADSTATE_NAME);
+            state = (String) SharedPreferenceUtil.getData(AccountProfileActivity.this, ConstantUtil.THREADSTATE, "", ConstantUtil.THREADSTATE_NAME);
             if (response != null) {
                 switch (state) {
-//                    case Contants.GETUSERINFO:
-//                        userInfo = GsonUtils.parseJSON(response, UserInfo.class);
+//                    case ConstantUtil.GETUSERINFO:
+//                        userInfo = GsonUtil.parseJSON(response, UserInfo.class);
 //                        UserInfoData data = userInfo.getData();
 //                        UserInfoDataInfo info = data.getInfo();
 //                        if (data != null & info != null) {
 //                            UserInfoDataInfoUserinfo userinfo = info.getUserinfo();
-//                            new SaveObjectUtils(AccountProfileActivity.this, Contants.USERINFO_NAME).setObject(token, userinfo);
+//                            new SaveObjectUtils(AccountProfileActivity.this, ConstantUtil.USERINFO_NAME).setObject(token, userinfo);
 //                            String nickname = userinfo.getNickname();
 //                            String head_pic = userinfo.getHead_pic();
 //                            sex = userinfo.getSex();
@@ -368,25 +368,25 @@ public class AccountProfileActivity extends AppCompatActivity {
 //                            }
 //                        }
 //                        break;
-                    case Contants.UPDATEINFOSEX:
-//                        UpdateSexInfo updateSexInfo = GsonUtils.parseJSON(response, UpdateSexInfo.class);
+                    case ConstantUtil.UPDATEINFOSEX:
+//                        UpdateSexInfo updateSexInfo = GsonUtil.parseJSON(response, UpdateSexInfo.class);
 //                        UpdateSexInfoData data1 = updateSexInfo.getData();
 //                        String msg = data1.getMsg();
 //                        if (msg.equals("修改成功")) {
 //                            savaInfo.setSex(sexId);
-//                            new SaveObjectUtils(AccountProfileActivity.this, Contants.USERINFO_NAME).setObject(token, savaInfo);
+//                            new SaveObjectUtils(AccountProfileActivity.this, ConstantUtil.USERINFO_NAME).setObject(token, savaInfo);
 //                        }
 //                        ToastUtil.toast(AccountProfileActivity.this, msg);
                         break;
-                    case Contants.UPDATEHEAD:
-                        UpdateHeadInfo updateHeadInfo = GsonUtils.parseJSON(response, UpdateHeadInfo.class);
+                    case ConstantUtil.UPDATEHEAD:
+                        UpdateHeadInfo updateHeadInfo = GsonUtil.parseJSON(response, UpdateHeadInfo.class);
                         UpdateHeadInfoData updateHeadInfoData = updateHeadInfo.getData();
                         String url = updateHeadInfoData.getUrl();
                         if (url != null) {
                             //把返回信息对象写入内存
                             updateInfo("head_pic", url);
                             savaInfo.setHead_pic(url);
-                            new SaveObjectUtils(AccountProfileActivity.this, Contants.USERINFO_NAME).setObject(token, savaInfo);
+                            new SaveObjectUtils(AccountProfileActivity.this, ConstantUtil.USERINFO_NAME).setObject(token, savaInfo);
                         }
                         break;
                     default:
@@ -412,7 +412,7 @@ public class AccountProfileActivity extends AppCompatActivity {
     private void initData() {
 
         Intent intent = getIntent();
-        UserInfoDataInfoUserinfo dataInfo = (UserInfoDataInfoUserinfo) intent.getSerializableExtra(Contants.INTENT_IDTOKEN);
+        UserInfoDataInfoUserinfo dataInfo = (UserInfoDataInfoUserinfo) intent.getSerializableExtra(ConstantUtil.INTENT_IDTOKEN);
         if (dataInfo != null) {
             String head_pic = dataInfo.getHead_pic();
             String nickname = dataInfo.getNickname();
@@ -426,31 +426,31 @@ public class AccountProfileActivity extends AppCompatActivity {
                 Glide.with(this).load(head_pic).into(head);
             }
         }
-        getSaveInfo = new SaveObjectUtils(this, Contants.LOGININFO).getObject(Contants.LOGININFO_OBJECT, LoginInfoDataInfo.class);
+        getSaveInfo = new SaveObjectUtils(this, ConstantUtil.LOGININFO).getObject(ConstantUtil.LOGININFO_OBJECT, LoginInfoDataInfo.class);
         if (getSaveInfo != null) {
             token = getSaveInfo.getToken();
             user_id = getSaveInfo.getUser_id();
-            savaInfo = new SaveObjectUtils(AccountProfileActivity.this, Contants.USERINFO_NAME).getObject(token, UserInfoDataInfoUserinfo.class);
+            savaInfo = new SaveObjectUtils(AccountProfileActivity.this, ConstantUtil.USERINFO_NAME).getObject(token, UserInfoDataInfoUserinfo.class);
 //            getUserInfo(user_id, token);
         }
     }
 
 
     private void showOutPoPuWindow() {
-        outPoPuWindow = new OutPoPuWindow(AccountProfileActivity.this, AccountProfileActivity.this);
+        outPoPuWindow = new LogoutPopup(AccountProfileActivity.this, AccountProfileActivity.this);
         outPoPuWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         outPoPuWindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         outPoPuWindow.setClippingEnabled(false);
         outPoPuWindow.showPopupWindow(findViewById(R.id.set_act_parent));
-        outPoPuWindow.setOnGetTypeClckListener(new OutPoPuWindow.onGetTypeClckListener() {
+        outPoPuWindow.setOnGetTypeClckListener(new LogoutPopup.onGetTypeClckListener() {
 
             @Override
             public void getText(String sure) {
                 switch (sure) {
-                    case Contants.OUT:
+                    case ConstantUtil.LOGOUT:
                         outLogin();
-                        SharedPreferenceUtil.saveData(AccountProfileActivity.this, Contants.ISLOGIN, false, Contants.SP_ISLOGIN);
-                        setResult(Contants.RESULT_OUTLOGINCODE, new Intent());
+                        SharedPreferenceUtil.saveData(AccountProfileActivity.this, ConstantUtil.ISLOGIN, false, ConstantUtil.SP_ISLOGIN);
+                        setResult(ConstantUtil.RESULT_OUTLOGINCODE, new Intent());
                         finish();
                         break;
                     default:
@@ -520,17 +520,17 @@ public class AccountProfileActivity extends AppCompatActivity {
     }
 
     private void showHeadPopuWindow() {
-        puWindow = new HeadPoPuWindow(AccountProfileActivity.this, AccountProfileActivity.this, selectList.size());
+        puWindow = new HeadPopup(AccountProfileActivity.this, AccountProfileActivity.this, selectList.size());
         puWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         puWindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         puWindow.setClippingEnabled(false);
         puWindow.showPopupWindow(findViewById(R.id.set_act_parent));
-        puWindow.setOnGetTypeClckListener(new HeadPoPuWindow.onGetTypeClckListener() {
+        puWindow.setOnGetTypeClckListener(new HeadPopup.onGetTypeClckListener() {
             @Override
-            public void getType(Contants.Type type) {
-                if (type == Contants.Type.CAMERA) {
+            public void getType(ConstantUtil.Type type) {
+                if (type == ConstantUtil.Type.CAMERA) {
                     onAddPicClick(false);
-                } else if (type == Contants.Type.PHONE) {
+                } else if (type == ConstantUtil.Type.PHONE) {
                     onAddPicClick(true);
                 }
             }
@@ -560,7 +560,7 @@ public class AccountProfileActivity extends AppCompatActivity {
                                 head.setImageBitmap(bitmap);
                             }
                             String s = Bitmap2Base64Util.Bitmap2StrByBase64(bitmap);
-                            SharedPreferenceUtil.saveData(this, Contants.HEADBASE64STR, s, Contants.HEADBASE64_NAME);
+                            SharedPreferenceUtil.saveData(this, ConstantUtil.HEADBASE64STR, s, ConstantUtil.HEADBASE64_NAME);
                             updateHeadImg(s);
 
                             // 例如 LocalMedia 里面返回三种path
@@ -571,8 +571,8 @@ public class AccountProfileActivity extends AppCompatActivity {
                         }
                         break;
                 }
-            } else if (resultCode == Contants.RESULTCODE_UPDATENICK) {
-                String sName = data.getStringExtra(Contants.NICKTEXT);
+            } else if (resultCode == ConstantUtil.RESULTCODE_UPDATENICK) {
+                String sName = data.getStringExtra(ConstantUtil.NICKTEXT);
                 tvNickName.setText(sName);
             }
         }

@@ -16,9 +16,9 @@ import com.wktx.www.subjects.Model.Service.ServiceInfo;
 import com.wktx.www.subjects.Model.Service.ServiceInfoData;
 import com.wktx.www.subjects.Model.Service.ServiceInfoDataInfo;
 import com.wktx.www.subjects.R;
-import com.wktx.www.subjects.Utils.Contants;
-import com.wktx.www.subjects.Utils.GsonUtils;
-import com.wktx.www.subjects.Utils.ToastUtil;
+import com.wktx.www.subjects.utils.ConstantUtil;
+import com.wktx.www.subjects.utils.GsonUtil;
+import com.wktx.www.subjects.utils.ToastUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -47,7 +47,7 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
     public void getServiceInfo() {
         Map<String, String> params = new HashMap<>();
         OkHttpUtils.post()//
-                .url(Contants.URL_CENTER_GETCUSTOMERSERVICEINFO)//
+                .url(ConstantUtil.URL_CENTER_GETCUSTOMERSERVICEINFO)//
                 .params(params)//
                 .build()//
                 .execute(new MyStringCallback());
@@ -62,7 +62,7 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
         @Override
         public void onResponse(String response, int id) {
             if (response != null) {
-                ServiceInfo serviceInfo = GsonUtils.parseJSON(response, ServiceInfo.class);
+                ServiceInfo serviceInfo = GsonUtil.parseJSON(response, ServiceInfo.class);
                 ServiceInfoData data = serviceInfo.getData();
                 if (data.getCode() == 0) {
                     info = data.getInfo();

@@ -93,7 +93,7 @@ public class UpdateStoreActivity extends AppCompatActivity {
                 }
             }
         })
-                .setLayoutRes(R.layout.pickerview_custom_options, new CustomListener() {
+                .setLayoutRes(R.layout.layout_custom_pickerview, new CustomListener() {
                     @Override
                     public void customLayout(View v) {
                         final TextView tvSubmit = (TextView) v.findViewById(R.id.tv_finish);

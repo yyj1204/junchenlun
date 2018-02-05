@@ -149,7 +149,7 @@
         android:layout_marginLeft="@dimen/dp_sixteen"
         android:layout_marginRight="@dimen/dp_sixteen"
         android:layout_marginTop="@dimen/dp_fifty"
-        android:background="@drawable/submit_shape_unselect"
+        android:background="@drawable/shape_submit_unselect"
         android:gravity="center"
         android:text="保存"
         android:textColor="@color/main_white"

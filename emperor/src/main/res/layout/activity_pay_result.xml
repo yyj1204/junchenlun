@@ -83,7 +83,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginLeft="15sp"
             android:layout_marginRight="15sp"
-            android:background="@drawable/shape_buttom_e1e1e1_five"/>
+            android:background="@drawable/shape_buttom_e1e1e1_10"/>
     </LinearLayout>
 
 </LinearLayout>

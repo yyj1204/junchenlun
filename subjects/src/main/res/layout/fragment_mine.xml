@@ -1,34 +1,32 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/color_f0f0f0"
     android:orientation="vertical"
-    tools:context=".Fragment.MineFragment">
+    tools:context=".ui.fragment.MineFragment">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/colorPrimary"
+        android:layout_height="@dimen/px_96"
+        android:background="@color/color_ffb321"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
         <TextView
-            android:id="@+id/tb_TvBarTitle"
+            android:id="@+id/tb_tvBarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/title_tab_mine"
-            android:textColor="@color/main_white"
-            android:textSize="@dimen/sp_twenty_three" />
-
+            android:text="@string/title_mine"
+            android:textColor="@color/color_ffffff"
+            android:textSize="@dimen/sp_23" />
         <ImageView
-            android:id="@+id/tb_ivRight"
+            android:id="@+id/iv_message"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:paddingLeft="@dimen/px_100"
+            android:paddingRight="@dimen/px_40"
             android:layout_gravity="center_vertical|right"
-            android:paddingLeft="@dimen/dp_fifty"
-            android:paddingRight="@dimen/dp_twenty"
             android:src="@drawable/message" />
     </android.support.v7.widget.Toolbar>
 
@@ -36,342 +34,312 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none">
-
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <com.zhy.autolayout.AutoRelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/main_white">
-
-                <LinearLayout
+                android:background="@color/color_ffffff">
+                <com.zhy.autolayout.AutoLinearLayout
                     android:id="@+id/mineLlOutLogin"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_thirty"
-                    android:background="@color/colorPrimary"
+                    android:layout_height="@dimen/px_60"
+                    android:background="@color/color_ffb321"
                     android:gravity="right">
-
                     <TextView
+                        android:id="@+id/tv_logout"
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="right"
                         android:gravity="center_vertical|right"
-                        android:paddingLeft="@dimen/dp_thirty"
-                        android:paddingRight="@dimen/dp_fifteen"
+                        android:paddingLeft="@dimen/px_60"
+                        android:paddingRight="@dimen/px_30"
                         android:text="退出登录"
                         android:textColor="@color/title_color"
-                        android:textSize="@dimen/sp_twelve" />
-                </LinearLayout>
+                        android:textSize="@dimen/sp_12" />
+                </com.zhy.autolayout.AutoLinearLayout>
 
-                <RelativeLayout
+                <com.zhy.autolayout.AutoRelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/dp_fifteen"
-                    android:paddingTop="@dimen/dp_seven">
-
+                    android:paddingLeft="@dimen/px_30"
+                    android:paddingTop="@dimen/px_14">
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/mineIvHead"
-                        android:layout_width="73dp"
-                        android:layout_height="73dp"
-                        android:layout_marginBottom="@dimen/dp_fourteen"
+                        android:id="@+id/civ_head"
+                        android:layout_width="@dimen/px_146"
+                        android:layout_height="@dimen/px_146"
+                        android:layout_marginBottom="@dimen/px_28"
                         android:src="@drawable/mine_head" />
 
-                    <LinearLayout
-                        android:id="@+id/minLlAccount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <com.zhy.autolayout.AutoLinearLayout
+                        android:id="@+id/linear_account"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/px_30"
+                        android:layout_marginRight="@dimen/px_30"
+                        android:paddingTop="@dimen/px_30"
+                        android:layout_toRightOf="@+id/civ_head"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
                         android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/mineIvHead"
-                        android:orientation="vertical"
-                        android:paddingLeft="@dimen/dp_fifteen"
-                        >
-
-                        <TextView
-                            android:id="@+id/mineTvAccount"
+                        android:visibility="gone">
+                        <com.zhy.autolayout.AutoLinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingTop="@dimen/dp_twenty"
-                            android:text="15559566365"
-                            android:textColor="@color/title_color"
-                            android:textSize="18sp" />
+                            android:layout_centerVertical="true"
+                            android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/tv_userName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="账户名"
+                                android:textColor="@color/color_000000"
+                                android:textSize="@dimen/sp_18" />
+                            <TextView
+                                android:id="@+id/tv_userJob"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/px_10"
+                                android:text="店铺运营"
+                                android:background="@drawable/shape_solid_yellow_five"
+                                android:textColor="@color/color_000000"
+                                android:textSize="@dimen/sp_12" />
+                        </com.zhy.autolayout.AutoLinearLayout>
 
-                        <LinearLayout
-                            android:id="@+id/mineLlCheckAccount"
+                        <com.zhy.autolayout.AutoLinearLayout
+                            android:id="@+id/linear_balance"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:paddingTop="@dimen/dp_five">
-
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/tv_balance"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0.00"
+                                android:textColor="@color/color_000000"
+                                android:textSize="@dimen/sp_15"
+                                android:textStyle="bold" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="店铺运营"
-                                android:background="@drawable/shape_solid_yellow_five"
-                                android:textColor="@color/title_color"
-                                android:textSize="@dimen/sp_thirteen" />
-                        </LinearLayout>
-                    </LinearLayout>
+                                android:layout_marginTop="@dimen/px_10"
+                                android:text="账户余额"
+                                android:textSize="@dimen/sp_13"
+                                android:textColor="@color/color_999999"/>
+                        </com.zhy.autolayout.AutoLinearLayout>
+                    </com.zhy.autolayout.AutoLinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/minLlAccount1"
+                    <com.zhy.autolayout.AutoLinearLayout
+                        android:id="@+id/linear_login"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/px_46"
+                        android:paddingTop="@dimen/px_40"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/dp_twenty_three"
-                        android:layout_toRightOf="@+id/mineIvHead"
-                        android:orientation="horizontal"
-                        android:visibility="gone"
-                        android:paddingTop="@dimen/dp_thirty">
-
+                        android:layout_toRightOf="@+id/civ_head"
+                        android:orientation="horizontal">
                         <TextView
-                            android:id="@+id/mineTvLogin"
-                            android:layout_width="80dp"
-                            android:layout_height="28dp"
-                            android:layout_marginRight="@dimen/dp_twenty_five"
+                            android:id="@+id/tv_login"
+                            android:layout_width="@dimen/px_160"
+                            android:layout_height="@dimen/px_56"
+                            android:layout_marginRight="@dimen/px_50"
                             android:background="@drawable/shape_stroke_gray_eight"
                             android:gravity="center"
-                            android:text="登陆"
-                            android:textColor="@color/title_color" />
-
+                            android:text="登录"
+                            android:textColor="@color/color_000000" />
                         <TextView
-                            android:id="@+id/mineTvRegiest"
-                            android:layout_width="80dp"
-                            android:layout_height="28dp"
+                            android:id="@+id/tv_register"
+                            android:layout_width="@dimen/px_160"
+                            android:layout_height="@dimen/px_56"
                             android:background="@drawable/shape_solid_yellow_eight"
                             android:gravity="center"
                             android:text="注册"
-                            android:textColor="@color/title_color" />
-                    </LinearLayout>
-                </RelativeLayout>
-                <LinearLayout
-                    android:id="@+id/mineLlCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:padding="@dimen/dp_fifteen"
-                    android:visibility="gone"
-                    android:orientation="vertical">
+                            android:textColor="@color/color_000000" />
+                    </com.zhy.autolayout.AutoLinearLayout>
+                </com.zhy.autolayout.AutoRelativeLayout>
+            </com.zhy.autolayout.AutoRelativeLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="0.00"
-                        android:gravity="right"
-                        android:textColor="@color/title_color"
-                        android:textSize="@dimen/sp_fifteen"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_five"
-                        android:text="账户余额"
-                        android:textSize="@dimen/sp_thirteen" />
-                </LinearLayout>
-            </RelativeLayout>
-
-            <LinearLayout
+            <com.zhy.autolayout.AutoLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/MineIvTouying"
-                android:layout_marginTop="@dimen/dp_ten"
+                android:layout_marginTop="@dimen/px_20"
                 android:orientation="vertical"
-                android:paddingBottom="@dimen/dp_fourty">
-
-                <LinearLayout
-                    android:id="@+id/mineLlResume"
+                android:paddingBottom="@dimen/px_80">
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:id="@+id/linear_myResume"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_fourty_three"
+                    android:layout_height="@dimen/px_86"
+                    android:layout_marginTop="@dimen/px_2"
+                    android:background="@color/color_ffffff"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/dp_one"
-                    android:background="@color/main_white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
-
                     <ImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="11dp"
+                        android:layout_width="@dimen/px_44"
+                        android:layout_height="@dimen/px_44"
+                        android:layout_marginLeft="@dimen/px_30"
+                        android:layout_marginRight="@dimen/px_20"
                         android:src="@drawable/mine_resume" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="我的简历"
-                        android:textColor="@color/title_color" />
-
+                        android:textColor="@color/color_000000" />
                     <ImageView
-                        android:layout_width="9dp"
-                        android:layout_height="16dp"
-                        android:layout_marginRight="15dp"
+                        android:layout_width="@dimen/px_18"
+                        android:layout_height="@dimen/px_32"
+                        android:layout_marginRight="@dimen/px_30"
                         android:src="@drawable/mine_arrow_right_gray" />
-                </LinearLayout>
+                </com.zhy.autolayout.AutoLinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/mineLlFavor"
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:id="@+id/linear_myCollect"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_fourty_three"
+                    android:layout_height="@dimen/px_86"
+                    android:layout_marginTop="@dimen/px_2"
+                    android:background="@color/color_ffffff"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/dp_one"
-                    android:background="@color/main_white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
-
                     <ImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="11dp"
+                        android:layout_width="@dimen/px_44"
+                        android:layout_height="@dimen/px_44"
+                        android:layout_marginLeft="@dimen/px_30"
+                        android:layout_marginRight="@dimen/px_20"
                         android:src="@drawable/mine_favor" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="我的收藏"
-                        android:textColor="@color/title_color" />
-
+                        android:textColor="@color/color_000000" />
                     <ImageView
-                        android:layout_width="9dp"
-                        android:layout_height="16dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="15dp"
+                        android:layout_width="@dimen/px_18"
+                        android:layout_height="@dimen/px_32"
+                        android:layout_marginRight="@dimen/px_30"
                         android:src="@drawable/mine_arrow_right_gray" />
-                </LinearLayout>
+                </com.zhy.autolayout.AutoLinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/mineLlTransact"
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:id="@+id/linear_tradeRecord"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_fourty_three"
+                    android:layout_height="@dimen/px_86"
+                    android:layout_marginTop="@dimen/px_2"
+                    android:background="@color/color_ffffff"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/dp_one"
-                    android:background="@color/main_white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
-
                     <ImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="11dp"
+                        android:layout_width="@dimen/px_44"
+                        android:layout_height="@dimen/px_44"
+                        android:layout_marginLeft="@dimen/px_30"
+                        android:layout_marginRight="@dimen/px_20"
                         android:src="@drawable/mine_transact" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="交易记录"
-                        android:textColor="@color/title_color" />
-
+                        android:textColor="@color/color_000000" />
                     <ImageView
-                        android:layout_width="9dp"
-                        android:layout_height="16dp"
-                        android:layout_marginRight="15dp"
+                        android:layout_width="@dimen/px_18"
+                        android:layout_height="@dimen/px_32"
+                        android:layout_marginRight="@dimen/px_30"
                         android:src="@drawable/mine_arrow_right_gray" />
-                </LinearLayout>
+                </com.zhy.autolayout.AutoLinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/mineLlInterview"
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:id="@+id/linear_interviewRecord"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_fourty_three"
+                    android:layout_height="@dimen/px_86"
+                    android:layout_marginTop="@dimen/px_2"
+                    android:background="@color/color_ffffff"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/dp_one"
-                    android:background="@color/main_white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
-
                     <ImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="11dp"
+                        android:layout_width="@dimen/px_44"
+                        android:layout_height="@dimen/px_44"
+                        android:layout_marginLeft="@dimen/px_30"
+                        android:layout_marginRight="@dimen/px_20"
                         android:src="@drawable/mine_interview" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="面试记录"
-                        android:textColor="@color/title_color" />
-
+                        android:textColor="@color/color_000000" />
                     <ImageView
-                        android:layout_width="9dp"
-                        android:layout_height="16dp"
-                        android:layout_marginRight="15dp"
+                        android:layout_width="@dimen/px_18"
+                        android:layout_height="@dimen/px_32"
+                        android:layout_marginRight="@dimen/px_30"
                         android:src="@drawable/mine_arrow_right_gray" />
-                </LinearLayout>
+                </com.zhy.autolayout.AutoLinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/mineLlService"
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:id="@+id/linear_contactService"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_fourty_three"
-
-                    android:layout_marginTop="@dimen/dp_ten"
-                    android:background="@color/main_white"
+                    android:layout_height="@dimen/px_86"
+                    android:layout_marginTop="@dimen/px_20"
+                    android:background="@color/color_ffffff"
+                    android:layout_gravity="center_horizontal"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
-
                     <ImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="11dp"
+                        android:layout_width="@dimen/px_44"
+                        android:layout_height="@dimen/px_44"
+                        android:layout_marginLeft="@dimen/px_30"
+                        android:layout_marginRight="@dimen/px_20"
                         android:src="@drawable/mine_service" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="联系客服"
-                        android:textColor="@color/title_color" />
-
+                        android:textColor="@color/color_000000" />
                     <ImageView
-                        android:layout_width="9dp"
-                        android:layout_height="16dp"
-                        android:layout_marginRight="15dp"
+                        android:layout_width="@dimen/px_18"
+                        android:layout_height="@dimen/px_32"
+                        android:layout_marginRight="@dimen/px_30"
                         android:src="@drawable/mine_arrow_right_gray" />
-                </LinearLayout>
+                </com.zhy.autolayout.AutoLinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/mineLlAbout"
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:id="@+id/linear_aboutApp"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_fourty_three"
+                    android:layout_height="@dimen/px_86"
+                    android:layout_marginTop="@dimen/px_2"
+                    android:background="@color/color_ffffff"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/dp_one"
-                    android:background="@color/main_white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
-
                     <ImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="11dp"
+                        android:layout_width="@dimen/px_44"
+                        android:layout_height="@dimen/px_44"
+                        android:layout_marginLeft="@dimen/px_30"
+                        android:layout_marginRight="@dimen/px_20"
                         android:src="@drawable/mine_theorys" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="关于君臣论"
-                        android:textColor="@color/title_color" />
-
+                        android:textColor="@color/color_000000" />
                     <ImageView
-                        android:layout_width="9dp"
-                        android:layout_height="16dp"
-                        android:layout_marginRight="15dp"
+                        android:layout_width="@dimen/px_18"
+                        android:layout_height="@dimen/px_32"
+                        android:layout_marginRight="@dimen/px_30"
                         android:src="@drawable/mine_arrow_right_gray" />
-                </LinearLayout>
-
-            </LinearLayout>
-        </LinearLayout>
+                </com.zhy.autolayout.AutoLinearLayout>
+            </com.zhy.autolayout.AutoLinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
     </ScrollView>
-</LinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

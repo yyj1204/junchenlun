@@ -17,14 +17,14 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.r0adkll.slidr.Slidr;
-import com.wktx.www.emperor.Application.MyApplication;
+import com.wktx.www.emperor.application.MyApplication;
 import com.wktx.www.emperor.Decoration.SpaceItemDecoration;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.Utils.ToastUtil;
-import com.wktx.www.emperor.Widget.DropDownMenu;
-import com.wktx.www.emperor.Adapter.ListDropDownAdapter;
-import com.wktx.www.emperor.Model.HomeItem;
-import com.wktx.www.emperor.Utils.Dip2pxUtil;
+import com.wktx.www.emperor.utils.ToastUtil;
+import com.wktx.www.emperor.widget.DropDownMenu;
+import com.wktx.www.emperor.ui.adapter.ListDropDownAdapter;
+import com.wktx.www.emperor.Model1.HomeItem;
+import com.wktx.www.emperor.utils.Dip2pxUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -77,7 +77,7 @@ public class WorksActivity extends AppCompatActivity {
 
     private void initView() {
         //测试tabView扩展功能
-        final View view = getLayoutInflater().inflate(R.layout.tab_text, null);
+        final View view = getLayoutInflater().inflate(R.layout.item_recruit_retrieve, null);
         view.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f));
         textView = (TextView) view.findViewById(R.id.text);
         imgView = (ImageView) view.findViewById(R.id.img);

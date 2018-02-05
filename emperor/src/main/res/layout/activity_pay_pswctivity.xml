@@ -155,7 +155,7 @@
         android:layout_alignRight="@+id/payPswLyPswTwo"
         android:layout_below="@+id/payPswLyPswTwo"
         android:layout_marginTop="@dimen/dp_fourty"
-        android:background="@drawable/submit_selected"
+        android:background="@drawable/selector_submit_selected_10"
         android:gravity="center"
         android:text="确认"
         android:textColor="@color/main_white"

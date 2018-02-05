@@ -15,6 +15,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        //条件筛选
         maven { url "https://jitpack.io" }
     }
 }

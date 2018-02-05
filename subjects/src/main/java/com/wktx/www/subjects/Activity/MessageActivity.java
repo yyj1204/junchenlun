@@ -12,8 +12,8 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
-import com.wktx.www.subjects.Fragment.MessageNoticeFragment;
-import com.wktx.www.subjects.Fragment.MessageRemindFragment;
+import com.wktx.www.subjects.ui.fragment.MessageNoticeFragment;
+import com.wktx.www.subjects.ui.fragment.MessageRemindFragment;
 import com.wktx.www.subjects.R;
 
 import butterknife.BindView;

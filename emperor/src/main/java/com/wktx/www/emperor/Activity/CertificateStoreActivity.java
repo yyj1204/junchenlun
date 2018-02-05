@@ -20,10 +20,10 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.Utils.Bitmap2Base64Util;
-import com.wktx.www.emperor.Utils.Contants;
-import com.wktx.www.emperor.Utils.SharedPreferenceUtil;
-import com.wktx.www.emperor.Widget.HeadPoPuWindow;
+import com.wktx.www.emperor.utils.Bitmap2Base64Util;
+import com.wktx.www.emperor.utils.ConstantUtil;
+import com.wktx.www.emperor.utils.SharedPreferenceUtil;
+import com.wktx.www.emperor.widget.HeadPopup;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +55,7 @@ public class CertificateStoreActivity extends AppCompatActivity {
     ImageView iv_photo_contrary;
 
     private boolean isFront;//true：是法人正面照片，false：营业执照片
-    private HeadPoPuWindow puWindow;
+    private HeadPopup puWindow;
     private int themeId;
     private int chooseMode = PictureMimeType.ofImage();
     private int compressMode = PictureConfig.SYSTEM_COMPRESS_MODE;
@@ -106,17 +106,17 @@ public class CertificateStoreActivity extends AppCompatActivity {
     }
 
     private void showPhotoPopuWindow() {
-        puWindow = new HeadPoPuWindow(CertificateStoreActivity.this, CertificateStoreActivity.this, selectList.size());
+        puWindow = new HeadPopup(CertificateStoreActivity.this, CertificateStoreActivity.this, selectList.size());
         puWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         puWindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         puWindow.setClippingEnabled(false);
         puWindow.showPopupWindow(findViewById(R.id.toolbar));
-        puWindow.setOnGetTypeClckListener(new HeadPoPuWindow.onGetTypeClckListener() {
+        puWindow.setOnGetTypeClckListener(new HeadPopup.onGetTypeClckListener() {
             @Override
-            public void getType(Contants.Type type) {
-                if (type == Contants.Type.CAMERA) {
+            public void getType(ConstantUtil.Type type) {
+                if (type == ConstantUtil.Type.CAMERA) {
                     onAddPicClick(false);
-                } else if (type == Contants.Type.PHONE) {
+                } else if (type == ConstantUtil.Type.PHONE) {
                     onAddPicClick(true);
                 }
             }
@@ -206,7 +206,7 @@ public class CertificateStoreActivity extends AppCompatActivity {
 
                             }
                             String s = Bitmap2Base64Util.Bitmap2StrByBase64(bitmap);
-                            SharedPreferenceUtil.saveData(this, Contants.HEADBASE64STR, s, Contants.HEADBASE64_NAME);
+                            SharedPreferenceUtil.saveData(this, ConstantUtil.HEADBASE64STR_KEY, s, ConstantUtil.HEADBASE64_NAME);
 
                             // 例如 LocalMedia 里面返回三种path
                             // 1.media.getPath(); 为原图path

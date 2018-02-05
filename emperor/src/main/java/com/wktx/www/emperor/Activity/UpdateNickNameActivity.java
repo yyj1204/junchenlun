@@ -8,16 +8,16 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.r0adkll.slidr.Slidr;
-import com.wktx.www.emperor.Model.Login.LoginInfoDataInfo;
-import com.wktx.www.emperor.Model.UpdateInfo.UpdateNickNameInfo;
-import com.wktx.www.emperor.Model.UpdateInfo.UpdateNickNameInfoData;
-import com.wktx.www.emperor.Model.UserInfo.UserInfoDataInfoUserinfo;
+import com.wktx.www.emperor.Model1.Login.LoginInfoDataInfo;
+import com.wktx.www.emperor.Model1.UpdateInfo.UpdateNickNameInfo;
+import com.wktx.www.emperor.Model1.UpdateInfo.UpdateNickNameInfoData;
+import com.wktx.www.emperor.Model1.UserInfo.UserInfoDataInfoUserinfo;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.Utils.Contants;
-import com.wktx.www.emperor.Utils.GsonUtils;
-import com.wktx.www.emperor.Utils.SaveObjectUtils;
-import com.wktx.www.emperor.Utils.ToastUtil;
-import com.wktx.www.emperor.Utils.getSaveInfoUtil;
+import com.wktx.www.emperor.utils.ConstantUtil;
+import com.wktx.www.emperor.utils.GsonUtil;
+import com.wktx.www.emperor.utils.SaveObjectUtils;
+import com.wktx.www.emperor.utils.ToastUtil;
+import com.wktx.www.emperor.utils.getSaveInfoUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -69,7 +69,7 @@ public class UpdateNickNameActivity extends AppCompatActivity {
         Slidr.attach(this);
         initSaveLoacl();
         if (token != null) {
-            info = new SaveObjectUtils(this, Contants.USERINFO_NAME).getObject(token, UserInfoDataInfoUserinfo.class);
+            info = new SaveObjectUtils(this, ConstantUtil.USERINFO_NAME).getObject(token, UserInfoDataInfoUserinfo.class);
         }
     }
 
@@ -89,10 +89,9 @@ public class UpdateNickNameActivity extends AppCompatActivity {
         public void onError(Call call, Exception e, int id) {
             Log.e("HomeDetailFragment", "null");
         }
-
         @Override
         public void onResponse(String response, int id) {
-            UpdateNickNameInfo updateNickNameInfo = GsonUtils.parseJSON(response, UpdateNickNameInfo.class);
+            UpdateNickNameInfo updateNickNameInfo = GsonUtil.parseJSON(response, UpdateNickNameInfo.class);
             UpdateNickNameInfoData data = updateNickNameInfo.getData();
             String msg = data.getMsg();
             if (!msg.equals("")) {
@@ -100,10 +99,10 @@ public class UpdateNickNameActivity extends AppCompatActivity {
                 if (msg.equals("修改成功")) {
                     String s = etNickName.getText().toString();
                     Intent intent = new Intent();
-                    intent.putExtra(Contants.NICKTEXT, s);
+                    intent.putExtra(ConstantUtil.NICKTEXT, s);
                     info.setNickname(s);
-                    new SaveObjectUtils(UpdateNickNameActivity.this, Contants.USERINFO_NAME).setObject(token, info);
-                    setResult(Contants.RESULTCODE_UPDATENICK, intent);
+                    new SaveObjectUtils(UpdateNickNameActivity.this, ConstantUtil.USERINFO_NAME).setObject(token, info);
+                    setResult(ConstantUtil.RESULTCODE_UPDATENAME, intent);
                     finish();
                 }
             }
@@ -117,10 +116,9 @@ public class UpdateNickNameActivity extends AppCompatActivity {
         params.put("token", token);
         params.put("nickname", nickName);
         OkHttpUtils.post()//
-                .url(Contants.URL_EDITUSERINFO)//
+                .url(ConstantUtil.URL_EDITUSERINFO)//
                 .params(params)//
                 .build()//
                 .execute(new MyStringCallback());
     }
-
 }

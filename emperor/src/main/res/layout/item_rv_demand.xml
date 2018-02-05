@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:background="@color/main_white"
-    android:padding="@dimen/dp_fifteen">
+    android:background="@color/color_ffffff"
+    android:padding="@dimen/px_30">
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_demandTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:layout_centerVertical="true"
-        android:textColor="@color/title_color"
-        android:textSize="@dimen/sp_thirteen"
-        />
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_13" />
     <TextView
-        android:id="@+id/itenTvDemandState"
+        android:id="@+id/tv_demandStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/textView"
-        android:layout_marginLeft="@dimen/dp_seven"
-        android:background="@drawable/shape_solid_red_five"
-        android:textSize="@dimen/sp_twelve"
-        android:textColor="@color/main_white"
+        android:layout_toRightOf="@id/tv_demandTitle"
+        android:layout_marginLeft="@dimen/px_14"
+        android:background="@drawable/shape_solid_color_fa716f_10"
+        android:textSize="@dimen/sp_12"
+        android:textColor="@color/color_ffffff"
         android:gravity="center"
         android:layout_centerVertical="true"
         android:text="待响应"/>
     <ImageView
-        android:layout_width="@dimen/dp_eight"
-        android:layout_height="@dimen/dp_ten"
+        android:layout_width="@dimen/px_16"
+        android:layout_height="@dimen/px_20"
         android:src="@drawable/arrow_right_gray"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"/>
-</RelativeLayout>
+</com.zhy.autolayout.AutoRelativeLayout>

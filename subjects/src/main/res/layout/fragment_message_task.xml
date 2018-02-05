@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_f0f0f0"
-    tools:context="com.wktx.www.subjects.Fragment.Message1TaskFragment">
+    tools:context=".ui.fragment.Message1TaskFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"

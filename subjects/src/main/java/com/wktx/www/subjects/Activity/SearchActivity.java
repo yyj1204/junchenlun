@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.subjects.R;
-import com.wktx.www.subjects.Utils.ToastUtil;
+import com.wktx.www.subjects.utils.ToastUtil;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 

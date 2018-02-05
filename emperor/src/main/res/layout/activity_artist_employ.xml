@@ -30,7 +30,7 @@
                     android:layout_height="53dp"
                     android:scaleType="fitXY"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/head_women" />
+                    android:src="@drawable/icon_head_woman" />
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -179,7 +179,7 @@
                 <RelativeLayout
                     android:layout_width="22dp"
                     android:layout_height="22dp"
-                    android:background="@drawable/shape_stroke_gray_one">
+                    android:background="@drawable/shape_stroke_888888_1">
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_centerInParent="true"
@@ -193,12 +193,12 @@
                     android:gravity="center"
                     android:textColor="@color/color_000000"
                     android:textSize="13sp"
-                    android:background="@drawable/shape_stroke_gray_one"/>
+                    android:background="@drawable/shape_stroke_888888_1"/>
 
                 <RelativeLayout
                     android:layout_width="22dp"
                     android:layout_height="22dp"
-                    android:background="@drawable/shape_stroke_gray_one">
+                    android:background="@drawable/shape_stroke_888888_1">
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_centerInParent="true"

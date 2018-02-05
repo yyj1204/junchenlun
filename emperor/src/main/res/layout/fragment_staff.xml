@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/title_tab_mine"
+            android:text="@string/title_mine"
             android:textColor="@color/main_white"
             android:textSize="@dimen/sp_twenty_three" />
 
@@ -32,7 +32,7 @@
             android:src="@drawable/message" />
     </android.support.v7.widget.Toolbar>
 
-    <com.wktx.www.emperor.Widget.DropDownMenu
+    <com.wktx.www.emperor.widget.DropDownMenu
         android:id="@+id/dropDownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
         app:ddmenuUnselectedIcon="@drawable/down_pull_normal"
         app:ddtextSelectedColor="@color/colorPrimary"
         app:ddtextUnselectedColor="@color/title_color"
-        app:ddunderlineColor="@color/gray"></com.wktx.www.emperor.Widget.DropDownMenu>
+        app:ddunderlineColor="@color/gray"></com.wktx.www.emperor.widget.DropDownMenu>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -91,7 +91,7 @@
             android:layout_width="325dp"
             android:layout_height="50dp"
             android:layout_marginTop="@dimen/dp_twenty"
-            android:background="@drawable/shape_stroke_yellow_five"
+            android:background="@drawable/shape_stroke_ffb321_10"
             android:gravity="center"
             android:text="挑合适的员工"
             android:textColor="@color/colorPrimary"

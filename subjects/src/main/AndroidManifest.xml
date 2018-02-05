@@ -1,34 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wktx.www.subjects">
-    //网络请求权限
-    <!-- if you want to load images from the internet -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    //RxJava2+Retrofit2 网络请求框架  请求权限
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    //if you want to load images from the internet
+    <!--<uses-permission android:name="android.permission.INTERNET" />-->
+    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
+
     <application
+        android:name=".application.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.MainActivity">
+        <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--登录、注册、忘记密码-->
+        <activity android:name=".ui.activity.mine.login.LoginActivity" />
+        <activity android:name=".ui.activity.mine.login.RegisterActivity" />
+        <activity android:name=".ui.activity.mine.login.ForgetPwdActivity" />
+
+
         <activity android:name=".Activity.ScreeningActivity" />
         <activity android:name=".Activity.MessageActivity" />
         <activity android:name=".Activity.MessageDetailsActivity" />
         <activity android:name=".Activity.SearchActivity" />
-        <activity android:name=".Activity.RegiestActivity" />
-        <activity android:name=".Activity.ForgetActivity" />
-        <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.AccountProfileActivity" />
         <activity android:name=".Activity.CashActivity" />
         <activity android:name=".Activity.InterviewActivity" />
@@ -50,6 +62,18 @@
         <activity android:name=".Activity.PersonalInfoEditActivity"></activity>
         <activity android:name=".Activity.WorkReportActivity" />
         <activity android:name=".Activity.GoodPickActivity"></activity>
+
+
+        <!-- 屏幕适配AutoLayout -->
+        <meta-data
+            android:name="design_width"
+            android:value="720" />
+        <meta-data
+            android:name="design_height"
+            android:value="1280" />
+        <!-- 屏幕适配AutoLayout -->
+
+
     </application>
 
 </manifest>

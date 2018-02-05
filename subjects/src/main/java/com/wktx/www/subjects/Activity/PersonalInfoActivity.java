@@ -27,13 +27,13 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.subjects.Model.JsonBean;
 import com.wktx.www.subjects.R;
-import com.wktx.www.subjects.Utils.Bitmap2Base64Util;
-import com.wktx.www.subjects.Utils.Contants;
-import com.wktx.www.subjects.Utils.DateUtils;
-import com.wktx.www.subjects.Utils.GetJsonDataUtil;
-import com.wktx.www.subjects.Utils.SharedPreferenceUtil;
-import com.wktx.www.subjects.Widget.HeadPoPuWindow;
-import com.wktx.www.subjects.Widget.SexPoPuWindow;
+import com.wktx.www.subjects.utils.Bitmap2Base64Util;
+import com.wktx.www.subjects.utils.ConstantUtil;
+import com.wktx.www.subjects.utils.DateUtil;
+import com.wktx.www.subjects.utils.GetJsonDataUtil;
+import com.wktx.www.subjects.utils.SharedPreferenceUtil;
+import com.wktx.www.subjects.widget.HeadPopup;
+import com.wktx.www.subjects.widget.SexPoPuWindow;
 
 import org.json.JSONArray;
 
@@ -77,7 +77,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
     TextView tv_wechat;
 
 
-    private HeadPoPuWindow puWindow;
+    private HeadPopup puWindow;
     private int themeId;
     private int chooseMode = PictureMimeType.ofImage();
     private int compressMode = PictureConfig.SYSTEM_COMPRESS_MODE;
@@ -308,17 +308,17 @@ public class PersonalInfoActivity extends AppCompatActivity {
 
     //头像弹窗
     private void showPhotoPopuWindow() {
-        puWindow = new HeadPoPuWindow(PersonalInfoActivity.this, PersonalInfoActivity.this, selectList.size());
+        puWindow = new HeadPopup(PersonalInfoActivity.this, PersonalInfoActivity.this, selectList.size());
         puWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         puWindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         puWindow.setClippingEnabled(false);
         puWindow.showPopupWindow(findViewById(R.id.toolbar));
-        puWindow.setOnGetTypeClckListener(new HeadPoPuWindow.onGetTypeClckListener() {
+        puWindow.setOnGetTypeClckListener(new HeadPopup.onGetTypeClckListener() {
             @Override
-            public void getType(Contants.Type type) {
-                if (type == Contants.Type.CAMERA) {
+            public void getType(ConstantUtil.Type type) {
+                if (type == ConstantUtil.Type.CAMERA) {
                     onAddPicClick(false);
-                } else if (type == Contants.Type.PHONE) {
+                } else if (type == ConstantUtil.Type.PHONE) {
                     onAddPicClick(true);
                 }
             }
@@ -444,7 +444,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
                 .setCancelColor(Color.BLACK)
                 .isCenterLabel(false)
                 .build();
-        pvTime.setDate(DateUtils.getCalendarDate2(tv_birth.getText().toString()));
+        pvTime.setDate(DateUtil.getCalendarDate2(tv_birth.getText().toString()));
         pvTime.show();
     }
 
@@ -492,7 +492,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
                                 iv_head.setImageBitmap(bitmap);
                             }
                             String s = Bitmap2Base64Util.Bitmap2StrByBase64(bitmap);
-                            SharedPreferenceUtil.saveData(this, Contants.HEADBASE64STR, s, Contants.HEADBASE64_NAME);
+                            SharedPreferenceUtil.saveData(this, ConstantUtil.HEADBASE64STR, s, ConstantUtil.HEADBASE64_NAME);
 
                             //TODO 更新头像的请求操作
                             // 例如 LocalMedia 里面返回三种path

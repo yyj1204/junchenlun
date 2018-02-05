@@ -5,8 +5,8 @@
     android:layout_height="@dimen/title_height_default"
     android:background="@color/colorPrimary"
     android:id="@+id/title_layout"
-    android:gravity="center"
-    >
+    android:gravity="center">
+
     <ImageView
         android:id="@+id/tb_IvReturn"
         android:layout_width="@dimen/dp_fourty_three"
@@ -28,14 +28,12 @@
         android:id="@+id/title_search"
         android:drawableLeft="@drawable/ic_search"
         android:paddingLeft="20dp"
-        android:drawablePadding="5dp"
-        />
+        android:drawablePadding="5dp" />
+
     <ImageView
         android:padding="@dimen/dp_thirteen"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/message"
-        android:id="@+id/tb_right_img"
-        />
-
+        android:id="@+id/tb_right_img" />
 </LinearLayout>

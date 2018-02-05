@@ -23,7 +23,7 @@
             android:src="@drawable/un_favor" />
     </LinearLayout>
 
-    <com.wktx.www.emperor.Widget.DropDownMenu
+    <com.wktx.www.emperor.widget.DropDownMenu
         android:id="@+id/dropDownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,7 +36,8 @@
         app:ddmenuUnselectedIcon="@drawable/down_pull_normal"
         app:ddtextSelectedColor="@color/colorPrimary"
         app:ddtextUnselectedColor="@color/title_color"
-        app:ddunderlineColor="@color/gray"></com.wktx.www.emperor.Widget.DropDownMenu>
+        app:ddunderlineColor="@color/gray">
+    </com.wktx.www.emperor.widget.DropDownMenu>
 
     <LinearLayout
         android:layout_width="match_parent"

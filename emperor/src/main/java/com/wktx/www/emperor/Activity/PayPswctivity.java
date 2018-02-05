@@ -10,16 +10,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.r0adkll.slidr.Slidr;
-import com.wktx.www.emperor.Model.ForgetPsw.ForgetPswInfo;
-import com.wktx.www.emperor.Model.ForgetPsw.ForgetPswInfoData;
-import com.wktx.www.emperor.Model.SendCode.SendCodeInfo;
-import com.wktx.www.emperor.Model.SendCode.SendCodeInfoData;
+import com.wktx.www.emperor.Model1.ForgetPsw.ForgetPswInfo;
+import com.wktx.www.emperor.Model1.ForgetPsw.ForgetPswInfoData;
+import com.wktx.www.emperor.Model1.SendCode.SendCodeInfo;
+import com.wktx.www.emperor.Model1.SendCode.SendCodeInfoData;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.Utils.CheckPhoneUtil;
-import com.wktx.www.emperor.Utils.Contants;
-import com.wktx.www.emperor.Utils.GsonUtils;
-import com.wktx.www.emperor.Utils.ToastUtil;
-import com.wktx.www.emperor.Utils.Md5Util;
+import com.wktx.www.emperor.utils.CheckPhoneUtil;
+import com.wktx.www.emperor.utils.ConstantUtil;
+import com.wktx.www.emperor.utils.GsonUtil;
+import com.wktx.www.emperor.utils.ToastUtil;
+import com.wktx.www.emperor.utils.Md5Util;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import java.lang.ref.WeakReference;
@@ -93,13 +93,13 @@ public class PayPswctivity extends AppCompatActivity {
    *提交请求修改密码的方法
     */
     public void UpdatePsw(String phone, String code, String psw) {
-        state = Contants.SUBMITREGIEST;
+        state = ConstantUtil.SUBMITREGIEST;
         Map<String, String> params = new HashMap<>();
         params.put("phone", phone);
         params.put("code", code);
         params.put("new_password", Md5Util.md5(psw));
         OkHttpUtils.post()
-                .url(Contants.URL_USER_USER_INFO_FORGETPASSWORD)
+                .url(ConstantUtil.URL_USER_USER_INFO_FORGETPASSWORD)
                 .params(params)
                 .build()
                 .execute(new MyStringCallback());
@@ -107,12 +107,12 @@ public class PayPswctivity extends AppCompatActivity {
 
 
     private void sendCode() {
-        state = Contants.SENDCODE;
+        state = ConstantUtil.SENDCODE;
         String account = etAccount.getText().toString();
         Map<String, String> params = new HashMap<>();
         params.put("phone", account);
         OkHttpUtils.post()
-                .url(Contants.URL_SENDCODE)
+                .url(ConstantUtil.URL_SENDCODE)
                 .params(params)
                 .build()
                 .execute(new MyStringCallback());
@@ -128,13 +128,13 @@ public class PayPswctivity extends AppCompatActivity {
         public void onResponse(String response, int id) {
 
             switch (state) {
-                case Contants.SENDCODE:
-                    SendCodeInfo sendCodeInfo = GsonUtils.parseJSON(response, SendCodeInfo.class);
+                case ConstantUtil.SENDCODE:
+                    SendCodeInfo sendCodeInfo = GsonUtil.parseJSON(response, SendCodeInfo.class);
                     SendCodeInfoData data = sendCodeInfo.getData();
                     ToastUtil.toast(PayPswctivity.this, data.getMsg());
                     break;
-                case Contants.SUBMITREGIEST:
-                    ForgetPswInfo forgetInfo = GsonUtils.parseJSON(response, ForgetPswInfo.class);
+                case ConstantUtil.SUBMITREGIEST:
+                    ForgetPswInfo forgetInfo = GsonUtil.parseJSON(response, ForgetPswInfo.class);
                     ForgetPswInfoData forgetInfoData = forgetInfo.getData();
                     if (forgetInfoData.getCode() == 0) {
                         ToastUtil.toast(PayPswctivity.this, forgetInfoData.getMsg());

@@ -4,18 +4,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.wktx.www.subjects.R;
-import com.wktx.www.subjects.Utils.MyDividerUtil;
-import com.wktx.www.subjects.Utils.ToastUtil;
-import com.wktx.www.subjects.Widget.MyLayoutManager;
+import com.wktx.www.subjects.utils.ToastUtil;
+import com.wktx.www.subjects.widget.MyLayoutManager;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

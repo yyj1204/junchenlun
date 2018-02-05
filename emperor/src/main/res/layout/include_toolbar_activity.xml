@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="48dp"
-    android:background="@color/colorPrimary"
+    android:layout_height="@dimen/px_96"
+    android:background="@color/color_ffb321"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
     <ImageView
         android:id="@+id/tb_IvReturn"
-        android:layout_width="@dimen/dp_sixty_three"
-        android:layout_height="@dimen/dp_fourty_three"
+        android:layout_width="@dimen/px_126"
+        android:layout_height="@dimen/px_86"
+        android:paddingTop="@dimen/px_20"
+        android:paddingBottom="@dimen/px_20"
+        android:paddingRight="@dimen/px_100"
         android:layout_gravity="center_vertical|left"
-        android:paddingBottom="@dimen/dp_ten"
-        android:paddingRight="@dimen/dp_fifty"
-        android:paddingTop="@dimen/dp_ten"
         android:src="@drawable/arrow_left" />
 
     <TextView
@@ -22,6 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="界面标题"
-        android:textColor="@color/main_white"
-        android:textSize="@dimen/sp_twenty_three" />
+        android:textColor="@color/color_ffffff"
+        android:textSize="@dimen/sp_23" />
 </android.support.v7.widget.Toolbar>

@@ -15,10 +15,11 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.Utils.MyDividerUtil;
-import com.wktx.www.emperor.Widget.DropDownMenu;
-import com.wktx.www.emperor.Adapter.ListDropDownAdapter;
-import com.wktx.www.emperor.Widget.MyLayoutManager;
+import com.wktx.www.emperor.ui.activity.recruit.resume.ArtistResumeActivity;
+import com.wktx.www.emperor.utils.MyUtils;
+import com.wktx.www.emperor.widget.DropDownMenu;
+import com.wktx.www.emperor.ui.adapter.ListDropDownAdapter;
+import com.wktx.www.emperor.widget.MyLayoutManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -115,7 +116,7 @@ public class EmployActivity extends AppCompatActivity {
 
 
     private void initVtRecycleView() {
-        mVtRecycleView.addItemDecoration(MyDividerUtil.drawDivider(this, LinearLayout.VERTICAL, R.drawable.divider_recycler_gray_seven));
+        mVtRecycleView.addItemDecoration(MyUtils.drawDivider(this, LinearLayout.VERTICAL, R.drawable.divider_f0f0f0_14));
         MyLayoutManager myLayoutManager = new MyLayoutManager(this, LinearLayout.VERTICAL, false);
         mVtRecycleView.setLayoutManager(myLayoutManager);
         mAdapter = new BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_vt_rv_employ, mDatas) {

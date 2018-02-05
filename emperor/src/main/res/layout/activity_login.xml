@@ -1,148 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/main_white"
-                android:orientation="vertical"
-                android:fitsSystemWindows="true"
-                tools:context="com.wktx.www.emperor.Activity.LoginActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_ffffff"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.activity.login.LoginActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    >
-        <ImageView
-            android:id="@+id/tb_IvReturn"
-            android:layout_width="@dimen/dp_sixty_three"
-            android:layout_height="@dimen/dp_fourty_three"
-            android:paddingRight="@dimen/dp_fifty"
-            android:paddingTop="@dimen/dp_ten"
-            android:paddingBottom="@dimen/dp_ten"
-            android:layout_gravity="center_vertical|left"
-            android:src="@drawable/arrow_left"/>
-
-        <TextView
-            android:id="@+id/tb_TvBarTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/title_login"
-            android:textColor="@color/main_white"
-            android:textSize="@dimen/sp_twenty_three"
-        />
-
-    </android.support.v7.widget.Toolbar>
-
+    <include layout="@layout/include_toolbar_activity" />
 
     <ImageView
         android:id="@+id/image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/login_theory"
+        android:layout_marginTop="@dimen/px_100"
+        android:layout_marginBottom="@dimen/px_60"
+        android:layout_below="@+id/toolbar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/dp_fifty"
-        android:layout_marginBottom="@dimen/dp_thirty"
-        android:layout_below="@+id/toolbar"/>
+        android:src="@drawable/login_theory"/>
+
     <LinearLayout
         android:id="@+id/loginLyName"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="@dimen/px_90"
+        android:layout_marginLeft="@dimen/px_60"
+        android:layout_marginRight="@dimen/px_60"
         android:layout_below="@+id/image"
-        android:layout_marginLeft="@dimen/dp_thirty"
-        android:layout_marginRight="@dimen/dp_thirty"
         android:gravity="center_vertical"
         android:orientation="vertical">
         <EditText
-            android:id="@+id/loginEtAccount"
+            android:id="@+id/et_phone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@null"
-            android:textCursorDrawable="@null"
-            android:hint="请输入手机号"
-            android:inputType="textPersonName"
-            android:textColorHint="@color/textColorHint"
             android:drawableLeft="@drawable/login_account"
-            android:drawablePadding="@dimen/dp_eight"
-            android:textSize="@dimen/sp_fourteen"/>
+            android:drawablePadding="@dimen/px_16"
+            android:hint="请输入手机号码"
+            android:inputType="phone"
+            android:singleLine="true"
+            android:maxLength="11"
+            android:textColorHint="@color/textColorHint"
+            android:textSize="@dimen/sp_14" />
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/line"/>
+            android:layout_height="@dimen/px_2"
+            android:background="@color/color_f2f2f2"/>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/loginLyPsw"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="@dimen/px_90"
         android:layout_alignLeft="@+id/loginLyName"
         android:layout_alignRight="@+id/loginLyName"
         android:layout_below="@+id/loginLyName"
         android:gravity="center_vertical"
         android:orientation="vertical">
-
         <EditText
-            android:id="@+id/loginEtPsw"
+            android:id="@+id/et_pwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/px_5"
             android:layout_weight="1"
             android:background="@null"
-            android:hint="请输入密码"
-            android:inputType="textPassword"
-            android:textColorHint="@color/textColorHint"
             android:drawableLeft="@drawable/login_psw"
-            android:drawablePadding="10.5dp"
-            android:paddingLeft="2.5dp"
-            android:textSize="@dimen/sp_fourteen"/>
+            android:drawablePadding="@dimen/px_21"
+            android:hint="请输入密码(6-12位数字、字母)"
+            android:singleLine="true"
+            android:inputType="textPassword"
+            android:digits="@string/string_pwd"
+            android:textColorHint="@color/textColorHint"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/sp_14" />
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/line"/>
+            android:layout_height="@dimen/px_2"
+            android:background="@color/color_f2f2f2"/>
     </LinearLayout>
+
     <TextView
-        android:id="@+id/tv_forget"
+        android:id="@+id/tv_forget_pwd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px_20"
         android:text="忘记密码?"
         android:layout_below="@+id/loginLyPsw"
         android:layout_alignRight="@+id/loginLyPsw"
-        android:layout_marginTop="@dimen/dp_ten"
-        android:textSize="@dimen/dp_twelve"/>
+        android:textSize="@dimen/sp_12"/>
 
     <Button
-        android:id="@+id/loginBtnSubmit"
+        android:id="@+id/bt_login"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
+        android:layout_height="@dimen/px_90"
+        android:layout_marginTop="@dimen/px_148"
         android:layout_alignLeft="@+id/loginLyPsw"
         android:layout_alignRight="@+id/loginLyPsw"
         android:layout_below="@+id/loginLyPsw"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="74dp"
-        android:background="@drawable/submit_selected"
+        android:background="@drawable/selector_submit_selected_10"
         android:gravity="center"
         android:text="登录"
-        android:textColor="@color/main_white"
-        android:textSize="@dimen/dp_fifteen"/>
+        android:textColor="@color/color_ffffff"
+        android:textSize="@dimen/sp_15"/>
+
     <LinearLayout
         android:id="@+id/lL_regiest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/loginBtnSubmit"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="@dimen/px_44"
+        android:layout_below="@+id/bt_login"
         android:gravity="center"
         android:orientation="horizontal">
         <TextView
             android:id="@+id/tv_regiest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="12dp"
+            android:layout_marginRight="@dimen/px_24"
             android:text="没有账号？立即注册"
-            android:textColor="@color/title_color_gray"
-            android:textSize="@dimen/sp_fourteen"/>
+            android:textColor="@color/color_888888"
+            android:textSize="@dimen/sp_14"/>
     </LinearLayout>
 </RelativeLayout>

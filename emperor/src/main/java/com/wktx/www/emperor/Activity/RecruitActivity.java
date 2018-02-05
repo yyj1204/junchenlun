@@ -14,7 +14,9 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
-import com.wktx.www.emperor.Fragment.RecruitListFragment;
+import com.wktx.www.emperor.ui.activity.SearchActivity;
+import com.wktx.www.emperor.ui.activity.recruit.demand.DemandActivity;
+import com.wktx.www.emperor.ui.fragment.recruit.RecruitListFragment;
 import com.wktx.www.emperor.R;
 
 import butterknife.BindView;
@@ -80,7 +82,7 @@ public class RecruitActivity extends AppCompatActivity {
             @Override
             public View createTabView(ViewGroup container, int position, PagerAdapter adapter) {
                 CharSequence pageTitle = adapter.getPageTitle(position);
-                View v = LayoutInflater.from(RecruitActivity.this).inflate(R.layout.sortlist_title_view, container, false);
+                View v = LayoutInflater.from(RecruitActivity.this).inflate(R.layout.item_recruit_smarttab, container, false);
                 if (v != null) {
                     TextView textView = (TextView) v.findViewById(R.id.textView);
                     textView.setText(pageTitle);
