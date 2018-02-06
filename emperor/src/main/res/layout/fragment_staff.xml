@@ -37,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:dddividerColor="@color/gray"
+        app:dddividerHeight="@dimen/px_20"
         app:ddmaskColor="@color/mask_color"
         app:ddmenuBackgroundColor="@color/white"
         app:ddmenuIconOrientation="right"

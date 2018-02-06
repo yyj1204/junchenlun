@@ -7,12 +7,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.wktx.www.emperor.R;
+import com.zhy.autolayout.AutoLinearLayout;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 /**
  * 招聘顶部搜索框控件
  */
-public class TitleLayout extends LinearLayout {
+public class TitleLayout extends AutoLinearLayout {
 
     @BindView(R.id.linear_titleSearch)
     LinearLayout llTitle;

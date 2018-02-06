@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<com.zhy.autolayout.AutoLinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/linear_titleSearch"
     android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         android:id="@+id/tv_titleSearch"
         android:background="@drawable/shape_search"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/px_60"
         android:layout_weight="1"
         android:text="搜索"
         android:gravity="center|left"
@@ -31,4 +31,4 @@
         android:layout_height="@dimen/px_100"
         android:src="@drawable/message" />
 
-</LinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

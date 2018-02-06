@@ -14,10 +14,11 @@
         app:ddtextUnselectedColor="@color/color_5d5d5d"
         app:ddmenuSelectedIcon="@drawable/down_pull_selected"
         app:ddmenuUnselectedIcon="@drawable/down_pull_normal"
-        app:ddmaskColor="@color/color_88888888"
+        app:ddmaskColor="@color/mask_color"
         app:ddmenuBackgroundColor="@color/color_f0f0f0"
-        app:ddunderlineColor="@color/color_cccccc"
-        app:dddividerColor="@color/color_cccccc"
+        app:ddunderlineColor="@color/gray"
+        app:dddividerColor="@color/gray"
+        app:dddividerHeight="@dimen/px_20"
         app:ddmenuIconOrientation="right">
     </com.wktx.www.emperor.widget.DropDownMenu>
 

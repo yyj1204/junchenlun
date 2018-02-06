@@ -66,6 +66,7 @@ public class ArtistResumeActivity extends ABaseActivity<IView,ResumePresenter> i
                 }
                 break;
             case R.id.linear_phone://调用拨号界面
+                phoneStr="18150961675";
                 if (phoneStr.equals("")||phoneStr.equals("0")){
                     MyUtils.showToast(ArtistResumeActivity.this,"该同学未留下手机号！");
                 }else {
