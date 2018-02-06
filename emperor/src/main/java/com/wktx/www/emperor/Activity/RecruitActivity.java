@@ -17,6 +17,7 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.wktx.www.emperor.ui.activity.SearchActivity;
 import com.wktx.www.emperor.ui.activity.recruit.demand.DemandActivity;
 import com.wktx.www.emperor.R;
+import com.wktx.www.emperor.ui.fragment.recruit.RecruitListFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
