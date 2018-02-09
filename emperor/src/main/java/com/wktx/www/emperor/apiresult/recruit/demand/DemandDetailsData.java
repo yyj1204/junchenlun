@@ -17,10 +17,10 @@ package com.wktx.www.emperor.apiresult.recruit.demand;
  * }
  */
 
-public class DemandDetailData {
+public class DemandDetailsData {
     private int code;
     private String msg;
-    private DemandDetailInfoData info;
+    private DemandDetailsInfoData info;
 
     public int getCode() {
         return code;
@@ -38,18 +38,18 @@ public class DemandDetailData {
         this.msg = msg;
     }
 
-    public DemandDetailInfoData getInfo() {
+    public DemandDetailsInfoData getInfo() {
         return info;
     }
 
-    public void setInfo(DemandDetailInfoData info) {
+    public void setInfo(DemandDetailsInfoData info) {
         this.info = info;
     }
 
 
     @Override
     public String toString() {
-        return "DemandDetailData{" +
+        return "DemandDetailsData{" +
                 "code=" + code +
                 ", msg='" + msg + '\'' +
                 ", info=" + info +

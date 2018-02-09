@@ -13,6 +13,7 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
+import com.wktx.www.emperor.basemvp.ALazyLoadFragment;
 import com.wktx.www.emperor.ui.activity.SearchActivity;
 import com.wktx.www.emperor.ui.activity.login.LoginActivity;
 import com.wktx.www.emperor.ui.activity.recruit.demand.DemandActivity;
@@ -21,7 +22,6 @@ import com.wktx.www.emperor.R;
 import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.recruit.retrievalcondition.Bean;
 import com.wktx.www.emperor.apiresult.recruit.retrievalcondition.RetrievalConditionInfoData;
-import com.wktx.www.emperor.basemvp.ABaseFragment;
 import com.wktx.www.emperor.presenter.recruit.recruit.RecruitPresenter;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.LoginUtil;
@@ -36,11 +36,13 @@ import butterknife.OnClick;
 /**
  * 招聘片段
  */
-public class RecruitFragment extends ABaseFragment<IView,RecruitPresenter> implements IView<RetrievalConditionInfoData> {
+public class RecruitFragment extends ALazyLoadFragment<IView,RecruitPresenter> implements IView<RetrievalConditionInfoData> {
     @BindView(R.id.viewpager)
     ViewPager viewPager;
     @BindView(R.id.layout_smartTab)
     SmartTabLayout smartTab;
+
+    private boolean isFirstVisible;//是否第一次创建可见
 
     @OnClick({R.id.linear_titleSearch, R.id.iv_titleRight,R.id.tv_releaseDemand})
     public void MyOnclick(View view) {
@@ -78,7 +80,6 @@ public class RecruitFragment extends ABaseFragment<IView,RecruitPresenter> imple
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recruit, container, false);
         ButterKnife.bind(this, view);
-        getPresenter().onGetRetrievalConditionInfo();//获取招聘检索条件
         return view;
     }
 
@@ -87,6 +88,40 @@ public class RecruitFragment extends ABaseFragment<IView,RecruitPresenter> imple
         return new RecruitPresenter();
     }
 
+    /**
+     * 片段是否可见
+     * @param isVisible falese 可见 -> 不可见
+     *  此时 isFirstVisible=true，在片段不可见时候将 isFirstVisible = false
+     * @param isVisible true  不可见 -> 可见
+     *  如果 isFirstVisible=false 说明已经创建过，防止多次请求接口，加判断
+     */
+    @Override
+    protected void onFragmentVisibleChange(boolean isVisible) {
+        if (isVisible){
+            if (!isFirstVisible){
+                initData();
+            }
+        }else {
+            if (isFirstVisible){
+                isFirstVisible=false;
+            }
+        }
+    }
+
+    /**
+     * 片段第一次被创建（可见）时才会执行到这个方法
+     * 加载数据
+     * isFirstVisible=true
+     */
+    @Override
+    protected void onFragmentFirstVisible() {
+        initData();
+        isFirstVisible=true;
+    }
+
+    private void initData() {
+        getPresenter().onGetRetrievalConditionInfo();//获取招聘检索条件
+    }
     /**
      * IRecruitListView
      */

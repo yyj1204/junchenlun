@@ -33,6 +33,7 @@ public class ResumePresenter extends ABasePresenter<IView> {
                         (new ProgressDialogCallBack<ResumeData>(mProgressDialog) {
                             @Override
                             public void onError(ApiException e) {
+                                super.onError(e);
                                 LogUtil.error("获取简历详情","e=="+e.getMessage());
 
                                 if (e.getMessage().equals("无法解析该域名")){

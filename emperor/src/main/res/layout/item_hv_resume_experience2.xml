@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f0f0f0"
+    android:paddingLeft="@dimen/px_20"
+    android:paddingRight="@dimen/px_20"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_60"
+        android:layout_marginTop="@dimen/px_20"
+        android:paddingLeft="@dimen/px_30"
+        android:background="@color/color_ffffff"
+        android:text="基本信息"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_15" />
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_one"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:paddingTop="@dimen/px_30"
+        android:background="@color/color_ffffff">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="最高学历:"
+            android:textColor="@color/color_a0a0a0"
+            android:textSize="@dimen/sp_13" />
+        <TextView
+            android:id="@+id/tv_highestEducation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_30"
+            android:text="未填写"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_13" />
+    </com.zhy.autolayout.AutoLinearLayout>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:paddingTop="@dimen/px_20"
+        android:background="@color/color_ffffff">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="工作年限:"
+            android:textColor="@color/color_a0a0a0"
+            android:textSize="@dimen/sp_13" />
+        <TextView
+            android:id="@+id/tv_workYears"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_30"
+            android:text="未填写"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_13" />
+    </com.zhy.autolayout.AutoLinearLayout>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:paddingTop="@dimen/px_20"
+        android:background="@color/color_ffffff">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="出生年月:"
+            android:textColor="@color/color_a0a0a0"
+            android:textSize="@dimen/sp_13" />
+        <TextView
+            android:id="@+id/tv_birthDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_30"
+            android:text="未填写"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_13" />
+    </com.zhy.autolayout.AutoLinearLayout>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:paddingTop="@dimen/px_20"
+        android:background="@color/color_ffffff">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="所在城市:"
+            android:textColor="@color/color_a0a0a0"
+            android:textSize="@dimen/sp_13" />
+        <TextView
+            android:id="@+id/tv_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_30"
+            android:text="未填写"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_13" />
+    </com.zhy.autolayout.AutoLinearLayout>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:paddingTop="@dimen/px_20"
+        android:paddingBottom="@dimen/px_30"
+        android:background="@color/color_ffffff">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="性格介绍:"
+            android:textColor="@color/color_a0a0a0"
+            android:textSize="@dimen/sp_13" />
+        <TextView
+            android:id="@+id/tv_characterIntroduce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_30"
+            android:text="未填写"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_13" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_60"
+        android:layout_marginTop="@dimen/px_20"
+        android:paddingLeft="@dimen/px_30"
+        android:background="@color/color_ffffff"
+        android:text="个性简历"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_15" />
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/linear_resumeMaking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px_1"
+        android:background="@color/color_ffffff"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/px_80">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/resume" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/px_60"
+            android:text="个性简历还在加紧制作中，敬请见谅~"
+            android:textColor="@color/color_a0a0a0"
+            android:textSize="@dimen/sp_12" />
+    </com.zhy.autolayout.AutoLinearLayout>
+    <ImageView
+        android:id="@+id/iv_resume"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px_1"
+        android:scaleType="fitXY"
+        android:background="@color/color_ffffff"
+        android:paddingBottom="@dimen/px_20"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_60"
+        android:layout_marginTop="@dimen/px_20"
+        android:paddingLeft="@dimen/px_30"
+        android:background="@color/color_ffffff"
+        android:text="工作经历"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_15" />
+</com.zhy.autolayout.AutoLinearLayout>

@@ -20,6 +20,7 @@ import android.widget.ListView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.wktx.www.emperor.apiresult.recruit.recruitlist.RecruitListInfoData;
+import com.wktx.www.emperor.ui.activity.recruit.demand.DemandActivity;
 import com.wktx.www.emperor.ui.activity.recruit.resume.ArtistResumeActivity;
 import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.basemvp.ALazyLoadFragment;
@@ -60,19 +61,19 @@ public class RecruitListFragment extends ALazyLoadFragment<IRecruitListView,Recr
     private String tabTexts1[] = {"擅长类目", "擅长平台"};
     private String tabTexts2[] = {"擅长类目", "客服类型"};
     private List<Bean> categoryBeans = new ArrayList<>();//类目集合
-    private List<Bean> platformBeans = new ArrayList<>();//平台（客服类型）集合
+    private List<Bean> platformBeans = new ArrayList<>();//平台（客服类型）共用集合
     private List<String> categoryStrs = new ArrayList<>();//类目名称
-    private List<String> platformStrs = new ArrayList<>();//平台（客服类型）名称
+    private List<String> platformStrs = new ArrayList<>();//平台（客服类型）共用名称
 
     private List<View> popupViews = new ArrayList<>();//多条件筛选的弹窗集合
     private String categoryId="0";//类目Id
-    private String platformId="0";//平台（客服类型）Id
+    private String platformId="0";//平台（客服类型）共用Id
     private String experienceId="0";//工作经验Id
     private String sexId="0";//性别Id
 
     //条件筛选适配器
     private ListDropDownAdapter categoryAdapter;//类目
-    private ListDropDownAdapter platformAdapter;//平台（客服类型）
+    private ListDropDownAdapter platformAdapter;//平台（客服类型）共用
     //RecyclerView 适配器
     private RecruitListAdapter adapter;
 
@@ -158,7 +159,7 @@ public class RecruitListFragment extends ALazyLoadFragment<IRecruitListView,Recr
         conditionInfoData = (RetrievalConditionInfoData) bundle.getSerializable(ConstantUtil.KEY_DATA);
         //类目
         categoryBeans = conditionInfoData.getBottom().getBgat();
-        isServiceType = conditionInfoData.getTop().getTow().get(jobTypePosition).getName().equals("客服");
+        isServiceType = conditionInfoData.getTop().getTow().get(jobTypePosition).getId().equals("2");
         if (isServiceType){//客服类型
             platformBeans = conditionInfoData.getBottom().getCust_service_type();
         }else {//平台
@@ -232,7 +233,7 @@ public class RecruitListFragment extends ALazyLoadFragment<IRecruitListView,Recr
                 refresh();
             }
         });
-        //擅长平台（客服类型）
+        //擅长平台（客服类型）共用
         final ListView platformView = new ListView(getContext());
         platformView.setDividerHeight(0);
         platformAdapter = new ListDropDownAdapter(getContext(), platformStrs);
@@ -372,12 +373,14 @@ public class RecruitListFragment extends ALazyLoadFragment<IRecruitListView,Recr
         if (isServiceType){
             return "0";
         }else {
+            //平台&客服类型共用一个参数
             return platformId;
         }
     }
     @Override
     public String getServiceId() {
         if (isServiceType){
+            //平台&客服类型共用一个参数
             return platformId;
         }else {
             return "0";
@@ -401,13 +404,20 @@ public class RecruitListFragment extends ALazyLoadFragment<IRecruitListView,Recr
     }
     @Override
     public void onRequestFailure(String result) {
-        adapter.setNewData(null);
-        MyUtils.showToast(getContext(),result);
+        if (result.equals("")){//没数据
+            MyUtils.showToast(getContext(),"暂无任何简历！");
+        }else {
+            MyUtils.showToast(getContext(),result);
+        }
         if (isRefresh){
             adapter.setEnableLoadMore(true);
             swipeRefreshLayout.setRefreshing(false);
         }else {
-            adapter.loadMoreFail();
+            if (result.equals("")){//没数据
+                adapter.loadMoreEnd();
+            }else {//请求出错
+                adapter.loadMoreFail();
+            }
         }
     }
 
@@ -439,6 +449,7 @@ public class RecruitListFragment extends ALazyLoadFragment<IRecruitListView,Recr
             switch (requestCode) {
                 case ConstantUtil.REQUESTCODE_SCREENING:
                     if (resultCode==ConstantUtil.RESULTCODE_SCREENING){
+                        //接收经验、性别筛选界面选中的值
                         String[] screeningIdStr = data.getStringArrayExtra(ConstantUtil.KEY_POSITION);
                         experienceId = screeningIdStr[0];
                         sexId = screeningIdStr[1];

@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/tv_demandTitle"
         android:layout_marginLeft="@dimen/px_14"
-        android:background="@drawable/shape_solid_color_fa716f_10"
+        android:background="@drawable/shape_solid_fa716f_10"
         android:textSize="@dimen/sp_12"
         android:textColor="@color/color_ffffff"
         android:gravity="center"

@@ -66,7 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_ten"
-                    android:background="@drawable/shape_stroke_yellow_eight"
+                    android:background="@drawable/shape_stroke_ffb321_18"
                     android:text="美工"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/sp_twelve" />

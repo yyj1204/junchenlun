@@ -64,8 +64,10 @@ public class ApiURL {
     public static final String PARAMS_DEMAND_RELEASE= "Hire.ReleaseDemand";
     //简历详情
     public static final String PARAMS_RESUME_INFO= "Resume.GetResumeInfo";
-    //简历评价详情
+    //简历评价列表
     public static final String PARAMS_RESUME_EVALUATE= "Resume.GetRevaluateList";
+    //简历作品列表
+    public static final String PARAMS_RESUME_WORKS= "Resume.GetResumeWorksList";
     //简历作品详情
-    public static final String PARAMS_RESUME_WORKS= "Resume.GetResumeWorksInfo";
+    public static final String PARAMS_RESUME_WORKS_INFO= "Resume.GetResumeWorksInfo";
 }

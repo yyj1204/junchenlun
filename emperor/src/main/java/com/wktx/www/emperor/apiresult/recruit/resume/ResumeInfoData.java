@@ -1,5 +1,6 @@
 package com.wktx.www.emperor.apiresult.recruit.resume;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -13,9 +14,9 @@ import java.util.List;
  * "bgat":"服装内衣","position":"视觉传达设计师","introduction":"负责整个店铺页面装修，活动页面制作，商品详情"}]
  */
 
-public class ResumeInfoData {
-    private String id;
-    private String tow;
+public class ResumeInfoData implements Serializable{
+    private String id;//简历id
+    private String tow;//工作类型 1:美工2:客服3:运营
     private String name;
     private String picture;
     private String highest_education;//最高学历
@@ -31,6 +32,7 @@ public class ResumeInfoData {
     private String phone;
     private String bgat;//擅长类目
     private String bgas;//擅长风格
+    private String typing_speed;//打字速度
     private int is_collection;//是否收藏 0:否 1:是
     private int evaluate_num;//评价数量
     private String service_attitude;//服务态度星级
@@ -140,6 +142,15 @@ public class ResumeInfoData {
     public void setBgas(String bgas) {
         this.bgas = bgas;
     }
+
+    public String getTyping_speed() {
+        return typing_speed;
+    }
+
+    public void setTyping_speed(String typing_speed) {
+        this.typing_speed = typing_speed;
+    }
+
     public int getIs_collection() {
         return is_collection;
     }
@@ -198,6 +209,7 @@ public class ResumeInfoData {
                 ", phone='" + phone + '\'' +
                 ", bgat='" + bgat + '\'' +
                 ", bgas='" + bgas + '\'' +
+                ", typing_speed='" + typing_speed + '\'' +
                 ", is_collection=" + is_collection +
                 ", evaluate_num=" + evaluate_num +
                 ", service_attitude='" + service_attitude + '\'' +
@@ -207,7 +219,7 @@ public class ResumeInfoData {
                 '}';
     }
 
-    public static class WorkExperienceBean {
+    public static class WorkExperienceBean implements Serializable{
         private WorkDateBean work_date;//工作日期
         private String company;//公司
         private String bgat;//	擅长类目
@@ -256,7 +268,7 @@ public class ResumeInfoData {
                     '}';
         }
 
-        public static class WorkDateBean {
+        public static class WorkDateBean implements Serializable{
             private String start_date;
             private String end_date;
 

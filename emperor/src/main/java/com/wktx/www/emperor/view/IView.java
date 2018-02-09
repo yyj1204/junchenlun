@@ -6,10 +6,8 @@ import com.wktx.www.emperor.basemvp.IBaseView;
  * Created by yyj on 2018/1/15.
  * 将重复操作抽取出来，解决MVP代码冗余
  *
- * RecruitFragment
- * DemandActivity
- * DemandDetailActivity
- * ArtistResumeActivity
+ * RecruitFragment \ ResumeEvaluateFragment \ ResumeWorksFragment
+ * DemandActivity \ DemandDetailActivity \ ArtistResumeActivity \ WorksDetailsPresenter
  */
 
 public interface IView<T> extends IBaseView {

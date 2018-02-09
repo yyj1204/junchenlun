@@ -15,11 +15,10 @@
         android:paddingLeft="@dimen/px_30"
         android:paddingRight="@dimen/px_30"
         android:paddingTop="@dimen/px_42">
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_head"
             android:layout_width="@dimen/px_106"
             android:layout_height="@dimen/px_106"
-            android:scaleType="fitXY"
             android:src="@drawable/icon_head_woman" />
 
         <com.zhy.autolayout.AutoLinearLayout

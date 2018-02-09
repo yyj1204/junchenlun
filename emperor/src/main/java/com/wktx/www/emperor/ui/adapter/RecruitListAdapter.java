@@ -9,7 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.jaeger.ninegridimageview.NineGridImageView;
 import com.jaeger.ninegridimageview.NineGridImageViewAdapter;
-import com.wktx.www.emperor.Activity.WorksDetailActivity;
+import com.wktx.www.emperor.ui.activity.recruit.resume.WorksDetailsActivity;
 import com.wktx.www.emperor.R;
 import com.wktx.www.emperor.apiresult.recruit.recruitlist.RecruitListInfoData;
 import com.wktx.www.emperor.utils.ApiURL;
@@ -17,6 +17,7 @@ import com.wktx.www.emperor.utils.LogUtil;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by yyj on 2018/1/26.
@@ -52,30 +53,31 @@ public class RecruitListAdapter extends BaseQuickAdapter<RecruitListInfoData, Ba
             helper.setGone(R.id.linear_speed,false);
         }
         //工作经验
-        if (item.getWorking_years().equals("0")){
+        String working_years = item.getWorking_years();
+        if (working_years.equals("0")){
             helper.setText(R.id.tv_workYears,"未设置");
             helper.setText(R.id.tv_workExperience,"未设置");
             helper.setGone(R.id.tv_workYears,true);
             helper.setGone(R.id.tv_workExperience,true);
-        }else if (item.getWorking_years().equals("1")){
+        }else if (working_years.equals("1")){
             helper.setText(R.id.tv_workYears,"一年以内");
             helper.setText(R.id.tv_workExperience,"一年以内");
-        }else if (item.getWorking_years().equals("2")){
+        }else if (working_years.equals("2")){
             helper.setText(R.id.tv_workYears,"一年");
             helper.setText(R.id.tv_workExperience,"一年");
-        }else if (item.getWorking_years().equals("3")){
+        }else if (working_years.equals("3")){
             helper.setText(R.id.tv_workYears,"两年");
             helper.setText(R.id.tv_workExperience,"两年");
-        }else if (item.getWorking_years().equals("4")){
+        }else if (working_years.equals("4")){
             helper.setText(R.id.tv_workYears,"三年");
             helper.setText(R.id.tv_workExperience,"三年");
-        }else if (item.getWorking_years().equals("5")){
+        }else if (working_years.equals("5")){
             helper.setText(R.id.tv_workYears,"四年");
             helper.setText(R.id.tv_workExperience,"四年");
-        }else if (item.getWorking_years().equals("6")){
+        }else if (working_years.equals("6")){
             helper.setText(R.id.tv_workYears,"五年");
             helper.setText(R.id.tv_workExperience,"五年");
-        }else if (item.getWorking_years().equals("7")){
+        }else if (working_years.equals("7")){
             helper.setText(R.id.tv_workYears,"五年以上");
             helper.setText(R.id.tv_workExperience,"五年以上");
         }
@@ -86,7 +88,7 @@ public class RecruitListAdapter extends BaseQuickAdapter<RecruitListInfoData, Ba
             helper.setText(R.id.tv_jobStatus,"找工作中");
         }
         //头像
-        ImageView ivHead = helper.getView(R.id.iv_head);
+        CircleImageView ivHead = helper.getView(R.id.iv_head);
         if (!item.getPicture().equals("")){
             Glide.with(mContext).load(item.getPicture()).into(ivHead);
         }else {
@@ -119,7 +121,8 @@ public class RecruitListAdapter extends BaseQuickAdapter<RecruitListInfoData, Ba
                 }
                 @Override
                 protected void onItemImageClick(Context context, ImageView imageView, int index, List<RecruitListInfoData.ResumeWorksBean> list) {
-                    mContext.startActivity(new Intent(mContext, WorksDetailActivity.class));
+                    //TODO 打开作品详情
+                    mContext.startActivity(new Intent(mContext, WorksDetailsActivity.class));
                 }
             };
             nglWorks.setAdapter(adapter);

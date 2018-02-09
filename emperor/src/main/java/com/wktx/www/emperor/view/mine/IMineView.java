@@ -10,5 +10,8 @@ import com.wktx.www.emperor.view.IView;
 
 public interface IMineView extends IView<UserInfoData> {
 
-
+    /**
+     * 退出登录的回调
+     */
+    void onLogout(boolean isSuccess, String msg);
 }

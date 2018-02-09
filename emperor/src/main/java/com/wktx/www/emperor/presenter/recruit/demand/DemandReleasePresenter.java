@@ -77,6 +77,7 @@ public class DemandReleasePresenter extends ABasePresenter<IDemandReleaseView> {
                         (new ProgressDialogCallBack<DemandReleaseData>(mProgressDialog) {
                             @Override
                             public void onError(ApiException e) {
+                                super.onError(e);
                                 LogUtil.error("需求发布","e=="+e.getMessage());
 
                                 if (e.getMessage().equals("无法解析该域名")){

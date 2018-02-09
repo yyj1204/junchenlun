@@ -234,7 +234,6 @@ public class DemandReleaseActivity extends ABaseActivity<IDemandReleaseView,Dema
         pvCustomOptions = new OptionsPickerView.Builder(this, new OptionsPickerView.OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int option2, int options3, View v) {
-                MyUtils.showToast(DemandReleaseActivity.this,"选择参数ID="+list.get(options1).getId());
                 //返回的分别是三个级别的选中位置
                 String name = list.get(options1).getName();
                 if (id == R.id.tv_demandStore){

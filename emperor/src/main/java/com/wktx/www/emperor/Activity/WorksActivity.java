@@ -18,7 +18,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.application.MyApplication;
-import com.wktx.www.emperor.Decoration.SpaceItemDecoration;
+import com.wktx.www.emperor.ui.activity.recruit.resume.WorksDetailsActivity;
+import com.wktx.www.emperor.utils.SpaceItemDecoration;
 import com.wktx.www.emperor.R;
 import com.wktx.www.emperor.utils.ToastUtil;
 import com.wktx.www.emperor.widget.DropDownMenu;
@@ -145,7 +146,7 @@ public class WorksActivity extends AppCompatActivity {
     private void initVtRecycleView() {
         mVtRecycleView.setLayoutManager(new GridLayoutManager(this, 2));
         mVtRecycleView.addItemDecoration(new SpaceItemDecoration(Dip2pxUtil.dip2px(MyApplication.getContext(), 10),2));
-        BaseQuickAdapter<HomeItem, BaseViewHolder> homeAdapter = new BaseQuickAdapter<HomeItem, BaseViewHolder>(R.layout.home_item_view, mDataList) {
+        BaseQuickAdapter<HomeItem, BaseViewHolder> homeAdapter = new BaseQuickAdapter<HomeItem, BaseViewHolder>(R.layout.item_rv_resume_works, mDataList) {
             @Override
             protected void convert(BaseViewHolder helper, HomeItem item) {
 
@@ -154,7 +155,7 @@ public class WorksActivity extends AppCompatActivity {
         homeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(WorksActivity.this, WorksDetailActivity.class);
+                Intent intent = new Intent(WorksActivity.this, WorksDetailsActivity.class);
                 startActivity(intent);
 
             }

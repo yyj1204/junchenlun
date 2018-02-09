@@ -58,6 +58,8 @@ public class RecruitListPresenter extends ABasePresenter<IRecruitListView> {
 
                                     if (result.getCode()==0){//获取招聘列表成功
                                         getmMvpView().onRequestSuccess(result.getInfo());
+                                    }else if (result.getCode()==1){//获取招聘列表失败(无数据)
+                                        getmMvpView().onRequestFailure("");
                                     }else {//获取招聘列表失败
                                         getmMvpView().onRequestFailure(result.getMsg());
                                     }

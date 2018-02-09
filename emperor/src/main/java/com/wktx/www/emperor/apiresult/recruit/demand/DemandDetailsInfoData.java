@@ -16,7 +16,7 @@ import java.util.List;
  * status : 0
  */
 
-public class DemandDetailInfoData {
+public class DemandDetailsInfoData {
     private String id;
     private String title;
     private String content;
@@ -147,7 +147,7 @@ public class DemandDetailInfoData {
 
     @Override
     public String toString() {
-        return "DemandDetailInfoData{" +
+        return "DemandDetailsInfoData{" +
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +

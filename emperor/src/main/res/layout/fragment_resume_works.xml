@@ -1,0 +1,22 @@
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_ffffff"
+    android:paddingLeft="@dimen/px_30"
+    android:paddingRight="@dimen/px_30"
+    tools:context="com.wktx.www.emperor.ui.fragment.resume.ResumeWorksFragment">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/swipeRefreshLayout"
+        android:orientation="vertical">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_ffffff"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</com.zhy.autolayout.AutoRelativeLayout>

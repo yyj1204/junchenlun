@@ -1,9 +1,10 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/color_f0f0f0"
     tools:context="com.wktx.www.emperor.ui.fragment.resume.ResumeFragment">
 
-    <include layout="@layout/include_recycleview" />
-</LinearLayout>
+    <include layout="@layout/include_recycleview"/>
+</com.zhy.autolayout.AutoLinearLayout>

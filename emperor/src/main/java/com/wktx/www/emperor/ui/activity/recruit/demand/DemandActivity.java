@@ -102,7 +102,7 @@ public class DemandActivity extends ABaseActivity<IView,DemandPresenter> impleme
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 //打开需求详情界面
-                Intent intent = new Intent(DemandActivity.this, DemandDetailActivity.class);
+                Intent intent = new Intent(DemandActivity.this, DemandDetailsActivity.class);
                 intent.putExtra(ConstantUtil.KEY_POSITION,mAdapter.getData().get(position).getId());
                 startActivity(intent);
             }
@@ -168,12 +168,20 @@ public class DemandActivity extends ABaseActivity<IView,DemandPresenter> impleme
     }
     @Override
     public void onRequestFailure(String result) {
-        MyUtils.showToast(DemandActivity.this,result);
+        if (result.equals("")){//没数据
+            MyUtils.showToast(DemandActivity.this,"暂无任何评价！");
+        }else {
+            MyUtils.showToast(DemandActivity.this,result);
+        }
         if (isRefresh){
             mAdapter.setEnableLoadMore(true);
             swipeRefreshLayout.setRefreshing(false);
         }else {
-            mAdapter.loadMoreFail();
+            if (result.equals("")){//没数据
+                mAdapter.loadMoreEnd();
+            }else {//请求出错
+                mAdapter.loadMoreFail();
+            }
         }
     }
 

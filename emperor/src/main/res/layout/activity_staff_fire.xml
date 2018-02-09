@@ -65,7 +65,7 @@
                     android:text="美工"
                     android:textColor="@color/colorPrimary"
                     android:layout_marginLeft="@dimen/dp_ten"
-                    android:background="@drawable/shape_stroke_yellow_eight"
+                    android:background="@drawable/shape_stroke_ffb321_18"
                     android:textSize="@dimen/sp_twelve" />
             </LinearLayout>
 

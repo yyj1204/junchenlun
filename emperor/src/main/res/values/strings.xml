@@ -13,8 +13,11 @@
     <string name="title_companyinfo">公司信息</string>
     <!--招聘-->
     <string name="title_demand_list">需求列表</string>
-    <string name="title_demand_detail">需求详情</string>
+    <string name="title_demand_details">需求详情</string>
     <string name="title_demand_release">发布需求</string>
+    <string name="title_works_details">作品详情</string>
+    <string name="title_artist_employ">美工雇佣</string>
+    <string name="title_service_employ">客服雇佣</string>
     <!--管理-->
     <!--首页-->
 
@@ -67,8 +70,6 @@
     <string name="title_staff_fire">发起解雇</string>
     <string name="title_manage_staff">员工管理</string>
     <string name="title_works">作品</string>
-    <string name="title_works_detail">作品详情</string>
-    <string name="title_artist_employ">美工雇佣</string>
     <string name="title_orderinfo_confirm">确认订单信息</string>
     <string name="title_salary_trusteeship">托管工资</string>
     <string name="title_pay_result">支付结果</string>

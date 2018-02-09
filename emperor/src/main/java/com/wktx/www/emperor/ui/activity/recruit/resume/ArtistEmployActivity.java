@@ -1,12 +1,14 @@
-package com.wktx.www.emperor.Activity;
+package com.wktx.www.emperor.ui.activity.recruit.resume;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import com.r0adkll.slidr.Slidr;
+import com.wktx.www.emperor.Activity.OrdersInfoActivity;
 import com.wktx.www.emperor.R;
+import com.zhy.autolayout.AutoLayoutActivity;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -14,7 +16,7 @@ import butterknife.OnClick;
 /**
  * 美工简历---美工雇佣
  */
-public class ArtistEmployActivity extends AppCompatActivity {
+public class ArtistEmployActivity extends AutoLayoutActivity {
     @BindView(R.id.tb_TvBarTitle)
     TextView mTvTitle;
 

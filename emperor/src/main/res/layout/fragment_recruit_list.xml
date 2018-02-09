@@ -15,7 +15,7 @@
         app:ddmenuSelectedIcon="@drawable/down_pull_selected"
         app:ddmenuUnselectedIcon="@drawable/down_pull_normal"
         app:ddmaskColor="@color/mask_color"
-        app:ddmenuBackgroundColor="@color/color_f0f0f0"
+        app:ddmenuBackgroundColor="@color/color_f7f7f7"
         app:ddunderlineColor="@color/gray"
         app:dddividerColor="@color/gray"
         app:dddividerHeight="@dimen/px_20"

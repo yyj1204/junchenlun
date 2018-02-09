@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,7 +33,9 @@ import com.wktx.www.emperor.ui.activity.login.RegisterActivity;
 import com.wktx.www.emperor.Activity.StoreInfoActivity;
 import com.wktx.www.emperor.Activity.TrasactActivity;
 import com.wktx.www.emperor.utils.LoginUtil;
+import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.view.mine.IMineView;
+import com.wktx.www.emperor.widget.LogoutPopup;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,6 +57,10 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
     TextView tvBalance;
     @BindView(R.id.tv_usableBalance)
     TextView tvUsableBalance;
+    @BindView(R.id.bt_logout)
+    Button btLogout;//退出登录
+
+    private LogoutPopup logoutPopup;//退出登录弹窗
 
     private boolean isLogin;
 
@@ -62,7 +69,7 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
             R.id.tv_login,R.id.tv_register,R.id.linear_balance,R.id.linear_usableBalance,
             R.id.linear_storeMeassage,R.id.linear_myCollect,R.id.linear_tradeRecord,
             R.id.linear_interviewRecord,R.id.linear_employRecord,R.id.linear_myRedpacket,
-            R.id.linear_aboutApp, R.id.linear_payPwd, R.id.linear_contactService})
+            R.id.linear_aboutApp, R.id.linear_payPwd, R.id.linear_contactService, R.id.bt_logout})
     public void MyOnclick(View view) {
         switch (view.getId()) {
             case R.id.iv_message://消息通知
@@ -73,7 +80,7 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
                 break;
             case R.id.civ_head://用户头像
             case R.id.tv_userName://用户名
-                if (getUserInfo()!=null){//已登录
+                if (isLogin){//已登录
                     Intent intent = new Intent();
 //                intent.putExtra(Contants.INTENT_IDTOKEN, info);
                     intent.setClass(getActivity(), CompanyInfoActivity.class);
@@ -122,14 +129,39 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
             case R.id.linear_contactService://联系客服
                 startActivity(new Intent(getActivity(), ServiceActivity.class));
                 break;
+            case R.id.bt_logout://退出登录
+                showLogoutPopup();
+                break;
             default:
                 break;
         }
     }
 
-    public MineFragment() {
+    /**
+     * 退出登录弹窗
+     */
+    private void showLogoutPopup() {
+        logoutPopup = new LogoutPopup(getActivity(), getActivity());
+        logoutPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        logoutPopup.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+        logoutPopup.setClippingEnabled(false);
+        logoutPopup.showPopupWindow(ivHead);
+        logoutPopup.setOnGetTypeClckListener(new LogoutPopup.onGetTypeClckListener() {
+            @Override
+            public void getText(String sure) {
+                switch (sure) {
+                    case ConstantUtil.LOGOUT:
+                        getPresenter().onLogout();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
     }
 
+    public MineFragment() {
+    }
     public static MineFragment newInstance(String info) {
         Bundle args = new Bundle();
         MineFragment fragment = new MineFragment();
@@ -137,10 +169,8 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         ButterKnife.bind(this, view);
         initUI();
@@ -149,11 +179,15 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
 
     private void initUI() {
         if (getUserInfo()!=null){//已登录
+            isLogin=true;
             llAccount.setVisibility(View.VISIBLE);
             llLogin.setVisibility(View.GONE);
+            btLogout.setVisibility(View.VISIBLE);
         }else {//未登录
+            isLogin=false;
             llAccount.setVisibility(View.GONE);
             llLogin.setVisibility(View.VISIBLE);
+            btLogout.setVisibility(View.GONE);
         }
     }
 
@@ -177,6 +211,14 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
     @Override
     public void onRequestFailure(String result) {
 
+    }
+    @Override
+    public void onLogout(boolean isSuccess, String msg) {
+        MyUtils.showToast(getContext(), msg);
+        if (isSuccess){
+            LoginUtil.getinit().logout();//将本地登录信息清除
+            initUI();
+        }
     }
 
     //根据登录状态获取用户信息，更新界面
@@ -210,5 +252,4 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
             }
         }
     }
-
 }

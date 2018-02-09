@@ -7,9 +7,9 @@ import android.widget.TextView;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
 import com.wktx.www.emperor.apiresult.login.AccountInfoData;
-import com.wktx.www.emperor.apiresult.recruit.demand.DemandDetailInfoData;
+import com.wktx.www.emperor.apiresult.recruit.demand.DemandDetailsInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
-import com.wktx.www.emperor.presenter.recruit.demand.DemandDetailPresenter;
+import com.wktx.www.emperor.presenter.recruit.demand.DemandDetailsPresenter;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.DateUtil;
 import com.wktx.www.emperor.utils.LoginUtil;
@@ -22,7 +22,7 @@ import butterknife.OnClick;
 /**
  * 招聘---需求列表---需求详情
  */
-public class DemandDetailActivity extends ABaseActivity<IView,DemandDetailPresenter> implements IView<DemandDetailInfoData> {
+public class DemandDetailsActivity extends ABaseActivity<IView,DemandDetailsPresenter> implements IView<DemandDetailsInfoData> {
     @BindView(R.id.tb_TvBarTitle)
     TextView tvTitle;
     @BindView(R.id.tv_demandTitle)
@@ -48,17 +48,17 @@ public class DemandDetailActivity extends ABaseActivity<IView,DemandDetailPresen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_demand_detail);
+        setContentView(R.layout.activity_demand_details);
         ButterKnife.bind(this);
         // 设置右滑动返回
         Slidr.attach(this);
-        tvTitle.setText(R.string.title_demand_detail);
+        tvTitle.setText(R.string.title_demand_details);
         initData();
     }
 
     @Override
-    protected DemandDetailPresenter createPresenter() {
-        return new DemandDetailPresenter();
+    protected DemandDetailsPresenter createPresenter() {
+        return new DemandDetailsPresenter();
     }
 
     /**
@@ -79,7 +79,7 @@ public class DemandDetailActivity extends ABaseActivity<IView,DemandDetailPresen
         return userInfo;
     }
     @Override
-    public void onRequestSuccess(DemandDetailInfoData tData) {
+    public void onRequestSuccess(DemandDetailsInfoData tData) {
         String status = tData.getStatus();
         if (status.equals("0")){
             tvDemandStatus.setVisibility(View.VISIBLE);
@@ -98,6 +98,6 @@ public class DemandDetailActivity extends ABaseActivity<IView,DemandDetailPresen
     }
     @Override
     public void onRequestFailure(String result) {
-        MyUtils.showToast(DemandDetailActivity.this,result);
+        MyUtils.showToast(DemandDetailsActivity.this,result);
     }
 }

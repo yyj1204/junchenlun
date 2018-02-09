@@ -5,7 +5,7 @@ package com.wktx.www.emperor.apiresult.recruit.resume;
  * 简历详情
  * {
  * "ret": 200,"msg": "",
- *   "data": {
+ * "data": {
  *         "code":0,"msg":"",
  *         "info":{
  *             "id":"1","tow":"1","name":"胡图图","picture":"","highest_education":"本科","working_years":"一年","sex":"2",

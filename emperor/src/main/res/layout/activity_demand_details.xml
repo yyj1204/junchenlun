@@ -31,7 +31,7 @@
             android:id="@+id/tv_demandStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_solid_color_fa716f_10"
+            android:background="@drawable/shape_solid_fa716f_10"
             android:text="待响应"
             android:textColor="@color/color_ffffff"
             android:textSize="@dimen/sp_15" />

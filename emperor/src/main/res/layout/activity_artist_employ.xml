@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="@color/color_f0f0f0"
-    tools:context="com.wktx.www.emperor.Activity.ArtistEmployActivity">
+    tools:context="com.wktx.www.emperor.ui.activity.recruit.resume.ArtistEmployActivity">
 
     <include layout="@layout/include_toolbar_activity" />
 
@@ -61,7 +61,7 @@
                             android:text="美工"
                             android:textColor="@color/colorPrimary"
                             android:layout_marginLeft="@dimen/dp_ten"
-                            android:background="@drawable/shape_stroke_yellow_eight"
+                            android:background="@drawable/shape_stroke_ffb321_18"
                             android:textSize="@dimen/sp_twelve" />
                     </LinearLayout>
 

@@ -218,7 +218,7 @@
                             xlhRatingBar:dividerWidth="7dp"
                             xlhRatingBar:countSelected="0"
                             xlhRatingBar:starCount="5"
-                            xlhRatingBar:stateResId="@drawable/selector_star_appraise"
+                            xlhRatingBar:stateResId="@drawable/selector_star_collect"
                             xlhRatingBar:widthAndHeight="15dp" />
                     </LinearLayout>
 
@@ -245,7 +245,7 @@
                             xlhRatingBar:dividerWidth="7dp"
                             xlhRatingBar:countSelected="0"
                             xlhRatingBar:starCount="5"
-                            xlhRatingBar:stateResId="@drawable/selector_star_appraise"
+                            xlhRatingBar:stateResId="@drawable/selector_star_collect"
                             xlhRatingBar:widthAndHeight="15dp" />
                     </LinearLayout>
 
@@ -272,7 +272,7 @@
                             xlhRatingBar:dividerWidth="7dp"
                             xlhRatingBar:countSelected="0"
                             xlhRatingBar:starCount="5"
-                            xlhRatingBar:stateResId="@drawable/selector_star_appraise"
+                            xlhRatingBar:stateResId="@drawable/selector_star_collect"
                             xlhRatingBar:widthAndHeight="15dp" />
                     </LinearLayout>
                 </LinearLayout>

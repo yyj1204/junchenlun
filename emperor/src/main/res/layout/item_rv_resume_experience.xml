@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_f0f0f0"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/px_20"
+    android:paddingRight="@dimen/px_20">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_ffffff"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/px_36"
+        android:paddingLeft="@dimen/px_20"
+        android:paddingRight="@dimen/px_20"
+        android:paddingTop="@dimen/px_36">
+        <TextView
+            android:id="@+id/tv_workDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="工作时间"
+            android:textColor="@color/color_a0a0a0"
+            android:textSize="@dimen/sp_12" />
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/px_20"
+            android:paddingTop="@dimen/px_20">
+            <TextView
+                android:id="@+id/tv_workCompany"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="公司名称"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_13" />
+            <TextView
+                android:id="@+id/tv_workCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/px_20"
+                android:background="@drawable/shape_solid_ffb321_18"
+                android:text="擅长类目"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_12" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <TextView
+            android:id="@+id/tv_workType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="工作类型"
+            android:textColor="@color/color_a0a0a0"
+            android:textSize="@dimen/sp_12" />
+        <TextView
+            android:id="@+id/tv_workIntroduction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/px_20"
+            android:text="工作内容介绍"
+            android:textColor="@color/color_a0a0a0"
+            android:textSize="@dimen/sp_12" />
+    </com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

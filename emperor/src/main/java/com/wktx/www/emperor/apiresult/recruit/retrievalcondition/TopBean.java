@@ -9,7 +9,7 @@ import java.util.List;
  */
 
 public class TopBean implements Serializable{
-    private List<Bean> tow;//工作类型
+    private List<Bean> tow;//工作类型 1:美工2:客服3:运营
 
     public List<Bean> getTow() {
         return tow;

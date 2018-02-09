@@ -4,6 +4,8 @@ package com.wktx.www.emperor.utils;
  */
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -142,6 +144,23 @@ public class MyUtils {
         return new File("/data/data/" + packageName).exists();
     }
 
+    /**
+     * 判断是否安装目标应用
+     * QQ：com.tencent.mobileqq
+     */
+    public static boolean checkQQApkExist(Context context, String packageName) {
+        if (packageName == null || "".equals(packageName)){
+            return false;
+        }else {
+            try {
+                ApplicationInfo info = context.getPackageManager().getApplicationInfo(packageName,
+                        PackageManager.GET_UNINSTALLED_PACKAGES);
+                return true;
+            } catch (PackageManager.NameNotFoundException e) {
+                return false;
+            }
+        }
+    }
     /**
      * 通过Base32将Bitmap转换成Base64字符串
      * @param bit

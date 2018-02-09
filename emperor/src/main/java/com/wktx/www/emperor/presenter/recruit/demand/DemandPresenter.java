@@ -37,6 +37,7 @@ public class DemandPresenter extends ABasePresenter<IView> {
                         (new ProgressDialogCallBack<DemandListData>(mProgressDialog) {
                             @Override
                             public void onError(ApiException e) {
+                                super.onError(e);
                                 LogUtil.error("获取需求列表","e=="+e.getMessage());
 
                                 if (e.getMessage().equals("无法解析该域名")){
@@ -47,11 +48,13 @@ public class DemandPresenter extends ABasePresenter<IView> {
                             }
                             @Override
                             public void onSuccess(DemandListData result) {
-                                if (result != null) {//获取需求列表成功
+                                if (result != null) {
                                     LogUtil.error("获取需求列表","result=="+result.toString());
 
                                     if (result.getCode()==0){//获取需求列表成功
                                         getmMvpView().onRequestSuccess(result.getInfo());
+                                    }else if (result.getCode()==1){//获取需求列表失败(无数据)
+                                        getmMvpView().onRequestFailure("");
                                     }else {//获取需求列表失败
                                         getmMvpView().onRequestFailure(result.getMsg());
                                     }

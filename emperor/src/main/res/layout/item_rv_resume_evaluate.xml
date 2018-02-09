@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:hedgehog="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_ffffff"
+    android:padding="@dimen/px_30"
+    android:orientation="vertical">
+
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px_22"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_employerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="雇主:"
+            android:layout_weight="1"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_15" />
+        <TextView
+            android:id="@+id/tv_serviceType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="服务类型"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_12"
+            android:background="@drawable/shape_solid_ffb321_18"/>
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <TextView
+        android:id="@+id/tv_designPattern"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px_22"
+        android:text="设计模式"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_13" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px_22"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="服务态度"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_12" />
+        <com.hedgehog.ratingbar.RatingBar
+            android:id="@+id/rb_serviceAttitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_5"
+            hedgehog:clickable="false"
+            hedgehog:halfstart="true"
+            hedgehog:starCount="5"
+            hedgehog:starEmpty="@drawable/ic_resume_star_unselected"
+            hedgehog:starFill="@drawable/ic_resume_star_selected"
+            hedgehog:starHalf="@drawable/ic_resume_star_half"
+            hedgehog:starImageHeight="@dimen/px_30"
+            hedgehog:starImageWidth="@dimen/px_30"
+            hedgehog:starImagePadding="@dimen/px_4"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_14"
+            android:text="设计能力"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_12" />
+        <com.hedgehog.ratingbar.RatingBar
+            android:id="@+id/rb_designAbility"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_5"
+            hedgehog:clickable="false"
+            hedgehog:halfstart="true"
+            hedgehog:starCount="5"
+            hedgehog:starEmpty="@drawable/ic_resume_star_unselected"
+            hedgehog:starFill="@drawable/ic_resume_star_selected"
+            hedgehog:starHalf="@drawable/ic_resume_star_half"
+            hedgehog:starImageHeight="@dimen/px_30"
+            hedgehog:starImageWidth="@dimen/px_30"
+            hedgehog:starImagePadding="@dimen/px_4"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_14"
+            android:text="响应速度"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_12" />
+        <com.hedgehog.ratingbar.RatingBar
+            android:id="@+id/rb_responseSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_5"
+            hedgehog:clickable="false"
+            hedgehog:halfstart="true"
+            hedgehog:starCount="5"
+            hedgehog:starEmpty="@drawable/ic_resume_star_unselected"
+            hedgehog:starFill="@drawable/ic_resume_star_selected"
+            hedgehog:starHalf="@drawable/ic_resume_star_half"
+            hedgehog:starImageHeight="@dimen/px_30"
+            hedgehog:starImageWidth="@dimen/px_30"
+            hedgehog:starImagePadding="@dimen/px_4"/>
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_1"
+        android:layout_marginTop="@dimen/px_22"
+        android:background="@color/color_f0f0f0"/>
+    <com.jaeger.ninegridimageview.NineGridImageView
+        android:id="@+id/ngl_evaluateImages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px_12"
+        android:background="@color/color_ffffff"
+        android:paddingLeft="@dimen/px_20"
+        android:paddingRight="@dimen/px_20"
+        android:paddingTop="@dimen/px_24"
+        android:visibility="gone"
+        app:imgGap="@dimen/px_6"
+        app:showStyle="grid"
+        app:singleImgSize="@dimen/px_1000" />
+    <TextView
+        android:id="@+id/tv_evaluateContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px_22"
+        android:layout_marginBottom="@dimen/px_30"
+        android:text="评价内容"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_13" />
+</com.zhy.autolayout.AutoLinearLayout>
