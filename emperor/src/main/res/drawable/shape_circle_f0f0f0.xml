@@ -2,6 +2,6 @@
 <shape
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
-    <size android:width="@dimen/dp_five" android:height="@dimen/dp_five"></size>
-    <solid android:color="@color/tab_text_selected"></solid>
+    <size android:width="@dimen/px_10" android:height="@dimen/px_10"></size>
+    <solid android:color="@color/color_f0f0f0"></solid>
 </shape>

@@ -109,7 +109,7 @@ public class StaffFragment extends Fragment {
             }
         });
 
-        final View view_rv = getLayoutInflater(new Bundle()).inflate(R.layout.include_recycleview, null);
+        final View view_rv = getLayoutInflater(new Bundle()).inflate(R.layout.include_recycleview_f0f0f0, null);
         mVtRecycleView = (RecyclerView) view_rv.findViewById(R.id.recyclerView);
         view_rv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         //初始化 dropdownview

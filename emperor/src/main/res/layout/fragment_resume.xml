@@ -6,5 +6,5 @@
     android:background="@color/color_f0f0f0"
     tools:context="com.wktx.www.emperor.ui.fragment.resume.ResumeFragment">
 
-    <include layout="@layout/include_recycleview"/>
+    <include layout="@layout/include_recycleview_f0f0f0"/>
 </com.zhy.autolayout.AutoLinearLayout>

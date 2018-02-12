@@ -5,7 +5,7 @@ android {
         emperor {
             keyAlias 'emperor'
             keyPassword 'emperor'
-            storeFile file('D:/android/workspace/junchenlun/Theory/emperor.jks')
+            storeFile file('D:/android/workspace/as0819/jcl/emperor.jks')
             storePassword 'emperor'
         }
     }

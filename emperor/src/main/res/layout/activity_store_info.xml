@@ -7,5 +7,5 @@
     android:orientation="vertical">
 
     <include layout="@layout/include_toolbar_activity" />s
-    <include layout="@layout/include_recycleview" />
+    <include layout="@layout/include_recycleview_f0f0f0" />
 </LinearLayout>

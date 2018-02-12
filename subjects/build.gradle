@@ -5,7 +5,7 @@ android {
         subjects {
             keyAlias 'subjects'
             keyPassword 'subjects'
-            storeFile file('D:/android/workspace/junchenlun/Theory/subjects.jks')
+            storeFile file('D:/android/workspace/as0819/jcl/subjects.jks')
             storePassword 'subjects'
         }
     }

@@ -84,6 +84,6 @@
             android:src="@drawable/un_favor" />
     </LinearLayout>
 
-    <include layout="@layout/include_recycleview" />
+    <include layout="@layout/include_recycleview_f0f0f0" />
 
 </LinearLayout>

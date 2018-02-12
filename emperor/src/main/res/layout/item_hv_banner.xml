@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_f0f0f0"
+    android:orientation="vertical">
+
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_280"
+        app:indicator_height="@dimen/px_14"
+        app:indicator_width="@dimen/px_14"
+        app:indicator_margin="@dimen/px_10"
+        app:indicator_drawable_selected="@drawable/shape_circle_ffb321"
+        app:indicator_drawable_unselected="@drawable/shape_circle_f0f0f0" />
+
+</com.zhy.autolayout.AutoLinearLayout>

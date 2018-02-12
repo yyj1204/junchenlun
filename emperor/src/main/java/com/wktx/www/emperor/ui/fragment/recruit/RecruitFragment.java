@@ -147,7 +147,8 @@ public class RecruitFragment extends ALazyLoadFragment<IView,RecruitPresenter> i
         List<Bean> jobTypeList = tData.getTop().getTow();
         //子片段数量
         FragmentPagerItems pages = new FragmentPagerItems(getActivity());
-        for (int i = 0; i < jobTypeList.size(); i++) {
+        //TODO 运营的隐藏起来了，所以-1
+        for (int i = 0; i < jobTypeList.size()-1; i++) {
             //绑定检索条件数据
             Bundle bundle = new Bundle();
             bundle.putInt(ConstantUtil.KEY_POSITION, i);//工作类型的ID

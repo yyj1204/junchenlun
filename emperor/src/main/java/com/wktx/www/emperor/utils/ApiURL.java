@@ -48,6 +48,12 @@ public class ApiURL {
     public static final String PARAMS_USER_INFO = "User_User_Info.GetUserInfo";
 
     /**
+     * 首页
+     */
+    //首页
+    public static final String PARAMS_HOME = "Home.Index";
+
+    /**
      * 招聘
      */
     //招聘检索条件
