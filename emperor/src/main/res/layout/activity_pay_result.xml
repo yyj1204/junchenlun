@@ -39,7 +39,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginLeft="15sp"
             android:layout_marginRight="15sp"
-            android:background="@drawable/shape_buttom_yellow_five"/>
+            android:background="@drawable/shape_buttom_ffb321_10"/>
     </LinearLayout>
 
     <LinearLayout
@@ -71,7 +71,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginLeft="15sp"
             android:layout_marginRight="15sp"
-            android:background="@drawable/shape_buttom_yellow_five"/>
+            android:background="@drawable/shape_buttom_ffb321_10"/>
         <TextView
             android:id="@+id/tv_pay_cancel"
             android:layout_width="match_parent"

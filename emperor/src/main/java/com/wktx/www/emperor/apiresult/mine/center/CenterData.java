@@ -1,16 +1,14 @@
-package com.wktx.www.emperor.apiresult.mine;
-
+package com.wktx.www.emperor.apiresult.mine.center;
 
 /**
  * Created by yyj on 2018/1/18.
- * 用户信息
+ * 个人中心
  */
 
-public class UserData {
+public class CenterData {
     private int code;
     private String msg;
-    private UserInfoData info;
-
+    private CenterInfoData info;
 
     public int getCode() {
         return code;
@@ -28,17 +26,18 @@ public class UserData {
         this.msg = msg;
     }
 
-    public UserInfoData getInfo() {
+    public CenterInfoData getInfo() {
         return info;
     }
 
-    public void setInfo(UserInfoData info) {
+    public void setInfo(CenterInfoData info) {
         this.info = info;
     }
 
+
     @Override
     public String toString() {
-        return "UserData{" +
+        return "CenterData{" +
                 "code=" + code +
                 ", msg='" + msg + '\'' +
                 ", info=" + info +

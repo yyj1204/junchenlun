@@ -11,13 +11,12 @@ import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.wktx.www.emperor.apiresult.home.home.BannerBean;
-import com.wktx.www.emperor.apiresult.home.home.HomeInfoData;
-import com.wktx.www.emperor.apiresult.home.home.ResumeListBean;
+import com.wktx.www.emperor.apiresult.main.home.BannerBean;
+import com.wktx.www.emperor.apiresult.main.home.HomeInfoData;
+import com.wktx.www.emperor.apiresult.main.home.ResumeListBean;
 import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.basemvp.ABaseFragment;
-import com.wktx.www.emperor.presenter.home.HomePresenter;
-import com.wktx.www.emperor.ui.activity.recruit.demand.DemandActivity;
+import com.wktx.www.emperor.presenter.main.HomePresenter;
 import com.wktx.www.emperor.ui.activity.recruit.resume.ArtistResumeActivity;
 import com.wktx.www.emperor.Activity.InviteGuideActivity;
 import com.wktx.www.emperor.Activity.MessageActivity;
@@ -241,9 +240,9 @@ public class HomeFragment extends ABaseFragment<IView,HomePresenter> implements 
     }
     @Override
     public void onRequestSuccess(HomeInfoData tData) {
-        initBanner(tData.getTop_ad());
         setData(tData.getResume_list());
         if (isRefresh){//停止刷新
+            initBanner(tData.getTop_ad());
             adapter.setEnableLoadMore(true);
             swipeRefreshLayout.setRefreshing(false);
         }else {

@@ -57,6 +57,10 @@
         //我的账户
         <!--公司信息-->
         <activity android:name="com.wktx.www.emperor.ui.activity.mine.CompanyInfoActivity" />
+        <!--账户认证（个人、店铺）-->
+        <activity android:name="com.wktx.www.emperor.ui.activity.mine.certification.AccountCertificationActivity" />
+        <activity android:name="com.wktx.www.emperor.ui.activity.mine.certification.CertificationPersonalActivity" />
+        <activity android:name="com.wktx.www.emperor.ui.activity.mine.certification.CertificationStoreActivity" />
 
         <!--搜索-->
         <activity android:name="com.wktx.www.emperor.ui.activity.SearchActivity" />
@@ -80,7 +84,6 @@
         <activity android:name="com.wktx.www.emperor.Activity.MessageActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.MessageDetailsActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.InviteGuideActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.CheckAccountActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.ArrangeWorkActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.RecruitActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.StaffManageActivity" />
@@ -95,8 +98,6 @@
         <activity android:name="com.wktx.www.emperor.Activity.WorksActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.StaffSaleActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.StaffReportDetaisActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.CertificateIndividualActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.CertificateStoreActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.OrdersInfoActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.SalaryTrusteeshipActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.PayResultActivity" />

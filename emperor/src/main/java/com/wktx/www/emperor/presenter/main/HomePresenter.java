@@ -1,7 +1,7 @@
-package com.wktx.www.emperor.presenter.home;
+package com.wktx.www.emperor.presenter.main;
 
 import com.wktx.www.emperor.apiresult.CustomApiResult;
-import com.wktx.www.emperor.apiresult.home.home.HomeData;
+import com.wktx.www.emperor.apiresult.main.home.HomeData;
 import com.wktx.www.emperor.basemvp.ABasePresenter;
 import com.wktx.www.emperor.utils.ApiURL;
 import com.wktx.www.emperor.utils.ConstantUtil;

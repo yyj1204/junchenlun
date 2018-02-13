@@ -1,6 +1,6 @@
 package com.wktx.www.emperor.view.mine;
 
-import com.wktx.www.emperor.apiresult.mine.UserInfoData;
+import com.wktx.www.emperor.apiresult.mine.center.CenterInfoData;
 import com.wktx.www.emperor.view.IView;
 
 /**
@@ -8,7 +8,7 @@ import com.wktx.www.emperor.view.IView;
  * 我的账户界面
  */
 
-public interface IMineView extends IView<UserInfoData> {
+public interface IMineView extends IView<CenterInfoData> {
 
     /**
      * 退出登录的回调

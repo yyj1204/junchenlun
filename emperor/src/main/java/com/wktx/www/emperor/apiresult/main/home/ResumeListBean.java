@@ -1,4 +1,4 @@
-package com.wktx.www.emperor.apiresult.home.home;
+package com.wktx.www.emperor.apiresult.main.home;
 
 /**
  * Created by yyj on 2018/2/12.

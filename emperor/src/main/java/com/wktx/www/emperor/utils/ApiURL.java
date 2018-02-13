@@ -9,7 +9,6 @@ package com.wktx.www.emperor.utils;
  */
 
 public class ApiURL {
-
     /**
      *  API的全局URL
      */
@@ -19,7 +18,6 @@ public class ApiURL {
      *  图片的全局URL
      */
     public static final String GLOBAL_IMG_URL = "http://shop.jcl.55085.cn";
-
 
     /**
      *共同部分URL
@@ -44,8 +42,6 @@ public class ApiURL {
     public static final String PARAMS_LOGOUT = "User_User_Info.Logout";
     //忘记密码
     public static final String PARAMS_FORGET_PWD = "User_User_Info.ForgetPassword";
-    //获取用户信息
-    public static final String PARAMS_USER_INFO = "User_User_Info.GetUserInfo";
 
     /**
      * 首页
@@ -76,4 +72,12 @@ public class ApiURL {
     public static final String PARAMS_RESUME_WORKS= "Resume.GetResumeWorksList";
     //简历作品详情
     public static final String PARAMS_RESUME_WORKS_INFO= "Resume.GetResumeWorksInfo";
+
+    /**
+     * 我的
+     */
+    //个人中心
+    public static final String PARAMS_CENTER = "Center.Index";
+    //账户认证（个人&店铺）
+    public static final String PARAMS_CERTIFICATION = "Center.IdentityAuthent";
 }

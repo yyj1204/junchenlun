@@ -200,7 +200,7 @@
         android:id="@+id/payWayTvGoPay"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:background="@drawable/shape_buttom_yellow_five"
+        android:background="@drawable/shape_buttom_ffb321_10"
         android:layout_marginTop="@dimen/dp_hundred"
         android:layout_marginLeft="@dimen/dp_fifteen"
         android:layout_marginRight="@dimen/dp_fifteen"

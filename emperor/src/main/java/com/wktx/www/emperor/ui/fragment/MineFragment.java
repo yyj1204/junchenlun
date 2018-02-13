@@ -10,7 +10,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.wktx.www.emperor.apiresult.mine.UserInfoData;
+import com.bumptech.glide.Glide;
+import com.wktx.www.emperor.apiresult.mine.center.CenterInfoData;
+import com.wktx.www.emperor.apiresult.mine.center.UserInfoBean;
+import com.wktx.www.emperor.ui.activity.mine.certification.AccountCertificationActivity;
 import com.wktx.www.emperor.ui.activity.mine.CompanyInfoActivity;
 import com.wktx.www.emperor.Activity.PacketActivity;
 import com.wktx.www.emperor.Activity.ServiceActivity;
@@ -20,7 +23,6 @@ import com.wktx.www.emperor.basemvp.ABaseFragment;
 import com.wktx.www.emperor.presenter.mine.MinePresenter;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.Activity.AboutUsActivity;
-import com.wktx.www.emperor.Activity.CheckAccountActivity;
 import com.wktx.www.emperor.ui.activity.recruit.BrowsingHistoryActivity;
 import com.wktx.www.emperor.Activity.EmployActivity;
 import com.wktx.www.emperor.Activity.FavorActivity;
@@ -64,7 +66,6 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
 
     private boolean isLogin;
 
-
     @OnClick({R.id.iv_message, R.id.tv_browsing, R.id.civ_head,R.id.tv_userName,R.id.linear_certification,
             R.id.tv_login,R.id.tv_register,R.id.linear_balance,R.id.linear_usableBalance,
             R.id.linear_storeMeassage,R.id.linear_myCollect,R.id.linear_tradeRecord,
@@ -73,10 +74,10 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
     public void MyOnclick(View view) {
         switch (view.getId()) {
             case R.id.iv_message://消息通知
-                startActivity(new Intent(getActivity(), MessageActivity.class));
+                isLoginStartActivity(MessageActivity.class);
                 break;
             case R.id.tv_browsing://浏览记录
-                startActivity(new Intent(getActivity(), BrowsingHistoryActivity.class));
+                isLoginStartActivity(BrowsingHistoryActivity.class);
                 break;
             case R.id.civ_head://用户头像
             case R.id.tv_userName://用户名
@@ -86,45 +87,45 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
                     intent.setClass(getActivity(), CompanyInfoActivity.class);
                     startActivityForResult(intent, 0);
                 }else {//未登录
-                    startActivityForResult(new Intent(getActivity(), LoginActivity.class), ConstantUtil.REQUESTCODE_LOGIN);
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
                 }
                 break;
             case R.id.linear_certification://申请认证
-                startActivity(new Intent(getActivity(), CheckAccountActivity.class));
+                startActivity(new Intent(getActivity(), AccountCertificationActivity.class));
                 break;
             case R.id.tv_login://登录
-                startActivityForResult(new Intent(getActivity(), LoginActivity.class), ConstantUtil.REQUESTCODE_LOGIN);
+                startActivity(new Intent(getActivity(), LoginActivity.class));
                 break;
             case R.id.tv_register://注册
                 startActivity(new Intent(getActivity(), RegisterActivity.class));
                 break;
             case R.id.linear_balance://余额
             case R.id.linear_usableBalance://可用余额
-                startActivity(new Intent(getActivity(), PurseActivity.class));
+                isLoginStartActivity(PurseActivity.class);
                 break;
             case R.id.linear_storeMeassage://店铺信息
-                startActivity(new Intent(getActivity(), StoreInfoActivity.class));
+                isLoginStartActivity(StoreInfoActivity.class);
                 break;
             case R.id.linear_myCollect://我的收藏
-                startActivity(new Intent(getActivity(), FavorActivity.class));
+                isLoginStartActivity(FavorActivity.class);
                 break;
             case R.id.linear_tradeRecord://交易记录
-                startActivity(new Intent(getActivity(), TrasactActivity.class));
+                isLoginStartActivity(TrasactActivity.class);
                 break;
             case R.id.linear_interviewRecord://面试记录
-                startActivity(new Intent(getActivity(), InterviewActivity.class));
+                isLoginStartActivity(InterviewActivity.class);
                 break;
             case R.id.linear_employRecord://雇佣记录
-                startActivity(new Intent(getActivity(), EmployActivity.class));
+                isLoginStartActivity(EmployActivity.class);
                 break;
             case R.id.linear_myRedpacket://我的红包
-                startActivity(new Intent(getActivity(), PacketActivity.class));
+                isLoginStartActivity(PacketActivity.class);
                 break;
             case R.id.linear_aboutApp://关于君臣论
                 startActivity(new Intent(getActivity(), AboutUsActivity.class));
                 break;
             case R.id.linear_payPwd://支付密码
-                startActivity(new Intent(getActivity(), PayPswctivity.class));
+                isLoginStartActivity(PayPswctivity.class);
                 break;
             case R.id.linear_contactService://联系客服
                 startActivity(new Intent(getActivity(), ServiceActivity.class));
@@ -134,6 +135,17 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
                 break;
             default:
                 break;
+        }
+    }
+
+    /**
+     * 登录了才能打开对应的界面
+     */
+    private void isLoginStartActivity(Class<?> clazz) {
+        if (isLogin){
+            startActivity(new Intent(getActivity(), clazz));
+        }else {
+            startActivity(new Intent(getActivity(), LoginActivity.class));
         }
     }
 
@@ -173,8 +185,14 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         ButterKnife.bind(this, view);
-        initUI();
         return view;
+    }
+
+    //根据登录状态获取用户信息，更新界面
+    @Override
+    public void onResume() {
+        super.onResume();
+        initUI();
     }
 
     private void initUI() {
@@ -183,8 +201,12 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
             llAccount.setVisibility(View.VISIBLE);
             llLogin.setVisibility(View.GONE);
             btLogout.setVisibility(View.VISIBLE);
+            getPresenter().onGetCenterInfo();//请求个人中心信息
         }else {//未登录
             isLogin=false;
+            ivHead.setImageResource(R.drawable.mine_head);
+            tvBalance.setText("0.00");
+            tvUsableBalance.setText("0.00");
             llAccount.setVisibility(View.GONE);
             llLogin.setVisibility(View.VISIBLE);
             btLogout.setVisibility(View.GONE);
@@ -205,12 +227,31 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
         return userInfo;
     }
     @Override
-    public void onRequestSuccess(UserInfoData tData) {
-
+    public void onRequestSuccess(CenterInfoData tData) {
+        UserInfoBean userinfo = tData.getUserinfo();
+        //昵称
+        if (!userinfo.getNickname().equals("")){
+            tvUserName.setText(userinfo.getNickname());
+        }else {
+            tvUserName.setText(MyUtils.setPhone(userinfo.getMobile()));
+        }
+        //头像(根据性别显示对应头像图片)
+        if (!userinfo.getHead_pic().equals("")){
+            Glide.with(getContext()).load(userinfo.getHead_pic()).into(ivHead);
+        }else {
+            if (userinfo.getSex().equals("1")){
+                ivHead.setImageResource(R.drawable.icon_head_man);
+            }else if (userinfo.getSex().equals("2")){
+                ivHead.setImageResource(R.drawable.icon_head_woman);
+            }
+        }
+        //余额
+        tvBalance.setText(userinfo.getUser_money());
+        tvUsableBalance.setText(userinfo.getAvailable_balance());
     }
     @Override
     public void onRequestFailure(String result) {
-
+        MyUtils.showToast(getContext(),result);
     }
     @Override
     public void onLogout(boolean isSuccess, String msg) {
@@ -218,38 +259,6 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
         if (isSuccess){
             LoginUtil.getinit().logout();//将本地登录信息清除
             initUI();
-        }
-    }
-
-    //根据登录状态获取用户信息，更新界面
-    @Override
-    public void onResume() {
-        super.onResume();
-        initUI();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (data != null) {
-            switch (requestCode) {
-                case ConstantUtil.REQUESTCODE_LOGIN:
-                    llAccount.setVisibility(View.VISIBLE);
-                    llLogin.setVisibility(View.GONE);
-                    break;
-                default:
-                    break;
-            }
-            switch (resultCode) {
-                case ConstantUtil.RESULT_OUTLOGINCODE:
-                    tvUserName.setText("登录/注册");
-                    ivHead.setImageResource(R.drawable.mine_head);
-                    llLogin.setVisibility(View.VISIBLE);
-                    llAccount.setVisibility(View.GONE);
-                    break;
-                default:
-                    break;
-            }
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.wktx.www.emperor.apiresult.home.home;
+package com.wktx.www.emperor.apiresult.main.home;
 
 import java.util.List;
 

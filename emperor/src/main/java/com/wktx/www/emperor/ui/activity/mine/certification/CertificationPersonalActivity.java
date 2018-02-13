@@ -1,18 +1,19 @@
-package com.wktx.www.emperor.Activity;
+package com.wktx.www.emperor.ui.activity.mine.certification;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.compress.Luban;
 import com.luck.picture.lib.config.PictureConfig;
@@ -20,10 +21,17 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.utils.Bitmap2Base64Util;
+import com.wktx.www.emperor.apiresult.login.AccountInfoData;
+import com.wktx.www.emperor.apiresult.mine.CertificationData;
+import com.wktx.www.emperor.basemvp.ABaseActivity;
+import com.wktx.www.emperor.presenter.mine.certification.CertificationPersonalPresenter;
 import com.wktx.www.emperor.utils.ConstantUtil;
-import com.wktx.www.emperor.utils.SharedPreferenceUtil;
+import com.wktx.www.emperor.utils.Bitmap2Base64Util;
+import com.wktx.www.emperor.utils.LoginUtil;
+import com.wktx.www.emperor.utils.MyUtils;
+import com.wktx.www.emperor.view.mine.certification.ICertificationPersonalView;
 import com.wktx.www.emperor.widget.HeadPopup;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,28 +41,35 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 账户认证---店铺认证
+ * 账户认证---个人认证
  */
-public class CertificateStoreActivity extends AppCompatActivity {
-
+public class CertificationPersonalActivity extends ABaseActivity<ICertificationPersonalView,CertificationPersonalPresenter>
+          implements ICertificationPersonalView {
     @BindView(R.id.tb_TvBarTitle)
-    TextView mTvTitle;
-    //法人正面照片
+    TextView tvTitle;
+    //正面照片
     @BindView(R.id.linear_add_front)
-    LinearLayout linear_front;
+    LinearLayout llFront;
     @BindView(R.id.rela_photo_front)
-    RelativeLayout rela_front;
+    RelativeLayout rlFront;
     @BindView(R.id.iv_photo_front)
-    ImageView iv_photo_front;
-    //营业执照片
-    @BindView(R.id.linear_add_contrary)
-    LinearLayout linear_contrary;
-    @BindView(R.id.rela_photo_contrary)
-    RelativeLayout rela_contrary;
-    @BindView(R.id.iv_photo_contrary)
-    ImageView iv_photo_contrary;
+    ImageView ivFront;
+    //反面照片
+    @BindView(R.id.linear_add_reverse)
+    LinearLayout llReverse;
+    @BindView(R.id.rela_photo_reverse)
+    RelativeLayout rlReverse;
+    @BindView(R.id.iv_photo_reverse)
+    ImageView ivReverse;
 
-    private boolean isFront;//true：是法人正面照片，false：营业执照片
+    @BindView(R.id.et_name)
+    EditText etName;
+    @BindView(R.id.et_idNumber)
+    EditText etIdNumber;
+    @BindView(R.id.bt_submitCertificate)
+    Button btSubmitCertificate;//提交认证
+
+    private boolean isFront;//true：是正面照片，false：是反面照片
     private HeadPopup puWindow;
     private int themeId;
     private int chooseMode = PictureMimeType.ofImage();
@@ -62,10 +77,14 @@ public class CertificateStoreActivity extends AppCompatActivity {
     private static List<LocalMedia> selectList = new ArrayList<>();
     private int maxSelectNum = 1;
 
+    private String frontBase64Str="";//正面照片Base64
+    private String reverseBase64Str="";//反面照片Base64
+
+
     @OnClick({R.id.tb_IvReturn, R.id.linear_add_front,R.id.iv_delete_front,
-            R.id.linear_add_contrary,R.id.iv_delete_contrary, R.id.tv_certificate_submit})
+            R.id.linear_add_reverse,R.id.iv_delete_reverse, R.id.bt_submitCertificate})
     public void MyOnclick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.tb_IvReturn:
                 finish();
                 break;
@@ -75,19 +94,40 @@ public class CertificateStoreActivity extends AppCompatActivity {
                 showPhotoPopuWindow();
                 break;
             case R.id.iv_delete_front://删除身份证正面照片
-                linear_front.setVisibility(View.VISIBLE);
-                rela_front.setVisibility(View.GONE);
+                llFront.setVisibility(View.VISIBLE);
+                rlFront.setVisibility(View.GONE);
+                frontBase64Str="";
                 break;
-            case R.id.linear_add_contrary://添加身份证反面照片
+            case R.id.linear_add_reverse://添加身份证反面照片
                 isFront=false;
                 //触发展示相片来源popuwindow
                 showPhotoPopuWindow();
                 break;
-            case R.id.iv_delete_contrary://删除身份证正面照片
-                linear_contrary.setVisibility(View.VISIBLE);
-                rela_contrary.setVisibility(View.GONE);
+            case R.id.iv_delete_reverse://删除身份证反面照片
+                llReverse.setVisibility(View.VISIBLE);
+                rlReverse.setVisibility(View.GONE);
+                reverseBase64Str="";
                 break;
-            case R.id.tv_certificate_submit://提交认证
+            case R.id.bt_submitCertificate://提交认证
+                if (MyUtils.isFastClick()){
+                    return;
+                }
+
+                //判断输入框格式
+                if (TextUtils.isEmpty(getNameStr())){
+                    MyUtils.showToast(CertificationPersonalActivity.this,"请输入您的真实姓名！");
+                    etName.requestFocus();
+                }else if (TextUtils.isEmpty(getIdNumberStr())){
+                    MyUtils.showToast(CertificationPersonalActivity.this,"请输入您的身份证号码！");
+                    etIdNumber.requestFocus();
+                }else if (TextUtils.isEmpty(getPositivePhotoStr())){
+                    MyUtils.showToast(CertificationPersonalActivity.this,"请上传手持身份证的正面照片！");
+                }else if (TextUtils.isEmpty(getReversePhotoStr())){
+                    MyUtils.showToast(CertificationPersonalActivity.this,"请上传手持身份证的反面照片！");
+                }else {//注册
+                    btSubmitCertificate.setEnabled(false);
+                    getPresenter().onCertification();
+                }
                 break;
             default:
                 break;
@@ -97,16 +137,21 @@ public class CertificateStoreActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_certificate_store);
+        setContentView(R.layout.activity_certification_personal);
         ButterKnife.bind(this);
         // 设置右滑动返回
         Slidr.attach(this);
-        mTvTitle.setText(R.string.title_certificate_store);
+        tvTitle.setText(R.string.title_certification_personal);
         themeId = R.style.picture_default_style;
     }
 
+    @Override
+    protected CertificationPersonalPresenter createPresenter() {
+        return new CertificationPersonalPresenter();
+    }
+
     private void showPhotoPopuWindow() {
-        puWindow = new HeadPopup(CertificateStoreActivity.this, CertificateStoreActivity.this, selectList.size());
+        puWindow = new HeadPopup(CertificationPersonalActivity.this, CertificationPersonalActivity.this, selectList.size());
         puWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         puWindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         puWindow.setClippingEnabled(false);
@@ -122,7 +167,6 @@ public class CertificateStoreActivity extends AppCompatActivity {
             }
             @Override
             public void getImgUri(Uri ImgUri, File file) {
-
             }
         });
     }
@@ -130,7 +174,7 @@ public class CertificateStoreActivity extends AppCompatActivity {
     public void onAddPicClick(boolean b) {
         boolean mode = false;
         if (b) {// 进入相册 以下是例子：不需要的api可以不写
-            PictureSelector.create(CertificateStoreActivity.this)
+            PictureSelector.create(CertificationPersonalActivity.this)
                     .openGallery(PictureMimeType.ofImage())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
                     .theme(themeId)// 主题样式设置 具体参考 values/styles   用法：R.style.picture.white.style
                     .maxSelectNum(1)// 最大图片选择数量
@@ -154,7 +198,7 @@ public class CertificateStoreActivity extends AppCompatActivity {
                     .selectionMedia(null)// 是否传入已选图片
                     .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
         } else {// 单独拍照
-            PictureSelector.create(CertificateStoreActivity.this)
+            PictureSelector.create(CertificationPersonalActivity.this)
                     .openCamera(chooseMode)// 单独拍照，也可录像或也可音频 看你传入的类型是图片or视频
                     .theme(themeId)// 主题样式设置 具体参考 values/styles
                     .maxSelectNum(maxSelectNum)// 最大图片选择数量
@@ -179,6 +223,40 @@ public class CertificateStoreActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * ICertificationPersonalView
+     */
+    @Override
+    public AccountInfoData getUserInfo() {
+        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
+        return userInfo;
+    }
+    @Override
+    public String getNameStr() {
+        return etName.getText().toString().trim();
+    }
+    @Override
+    public String getIdNumberStr() {
+        return etIdNumber.getText().toString().trim();
+    }
+    @Override
+    public String getPositivePhotoStr() {
+        return frontBase64Str;
+    }
+    @Override
+    public String getReversePhotoStr() {
+        return reverseBase64Str;
+    }
+    @Override
+    public void onRequestSuccess(CertificationData tData) {
+        MyUtils.showToast(CertificationPersonalActivity.this,"个人认证成功啦！");
+        finish();
+    }
+    @Override
+    public void onRequestFailure(String result) {
+        btSubmitCertificate.setEnabled(true);
+        MyUtils.showToast(CertificationPersonalActivity.this,result);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -186,28 +264,25 @@ public class CertificateStoreActivity extends AppCompatActivity {
         if (data != null) {
             if (resultCode == RESULT_OK) {
                 switch (requestCode) {
-                    case PictureConfig.CHOOSE_REQUEST:
-                        // 图片选择结果回调
+                    case PictureConfig.CHOOSE_REQUEST:// 图片选择结果回调
                         selectList = PictureSelector.obtainMultipleResult(data);
                         if (selectList != null) {
                             LocalMedia media = selectList.get(0);
                             String path = media.getCompressPath();
                             Bitmap bitmap = BitmapFactory.decodeFile(path);
                             if (bitmap != null) {
-                                if (isFront){//如果是正面照片
-                                    linear_front.setVisibility(View.GONE);
-                                    rela_front.setVisibility(View.VISIBLE);
-                                    iv_photo_front.setImageBitmap(bitmap);
+                                if (isFront){//如果是身份证正面照片
+                                    llFront.setVisibility(View.GONE);
+                                    rlFront.setVisibility(View.VISIBLE);
+                                    ivFront.setImageBitmap(bitmap);
+                                    frontBase64Str = MyUtils.Bitmap2StrByBase64(bitmap);
                                 }else {
-                                    linear_contrary.setVisibility(View.GONE);
-                                    rela_contrary.setVisibility(View.VISIBLE);
-                                    iv_photo_contrary.setImageBitmap(bitmap);
+                                    llReverse.setVisibility(View.GONE);
+                                    rlReverse.setVisibility(View.VISIBLE);
+                                    ivReverse.setImageBitmap(bitmap);
+                                    reverseBase64Str = MyUtils.Bitmap2StrByBase64(bitmap);
                                 }
-
                             }
-                            String s = Bitmap2Base64Util.Bitmap2StrByBase64(bitmap);
-                            SharedPreferenceUtil.saveData(this, ConstantUtil.HEADBASE64STR_KEY, s, ConstantUtil.HEADBASE64_NAME);
-
                             // 例如 LocalMedia 里面返回三种path
                             // 1.media.getPath(); 为原图path
                             // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true

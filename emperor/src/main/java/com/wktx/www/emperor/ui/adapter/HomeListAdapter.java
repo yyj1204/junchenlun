@@ -6,8 +6,7 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.home.home.ResumeListBean;
-import com.wktx.www.emperor.utils.LogUtil;
+import com.wktx.www.emperor.apiresult.main.home.ResumeListBean;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

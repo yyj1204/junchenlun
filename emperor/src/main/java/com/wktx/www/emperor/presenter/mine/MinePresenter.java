@@ -1,7 +1,7 @@
 package com.wktx.www.emperor.presenter.mine;
 
 import com.wktx.www.emperor.apiresult.CustomApiResult;
-import com.wktx.www.emperor.apiresult.mine.UserData;
+import com.wktx.www.emperor.apiresult.mine.center.CenterData;
 import com.wktx.www.emperor.basemvp.ABasePresenter;
 import com.wktx.www.emperor.utils.ApiURL;
 import com.wktx.www.emperor.utils.ConstantUtil;
@@ -10,6 +10,7 @@ import com.wktx.www.emperor.view.mine.IMineView;
 import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.callback.CallBackProxy;
 import com.zhouyou.http.callback.ProgressDialogCallBack;
+import com.zhouyou.http.callback.SimpleCallBack;
 import com.zhouyou.http.exception.ApiException;
 
 /**
@@ -22,21 +23,20 @@ public class MinePresenter extends ABasePresenter<IMineView> {
     public MinePresenter() {
     }
 
-    //获取账户信息
-    public void onGetAccountInfo(){
-        LogUtil.error("获取账户信息","json===user_id:"+getmMvpView().getUserInfo().getUser_id()
+    //获取个人中心信息
+    public void onGetCenterInfo(){
+        LogUtil.error("获取个人中心信息","json===user_id:"+getmMvpView().getUserInfo().getUser_id()
                 +"\ntoken:"+getmMvpView().getUserInfo().getToken());
 
         EasyHttp.post(ApiURL.COMMON_URL)
-                .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_USER_INFO)
+                .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_CENTER)
                 .params("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()))
                 .params("token", getmMvpView().getUserInfo().getToken())
-                .execute(new CallBackProxy<CustomApiResult<UserData>, UserData>
-                        (new ProgressDialogCallBack<UserData>(mProgressDialog) {
+                .execute(new CallBackProxy<CustomApiResult<CenterData>, CenterData>
+                        (new SimpleCallBack<CenterData>() {
                             @Override
                             public void onError(ApiException e) {
-                                super.onError(e);
-                                LogUtil.error("获取账户信息","e=="+e.getMessage());
+                                LogUtil.error("获取个人中心信息","e=="+e.getMessage());
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
@@ -46,13 +46,13 @@ public class MinePresenter extends ABasePresenter<IMineView> {
                             }
 
                             @Override
-                            public void onSuccess(UserData result) {
+                            public void onSuccess(CenterData result) {
                                 if (result != null) {
-                                    LogUtil.error("获取账户信息","result=="+result.toString());
+                                    LogUtil.error("获取个人中心信息","result=="+result.toString());
 
-                                    if (result.getCode()==0){//获取用户信息成功
+                                    if (result.getCode()==0){//获取个人中心信息成功
                                         getmMvpView().onRequestSuccess(result.getInfo());
-                                    }else {//获取用户信息失败
+                                    }else {//获取个人中心信息失败
                                         getmMvpView().onRequestFailure(result.getMsg());
                                     }
                                 }else {
