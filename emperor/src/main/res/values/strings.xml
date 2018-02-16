@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">emperor</string>
+    <string name="app_name">君臣论-君主</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -23,6 +23,9 @@
     <string name="title_account_certification">账户认证</string>
     <string name="title_certification_personal">个人认证</string>
     <string name="title_certification_store">店铺认证</string>
+    <string name="title_my_purse">我的钱包</string>
+    <string name="title_purse_recharge">钱包充值</string>
+    <string name="title_purse_withdrawal">钱包提现</string>
 
 
 
@@ -49,9 +52,6 @@
     <string name="title_pay_psw">设置支付密码</string>
     <string name="title_account">公司信息</string>//
     <string name="title_chcek_list">浏览记录</string>
-    <string name="title_purse">我的钱包</string>
-    <string name="title_cash">提现</string>
-    <string name="title_recharge">充值</string>
     <string name="title_updatestore">编辑店铺信息</string>
     <string name="title_message">消息通知</string>
     <string name="title_message_notice">公告详情</string>

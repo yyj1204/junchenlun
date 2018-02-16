@@ -219,7 +219,7 @@
             android:layout_height="28dp"
             android:layout_centerVertical="true"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ali_pay" />
+            app:srcCompat="@drawable/ic_pay_alipay" />
 
         <TextView
             android:id="@+id/textVigggew57"
@@ -264,7 +264,7 @@
             android:layout_centerVertical="true"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            app:srcCompat="@drawable/weichat_pay" />
+            app:srcCompat="@drawable/ic_pay_wechat" />
 
         <TextView
             android:id="@+id/textView57"

@@ -21,6 +21,7 @@ import com.wktx.www.emperor.R;
 import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.basemvp.ABaseFragment;
 import com.wktx.www.emperor.presenter.mine.MinePresenter;
+import com.wktx.www.emperor.ui.activity.mine.purse.MyPurseActivity;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.Activity.AboutUsActivity;
 import com.wktx.www.emperor.ui.activity.recruit.BrowsingHistoryActivity;
@@ -30,7 +31,6 @@ import com.wktx.www.emperor.Activity.InterviewActivity;
 import com.wktx.www.emperor.ui.activity.login.LoginActivity;
 import com.wktx.www.emperor.Activity.MessageActivity;
 import com.wktx.www.emperor.Activity.PayPswctivity;
-import com.wktx.www.emperor.Activity.PurseActivity;
 import com.wktx.www.emperor.ui.activity.login.RegisterActivity;
 import com.wktx.www.emperor.Activity.StoreInfoActivity;
 import com.wktx.www.emperor.Activity.TrasactActivity;
@@ -101,7 +101,7 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
                 break;
             case R.id.linear_balance://余额
             case R.id.linear_usableBalance://可用余额
-                isLoginStartActivity(PurseActivity.class);
+                isLoginStartActivity(MyPurseActivity.class);
                 break;
             case R.id.linear_storeMeassage://店铺信息
                 isLoginStartActivity(StoreInfoActivity.class);

@@ -80,4 +80,6 @@ public class ApiURL {
     public static final String PARAMS_CENTER = "Center.Index";
     //账户认证（个人&店铺）
     public static final String PARAMS_CERTIFICATION = "Center.IdentityAuthent";
+    //钱包充值
+    public static final String PARAMS_PURSE_RECHARGE = "Center.WalletRecharge";
 }

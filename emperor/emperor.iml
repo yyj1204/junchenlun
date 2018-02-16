@@ -110,6 +110,7 @@
     <orderEntry type="library" name="com.squareup.retrofit2:converter-gson:2.3.0@jar" level="project" />
     <orderEntry type="library" scope="TEST" name="com.android.support.test:exposed-instrumentation-api-publish-0.5" level="project" />
     <orderEntry type="library" name="com.hyman:flowlayout-lib-1.1.2" level="project" />
+    <orderEntry type="library" name="__local_aars__:D.\android\workspace\as0819\jcl\emperor\libs\alipaySdk-20170922.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="com.github.chrisbanes.photoview:library-1.2.4" level="project" />
     <orderEntry type="library" name="com.xingliuhua:xlhratingbar_lib-1.0.1" level="project" />
     <orderEntry type="library" name="com.android.support:support-compat-25.3.0" level="project" />
@@ -150,6 +151,7 @@
     <orderEntry type="library" scope="TEST" name="javax.inject:javax.inject:1@jar" level="project" />
     <orderEntry type="library" name="com.ogaclejapan.smarttablayout:library-1.6.1" level="project" />
     <orderEntry type="library" name="com.android.support:support-v4-24.2.1" level="project" />
+    <orderEntry type="library" name="com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.1.6@jar" level="project" />
     <orderEntry type="library" name="com.github.bumptech.glide:annotations:4.0.0-RC1@jar" level="project" />
     <orderEntry type="library" name="com.jakewharton:disklrucache:2.0.2@jar" level="project" />
     <orderEntry type="library" name="com.android.support:animated-vector-drawable-24.2.1" level="project" />

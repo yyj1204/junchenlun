@@ -30,7 +30,16 @@ public class ConstantUtil {
     public static final String  KEY_POSITION= "position";//序号
     public static final String  KEY_DATA= "data";//数据
 
-
+    /**
+     * 支付宝支付结果
+     */
+    public static final int SDK_PAY_FLAG = 1;
+    public static final int SDK_AUTH_FLAG = 2;
+    /**
+     * 微信支付
+     */
+    //微信APPId
+    public static final String WX_APP_ID = "wx31feb0aeb009c07b";
 
 
     /**

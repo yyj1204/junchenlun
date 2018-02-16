@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/color_f0f0f0"
     android:gravity="center_horizontal"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <include layout="@layout/include_toolbar_activity" />

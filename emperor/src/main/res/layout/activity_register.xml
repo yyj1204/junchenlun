@@ -158,7 +158,7 @@
     <Button
         android:id="@+id/bt_register"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/px_84"
+        android:layout_height="@dimen/px_90"
         android:layout_marginTop="@dimen/px_80"
         android:layout_alignLeft="@+id/regiestLyPswTwo"
         android:layout_alignRight="@+id/regiestLyPswTwo"

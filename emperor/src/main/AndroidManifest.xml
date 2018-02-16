@@ -17,7 +17,13 @@
     <!--拨打电话-->
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
-
+    <!-- 《支付宝 -->
+    <!--<uses-permission android:name="android.permission.INTERNET" />-->
+    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
+    <!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
+    <!-- 支付宝 》 -->
 
     <application
         android:name="com.wktx.www.emperor.application.MyApplication"
@@ -33,6 +39,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <!-- 微信支付：这个intent-filter不要忘了 -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="wx31feb0aeb009c07b" /> <!-- 微信APPId -->
+            </intent-filter>
+
         </activity>
 
         <!--登录、注册、忘记密码-->
@@ -77,9 +91,9 @@
         <activity android:name="com.wktx.www.emperor.Activity.PacketRuleActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.PayPswctivity" />
         <activity android:name="com.wktx.www.emperor.Activity.InterviewActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.CashActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.PurseActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.RechargeActivity" />
+        <activity android:name="com.wktx.www.emperor.ui.activity.mine.purse.PurseWithdrawalActivity" />
+        <activity android:name="com.wktx.www.emperor.ui.activity.mine.purse.MyPurseActivity" />
+        <activity android:name="com.wktx.www.emperor.ui.activity.mine.purse.PurseRechargeActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.UpdateStoreActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.MessageActivity" />
         <activity android:name="com.wktx.www.emperor.Activity.MessageDetailsActivity" />
@@ -112,6 +126,27 @@
             android:value="1280" />
         <!-- 屏幕适配AutoLayout -->
 
+        <!-- 《支付宝 -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name="com.alipay.sdk.app.H5AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <!-- 支付宝 》 -->
+
+        <!-- 《微信支付 -->
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
+        <!-- 微信支付 》 -->
     </application>
 
 </manifest>

@@ -154,7 +154,7 @@
     <Button
         android:id="@+id/bt_reset"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/px_84"
+        android:layout_height="@dimen/px_90"
         android:layout_marginTop="@dimen/px_80"
         android:layout_alignLeft="@+id/forgetLyPswTwo"
         android:layout_alignRight="@+id/forgetLyPswTwo"
