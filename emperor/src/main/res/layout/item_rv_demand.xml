@@ -29,7 +29,7 @@
     <ImageView
         android:layout_width="@dimen/px_16"
         android:layout_height="@dimen/px_20"
-        android:src="@drawable/arrow_right_gray"
+        android:src="@drawable/ic_demand_arrow_right_gray"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"/>
 </com.zhy.autolayout.AutoRelativeLayout>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="18dp"
@@ -13,15 +13,15 @@
         android:layout_width="53dp"
         android:layout_height="53dp"
         android:scaleType="fitXY"
-        android:src="@drawable/icon_head_woman" />
+        android:src="@drawable/img_head_woman" />
 
-    <LinearLayout
+    <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_ten"
         android:orientation="vertical">
 
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -39,14 +39,14 @@
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_marginLeft="@dimen/dp_ten"
-                android:src="@drawable/icon_sex_woman" />
+                android:src="@drawable/ic_sex_woman" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="@dimen/dp_ten"
-                android:background="@drawable/shape_buttom_nine"
+                android:background="@drawable/shape_buttom_ffb321_18"
                 android:text="1年"
                 android:textColor="@color/title_color"
                 android:textSize="@dimen/sp_twelve" />
@@ -69,9 +69,9 @@
                 android:textColor="@color/title_color"
                 android:textSize="@dimen/sp_sixteen"
                 android:textStyle="bold" />
-        </LinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
 
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_fifteen"
@@ -92,9 +92,9 @@
                 android:text="服装内衣/母婴用品、生活百货"
                 android:textColor="@color/title_color"
                 android:textSize="@dimen/sp_thirteen" />
-        </LinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
 
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_ten"
@@ -114,6 +114,6 @@
                 android:text="日韩小清新/中国风/时尚简约"
                 android:textColor="@color/title_color"
                 android:textSize="@dimen/sp_thirteen" />
-        </LinearLayout>
-    </LinearLayout>
-</LinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

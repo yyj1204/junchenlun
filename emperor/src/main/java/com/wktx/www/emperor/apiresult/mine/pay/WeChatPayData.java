@@ -8,7 +8,7 @@ package com.wktx.www.emperor.apiresult.mine.pay;
 public class WeChatPayData {
     private int code;
     private String msg;
-    private WeChatPayInfoData info;
+    private WechatPayInfoData info;
 
     public int getCode() {
         return code;
@@ -26,11 +26,11 @@ public class WeChatPayData {
         this.msg = msg;
     }
 
-    public WeChatPayInfoData getInfo() {
+    public WechatPayInfoData getInfo() {
         return info;
     }
 
-    public void setInfo(WeChatPayInfoData info) {
+    public void setInfo(WechatPayInfoData info) {
         this.info = info;
     }
 

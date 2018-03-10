@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:background="@color/color_ffffff"
-    tools:context="com.wktx.www.emperor.com.wktx.www.emperor.Activity.StaffAttendanceActivity">
+    tools:context="com.wktx.www.emperor.Activity.StaffAttendanceActivity">
 
     <include layout="@layout/include_toolbar_activity" />
 

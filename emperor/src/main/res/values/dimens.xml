@@ -13,6 +13,7 @@
     <dimen name="sp_19">19sp</dimen>
     <dimen name="sp_20">20sp</dimen>
     <dimen name="sp_23">23sp</dimen>
+    <dimen name="sp_24">24sp</dimen>
 
     <dimen name="sp_ten">10sp</dimen>
     <dimen name="sp_eleven">11sp</dimen>
@@ -96,12 +97,15 @@
     <dimen name="px_48">48px</dimen>
     <dimen name="px_50">50px</dimen>
     <dimen name="px_52">52px</dimen>
+    <dimen name="px_54">54px</dimen>
     <dimen name="px_56">56px</dimen>
     <dimen name="px_60">60px</dimen>
     <dimen name="px_62">62px</dimen>
+    <dimen name="px_64">64px</dimen>
     <dimen name="px_66">66px</dimen>
     <dimen name="px_70">70px</dimen>
     <dimen name="px_72">72px</dimen>
+    <dimen name="px_74">74px</dimen>
     <dimen name="px_76">76px</dimen>
     <dimen name="px_78">78px</dimen>
     <dimen name="px_80">80px</dimen>
@@ -113,20 +117,33 @@
     <dimen name="px_96">96px</dimen>
     <dimen name="px_100">100px</dimen>
     <dimen name="px_106">106px</dimen>
+    <dimen name="px_112">112px</dimen>
+    <dimen name="px_118">118px</dimen>
     <dimen name="px_120">120px</dimen>
     <dimen name="px_126">126px</dimen>
     <dimen name="px_128">128px</dimen>
     <dimen name="px_144">144px</dimen>
     <dimen name="px_146">146px</dimen>
     <dimen name="px_148">148px</dimen>
+    <dimen name="px_154">154px</dimen>
     <dimen name="px_160">160px</dimen>
+    <dimen name="px_174">174px</dimen>
+    <dimen name="px_192">192px</dimen>
+    <dimen name="px_196">196px</dimen>
     <dimen name="px_200">200px</dimen>
     <dimen name="px_214">214px</dimen>
     <dimen name="px_222">222px</dimen>
+    <dimen name="px_240">240px</dimen>
+    <dimen name="px_256">256px</dimen>
     <dimen name="px_260">260px</dimen>
     <dimen name="px_280">280px</dimen>
+    <dimen name="px_300">300px</dimen>
     <dimen name="px_320">320px</dimen>
     <dimen name="px_346">346px</dimen>
+    <dimen name="px_350">350px</dimen>
+    <dimen name="px_420">420px</dimen>
+    <dimen name="px_480">480px</dimen>
+    <dimen name="px_578">578px</dimen>
     <dimen name="px_600">600px</dimen>
     <dimen name="px_1000">1000px</dimen>
 

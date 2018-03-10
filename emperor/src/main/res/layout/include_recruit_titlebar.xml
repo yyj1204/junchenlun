@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="@dimen/title_height_default"
@@ -15,7 +15,7 @@
         android:paddingBottom="@dimen/dp_ten"
         android:paddingLeft="@dimen/dp_ten"
         android:paddingTop="@dimen/dp_ten"
-        android:src="@drawable/arrow_left" />
+        android:src="@drawable/ic_toolbar_return" />
     <TextView
         android:background="@drawable/shape_search"
         android:layout_width="0dp"
@@ -34,6 +34,6 @@
         android:padding="@dimen/dp_thirteen"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/message"
+        android:src="@drawable/ic_message"
         android:id="@+id/tb_right_img" />
-</LinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

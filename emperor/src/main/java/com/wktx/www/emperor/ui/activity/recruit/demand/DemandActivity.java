@@ -17,7 +17,8 @@ import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.recruit.demand.DemandListInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.recruit.demand.DemandPresenter;
-import com.wktx.www.emperor.ui.adapter.DemandListAdapter;
+import com.wktx.www.emperor.ui.activity.mine.MyCollectActivity;
+import com.wktx.www.emperor.ui.adapter.recruit.DemandListAdapter;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
@@ -52,6 +53,12 @@ public class DemandActivity extends ABaseActivity<IView,DemandPresenter> impleme
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        refresh();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demand);
@@ -64,7 +71,6 @@ public class DemandActivity extends ABaseActivity<IView,DemandPresenter> impleme
         initAdapter();
         initHeadView();
         initRefreshLayout();
-        refresh();
     }
 
     @Override
@@ -101,6 +107,9 @@ public class DemandActivity extends ABaseActivity<IView,DemandPresenter> impleme
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (MyUtils.isFastClick1()){
+                    return;
+                }
                 //打开需求详情界面
                 Intent intent = new Intent(DemandActivity.this, DemandDetailsActivity.class);
                 intent.putExtra(ConstantUtil.KEY_POSITION,mAdapter.getData().get(position).getId());
@@ -118,6 +127,9 @@ public class DemandActivity extends ABaseActivity<IView,DemandPresenter> impleme
         hvDemandRelease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (MyUtils.isFastClick1()){
+                    return;
+                }
                 //打开发布需求界面
                 startActivity(new Intent(DemandActivity.this, DemandReleaseActivity.class));
             }
@@ -168,21 +180,24 @@ public class DemandActivity extends ABaseActivity<IView,DemandPresenter> impleme
     }
     @Override
     public void onRequestFailure(String result) {
-        if (result.equals("")){//没数据
-            MyUtils.showToast(DemandActivity.this,"暂无任何评价！");
-        }else {
-            MyUtils.showToast(DemandActivity.this,result);
-        }
+        String toastStr=result;
+        setData(null);
+        //如果是刷新，没数据代表全部没数据
         if (isRefresh){
+            if (result.equals("")){
+                toastStr="暂无任何需求！";
+            }
             mAdapter.setEnableLoadMore(true);
             swipeRefreshLayout.setRefreshing(false);
-        }else {
+        }else {//如果是加载，没数据代表加载完毕
             if (result.equals("")){//没数据
+                toastStr="已经到底了哦！";
                 mAdapter.loadMoreEnd();
             }else {//请求出错
                 mAdapter.loadMoreFail();
             }
         }
+        MyUtils.showToast(DemandActivity.this,toastStr);
     }
 
     /**

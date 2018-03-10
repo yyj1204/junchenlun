@@ -11,6 +11,7 @@ import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.callback.CallBackProxy;
 import com.zhouyou.http.callback.SimpleCallBack;
 import com.zhouyou.http.exception.ApiException;
+import com.zhouyou.http.model.HttpParams;
 
 /**
  * Created by yyj on 2018/1/24.
@@ -24,13 +25,16 @@ public class WorksListPresenter extends ABasePresenter<IView> {
 
     //获取作品列表
     public void onGetResumeWorksList(String resumeId,int page){
-        LogUtil.error("获取作品列表","json===resumeId:"+resumeId +"\npage:"+page);
+        HttpParams httpParams = new HttpParams();
+        httpParams.put("id", resumeId);
+        httpParams.put("page",page+"");
+        httpParams.put("limit","10");
+
+        LogUtil.error("获取作品列表","json==="+httpParams.toString());
 
         EasyHttp.post(ApiURL.COMMON_URL)
                 .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_RESUME_WORKS)
-                .params("id", resumeId)
-                .params("page", page+"")
-                .params("limit", "10")
+                .params(httpParams)
                 .execute(new CallBackProxy<CustomApiResult<WorksListData>, WorksListData>
                         (new SimpleCallBack<WorksListData>() {
                             @Override

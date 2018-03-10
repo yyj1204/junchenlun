@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
 import com.wktx.www.emperor.apiresult.login.AccountInfoData;
-import com.wktx.www.emperor.apiresult.login.ForgetPwdData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.login.ForgetPwdPresenter;
 import com.wktx.www.emperor.utils.MyUtils;
@@ -178,7 +177,7 @@ public class ForgetPwdActivity extends ABaseActivity<IForgetPwdView,ForgetPwdPre
         }
     }
     @Override//注册成功，登录
-    public void onRequestSuccess(ForgetPwdData tData) {
+    public void onRequestSuccess(String tData) {
         MyUtils.showToast(ForgetPwdActivity.this,"密码已重置！可以登录啦~");
         finish();
     }

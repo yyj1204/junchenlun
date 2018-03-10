@@ -12,11 +12,10 @@
         android:background="@color/color_ffb321"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <TextView
-            android:id="@+id/tb_tvBarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/title_mine"
+            android:text="@string/title_tab_mine"
             android:textColor="@color/color_ffffff"
             android:textSize="@dimen/sp_23" />
         <ImageView
@@ -26,7 +25,7 @@
             android:paddingLeft="@dimen/px_100"
             android:paddingRight="@dimen/px_40"
             android:layout_gravity="center_vertical|right"
-            android:src="@drawable/message" />
+            android:src="@drawable/ic_message" />
     </android.support.v7.widget.Toolbar>
 
     <ScrollView
@@ -72,7 +71,7 @@
                         android:layout_width="@dimen/px_146"
                         android:layout_height="@dimen/px_146"
                         android:layout_marginBottom="@dimen/px_28"
-                        android:src="@drawable/mine_head" />
+                        android:src="@drawable/img_mine_head" />
 
                     <com.zhy.autolayout.AutoLinearLayout
                         android:id="@+id/linear_account"
@@ -101,7 +100,7 @@
                             <ImageView
                                 android:layout_width="@dimen/px_20"
                                 android:layout_height="@dimen/px_24"
-                                android:src="@drawable/icon_mine_head" />
+                                android:src="@drawable/ic_mine_certification" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -113,7 +112,7 @@
                                 android:layout_width="@dimen/px_14"
                                 android:layout_height="@dimen/px_16"
                                 android:layout_marginLeft="@dimen/px_20"
-                                android:src="@drawable/mine_arrow_right_yellow" />
+                                android:src="@drawable/ic_mine_arrow_right_yellow" />
                         </com.zhy.autolayout.AutoLinearLayout>
                     </com.zhy.autolayout.AutoLinearLayout>
 
@@ -141,7 +140,7 @@
                             android:layout_height="@dimen/px_56"
                             android:text="注册"
                             android:gravity="center"
-                            android:background="@drawable/shape_solid_888888_18"
+                            android:background="@drawable/shape_buttom_ffb321_18"
                             android:textColor="@color/color_000000"/>
                     </com.zhy.autolayout.AutoLinearLayout>
                 </com.zhy.autolayout.AutoRelativeLayout>
@@ -210,7 +209,7 @@
                 android:paddingBottom="@dimen/px_80"
                 android:orientation="vertical">
                 <com.zhy.autolayout.AutoLinearLayout
-                    android:id="@+id/linear_storeMeassage"
+                    android:id="@+id/linear_storeInfo"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/px_86"
                     android:layout_marginTop="@dimen/px_2"
@@ -223,7 +222,7 @@
                         android:layout_height="@dimen/px_44"
                         android:layout_marginLeft="@dimen/px_30"
                         android:layout_marginRight="@dimen/px_20"
-                        android:src="@drawable/mine_message" />
+                        android:src="@drawable/ic_mine_store" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -235,7 +234,7 @@
                         android:layout_height="@dimen/px_32"
                         android:layout_marginRight="@dimen/px_30"
                         android:layout_gravity="center_vertical"
-                        android:src="@drawable/mine_arrow_right_gray" />
+                        android:src="@drawable/ic_mine_arrow_right_gray" />
                 </com.zhy.autolayout.AutoLinearLayout>
 
                 <com.zhy.autolayout.AutoLinearLayout
@@ -252,7 +251,7 @@
                         android:layout_height="@dimen/px_44"
                         android:layout_marginLeft="@dimen/px_30"
                         android:layout_marginRight="@dimen/px_20"
-                        android:src="@drawable/mine_favor" />
+                        android:src="@drawable/ic_mine_collect" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -264,7 +263,7 @@
                         android:layout_height="@dimen/px_32"
                         android:layout_marginRight="@dimen/px_30"
                         android:layout_gravity="center_vertical"
-                        android:src="@drawable/mine_arrow_right_gray" />
+                        android:src="@drawable/ic_mine_arrow_right_gray" />
                 </com.zhy.autolayout.AutoLinearLayout>
 
                 <com.zhy.autolayout.AutoLinearLayout
@@ -281,7 +280,7 @@
                         android:layout_height="@dimen/px_44"
                         android:layout_marginLeft="@dimen/px_30"
                         android:layout_marginRight="@dimen/px_20"
-                        android:src="@drawable/mine_transact" />
+                        android:src="@drawable/ic_mine_transact" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -293,7 +292,7 @@
                         android:layout_height="@dimen/px_32"
                         android:layout_marginRight="@dimen/px_30"
                         android:layout_gravity="center_vertical"
-                        android:src="@drawable/mine_arrow_right_gray" />
+                        android:src="@drawable/ic_mine_arrow_right_gray" />
                 </com.zhy.autolayout.AutoLinearLayout>
 
                 <com.zhy.autolayout.AutoLinearLayout
@@ -310,7 +309,7 @@
                         android:layout_height="@dimen/px_44"
                         android:layout_marginLeft="@dimen/px_30"
                         android:layout_marginRight="@dimen/px_20"
-                        android:src="@drawable/mine_interview" />
+                        android:src="@drawable/ic_mine_interview" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -322,7 +321,7 @@
                         android:layout_height="@dimen/px_32"
                         android:layout_marginRight="@dimen/px_30"
                         android:layout_gravity="center_vertical"
-                        android:src="@drawable/mine_arrow_right_gray" />
+                        android:src="@drawable/ic_mine_arrow_right_gray" />
                 </com.zhy.autolayout.AutoLinearLayout>
 
                 <com.zhy.autolayout.AutoLinearLayout
@@ -339,7 +338,7 @@
                         android:layout_height="@dimen/px_44"
                         android:layout_marginLeft="@dimen/px_30"
                         android:layout_marginRight="@dimen/px_20"
-                        android:src="@drawable/mine_employ" />
+                        android:src="@drawable/ic_mine_employ" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -351,7 +350,7 @@
                         android:layout_height="@dimen/px_32"
                         android:layout_marginRight="@dimen/px_30"
                         android:layout_gravity="center_vertical"
-                        android:src="@drawable/mine_arrow_right_gray" />
+                        android:src="@drawable/ic_mine_arrow_right_gray" />
                 </com.zhy.autolayout.AutoLinearLayout>
 
                 <com.zhy.autolayout.AutoLinearLayout
@@ -368,7 +367,7 @@
                         android:layout_height="@dimen/px_44"
                         android:layout_marginLeft="@dimen/px_30"
                         android:layout_marginRight="@dimen/px_20"
-                        android:src="@drawable/mine_red_packet" />
+                        android:src="@drawable/ic_mine_packet" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -380,7 +379,7 @@
                         android:layout_height="@dimen/px_32"
                         android:layout_marginRight="@dimen/px_30"
                         android:layout_gravity="center_vertical"
-                        android:src="@drawable/mine_arrow_right_gray" />
+                        android:src="@drawable/ic_mine_arrow_right_gray" />
                 </com.zhy.autolayout.AutoLinearLayout>
 
                 <com.zhy.autolayout.AutoLinearLayout
@@ -397,22 +396,23 @@
                         android:layout_height="@dimen/px_44"
                         android:layout_marginLeft="@dimen/px_30"
                         android:layout_marginRight="@dimen/px_20"
-                        android:src="@drawable/mine_theorys" />
+                        android:src="@drawable/ic_mine_aboutus" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="关于君臣论"
+                        android:text="关于我们"
                         android:textColor="@color/color_000000" />
                     <ImageView
                         android:layout_width="@dimen/px_18"
                         android:layout_height="@dimen/px_32"
                         android:layout_marginRight="@dimen/px_30"
                         android:layout_gravity="center_vertical"
-                        android:src="@drawable/mine_arrow_right_gray" />
+                        android:src="@drawable/ic_mine_arrow_right_gray" />
                 </com.zhy.autolayout.AutoLinearLayout>
 
                 <com.zhy.autolayout.AutoLinearLayout
+                    android:visibility="gone"
                     android:id="@+id/linear_payPwd"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/px_86"
@@ -426,7 +426,7 @@
                         android:layout_height="@dimen/px_44"
                         android:layout_marginLeft="@dimen/px_30"
                         android:layout_marginRight="@dimen/px_20"
-                        android:src="@drawable/mine_psw" />
+                        android:src="@drawable/ic_mine_paypsw" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -438,7 +438,7 @@
                         android:layout_height="@dimen/px_32"
                         android:layout_marginRight="@dimen/px_30"
                         android:layout_gravity="center_vertical"
-                        android:src="@drawable/mine_arrow_right_gray" />
+                        android:src="@drawable/ic_mine_arrow_right_gray" />
                 </com.zhy.autolayout.AutoLinearLayout>
 
                 <com.zhy.autolayout.AutoLinearLayout
@@ -455,7 +455,7 @@
                         android:layout_height="@dimen/px_44"
                         android:layout_marginLeft="@dimen/px_30"
                         android:layout_marginRight="@dimen/px_20"
-                        android:src="@drawable/mine_service" />
+                        android:src="@drawable/ic_mine_service" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -467,7 +467,7 @@
                         android:layout_height="@dimen/px_32"
                         android:layout_marginRight="@dimen/px_30"
                         android:layout_gravity="center_vertical"
-                        android:src="@drawable/mine_arrow_right_gray" />
+                        android:src="@drawable/ic_mine_arrow_right_gray" />
                 </com.zhy.autolayout.AutoLinearLayout>
 
                 <Button

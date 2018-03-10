@@ -12,6 +12,7 @@ import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.callback.CallBackProxy;
 import com.zhouyou.http.callback.ProgressDialogCallBack;
 import com.zhouyou.http.exception.ApiException;
+import com.zhouyou.http.model.HttpParams;
 
 /**
  * Created by yyj on 2018/1/15.
@@ -25,15 +26,16 @@ public class LoginPresenter extends ABasePresenter<ILoginView> {
 
     //登录
     public void onLogin(){
-        LogUtil.error("登录","json===phone:"+getmMvpView().getPhoneStr()
-                +"\npassword:"+Md5Util.md5(getmMvpView().getPwdStr()));
+        HttpParams httpParams = new HttpParams();
+        httpParams.put("phone",getmMvpView().getPhoneStr());
+        httpParams.put("password", Md5Util.md5(getmMvpView().getPwdStr()));
+        httpParams.put("ph_expires_in","10");
+        httpParams.put("type","1");
+        LogUtil.error("登录","json==="+httpParams.toString());
 
         EasyHttp.post(ApiURL.COMMON_URL)
                 .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_LOGIN)
-                .params("phone",getmMvpView().getPhoneStr())
-                .params("password", Md5Util.md5(getmMvpView().getPwdStr()))
-                .params("ph_expires_in","10")
-                .params("type","1")
+                .params(httpParams)
                 .execute(new CallBackProxy<CustomApiResult<RegisterData>, RegisterData>
                         (new ProgressDialogCallBack<RegisterData>(mProgressDialog) {
                             @Override

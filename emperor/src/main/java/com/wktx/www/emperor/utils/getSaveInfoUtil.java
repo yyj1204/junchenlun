@@ -24,7 +24,7 @@ public class getSaveInfoUtil {
 
     public static LoginInfoDataInfo getSaveObject(Context context) {
 
-        getSaveInfo = new SaveObjectUtils(context, ConstantUtil.LOGININFO).getObject(ConstantUtil.LOGININFO_OBJECT, LoginInfoDataInfo.class);
+        getSaveInfo = new SaveObjectUtil(context, ConstantUtil.LOGININFO).getObject(ConstantUtil.LOGININFO_OBJECT, LoginInfoDataInfo.class);
         return getSaveInfo;
     }
 
@@ -41,7 +41,7 @@ public class getSaveInfoUtil {
 
     public static UserInfoDataInfo getSaveUserInfo(Context context, String token) {
 
-        userInfoDataInfo = new SaveObjectUtils(context, ConstantUtil.USERINFO_NAME).getObject(token, UserInfoDataInfo.class);
+        userInfoDataInfo = new SaveObjectUtil(context, ConstantUtil.USERINFO_NAME).getObject(token, UserInfoDataInfo.class);
         return userInfoDataInfo;
     }
 

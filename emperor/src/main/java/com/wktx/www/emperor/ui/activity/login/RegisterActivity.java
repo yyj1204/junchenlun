@@ -110,6 +110,9 @@ public class RegisterActivity extends ABaseActivity<IRegisterView,RegisterPresen
                 }
                 break;
             case R.id.tv_login://已有账号，立即登录
+                if (MyUtils.isFastClick1()){
+                    return;
+                }
                 startActivity(new Intent(this, LoginActivity.class));
                 finish();
                 break;

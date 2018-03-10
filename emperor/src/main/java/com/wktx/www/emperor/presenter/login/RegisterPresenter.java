@@ -1,7 +1,7 @@
 package com.wktx.www.emperor.presenter.login;
 
+import com.wktx.www.emperor.apiresult.CommonSimpleData;
 import com.wktx.www.emperor.apiresult.CustomApiResult;
-import com.wktx.www.emperor.apiresult.login.SendCodeData;
 import com.wktx.www.emperor.apiresult.login.login8register.RegisterData;
 import com.wktx.www.emperor.utils.ApiURL;
 import com.wktx.www.emperor.basemvp.ABasePresenter;
@@ -13,6 +13,7 @@ import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.callback.CallBackProxy;
 import com.zhouyou.http.callback.ProgressDialogCallBack;
 import com.zhouyou.http.exception.ApiException;
+import com.zhouyou.http.model.HttpParams;
 
 /**
  * Created by yyj on 2018/1/15.
@@ -32,8 +33,8 @@ public class RegisterPresenter extends ABasePresenter<IRegisterView> {
         EasyHttp.post(ApiURL.COMMON_URL)
                 .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_SENCODE)
                 .params("phone",getmMvpView().getPhoneStr())
-                .execute(new CallBackProxy<CustomApiResult<SendCodeData>, SendCodeData>
-                        (new ProgressDialogCallBack<SendCodeData>(mProgressDialog) {
+                .execute(new CallBackProxy<CustomApiResult<CommonSimpleData>, CommonSimpleData>
+                        (new ProgressDialogCallBack<CommonSimpleData>(mProgressDialog) {
                             @Override
                             public void onError(ApiException e) {
                                 super.onError(e);
@@ -47,7 +48,7 @@ public class RegisterPresenter extends ABasePresenter<IRegisterView> {
                             }
 
                             @Override
-                            public void onSuccess(SendCodeData result) {
+                            public void onSuccess(CommonSimpleData result) {
                                 if (result != null) {
                                     LogUtil.error("获取验证码","result=="+result.toString());
 
@@ -65,17 +66,17 @@ public class RegisterPresenter extends ABasePresenter<IRegisterView> {
 
     //注册
     public void onRegister(){
-        LogUtil.error("注册","json===phone:"+getmMvpView().getPhoneStr()
-                +"\npassword:"+Md5Util.md5(getmMvpView().getPwd1Str())
-                +"\ncode:"+getmMvpView().getCodeStr());
+        HttpParams httpParams = new HttpParams();
+        httpParams.put("phone",getmMvpView().getPhoneStr());
+        httpParams.put("password", Md5Util.md5(getmMvpView().getPwd1Str()));
+        httpParams.put("ph_expires_in","5");
+        httpParams.put("type","0");
+        httpParams.put("code",getmMvpView().getCodeStr());
+        LogUtil.error("注册","json==="+httpParams.toString());
 
         EasyHttp.post(ApiURL.COMMON_URL)
                 .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_LOGIN)
-                .params("phone",getmMvpView().getPhoneStr())
-                .params("password", Md5Util.md5(getmMvpView().getPwd1Str()))
-                .params("ph_expires_in","5")
-                .params("type","0")
-                .params("code",getmMvpView().getCodeStr())
+                .params(httpParams)
                 .execute(new CallBackProxy<CustomApiResult<RegisterData>, RegisterData>
                         (new ProgressDialogCallBack<RegisterData>(mProgressDialog) {
                             @Override

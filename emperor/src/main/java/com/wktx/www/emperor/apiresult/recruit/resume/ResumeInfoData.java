@@ -8,8 +8,8 @@ import java.util.List;
  * 简历详情内容
  * "id":"1","tow":"1","name":"胡图图","picture":"","highest_education":"本科","working_years":"一年","sex":"2",
  * "date_of_birth":"1992.05","residential_city":"浙江-杭州","character_introduction":"脾气好、只做一家","resume_content":"",
- * "monthly_money":"3500.00","wechat":"","qq":"","phone":"0","bgat":"服装内衣/母婴玩具/精品鞋包","bgas":"日韩小清新/中国风/时尚简约",
- * "is_collection":0,"evaluate_num":0,"service_attitude":"0","ability":"0","response_speed":"0",
+ * "monthly_money":"3500.00","wechat":"","qq":"","phone":"0","typing_speed": "0字/分","bgat":"服装内衣/母婴玩具/精品鞋包","bgas":"日韩小清新/中国风/时尚简约",
+ * "is_collection":0,"evaluate_num":0,"service_attitude":"0","ability":"0","response_speed":"0","no_pay_order": "0","hire_id": "0","is_hiring": "1",
  * "work_experience":[{"work_date":{"start_date":"2014/07","end_date":"2016/08"},"company":"福建网客天下科技有限公司",
  * "bgat":"服装内衣","position":"视觉传达设计师","introduction":"负责整个店铺页面装修，活动页面制作，商品详情"}]
  */
@@ -26,7 +26,7 @@ public class ResumeInfoData implements Serializable{
     private String residential_city;//所在城市
     private String character_introduction;//性格介绍
     private String resume_content;//个性简历
-    private String monthly_money;//工作经历
+    private String monthly_money;//包月金额
     private String wechat;
     private String qq;
     private String phone;
@@ -38,7 +38,10 @@ public class ResumeInfoData implements Serializable{
     private String service_attitude;//服务态度星级
     private String ability;//能力星级
     private String response_speed;//相应速度星级
-    private List<WorkExperienceBean> work_experience;
+    private String no_pay_order;//是否有未支付的雇佣订单 0:否 1:是
+    private String hire_id;//未支付的雇佣订单id
+    private String is_hiring;//0:未被雇佣 1:正在被雇佣
+    private List<WorkExperienceBean> work_experience;//工作经历
 
     public String getId() {
         return id;
@@ -181,6 +184,31 @@ public class ResumeInfoData implements Serializable{
     public void setResponse_speed(String response_speed) {
         this.response_speed = response_speed;
     }
+
+    public String getNo_pay_order() {
+        return no_pay_order;
+    }
+
+    public void setNo_pay_order(String no_pay_order) {
+        this.no_pay_order = no_pay_order;
+    }
+
+    public String getHire_id() {
+        return hire_id;
+    }
+
+    public void setHire_id(String hire_id) {
+        this.hire_id = hire_id;
+    }
+
+    public String getIs_hiring() {
+        return is_hiring;
+    }
+
+    public void setIs_hiring(String is_hiring) {
+        this.is_hiring = is_hiring;
+    }
+
     public List<WorkExperienceBean> getWork_experience() {
         return work_experience;
     }
@@ -191,7 +219,7 @@ public class ResumeInfoData implements Serializable{
 
     @Override
     public String toString() {
-        return "InfoBean{" +
+        return "ResumeInfoData{" +
                 "id='" + id + '\'' +
                 ", tow='" + tow + '\'' +
                 ", name='" + name + '\'' +
@@ -215,6 +243,9 @@ public class ResumeInfoData implements Serializable{
                 ", service_attitude='" + service_attitude + '\'' +
                 ", ability='" + ability + '\'' +
                 ", response_speed='" + response_speed + '\'' +
+                ", no_pay_order='" + no_pay_order + '\'' +
+                ", hire_id='" + hire_id + '\'' +
+                ", is_hiring='" + is_hiring + '\'' +
                 ", work_experience=" + work_experience +
                 '}';
     }

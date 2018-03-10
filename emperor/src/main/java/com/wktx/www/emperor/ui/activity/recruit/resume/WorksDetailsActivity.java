@@ -26,7 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 /**
- * 美工简历---作品---作品详情界面
+ * 简历---作品---作品详情界面
  */
 public class WorksDetailsActivity extends ABaseActivity<IView,WorksDetailsPresenter> implements IView<WorksDetailsInfoData> {
     @BindView(R.id.tb_TvBarTitle)
@@ -109,6 +109,7 @@ public class WorksDetailsActivity extends ABaseActivity<IView,WorksDetailsPresen
     }
     @Override
     public void onRequestFailure(String result) {
+        finish();
         MyUtils.showToast(WorksDetailsActivity.this,result);
     }
 }

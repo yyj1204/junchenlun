@@ -19,11 +19,11 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.application.MyApplication;
 import com.wktx.www.emperor.ui.activity.recruit.resume.WorksDetailsActivity;
+import com.wktx.www.emperor.ui.adapter.DropDownListAdapter;
 import com.wktx.www.emperor.utils.SpaceItemDecoration;
 import com.wktx.www.emperor.R;
 import com.wktx.www.emperor.utils.ToastUtil;
 import com.wktx.www.emperor.widget.DropDownMenu;
-import com.wktx.www.emperor.ui.adapter.ListDropDownAdapter;
 import com.wktx.www.emperor.Model1.HomeItem;
 import com.wktx.www.emperor.utils.Dip2pxUtil;
 
@@ -42,7 +42,7 @@ public class WorksActivity extends AppCompatActivity {
     TextView mTvTitle;
     private ArrayList<HomeItem> mDataList;
     private ImageView imgView;
-    private ListDropDownAdapter ageAdapter1;
+    private DropDownListAdapter ageAdapter1;
 
     @OnClick({R.id.tb_IvReturn})
     public void MyOnclick(View view) {
@@ -57,7 +57,7 @@ public class WorksActivity extends AppCompatActivity {
     private String headers[] = {"擅长平台", "擅长类目"};
     private List<View> popupViews = new ArrayList<>();
     private TextView textView;
-    private ListDropDownAdapter ageAdapter;
+    private DropDownListAdapter ageAdapter;
     private RecyclerView mVtRecycleView;
     List<String> mDatas = new ArrayList<>();
     private String citys[] = {"不限", "淘宝", "天猫", "阿里巴巴", "京东", "苏宁"};
@@ -87,13 +87,13 @@ public class WorksActivity extends AppCompatActivity {
         //init age menu
         final ListView ageView = new ListView(this);
         ageView.setDividerHeight(0);
-        ageAdapter = new ListDropDownAdapter(this, Arrays.asList(citys));
+        ageAdapter = new DropDownListAdapter(this, Arrays.asList(citys));
         ageView.setAdapter(ageAdapter);
 
         //init sex menu
         final ListView ageView1 = new ListView(this);
         ageView1.setDividerHeight(0);
-        ageAdapter1 = new ListDropDownAdapter(this, Arrays.asList(ages));
+        ageAdapter1 = new DropDownListAdapter(this, Arrays.asList(ages));
         ageView1.setAdapter(ageAdapter1);
         popupViews.add(ageView);
         popupViews.add(ageView1);

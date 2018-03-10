@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<com.zhy.autolayout.AutoLinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:background="@color/color_ffffff"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
-    android:paddingTop="21dp"
-    android:paddingBottom="21dp"
+    android:padding="@dimen/px_30"
     android:layout_height="wrap_content">
 
     <TextView
@@ -15,16 +12,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="提醒内容"
+        android:maxLines="2"
         android:textColor="@color/color_000000"
-        android:textSize="13sp"/>
+        android:textSize="@dimen/sp_13"/>
 
-    <TextView
-        android:id="@+id/tv_time"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="提醒时间"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/color_999999"
-        android:textSize="12sp"/>
+        android:layout_marginTop="@dimen/px_30">
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="提醒时间"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_12"/>
+        <TextView
+            android:id="@+id/tv_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查看详情 >"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_12"/>
+    </RelativeLayout>
 
-</LinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

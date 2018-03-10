@@ -11,6 +11,7 @@ import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.callback.CallBackProxy;
 import com.zhouyou.http.callback.ProgressDialogCallBack;
 import com.zhouyou.http.exception.ApiException;
+import com.zhouyou.http.model.HttpParams;
 
 /**
  * Created by yyj on 2018/1/24.
@@ -24,14 +25,16 @@ public class DemandDetailsPresenter extends ABasePresenter<IView> {
 
     //获取需求详情
     public void onGetDemandInfo(String demandId){
-        LogUtil.error("获取需求详情","json===user_id:"+getmMvpView().getUserInfo().getUser_id()
-                +"\ntoken:"+getmMvpView().getUserInfo().getToken()+"\nid:"+demandId);
+        HttpParams httpParams = new HttpParams();
+        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("token", getmMvpView().getUserInfo().getToken());
+        httpParams.put("id", demandId);
+
+        LogUtil.error("获取需求详情","json==="+httpParams.toString());
 
         EasyHttp.post(ApiURL.COMMON_URL)
                 .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_DEMAND_INFO)
-                .params("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()))
-                .params("token", getmMvpView().getUserInfo().getToken())
-                .params("id", demandId)
+                .params(httpParams)
                 .execute(new CallBackProxy<CustomApiResult<DemandDetailsData>, DemandDetailsData>
                         (new ProgressDialogCallBack<DemandDetailsData>(mProgressDialog) {
                             @Override

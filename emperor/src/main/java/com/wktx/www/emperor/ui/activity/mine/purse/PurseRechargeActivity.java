@@ -1,6 +1,7 @@
 package com.wktx.www.emperor.ui.activity.mine.purse;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,15 +19,15 @@ import com.r0adkll.slidr.Slidr;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.wktx.www.emperor.ui.activity.recruit.hire.PayResultActivity;
 import com.wktx.www.emperor.R;
 import com.wktx.www.emperor.apiresult.login.AccountInfoData;
-import com.wktx.www.emperor.apiresult.mine.pay.WechatPayBean;
+import com.wktx.www.emperor.apiresult.mine.pay.WechatPayInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
-import com.wktx.www.emperor.pay.IPayView;
-import com.wktx.www.emperor.pay.alipay.AuthResult;
-import com.wktx.www.emperor.pay.alipay.PayResult;
+import com.wktx.www.emperor.payutil.IPayView;
+import com.wktx.www.emperor.payutil.alipay.AuthResult;
+import com.wktx.www.emperor.payutil.alipay.PayResult;
 import com.wktx.www.emperor.presenter.mine.purse.PurseRechargePresenter;
-import com.wktx.www.emperor.ui.activity.recruit.demand.DemandReleaseActivity;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.LogUtil;
 import com.wktx.www.emperor.utils.LoginUtil;
@@ -58,21 +59,19 @@ public class PurseRechargeActivity extends ABaseActivity<IPurseRechargeView,Purs
     private boolean isSelectWechat = false;
     private IWXAPI wxApi;//微信支付
 
-    @OnClick({R.id.tb_IvReturn,R.id.iv_selectedAlipay,R.id.iv_selectedWechat,R.id.rela_alipay,R.id.rela_wechat,R.id.bt_recharge})
+    @OnClick({R.id.tb_IvReturn,R.id.rela_alipay,R.id.rela_wechat,R.id.bt_recharge})
     public void MyOnclick(View view) {
         switch (view.getId()) {
             case R.id.tb_IvReturn:
                 finish();
                 break;
             //支付宝支付
-            case R.id.iv_selectedAlipay:
             case R.id.rela_alipay:
                 isSelectWechat = false;
                 ivAlipay.setSelected(!isSelectWechat);
                 ivWechat.setSelected(isSelectWechat);
                 break;
             //微信支付
-            case R.id.iv_selectedWechat:
             case R.id.rela_wechat:
                 isSelectWechat = true;
                 ivAlipay.setSelected(!isSelectWechat);
@@ -207,13 +206,13 @@ public class PurseRechargeActivity extends ABaseActivity<IPurseRechargeView,Purs
         }
     }
     @Override//微信支付
-    public void onRequestSuccess(WechatPayBean tData) {
+    public void onRequestSuccess(WechatPayInfoData tData) {
         //微信后台下单成功--->支付
         PayReq req = new PayReq();
         req.appId = tData.getAppid();
         req.partnerId = tData.getPartnerid();
         req.prepayId= tData.getPrepayid();
-        req.packageValue = tData.getPackage1();
+        req.packageValue = tData.getPay_package();
         req.nonceStr= tData.getNoncestr();
         req.timeStamp= tData.getTimestamp();
         req.sign= tData.getSign();
@@ -233,23 +232,32 @@ public class PurseRechargeActivity extends ABaseActivity<IPurseRechargeView,Purs
      */
     @Override
     public void alipaySuccess() {
-        finish();
-        btRecharge.setEnabled(true);
+        startPayResultActivity(true);
     }
     @Override
     public void alipayFailed() {
-        btRecharge.setEnabled(true);
+        startPayResultActivity(false);
     }
     @Override
     public void wxSuccess() {
-        finish();
-        btRecharge.setEnabled(true);
+        startPayResultActivity(true);
     }
     @Override
     public void wxFailed() {
-        btRecharge.setEnabled(true);
+        startPayResultActivity(false);
     }
 
+
+    /**
+     * 打开支付结果界面
+     */
+    private void startPayResultActivity(boolean isOk) {
+        Intent intent = new Intent(this, PayResultActivity.class);
+        intent.putExtra(ConstantUtil.KEY_POSITION,ConstantUtil.ACTIVITY_QBCZ);
+        intent.putExtra(ConstantUtil.KEY_ISOK,isOk);
+        startActivity(intent);
+        btRecharge.setEnabled(true);
+    }
 
     /**
      * 支付宝支付结果通知

@@ -15,7 +15,8 @@ import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.recruit.resume.EvaluateInfoData;
 import com.wktx.www.emperor.basemvp.ALazyLoadFragment;
 import com.wktx.www.emperor.presenter.recruit.resume.EvaluatePresenter;
-import com.wktx.www.emperor.ui.adapter.ResumeEvaluateAdapter;
+import com.wktx.www.emperor.ui.activity.mine.BrowsingRecordActivity;
+import com.wktx.www.emperor.ui.adapter.recruit.ResumeEvaluateAdapter;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.view.IView;
@@ -160,6 +161,7 @@ public class ResumeEvaluateFragment extends ALazyLoadFragment<IView,EvaluatePres
 
     @Override
     public void onRequestSuccess(List<EvaluateInfoData> tData) {
+        recyclerView.setBackgroundResource(R.color.color_f0f0f0);
         setData(tData);
         if (isRefresh){//停止刷新
             mAdapter.setEnableLoadMore(true);
@@ -168,21 +170,27 @@ public class ResumeEvaluateFragment extends ALazyLoadFragment<IView,EvaluatePres
     }
     @Override
     public void onRequestFailure(String result) {
-        if (result.equals("")){//没数据
-            MyUtils.showToast(getContext(),"暂无任何评价！");
-        }else {
-            MyUtils.showToast(getContext(),result);
-        }
+        String toastStr=result;
+        setData(null);
+        //如果是刷新，没数据代表全部没数据
         if (isRefresh){
+            if (result.equals("")){
+                toastStr="暂无任何评价！";
+                recyclerView.setBackgroundResource(R.drawable.img_nothing);
+            }else {
+                recyclerView.setBackgroundResource(R.drawable.img_nothing_net);
+            }
             mAdapter.setEnableLoadMore(true);
             swipeRefreshLayout.setRefreshing(false);
-        }else {
+        }else {//如果是加载，没数据代表加载完毕
             if (result.equals("")){//没数据
+                toastStr="已经到底了哦！";
                 mAdapter.loadMoreEnd();
             }else {//请求出错
                 mAdapter.loadMoreFail();
             }
         }
+        MyUtils.showToast(getContext(),toastStr);
     }
 
     /**

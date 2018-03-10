@@ -8,7 +8,7 @@ package com.wktx.www.emperor.apiresult.mine.pay;
 public class AliPayData {
     private int code;
     private String msg;
-    private AliPayInfoData info;
+    private String info;
 
     public int getCode() {
         return code;
@@ -26,11 +26,11 @@ public class AliPayData {
         this.msg = msg;
     }
 
-    public AliPayInfoData getInfo() {
+    public String getInfo() {
         return info;
     }
 
-    public void setInfo(AliPayInfoData info) {
+    public void setInfo(String info) {
         this.info = info;
     }
 

@@ -4,14 +4,14 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:background="@color/color_ffffff"
+    android:background="@drawable/selector_mine_linearlayout"
     android:padding="@dimen/px_30">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:drawableLeft="@drawable/demand"
+        android:drawableLeft="@drawable/ic_demand_release"
         android:drawablePadding="@dimen/px_14"
         android:gravity="center_vertical"
         android:text="@string/title_demand_release"
@@ -21,6 +21,6 @@
     <ImageView
         android:layout_width="@dimen/px_16"
         android:layout_height="@dimen/px_20"
-        android:src="@drawable/arrow_right_gray" />
+        android:src="@drawable/ic_demand_arrow_right_gray" />
 
 </com.zhy.autolayout.AutoLinearLayout>

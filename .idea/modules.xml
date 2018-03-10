@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/emperor/emperor.iml" filepath="$PROJECT_DIR$/emperor/emperor.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jcl.iml" filepath="$PROJECT_DIR$/.idea/modules/jcl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/junchenlun.iml" filepath="$PROJECT_DIR$/junchenlun.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_alphatabs/lib_alphatabs.iml" filepath="$PROJECT_DIR$/lib_alphatabs/lib_alphatabs.iml" />
       <module fileurl="file://$PROJECT_DIR$/subjects/subjects.iml" filepath="$PROJECT_DIR$/subjects/subjects.iml" />
     </modules>

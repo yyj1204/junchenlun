@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/selector_screening_tagbg"
                     android:text="男"
-                    android:textColor="@drawable/selector_textcolor"
+                    android:textColor="@color/selector_888888_ffb321"
                     android:textSize="@dimen/sp_12" />
                 <TextView
                     android:id="@+id/tv_sexWoman"
@@ -90,7 +90,7 @@
                     android:layout_marginLeft="@dimen/px_18"
                     android:background="@drawable/selector_screening_tagbg"
                     android:text="女"
-                    android:textColor="@drawable/selector_textcolor"
+                    android:textColor="@color/selector_888888_ffb321"
                     android:textSize="@dimen/sp_12" />
             </LinearLayout>
         </LinearLayout>

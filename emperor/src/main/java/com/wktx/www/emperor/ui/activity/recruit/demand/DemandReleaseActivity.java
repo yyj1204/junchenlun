@@ -72,25 +72,21 @@ public class DemandReleaseActivity extends ABaseActivity<IDemandReleaseView,Dema
             case R.id.linear_demandStore://选择店铺
                 if (platformBeans.size()!=0){//TODO storeBeans
                     initCustomOptionPicker(R.id.tv_demandStore,platformBeans);
-                    pvCustomOptions.show();
                 }
                 break;
             case R.id.linear_demandPlatfrom://选择平台
                 if (platformBeans.size()!=0){
                     initCustomOptionPicker(R.id.tv_demandPlatfrom,platformBeans);
-                    pvCustomOptions.show();
                 }
                 break;
             case R.id.linear_demandCategory://选择类目
                 if (categoryBeans.size()!=0) {
                     initCustomOptionPicker(R.id.tv_demandCategory, categoryBeans);
-                    pvCustomOptions.show();
                 }
                 break;
             case R.id.linear_demandPattern://选择需求模式
                 if (patternBeans.size()!=0) {
                     initCustomOptionPicker(R.id.tv_demandPattern, patternBeans);
-                    pvCustomOptions.show();
                 }
                 break;
             case R.id.bt_sureRelease://确认发布
@@ -115,7 +111,7 @@ public class DemandReleaseActivity extends ABaseActivity<IDemandReleaseView,Dema
                     MyUtils.showToast(DemandReleaseActivity.this,"请选择类目！");
                 }else if (TextUtils.isEmpty(patternId)){
                     MyUtils.showToast(DemandReleaseActivity.this,"请选择需求！");
-                }else {//注册
+                }else {//发布需求
                     btRelease.setEnabled(false);
                     getPresenter().onDemandRelease(platformId,categoryId,patternId);
                 }
@@ -219,6 +215,7 @@ public class DemandReleaseActivity extends ABaseActivity<IDemandReleaseView,Dema
     }
     @Override
     public void onRequestFailure(String result) {
+        finish();
         MyUtils.showToast(DemandReleaseActivity.this,result);
     }
 
@@ -233,7 +230,7 @@ public class DemandReleaseActivity extends ABaseActivity<IDemandReleaseView,Dema
          */
         pvCustomOptions = new OptionsPickerView.Builder(this, new OptionsPickerView.OnOptionsSelectListener() {
             @Override
-            public void onOptionsSelect(int options1, int option2, int options3, View v) {
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 //返回的分别是三个级别的选中位置
                 String name = list.get(options1).getName();
                 if (id == R.id.tv_demandStore){
@@ -272,11 +269,13 @@ public class DemandReleaseActivity extends ABaseActivity<IDemandReleaseView,Dema
                     }
                 })
                 .isDialog(false)
+                .setOutSideCancelable(false)
                 .build();
         optionsItemStrs.clear();
         for (int i = 0; i <list.size() ; i++) {
             optionsItemStrs.add(list.get(i).getName());
         }
         pvCustomOptions.setPicker(optionsItemStrs);//添加数据
+        pvCustomOptions.show();
     }
 }

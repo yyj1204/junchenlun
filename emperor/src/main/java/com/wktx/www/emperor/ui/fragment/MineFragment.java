@@ -11,29 +11,29 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.wktx.www.emperor.ui.activity.mine.TransactionRecordActivity;
 import com.wktx.www.emperor.apiresult.mine.center.CenterInfoData;
 import com.wktx.www.emperor.apiresult.mine.center.UserInfoBean;
+import com.wktx.www.emperor.ui.activity.mine.BrowsingRecordActivity;
+import com.wktx.www.emperor.ui.activity.mine.MyCollectActivity;
+import com.wktx.www.emperor.ui.activity.mine.coupon.MyCouponActivity;
 import com.wktx.www.emperor.ui.activity.mine.certification.AccountCertificationActivity;
 import com.wktx.www.emperor.ui.activity.mine.CompanyInfoActivity;
-import com.wktx.www.emperor.Activity.PacketActivity;
-import com.wktx.www.emperor.Activity.ServiceActivity;
+import com.wktx.www.emperor.ui.activity.mine.ContactServiceActivity;
 import com.wktx.www.emperor.R;
 import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.basemvp.ABaseFragment;
 import com.wktx.www.emperor.presenter.mine.MinePresenter;
 import com.wktx.www.emperor.ui.activity.mine.purse.MyPurseActivity;
 import com.wktx.www.emperor.utils.ConstantUtil;
-import com.wktx.www.emperor.Activity.AboutUsActivity;
-import com.wktx.www.emperor.ui.activity.recruit.BrowsingHistoryActivity;
-import com.wktx.www.emperor.Activity.EmployActivity;
-import com.wktx.www.emperor.Activity.FavorActivity;
+import com.wktx.www.emperor.ui.activity.mine.AboutUsActivity;
+import com.wktx.www.emperor.ui.activity.mine.HireRecordActivity;
 import com.wktx.www.emperor.Activity.InterviewActivity;
 import com.wktx.www.emperor.ui.activity.login.LoginActivity;
-import com.wktx.www.emperor.Activity.MessageActivity;
+import com.wktx.www.emperor.ui.activity.main.message.MessageActivity;
 import com.wktx.www.emperor.Activity.PayPswctivity;
 import com.wktx.www.emperor.ui.activity.login.RegisterActivity;
-import com.wktx.www.emperor.Activity.StoreInfoActivity;
-import com.wktx.www.emperor.Activity.TrasactActivity;
+import com.wktx.www.emperor.ui.activity.mine.store.StoreInfoActivity;
 import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.view.mine.IMineView;
@@ -68,16 +68,19 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
 
     @OnClick({R.id.iv_message, R.id.tv_browsing, R.id.civ_head,R.id.tv_userName,R.id.linear_certification,
             R.id.tv_login,R.id.tv_register,R.id.linear_balance,R.id.linear_usableBalance,
-            R.id.linear_storeMeassage,R.id.linear_myCollect,R.id.linear_tradeRecord,
+            R.id.linear_storeInfo,R.id.linear_myCollect,R.id.linear_tradeRecord,
             R.id.linear_interviewRecord,R.id.linear_employRecord,R.id.linear_myRedpacket,
             R.id.linear_aboutApp, R.id.linear_payPwd, R.id.linear_contactService, R.id.bt_logout})
     public void MyOnclick(View view) {
+        if (MyUtils.isFastClick1()){
+            return;
+        }
         switch (view.getId()) {
             case R.id.iv_message://消息通知
                 isLoginStartActivity(MessageActivity.class);
                 break;
             case R.id.tv_browsing://浏览记录
-                isLoginStartActivity(BrowsingHistoryActivity.class);
+                isLoginStartActivity(BrowsingRecordActivity.class);
                 break;
             case R.id.civ_head://用户头像
             case R.id.tv_userName://用户名
@@ -103,32 +106,38 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
             case R.id.linear_usableBalance://可用余额
                 isLoginStartActivity(MyPurseActivity.class);
                 break;
-            case R.id.linear_storeMeassage://店铺信息
+            case R.id.linear_storeInfo://店铺信息
                 isLoginStartActivity(StoreInfoActivity.class);
                 break;
             case R.id.linear_myCollect://我的收藏
-                isLoginStartActivity(FavorActivity.class);
+                isLoginStartActivity(MyCollectActivity.class);
                 break;
             case R.id.linear_tradeRecord://交易记录
-                isLoginStartActivity(TrasactActivity.class);
+                isLoginStartActivity(TransactionRecordActivity.class);
                 break;
             case R.id.linear_interviewRecord://面试记录
+                //TODO
+                MyUtils.showToast(getContext(),"没有效果图！");
                 isLoginStartActivity(InterviewActivity.class);
                 break;
             case R.id.linear_employRecord://雇佣记录
-                isLoginStartActivity(EmployActivity.class);
+                isLoginStartActivity(HireRecordActivity.class);
                 break;
             case R.id.linear_myRedpacket://我的红包
-                isLoginStartActivity(PacketActivity.class);
+                isLoginStartActivity(MyCouponActivity.class);
                 break;
             case R.id.linear_aboutApp://关于君臣论
+                //TODO
+                MyUtils.showToast(getContext(),"网页还没做！");
                 startActivity(new Intent(getActivity(), AboutUsActivity.class));
                 break;
             case R.id.linear_payPwd://支付密码
+                //TODO
+                MyUtils.showToast(getContext(),"还没做！");
                 isLoginStartActivity(PayPswctivity.class);
                 break;
             case R.id.linear_contactService://联系客服
-                startActivity(new Intent(getActivity(), ServiceActivity.class));
+                startActivity(new Intent(getActivity(), ContactServiceActivity.class));
                 break;
             case R.id.bt_logout://退出登录
                 showLogoutPopup();
@@ -172,6 +181,12 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
         });
     }
 
+    //根据登录状态获取用户信息，更新界面
+    @Override
+    public void onResume() {
+        super.onResume();
+        initUI();
+    }
     public MineFragment() {
     }
     public static MineFragment newInstance(String info) {
@@ -181,18 +196,12 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         ButterKnife.bind(this, view);
         return view;
-    }
-
-    //根据登录状态获取用户信息，更新界面
-    @Override
-    public void onResume() {
-        super.onResume();
-        initUI();
     }
 
     private void initUI() {
@@ -204,7 +213,7 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
             getPresenter().onGetCenterInfo();//请求个人中心信息
         }else {//未登录
             isLogin=false;
-            ivHead.setImageResource(R.drawable.mine_head);
+            ivHead.setImageResource(R.drawable.img_mine_head);
             tvBalance.setText("0.00");
             tvUsableBalance.setText("0.00");
             llAccount.setVisibility(View.GONE);
@@ -240,9 +249,11 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
             Glide.with(getContext()).load(userinfo.getHead_pic()).into(ivHead);
         }else {
             if (userinfo.getSex().equals("1")){
-                ivHead.setImageResource(R.drawable.icon_head_man);
+                ivHead.setImageResource(R.drawable.img_head_man);
             }else if (userinfo.getSex().equals("2")){
-                ivHead.setImageResource(R.drawable.icon_head_woman);
+                ivHead.setImageResource(R.drawable.img_head_woman);
+            }else {
+                ivHead.setImageResource(R.drawable.img_mine_head);
             }
         }
         //余额

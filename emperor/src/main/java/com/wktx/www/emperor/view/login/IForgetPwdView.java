@@ -1,6 +1,5 @@
 package com.wktx.www.emperor.view.login;
 
-import com.wktx.www.emperor.apiresult.login.ForgetPwdData;
 import com.wktx.www.emperor.view.IView;
 
 /**
@@ -8,7 +7,7 @@ import com.wktx.www.emperor.view.IView;
  * 忘记密码界面
  */
 
-public interface IForgetPwdView extends IView<ForgetPwdData> {
+public interface IForgetPwdView extends IView<String> {
 
     /**
      * 获取输入手机号码

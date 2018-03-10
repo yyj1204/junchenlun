@@ -45,6 +45,9 @@ public class LoginActivity extends ABaseActivity<ILoginView,LoginPresenter> impl
                 finish();
                 break;
             case R.id.tv_forget_pwd://忘记密码
+                if (MyUtils.isFastClick1()){
+                    return;
+                }
                 startActivity(new Intent(this, ForgetPwdActivity.class));
                 break;
             case R.id.bt_login://登录
@@ -70,6 +73,9 @@ public class LoginActivity extends ABaseActivity<ILoginView,LoginPresenter> impl
                 }
                 break;
             case R.id.tv_regiest://没有账号，立即注册
+                if (MyUtils.isFastClick1()){
+                    return;
+                }
                 startActivity(new Intent(this, RegisterActivity.class));
                 finish();
                 break;

@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="@color/color_f0f0f0"
+    android:fitsSystemWindows="true"
     tools:context="com.wktx.www.emperor.ui.activity.mine.certification.CertificationStoreActivity">
 
     <include layout="@layout/include_toolbar_activity" />
@@ -201,7 +201,7 @@
                 android:paddingRight="@dimen/px_30"
                 android:background="@color/color_ffffff"
                 android:gravity="center_vertical"
-                android:hint="xxx.taobao.com"
+                android:hint="www.xxx.com"
                 android:singleLine="true"
                 android:textColor="@color/color_999999"
                 android:textSize="@dimen/sp_15" />

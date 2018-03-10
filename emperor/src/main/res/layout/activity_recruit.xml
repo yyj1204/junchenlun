@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:background="@color/main_white"
     android:orientation="vertical"
-    tools:context="com.wktx.www.emperor.com.wktx.www.emperor.Fragment.RecruitFragment">
+    android:fitsSystemWindows="true"
+    tools:context="com.wktx.www.emperor.Activity.RecruitActivity">
 
     <include layout="@layout/include_recruit_titlebar" />
 
