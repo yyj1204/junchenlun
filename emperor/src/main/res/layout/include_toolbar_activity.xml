@@ -15,7 +15,7 @@
         android:paddingBottom="@dimen/px_20"
         android:paddingRight="@dimen/px_100"
         android:layout_gravity="center_vertical|left"
-        android:src="@drawable/arrow_left" />
+        android:src="@drawable/ic_toolbar_return" />
 
     <TextView
         android:id="@+id/tb_TvBarTitle"

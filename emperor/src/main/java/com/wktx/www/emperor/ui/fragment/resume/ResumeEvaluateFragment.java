@@ -15,11 +15,11 @@ import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.recruit.resume.EvaluateInfoData;
 import com.wktx.www.emperor.basemvp.ALazyLoadFragment;
 import com.wktx.www.emperor.presenter.recruit.resume.EvaluatePresenter;
-import com.wktx.www.emperor.ui.activity.mine.BrowsingRecordActivity;
 import com.wktx.www.emperor.ui.adapter.recruit.ResumeEvaluateAdapter;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.MyUtils;
-import com.wktx.www.emperor.view.IView;
+import com.wktx.www.emperor.ui.view.IView;
+import com.wktx.www.emperor.utils.ToastUtil;
 import com.wktx.www.emperor.widget.MyLayoutManager;
 
 import java.util.List;
@@ -106,7 +106,7 @@ public class ResumeEvaluateFragment extends ALazyLoadFragment<IView,EvaluatePres
         swipeRefreshLayout.setColorSchemeColors(Color.rgb(255, 179, 33));
         swipeRefreshLayout.setRefreshing(true);
         //设置分割线与垂直方向布局
-        recyclerView.addItemDecoration(MyUtils.drawDivider(getActivity(), LinearLayout.VERTICAL, R.drawable.divider_f0f0f0_2));
+        recyclerView.addItemDecoration(MyUtils.drawDivider(getActivity(), LinearLayout.VERTICAL, R.drawable.divider_f0f0f0_14));
         MyLayoutManager myLayoutManager = new MyLayoutManager(getActivity(), LinearLayout.VERTICAL, false);
         recyclerView.setLayoutManager(myLayoutManager);
     }
@@ -190,7 +190,7 @@ public class ResumeEvaluateFragment extends ALazyLoadFragment<IView,EvaluatePres
                 mAdapter.loadMoreFail();
             }
         }
-        MyUtils.showToast(getContext(),toastStr);
+        ToastUtil.myToast(toastStr);
     }
 
     /**

@@ -6,7 +6,7 @@
     android:background="@color/color_f0f0f0"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.wktx.www.emperor.ui.activity.staff.manage.StaffManageActivity">
+    tools:context="com.wktx.www.emperor.ui.activity.staff.StaffManageActivity">
 
     <include layout="@layout/include_toolbar_activity" />
 
@@ -21,7 +21,7 @@
             android:id="@+id/iv_head"
             android:layout_width="@dimen/px_118"
             android:layout_height="@dimen/px_118"
-            android:src="@drawable/img_head_woman"
+            android:src="@drawable/img_mine_head"
             android:layout_marginTop="@dimen/px_30"
             android:layout_marginBottom="@dimen/px_30"/>
         <LinearLayout
@@ -41,6 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="姓名"
+                    android:textStyle="bold"
                     android:textColor="@color/color_000000"
                     android:textSize="@dimen/sp_15" />
                 <ImageView
@@ -75,6 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="开始时间 - 结束时间"
                     android:layout_marginLeft="@dimen/px_12"
                     android:textColor="@color/color_000000"
                     android:textSize="@dimen/sp_13" />
@@ -276,6 +278,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
         <TextView
+            android:id="@+id/tv_pauseWork"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -297,6 +300,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
         <TextView
+            android:id="@+id/tv_launchComplaint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

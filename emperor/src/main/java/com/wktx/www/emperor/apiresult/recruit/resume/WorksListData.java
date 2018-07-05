@@ -5,6 +5,7 @@ import java.util.List;
 /**
  * Created by yyj on 2018/2/8.
  * 简历---作品列表
+ * 美工案例列表
  * {
  * "ret": 200,"msg": "",
  * "data": {

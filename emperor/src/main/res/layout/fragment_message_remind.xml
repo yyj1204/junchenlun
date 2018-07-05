@@ -3,6 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/include_recycleview_refresh"/>
+    <include layout="@layout/include_recyclerview_refresh"/>
 
 </com.zhy.autolayout.AutoRelativeLayout>

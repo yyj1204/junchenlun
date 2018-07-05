@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f0f0f0">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/px_30"
+            android:background="@color/color_ffffff"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="累计销售总额"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_13"/>
+            <TextView
+                android:id="@+id/tv_saleroomTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/px_18"
+                android:textColor="@color/color_fa716f"
+                android:textSize="@dimen/sp_15"/>
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/px_30"
+            android:layout_marginLeft="@dimen/px_4"
+            android:orientation="vertical"
+            android:background="@color/color_ffffff"
+            android:gravity="center"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="上月销售额"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_13"/>
+            <TextView
+                android:id="@+id/tv_saleroomLastmonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/px_18"
+                android:textColor="@color/color_fa716f"
+                android:textSize="@dimen/sp_15"/>
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/px_30"
+        android:gravity="center"
+        android:text="上月销售额数据"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_15"/>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_420"
+        android:layout_marginLeft="@dimen/px_30"
+        android:layout_marginRight="@dimen/px_30"
+        android:background="@color/color_ffffff">
+        <ImageView
+            android:id="@+id/iv_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"/>
+    </RelativeLayout>
+
+</com.zhy.autolayout.AutoLinearLayout>

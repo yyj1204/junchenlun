@@ -17,6 +17,7 @@ import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.ui.fragment.message.MessageNoticeFragment;
 import com.wktx.www.emperor.ui.fragment.message.MessageRemindFragment;
 import com.wktx.www.emperor.R;
+import com.wktx.www.emperor.utils.ToastUtil;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import butterknife.BindView;
@@ -87,5 +88,11 @@ public class MessageActivity extends AutoLayoutActivity {
         });
         viewPager.setAdapter(adapter);
         smartTab.setViewPager(viewPager);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ToastUtil.cancleMyToast();
     }
 }

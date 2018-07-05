@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/color_ffffff"
+    android:background="@drawable/selector_mine_linearlayout"
     android:padding="@dimen/px_30">
 
     <TextView
@@ -23,7 +23,7 @@
         android:textColor="@color/color_999999"
         android:maxLines="3"
         android:textSize="@dimen/sp_13"/>
-    <RelativeLayout
+    <com.zhy.autolayout.AutoRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/px_30">
@@ -42,5 +42,5 @@
             android:layout_alignParentRight="true"
             android:textColor="@color/color_999999"
             android:textSize="@dimen/sp_12"/>
-    </RelativeLayout>
+    </com.zhy.autolayout.AutoRelativeLayout>
 </com.zhy.autolayout.AutoLinearLayout>

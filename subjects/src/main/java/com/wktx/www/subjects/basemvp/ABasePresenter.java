@@ -1,5 +1,9 @@
 package com.wktx.www.subjects.basemvp;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import com.zhouyou.http.subsciber.IProgressDialog;
 
 /**
  * Created by yyj on 2018/1/12.
@@ -8,12 +12,15 @@ package com.wktx.www.subjects.basemvp;
 
 public abstract class ABasePresenter<V extends IBaseView> {
     private V mMvpView;
+    private Context mContext;
+
     /**
      * 绑定V层
      * @param view
      */
-    public void attachMvpView(V view){
+    public void attachMvpView(V view,Context Context){
         this.mMvpView = view;
+        this.mContext = Context;
     }
 
     /**
@@ -39,4 +46,16 @@ public abstract class ABasePresenter<V extends IBaseView> {
         return mMvpView != null;
     }
 
+    /**
+     * 加载框
+     * @return
+     */
+    public IProgressDialog mProgressDialog = new IProgressDialog() {
+        @Override
+        public Dialog getDialog() {
+            ProgressDialog dialog = new ProgressDialog(mContext);
+            dialog.setMessage("请稍候...");
+            return dialog;
+        }
+    };
 }

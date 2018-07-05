@@ -13,7 +13,7 @@
         android:layout_width="53dp"
         android:layout_height="53dp"
         android:scaleType="fitXY"
-        android:src="@drawable/img_head_woman" />
+        android:src="@drawable/img_mine_head" />
 
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
@@ -32,6 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="胡图图"
+                android:textStyle="bold"
                 android:textColor="@color/title_color"
                 android:textSize="@dimen/sp_sixteen" />
 
@@ -47,7 +48,7 @@
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="@dimen/dp_ten"
                 android:background="@drawable/shape_buttom_ffb321_18"
-                android:text="1年"
+                android:text="0年"
                 android:textColor="@color/title_color"
                 android:textSize="@dimen/sp_twelve" />
 
@@ -65,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_three"
-                android:text="3500元"
+                android:text="0"
                 android:textColor="@color/title_color"
                 android:textSize="@dimen/sp_sixteen"
                 android:textStyle="bold" />

@@ -1,5 +1,6 @@
 package com.wktx.www.emperor.ui.activity.recruit.hire;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,14 +8,13 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
-import com.bumptech.glide.Glide;
-import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
 import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.recruit.hire.HireInfoData;
@@ -24,9 +24,11 @@ import com.wktx.www.emperor.presenter.recruit.hire.HirePresenter;
 import com.wktx.www.emperor.utils.ArithUtil;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.DateUtil;
+import com.wktx.www.emperor.utils.GlideUtil;
 import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
-import com.wktx.www.emperor.view.recruit.hire.IHireView;
+import com.wktx.www.emperor.ui.view.recruit.hire.IHireView;
+import com.wktx.www.emperor.utils.ToastUtil;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -120,9 +122,12 @@ public class HireActivity extends ABaseActivity<IHireView,HirePresenter> impleme
     private long endDateLong;//项目结束时间的时间戳
 
 
-    @OnClick({R.id.tb_IvReturn,R.id.tv_wayMonth,R.id.tv_wayCustom,R.id.tv_wayMorning,R.id.tv_wayEvening,R.id.linear_beginTime,R.id.linear_endTime,
-            R.id.rela_hireTimeMinus,R.id.rela_hireTimeAdd,R.id.tv_sureOrders})
+    @OnClick({R.id.tb_IvReturn,R.id.tv_wayMonth,R.id.tv_wayCustom,R.id.tv_wayMorning,R.id.tv_wayEvening,
+            R.id.linear_beginTime,R.id.linear_endTime, R.id.rela_hireTimeMinus,R.id.rela_hireTimeAdd,R.id.tv_sureOrders})
     public void MyOnclick(View view) {
+        //将输入法隐藏
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(tvTitle.getWindowToken(), 0);
         switch (view.getId()) {
             case R.id.tb_IvReturn://返回
                 finish();
@@ -177,7 +182,7 @@ public class HireActivity extends ABaseActivity<IHireView,HirePresenter> impleme
                     if (MyUtils.isFastClick()) {
                         return;
                     }
-                    MyUtils.showToast(HireActivity.this,"包月的雇佣时间最短为1个月哦!");
+                    ToastUtil.myToast("包月的雇佣时间最短为1个月哦!");
                 }
                 break;
             case R.id.rela_hireTimeAdd://雇佣时间加
@@ -188,7 +193,7 @@ public class HireActivity extends ABaseActivity<IHireView,HirePresenter> impleme
                     if (MyUtils.isFastClick()) {
                         return;
                     }
-                    MyUtils.showToast(HireActivity.this,"包月的雇佣时间最长为12个月哦!");
+                    ToastUtil.myToast("包月的雇佣时间最长为12个月哦!");
                 }
                 break;
             case R.id.tv_sureOrders://确认下单
@@ -199,7 +204,7 @@ public class HireActivity extends ABaseActivity<IHireView,HirePresenter> impleme
                 //判断输入框格式
                 if (isService){//客服类型
                     if (TextUtils.isEmpty(getPushMoney())){
-                        MyUtils.showToast(HireActivity.this,"请输入约定好的业绩分成！");
+                        ToastUtil.myToast("请输入约定好的业绩分成！");
                         etPushMoney.requestFocus();
                         return;
                     }
@@ -207,11 +212,11 @@ public class HireActivity extends ABaseActivity<IHireView,HirePresenter> impleme
                     if (isCustom){
                         //如果开始日期大于结束日期，需要重新选择开始日期
                         if (beginDateLong > endDateLong ){
-                            MyUtils.showToast(HireActivity.this,"项目开始时间需在结束时间之前!");
+                            ToastUtil.myToast("项目开始时间需在结束时间之前!");
                             pickDate(tvBeginTime,true,"选择项目开始时间");
                             return;
                         }else if (TextUtils.isEmpty(getcustomPrice())){
-                            MyUtils.showToast(HireActivity.this,"请输入定制价格！");
+                            ToastUtil.myToast("请输入定制价格！");
                             etCustomPrice.requestFocus();
                             return;
                         }
@@ -219,15 +224,15 @@ public class HireActivity extends ABaseActivity<IHireView,HirePresenter> impleme
                 }
 
                 if (TextUtils.isEmpty(getDemandContent())){
-                    MyUtils.showToast(HireActivity.this,"请输入需求内容！");
+                    ToastUtil.myToast("请输入需求内容！");
                     etDemand.requestFocus();
                 }else if (TextUtils.isEmpty(getQQNumber())){
-                    MyUtils.showToast(HireActivity.this,"请输入QQ号码！");
+                    ToastUtil.myToast("请输入QQ号码！");
                     etQQNumber.requestFocus();
                 }else if (TextUtils.isEmpty(getWeChatNumber())){
-                    MyUtils.showToast(HireActivity.this,"请输入微信号码！");
+                    ToastUtil.myToast("请输入微信号码！");
                     etWechatNumber.requestFocus();
-                }else {//注册
+                }else {//确认下单获取雇佣信息
                     tvSureOrders.setEnabled(false);
                     getPresenter().onGetHireInfo(resumeInfoData.getId());
                 }
@@ -242,8 +247,6 @@ public class HireActivity extends ABaseActivity<IHireView,HirePresenter> impleme
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hire);
         ButterKnife.bind(this);
-        // 设置右滑动返回
-        Slidr.attach(this);
         initData();
         initUI();
     }
@@ -262,9 +265,7 @@ public class HireActivity extends ABaseActivity<IHireView,HirePresenter> impleme
 
     private void initUI() {
         //头像
-        if (!resumeInfoData.getPicture().equals("")){
-            Glide.with(HireActivity.this).load(resumeInfoData.getPicture()).into(ivHead);
-        }else {
+        if (resumeInfoData.getPicture()==null||resumeInfoData.getPicture().equals("")){
             if (resumeInfoData.getSex().equals("1")){
                 ivHead.setImageResource(R.drawable.img_head_man);
             }else if (resumeInfoData.getSex().equals("2")){
@@ -272,22 +273,18 @@ public class HireActivity extends ABaseActivity<IHireView,HirePresenter> impleme
             }else {
                 ivHead.setImageResource(R.drawable.img_mine_head);
             }
+        }else {
+            GlideUtil.loadImage(resumeInfoData.getPicture(),R.drawable.img_mine_head,ivHead);
         }
         //员工姓名
         tvStaffName.setText(resumeInfoData.getName());
         //月薪
         tvStaffSalary.setText(salaryStr+"元/月");
         //员工职业类型
-        String jobTow = resumeInfoData.getTow();
-        if (jobTow.equals("1")){
-            tvStaffJob.setText("美工");
-        }else if (jobTow.equals("2")){
-            tvStaffJob.setText("客服");
-        }else if (jobTow.equals("3")){
-            tvStaffJob.setText("运营");
-        }
+        tvTitle.setText(resumeInfoData.getTow_name()+"雇佣");
+        tvStaffJob.setText(resumeInfoData.getTow_name());
         //初始化客服以及其他职位类型的控件
-        initServiceUI(jobTow);
+        initServiceUI(resumeInfoData.getTow());
         //定制价格输入框（小数点限制两位数）
         setEtListener(etCustomPrice);
         //提成方案输入框（小数点限制两位数）
@@ -303,13 +300,6 @@ public class HireActivity extends ABaseActivity<IHireView,HirePresenter> impleme
      * 雇佣方式、提成方案
      */
     private void initServiceUI(String jobType) {
-        if (jobType.equals("1")){
-            tvTitle.setText(R.string.title_artist_hire);
-        }else if (jobType.equals("2")){
-            tvTitle.setText(R.string.title_service_hire);
-        }else {
-
-        }
         if (jobType.equals("2")){//客服
             isService=true;
             tvWayMorning.setSelected(true);
@@ -399,7 +389,7 @@ public class HireActivity extends ABaseActivity<IHireView,HirePresenter> impleme
         beginDateLong = curDateLong;
         tvBeginTime.setText(beginDateStr);
 
-        //结束时间推迟日历一个月
+        //结束时间---推迟日历一个月
         curCalendar.add(Calendar.DAY_OF_MONTH,-1);
         curCalendar.add(Calendar.MONTH,1);
         Date endDate = curCalendar.getTime();
@@ -410,7 +400,7 @@ public class HireActivity extends ABaseActivity<IHireView,HirePresenter> impleme
     }
 
     //选择项目开始结束时间
-    private void pickDate(final TextView tvDate, final boolean isBegin, String titleStr) {
+    private void  pickDate(final TextView tvDate, final boolean isBegin, String titleStr) {
         TimePickerView pvTime = new TimePickerView.Builder(HireActivity.this, new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {//选中事件回调
@@ -424,7 +414,7 @@ public class HireActivity extends ABaseActivity<IHireView,HirePresenter> impleme
                         //如果是定制雇佣方式，需再判断开始日期不能在结束日期之后
                         if (isCustom){
                             if (selectDateLong > endDateLong){
-                                MyUtils.showToast(HireActivity.this,"项目开始时间需在结束时间之前!");
+                                ToastUtil.myToast("项目开始时间需在结束时间之前!");
                             }else {
                                 beginDateLong = selectDateLong;//赋值，用在结束日期做判断
                                 tvDate.setText(selectDateStr);
@@ -434,18 +424,18 @@ public class HireActivity extends ABaseActivity<IHireView,HirePresenter> impleme
                             tvDate.setText(selectDateStr);
                         }
                     }else {
-                        MyUtils.showToast(HireActivity.this,"项目开始时间需在今日及之后15天之内!");
+                        ToastUtil.myToast("项目开始时间需在今日及之后15天之内!");
                     }
 
                 }else {//如果是结束时间，则选中的日期不能在开始日期之前
                     if(selectDateLong >= beginDateLong) {
                         if (selectDateLong > beginDateLong + (31*24*60*60*1000L)){
-                            MyUtils.showToast(HireActivity.this, "定制时间超过1个月，建议使用包月雇佣方式!");
+                            ToastUtil.myToast( "定制时间超过1个月，建议使用包月雇佣方式!");
                         }
                         endDateLong = selectDateLong;//赋值，用在开始日期做判断
                         tvDate.setText(selectDateStr);
                     }else {
-                        MyUtils.showToast(HireActivity.this,"项目结束时间需在开始时间之后!");
+                        ToastUtil.myToast("项目结束时间需在开始时间之后!");
                     }
                 }
             }
@@ -538,6 +528,12 @@ public class HireActivity extends ABaseActivity<IHireView,HirePresenter> impleme
     @Override
     public void onRequestFailure(String result) {
         tvSureOrders.setEnabled(true);
-        MyUtils.showToast(HireActivity.this,result);
+        ToastUtil.myToast(result);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ToastUtil.cancleMyToast();
     }
 }

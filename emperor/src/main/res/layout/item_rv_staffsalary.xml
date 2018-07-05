@@ -3,22 +3,22 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/main_white"
+    android:background="@drawable/selector_mine_linearlayout"
     android:gravity="center_vertical"
-    android:padding="15dp">
+    android:padding="@dimen/px_30">
     <TextView
-        android:id="@+id/tv_salary_time"
+        android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/title_color"
-        android:textSize="12sp"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_12"
         android:layout_weight="1"
-        android:text="2017.10.16 - 2017.11.15"/>
+        android:text="开始时间 - 结束时间"/>
     <TextView
-        android:id="@+id/tv_salary_money"
+        android:id="@+id/tv_money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/title_color"
-        android:textSize="12sp"
-        android:text="3500"/>
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_12"
+        android:text="0"/>
 </com.zhy.autolayout.AutoLinearLayout>

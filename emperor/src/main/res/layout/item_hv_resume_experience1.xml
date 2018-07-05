@@ -15,7 +15,7 @@
             android:id="@+id/iv_head"
             android:layout_width="@dimen/px_106"
             android:layout_height="@dimen/px_106"
-            android:src="@drawable/img_head_woman" />
+            android:src="@drawable/img_mine_head" />
 
         <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
@@ -33,6 +33,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="姓名"
+                    android:textStyle="bold"
                     android:textColor="@color/color_000000"
                     android:textSize="@dimen/sp_15" />
                 <ImageView
@@ -41,6 +42,15 @@
                     android:layout_height="@dimen/px_24"
                     android:layout_marginLeft="@dimen/px_10"
                     android:src="@drawable/ic_sex_woman" />
+                <TextView
+                    android:id="@+id/tv_staffJob"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/px_12"
+                    android:text="职位"
+                    android:textColor="@color/color_ffb321"
+                    android:background="@drawable/shape_stroke_ffb321_18"
+                    android:textSize="@dimen/sp_12" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -177,7 +187,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="沟通能力"
+                android:text="工作能力"
                 android:textColor="@color/color_000000"
                 android:textSize="@dimen/sp_13" />
             <com.hedgehog.ratingbar.RatingBar

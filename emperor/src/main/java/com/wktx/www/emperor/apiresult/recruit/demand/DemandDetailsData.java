@@ -9,7 +9,7 @@ package com.wktx.www.emperor.apiresult.recruit.demand;
  *        "code": 0,"msg": "",
  *        "info": {
  *            "id": "1","title": "淘宝首页设计","content": "淘宝首页设计淘宝首页设计淘宝首页设计",
- *             "design_pattern": "2","budget": "200.00","add_time": "1516930645","end_time": "0",
+ *             "design_pattern": "其他设计","budget": "200.00","add_time": "1516930645","1521388799": "0",
  *             "status_log": [{"remark": "您创建了需求","create_time": "1516930645","user_id": "2649"}],
  *             "status": "0"
  *                }

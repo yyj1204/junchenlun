@@ -3,13 +3,14 @@ package com.wktx.www.emperor.apiresult.main.home;
 /**
  * Created by yyj on 2018/2/12.
  * 首页职位列表
- * {"id": "2", "tow": "1","name": "啊西歌","picture": "","working_years": "5","sex": "1","monthly_money": "4800.00",
+ * {"id": "2", "tow": "1","tow_name": "美工","name": "啊西歌","picture": "","working_years": "5","sex": "1","monthly_money": "4800.00",
  *  "is_job_hunting": "1","bgat": "母婴玩具/精品鞋包/生活百货","bgas": "中国风/时尚简约/质感炫酷","typing_speed":"95字/分"}
  */
 
 public class ResumeListBean {
     private String id;//简历id
     private String tow;//职位类型 1:美工 2:客服 3:运营
+    private String tow_name;//职位类型名称
     private String name;//姓名
     private String picture;//头像
     private String working_years;//工龄 0:未设置 1:一年以内 2:一年 3:二年 4:三年 5:四年 6:五年 7:五年以上
@@ -34,6 +35,14 @@ public class ResumeListBean {
 
     public void setTow(String tow) {
         this.tow = tow;
+    }
+
+    public String getTow_name() {
+        return tow_name;
+    }
+
+    public void setTow_name(String tow_name) {
+        this.tow_name = tow_name;
     }
 
     public String getName() {
@@ -114,6 +123,7 @@ public class ResumeListBean {
         return "RecruitListInfoData{" +
                 "id='" + id + '\'' +
                 ", tow='" + tow + '\'' +
+                ", tow_name='" + tow_name + '\'' +
                 ", name='" + name + '\'' +
                 ", picture='" + picture + '\'' +
                 ", working_years='" + working_years + '\'' +

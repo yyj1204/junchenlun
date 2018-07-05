@@ -1,7 +1,9 @@
 package com.wktx.www.emperor.ui.activity.recruit.hire;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -9,7 +11,6 @@ import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.listener.CustomListener;
-import com.bumptech.glide.Glide;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
 import com.wktx.www.emperor.apiresult.login.AccountInfoData;
@@ -20,9 +21,12 @@ import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.recruit.hire.OrdersInfoPresenter;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.DateUtil;
+import com.wktx.www.emperor.utils.GlideUtil;
 import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
-import com.wktx.www.emperor.view.recruit.hire.IOrdersInfoView;
+import com.wktx.www.emperor.ui.view.recruit.hire.IOrdersInfoView;
+import com.wktx.www.emperor.utils.ToastUtil;
+import com.wktx.www.emperor.widget.CustomDialog;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -83,12 +87,12 @@ public class OrdersInfoActivity extends ABaseActivity<IOrdersInfoView,OrdersInfo
     private double hireMoney;//雇佣总金额
     private double payMoney;//待支付金额
 
-
+    private CustomDialog customDialog;
     @OnClick({R.id.tb_IvReturn,R.id.linear_usableBalance,R.id.linear_usableDiscounts,R.id.tv_sureOrders})
     public void MyOnclick(View view) {
         switch (view.getId()) {
             case R.id.tb_IvReturn://返回
-                finish();
+                showCancelOrdersDialog();
                 break;
             case R.id.linear_usableBalance://可用余额
                 isUseBalance=!isUseBalance;
@@ -119,16 +123,45 @@ public class OrdersInfoActivity extends ABaseActivity<IOrdersInfoView,OrdersInfo
                 //如果没有使用余额和优惠券，则直接进入 TrusteeshipSalaryActivity 进行支付
                 if (!isUseBalance&&couponId.equals("0")){
                     Intent intent = new Intent(this, TrusteeshipSalaryActivity.class);
-                    intent.putExtra(ConstantUtil.KEY_POSITION,hireInfoData.getHire_id());
+                    intent.putExtra(ConstantUtil.KEY_DATA,hireInfoData.getHire_id());
+                    intent.putExtra(ConstantUtil.KEY_POSITION,ConstantUtil.ACTIVITY_QRDD);
                     startActivity(intent);
                 }else {
                     tvSureOrders.setEnabled(false);
-                    getPresenter().onGetHireInfo(hireInfoData.getHire_id());
+                    getPresenter().onUseCounpon(hireInfoData.getHire_id());
                 }
                 break;
             default:
                 break;
         }
+    }
+
+    /**
+     * 取消雇佣订单对话框
+     */
+    private void showCancelOrdersDialog() {
+        CustomDialog.Builder builder = new CustomDialog.Builder(this);
+        builder.setTitle("系统提示");
+        builder.setMessage("您是否要取消这笔雇佣订单？");
+        builder.setPositiveButton("不，再等等", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton("确认取消",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        getPresenter().onCancelOrders(hireInfoData.getHire_id());
+                    }
+                });
+
+        customDialog = builder.create();
+        customDialog.setCanceledOnTouchOutside(false);
+        customDialog.show();
     }
 
     @Override
@@ -148,8 +181,10 @@ public class OrdersInfoActivity extends ABaseActivity<IOrdersInfoView,OrdersInfo
         return new OrdersInfoPresenter();
     }
 
+    /**
+     * 接收 HireActivity StaffRenewalActivity 传递过来的员工简历（管理）信息、确认订单信息
+     */
     private void initData() {
-        //接收 HireActivity 传递过来的员工简历信息、确认订单信息
         resumeInfoData = (ResumeInfoData) getIntent().getSerializableExtra(ConstantUtil.KEY_INFO);
         hireInfoData = (HireInfoData) getIntent().getSerializableExtra(ConstantUtil.KEY_DATA);
         //遍历优惠券可用才添加到集合器
@@ -183,9 +218,7 @@ public class OrdersInfoActivity extends ABaseActivity<IOrdersInfoView,OrdersInfo
 
     private void initUI() {
         //头像
-        if (!resumeInfoData.getPicture().equals("")){
-            Glide.with(OrdersInfoActivity.this).load(resumeInfoData.getPicture()).into(ivHead);
-        }else {
+        if (resumeInfoData.getPicture()==null||resumeInfoData.getPicture().equals("")){
             if (resumeInfoData.getSex().equals("1")){
                 ivHead.setImageResource(R.drawable.img_head_man);
             }else if (resumeInfoData.getSex().equals("2")){
@@ -193,20 +226,15 @@ public class OrdersInfoActivity extends ABaseActivity<IOrdersInfoView,OrdersInfo
             }else {
                 ivHead.setImageResource(R.drawable.img_mine_head);
             }
+        }else {
+            GlideUtil.loadImage(resumeInfoData.getPicture(),R.drawable.img_mine_head,ivHead);
         }
         //员工姓名
         tvStaffName.setText(resumeInfoData.getName());
         //月薪
         tvStaffSalary.setText(resumeInfoData.getMonthly_money()+"元/月");
         //员工职业类型
-        String jobTow = resumeInfoData.getTow();
-        if (jobTow.equals("1")){
-            tvStaffJob.setText("美工");
-        }else if (jobTow.equals("2")){
-            tvStaffJob.setText("客服");
-        }else if (jobTow.equals("3")){
-            tvStaffJob.setText("运营");
-        }
+        tvStaffJob.setText(resumeInfoData.getTow_name());
         //雇佣方式
         String hireWay = hireInfoData.getHire_type();
         if (hireWay.equals("1")){
@@ -290,10 +318,10 @@ public class OrdersInfoActivity extends ABaseActivity<IOrdersInfoView,OrdersInfo
                 tvPayMoney.setText("¥" +getPayMoneyStr(payMoney));
             }
         })
-                .setLayoutRes(R.layout.layout_custom_pickerview, new CustomListener() {
+                .setLayoutRes(R.layout.widget_custom_pickerview, new CustomListener() {
                     @Override
                     public void customLayout(View v) {
-                        TextView tvCancel = (TextView) v.findViewById(R.id.iv_cancel);
+                        TextView tvCancel = (TextView) v.findViewById(R.id.tv_cancel);
                         TextView tvSubmit = (TextView) v.findViewById(R.id.tv_finish);
                         TextView tvTitle = (TextView) v.findViewById(R.id.tv_title);
                         tvCancel.setText("不使用");
@@ -364,6 +392,13 @@ public class OrdersInfoActivity extends ABaseActivity<IOrdersInfoView,OrdersInfo
         }
     }
     @Override
+    public void onCancelOrdersResult(boolean isSuccess, String result) {
+        ToastUtil.myToast(result);
+        if (isSuccess){
+            finish();
+        }
+    }
+    @Override
     public void onRequestSuccess(CouponBalanceInfoData tData) {
         tvSureOrders.setEnabled(true);
         Intent intent = new Intent(this, TrusteeshipSalaryActivity.class);
@@ -374,7 +409,24 @@ public class OrdersInfoActivity extends ABaseActivity<IOrdersInfoView,OrdersInfo
     @Override
     public void onRequestFailure(String result) {
         tvSureOrders.setEnabled(true);
-        MyUtils.showToast(OrdersInfoActivity.this,result);
+        ToastUtil.myToast(result);
+    }
+
+
+    /**
+     * 系统返回键
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (customDialog==null) {
+                showCancelOrdersDialog();
+            } else {
+                customDialog.dismiss();
+                customDialog=null;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -383,5 +435,11 @@ public class OrdersInfoActivity extends ABaseActivity<IOrdersInfoView,OrdersInfo
         if (pvCustomOptions!=null){
             pvCustomOptions.dismiss();
         }
+
+        if (customDialog!=null){
+            customDialog.dismiss();
+            customDialog=null;
+        }
+        ToastUtil.cancleMyToast();
     }
 }

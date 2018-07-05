@@ -7,15 +7,15 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:background="@color/color_ffffff"
-    tools:context="com.wktx.www.emperor.Activity.StaffAttendanceActivity">
+    tools:context="com.wktx.www.emperor.ui.activity.staff.StaffAttendanceActivity">
 
     <include layout="@layout/include_toolbar_activity" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="24dp"
-        android:paddingBottom="15dp"
+        android:paddingTop="@dimen/px_48"
+        android:paddingBottom="@dimen/px_30"
         android:orientation="horizontal">
         <LinearLayout
             android:layout_width="wrap_content"
@@ -30,18 +30,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:textSize="13sp"
+                android:layout_marginTop="@dimen/px_14"
+                android:textSize="@dimen/sp_13"
                 android:textColor="@color/color_999999"
                 android:text="出勤"/>
             <TextView
-                android:id="@+id/tv_chuqin_day"
+                android:id="@+id/tv_chuqinDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:textSize="13sp"
+                android:layout_marginTop="@dimen/px_14"
+                android:textSize="@dimen/sp_15"
                 android:textColor="@color/color_000000"
-                android:text="28"/>
+                android:text="0"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -56,31 +56,37 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:textSize="13sp"
+                android:layout_marginTop="@dimen/px_14"
+                android:textSize="@dimen/sp_13"
                 android:textColor="@color/color_999999"
                 android:text="缺勤"/>
             <TextView
-                android:id="@+id/tv_queqin_day"
+                android:id="@+id/tv_queqinDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:textSize="13sp"
+                android:layout_marginTop="@dimen/px_14"
+                android:textSize="@dimen/sp_15"
                 android:textColor="@color/color_ffb321"
                 android:text="0"/>
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_view_report"
+    <com.wktx.www.emperor.widget.CustomCalendar
+        xmlns:CustomCalendarNs="http://schemas.android.com/apk/res/com.wktx.www.emperor"
+        android:id="@+id/customCalendar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="查看报告"
+        android:layout_height="wrap_content"
+        CustomCalendarNs:dateFormat="yyyy年MM月"
+        android:layout_marginBottom="@dimen/px_60">
+    </com.wktx.www.emperor.widget.CustomCalendar>
+    <Button
+        android:id="@+id/bt_viewReport"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_90"
+        android:layout_margin="@dimen/px_30"
+        android:background="@drawable/selector_submit_selected_10"
         android:gravity="center"
+        android:text="查看报告"
         android:textColor="@color/color_ffffff"
-        android:textSize="16sp"
-        android:layout_marginTop="48dp"
-        android:layout_marginLeft="15sp"
-        android:layout_marginRight="15sp"
-        android:background="@drawable/shape_buttom_ffb321_10"/>
+        android:textSize="@dimen/sp_15" />
 </LinearLayout>

@@ -10,11 +10,34 @@
     <include layout="@layout/include_toolbar_activity" />
 
     <LinearLayout
+        android:id="@+id/linear_storeLogo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_90"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:orientation="horizontal"
+        android:background="@drawable/selector_mine_linearlayout"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="店铺头像"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_13"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_storeLogo"
+            android:layout_width="@dimen/px_60"
+            android:layout_height="@dimen/px_60"
+            android:src="@drawable/img_mine_head"/>
+    </LinearLayout>
+    <LinearLayout
         android:id="@+id/linear_storePlatform"
         android:layout_width="match_parent"
         android:layout_height="@dimen/px_86"
         android:paddingLeft="@dimen/px_30"
         android:paddingRight="@dimen/px_30"
+        android:layout_marginTop="@dimen/px_1"
         android:background="@drawable/selector_mine_linearlayout"
         android:gravity="center_vertical"
         android:orientation="horizontal">

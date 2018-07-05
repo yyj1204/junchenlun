@@ -11,8 +11,8 @@ import java.util.List;
  * "data": {
  *         "code":0,"msg":"",
  *         "info":[{
- *                   "hire_id": "151","rid": "1","tow": "1","project_start_time": "1520006400","project_end_time": "1522684799",
- *                   "hire_price": "0.01","is_pay": "1","name": "胡图图","picture": "","type": "1","status_str": "合作中"}]
+ *                   "hire_id": "151","rid": "1","tow": "1","tow_name": "美工","project_start_time": "1520006400",
+ *                   "project_end_time": "1522684799","hire_price": "0.01","is_pay": "1","name": "胡图图","picture": "","type": "1"}]
  *          }
  * }
  */

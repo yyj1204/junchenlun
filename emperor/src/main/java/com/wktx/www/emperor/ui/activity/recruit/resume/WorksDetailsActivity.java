@@ -1,5 +1,6 @@
 package com.wktx.www.emperor.ui.activity.recruit.resume;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -18,8 +19,10 @@ import com.wktx.www.emperor.apiresult.recruit.resume.WorksDetailsInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.recruit.resume.WorksDetailsPresenter;
 import com.wktx.www.emperor.utils.ConstantUtil;
+import com.wktx.www.emperor.utils.GlideUtil;
 import com.wktx.www.emperor.utils.MyUtils;
-import com.wktx.www.emperor.view.IView;
+import com.wktx.www.emperor.ui.view.IView;
+import com.wktx.www.emperor.utils.ToastUtil;
 import com.wktx.www.emperor.widget.MyLayoutManager;
 
 import butterknife.BindView;
@@ -36,13 +39,27 @@ public class WorksDetailsActivity extends ABaseActivity<IView,WorksDetailsPresen
     private View fvWorksInfo;
 
     private BaseQuickAdapter<String, BaseViewHolder> mAdapter;
+    private String isActivity;//是哪个界面进来的
+    private String resumeId;
 
     @OnClick({R.id.tb_IvReturn,R.id.bt_lookResume})
     public void MyOnclick(View view) {
         switch (view.getId()) {
             case R.id.tb_IvReturn:
-            case R.id.bt_lookResume:
                 finish();
+                break;
+            case R.id.bt_lookResume://查看简历
+                if (MyUtils.isFastClick()){
+                    return;
+                }
+                if (isActivity.equals(ConstantUtil.ACTIVITY_JL)){
+                    finish();
+                }else {
+                    //将简历ID 传递给 ResumeActivity
+                    Intent intent = new Intent(WorksDetailsActivity.this, ResumeActivity.class);
+                    intent.putExtra(ConstantUtil.KEY_POSITION,resumeId);
+                    startActivity(intent);
+                }
                 break;
             default:
                 break;
@@ -67,9 +84,10 @@ public class WorksDetailsActivity extends ABaseActivity<IView,WorksDetailsPresen
     }
 
     /**
-     *接收 ResumeWorksFragment 传递过来的作品Id
+     *接收 ResumeWorksFragment RecruitListFragment SearchActivity ArtistCaseActivity 传递过来的作品Id
      */
     private void initData() {
+        isActivity = getIntent().getStringExtra(ConstantUtil.KEY_ISOK);
         String worksId = getIntent().getStringExtra(ConstantUtil.KEY_POSITION);
         getPresenter().onGetWorksInfo(worksId);
     }
@@ -81,7 +99,7 @@ public class WorksDetailsActivity extends ABaseActivity<IView,WorksDetailsPresen
             @Override
             protected void convert(BaseViewHolder helper, String item) {
                 ImageView ivWorksDetails = helper.getView(R.id.iv_worksDetails);
-                Glide.with(WorksDetailsActivity.this).load(item).into(ivWorksDetails);
+                GlideUtil.loadImage(item,R.drawable.img_loading,ivWorksDetails);
             }
         };
         fvWorksInfo = getLayoutInflater().inflate(R.layout.item_fv_works_details, (ViewGroup) recycleView.getParent(), false);
@@ -102,6 +120,7 @@ public class WorksDetailsActivity extends ABaseActivity<IView,WorksDetailsPresen
         TextView tvTag = fvWorksInfo.findViewById(R.id.tv_worksTag);
         TextView tvContent = fvWorksInfo.findViewById(R.id.tv_worksContent);
 
+        resumeId = tData.getRid();
         tvTitle.setText(tData.getTitle());
         tvTag.setText(tData.getBgat());
         tvContent.setText(tData.getBrief_intro());
@@ -109,7 +128,7 @@ public class WorksDetailsActivity extends ABaseActivity<IView,WorksDetailsPresen
     }
     @Override
     public void onRequestFailure(String result) {
+        ToastUtil.myToast(result);
         finish();
-        MyUtils.showToast(WorksDetailsActivity.this,result);
     }
 }

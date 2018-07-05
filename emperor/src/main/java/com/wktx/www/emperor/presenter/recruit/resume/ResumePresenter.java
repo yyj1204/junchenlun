@@ -7,10 +7,11 @@ import com.wktx.www.emperor.basemvp.ABasePresenter;
 import com.wktx.www.emperor.utils.ApiURL;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.LogUtil;
-import com.wktx.www.emperor.view.IView;
+import com.wktx.www.emperor.ui.view.recruit.IResumeView;
 import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.callback.CallBackProxy;
 import com.zhouyou.http.callback.ProgressDialogCallBack;
+import com.zhouyou.http.callback.SimpleCallBack;
 import com.zhouyou.http.exception.ApiException;
 import com.zhouyou.http.model.HttpParams;
 
@@ -19,7 +20,7 @@ import com.zhouyou.http.model.HttpParams;
  *美工简历---简历（收藏、取消收藏）
  */
 
-public class ResumePresenter extends ABasePresenter<IView> {
+public class ResumePresenter extends ABasePresenter<IResumeView> {
 
     public ResumePresenter() {
     }
@@ -89,9 +90,9 @@ public class ResumePresenter extends ABasePresenter<IView> {
                                 LogUtil.error("收藏简历","e=="+e.getMessage());
 
                                 if (e.getMessage().equals("无法解析该域名")){
-                                    getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                    getmMvpView().onInterviewResult(false,ConstantUtil.TOAST_NONET);
                                 }else {
-                                    getmMvpView().onRequestFailure(e.getMessage());
+                                    getmMvpView().onInterviewResult(false,e.getMessage());
                                 }
                             }
                             @Override
@@ -100,12 +101,53 @@ public class ResumePresenter extends ABasePresenter<IView> {
                                     LogUtil.error("收藏简历","result=="+result.toString());
 
                                     if (result.getCode()==0){//收藏（取消收藏）简历成功
-                                        getmMvpView().onRequestSuccess(result.getMsg());
+                                        getmMvpView().onInterviewResult(true,result.getMsg());
                                     }else {//收藏（取消收藏）简历失败
-                                        getmMvpView().onRequestFailure(result.getMsg());
+                                        getmMvpView().onInterviewResult(false,result.getMsg());
                                     }
                                 }else {
-                                    getmMvpView().onRequestFailure(ConstantUtil.TOAST_ERROR);
+                                    getmMvpView().onInterviewResult(false,ConstantUtil.TOAST_ERROR);
+                                }
+                            }
+                        }) {});
+    }
+
+    //面试员工
+    public void onInterview(String resumeId){
+        HttpParams httpParams = new HttpParams();
+        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("token", getmMvpView().getUserInfo().getToken());
+        httpParams.put("rid", resumeId);
+
+        LogUtil.error("面试员工","json==="+httpParams.toString());
+
+        EasyHttp.post(ApiURL.COMMON_URL)
+                .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_RESUME_INTERVIEW)
+                .params(httpParams)
+                .execute(new CallBackProxy<CustomApiResult<CommonSimpleData>, CommonSimpleData>
+                        (new SimpleCallBack<CommonSimpleData>() {
+                            @Override
+                            public void onError(ApiException e) {
+                                LogUtil.error("面试员工","e=="+e.getMessage());
+
+                                if (e.getMessage().equals("无法解析该域名")){
+                                    getmMvpView().onInterviewResult(false,ConstantUtil.TOAST_NONET);
+                                }else {
+                                    getmMvpView().onInterviewResult(false,e.getMessage());
+                                }
+                            }
+                            @Override
+                            public void onSuccess(CommonSimpleData result) {
+                                if (result != null) {
+                                    LogUtil.error("面试员工","result=="+result.toString());
+
+                                    if (result.getCode()==0){//面试员工简历成功
+                                        getmMvpView().onInterviewResult(true,result.getMsg());
+                                    }else {//面试员工 简历失败
+                                        getmMvpView().onInterviewResult(false,result.getMsg());
+                                    }
+                                }else {
+                                    getmMvpView().onInterviewResult(false,ConstantUtil.TOAST_ERROR);
                                 }
                             }
                         }) {});

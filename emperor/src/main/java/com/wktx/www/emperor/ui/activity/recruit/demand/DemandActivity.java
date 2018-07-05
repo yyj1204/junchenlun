@@ -17,12 +17,12 @@ import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.recruit.demand.DemandListInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.recruit.demand.DemandPresenter;
-import com.wktx.www.emperor.ui.activity.mine.MyCollectActivity;
 import com.wktx.www.emperor.ui.adapter.recruit.DemandListAdapter;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
-import com.wktx.www.emperor.view.IView;
+import com.wktx.www.emperor.ui.view.IView;
+import com.wktx.www.emperor.utils.ToastUtil;
 import com.wktx.www.emperor.widget.MyLayoutManager;
 
 import java.util.List;
@@ -197,7 +197,7 @@ public class DemandActivity extends ABaseActivity<IView,DemandPresenter> impleme
                 mAdapter.loadMoreFail();
             }
         }
-        MyUtils.showToast(DemandActivity.this,toastStr);
+        ToastUtil.myToast(toastStr);
     }
 
     /**
@@ -219,5 +219,11 @@ public class DemandActivity extends ABaseActivity<IView,DemandPresenter> impleme
         } else {
             mAdapter.loadMoreComplete();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ToastUtil.cancleMyToast();
     }
 }

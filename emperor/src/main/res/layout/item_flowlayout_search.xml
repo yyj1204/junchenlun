@@ -8,8 +8,8 @@
     android:layout_marginBottom="@dimen/px_10"
     android:paddingLeft="@dimen/px_30"
     android:paddingRight="@dimen/px_30"
-    android:paddingTop="@dimen/px_20"
-    android:paddingBottom="@dimen/px_20"
+    android:paddingTop="@dimen/px_10"
+    android:paddingBottom="@dimen/px_10"
     android:background="@drawable/shape_stroke_a0a0a0_18"
     android:textColor="@color/selector_888888_ffb321"
     android:textSize="@dimen/sp_12"/>

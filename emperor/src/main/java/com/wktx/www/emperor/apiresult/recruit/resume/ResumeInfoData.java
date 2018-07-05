@@ -6,10 +6,10 @@ import java.util.List;
 /**
  * Created by yyj on 2018/2/2.
  * 简历详情内容
- * "id":"1","tow":"1","name":"胡图图","picture":"","highest_education":"本科","working_years":"一年","sex":"2",
+ * "id":"1","tow":"1","tow_name": "美工","name":"胡图图","picture":"","highest_education":"本科","working_years":"一年","sex":"2","is_job_hunting":"1",
  * "date_of_birth":"1992.05","residential_city":"浙江-杭州","character_introduction":"脾气好、只做一家","resume_content":"",
  * "monthly_money":"3500.00","wechat":"","qq":"","phone":"0","typing_speed": "0字/分","bgat":"服装内衣/母婴玩具/精品鞋包","bgas":"日韩小清新/中国风/时尚简约",
- * "is_collection":0,"evaluate_num":0,"service_attitude":"0","ability":"0","response_speed":"0","no_pay_order": "0","hire_id": "0","is_hiring": "1",
+ * "is_collection":0,"evaluate_num":0,"service_attitude":"0","ability":"0","response_speed":"0","no_pay_order": "0","hire_id": "0","is_hiring": "1", *
  * "work_experience":[{"work_date":{"start_date":"2014/07","end_date":"2016/08"},"company":"福建网客天下科技有限公司",
  * "bgat":"服装内衣","position":"视觉传达设计师","introduction":"负责整个店铺页面装修，活动页面制作，商品详情"}]
  */
@@ -17,6 +17,7 @@ import java.util.List;
 public class ResumeInfoData implements Serializable{
     private String id;//简历id
     private String tow;//工作类型 1:美工2:客服3:运营
+    private String tow_name;//工作类型名称 1:美工2:客服3:运营
     private String name;
     private String picture;
     private String highest_education;//最高学历
@@ -40,7 +41,8 @@ public class ResumeInfoData implements Serializable{
     private String response_speed;//相应速度星级
     private String no_pay_order;//是否有未支付的雇佣订单 0:否 1:是
     private String hire_id;//未支付的雇佣订单id
-    private String is_hiring;//0:未被雇佣 1:正在被雇佣
+    private String is_hiring;//0:未被雇佣 1:正在被雇佣（一对多，暂时不需要这个参数）
+    private String is_job_hunting;//找工作中 0:否 1:是
     private List<WorkExperienceBean> work_experience;//工作经历
 
     public String getId() {
@@ -54,6 +56,12 @@ public class ResumeInfoData implements Serializable{
     }
     public void setTow(String tow) {
         this.tow = tow;
+    }
+    public String getTow_name() {
+        return tow_name;
+    }
+    public void setTow_name(String tow_name) {
+        this.tow_name = tow_name;
     }
     public String getName() {
         return name;
@@ -209,6 +217,14 @@ public class ResumeInfoData implements Serializable{
         this.is_hiring = is_hiring;
     }
 
+    public String getIs_job_hunting() {
+        return is_job_hunting;
+    }
+
+    public void setIs_job_hunting(String is_job_hunting) {
+        this.is_job_hunting = is_job_hunting;
+    }
+
     public List<WorkExperienceBean> getWork_experience() {
         return work_experience;
     }
@@ -222,6 +238,7 @@ public class ResumeInfoData implements Serializable{
         return "ResumeInfoData{" +
                 "id='" + id + '\'' +
                 ", tow='" + tow + '\'' +
+                ", tow_name='" + tow_name + '\'' +
                 ", name='" + name + '\'' +
                 ", picture='" + picture + '\'' +
                 ", highest_education='" + highest_education + '\'' +
@@ -246,6 +263,7 @@ public class ResumeInfoData implements Serializable{
                 ", no_pay_order='" + no_pay_order + '\'' +
                 ", hire_id='" + hire_id + '\'' +
                 ", is_hiring='" + is_hiring + '\'' +
+                ", is_job_hunting='" + is_job_hunting + '\'' +
                 ", work_experience=" + work_experience +
                 '}';
     }

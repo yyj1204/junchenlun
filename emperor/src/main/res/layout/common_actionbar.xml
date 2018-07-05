@@ -19,7 +19,7 @@
             android:layout_height="@dimen/dp_twenty_three"
             android:paddingRight="@dimen/dp_twenty"
             android:layout_gravity="center_vertical|left"
-            android:src="@drawable/arrow_left"/>
+            android:src="@drawable/ic_toolbar_return"/>
         <TextView
             android:id="@+id/tv_actionbar_title"
             android:layout_width="wrap_content"

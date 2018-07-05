@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import com.jaeger.library.StatusBarUtil;
+import com.wktx.www.subjects.R;
+
 
 /**
  * Created by yyj on 2018/1/13.
@@ -11,14 +14,15 @@ import android.support.v4.app.Fragment;
  * 指定子类具体的Presenter必须继承自 ABasePresenter
  */
 
-public abstract class ABaseFragment<V extends IBaseView,P extends ABasePresenter<V>>
-        extends Fragment implements IBaseView{
+public abstract class ABaseFragment<V extends IBaseView,P extends ABasePresenter<V>> extends Fragment implements IBaseView{
 
     private P presenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //沉浸式状态栏
+        StatusBarUtil.setColor(getActivity(), getResources().getColor(R.color.color_ffb321),0);
         //初始化MVP
         initMVP();
     }
@@ -35,7 +39,7 @@ public abstract class ABaseFragment<V extends IBaseView,P extends ABasePresenter
             throw new NullPointerException("presenter 不能为空!");
         }
         //绑定view
-        presenter.attachMvpView((V) this);
+        presenter.attachMvpView((V) this,getContext());
     }
 
 

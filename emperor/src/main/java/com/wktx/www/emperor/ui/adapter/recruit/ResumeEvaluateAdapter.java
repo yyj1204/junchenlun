@@ -1,8 +1,6 @@
 package com.wktx.www.emperor.ui.adapter.recruit;
 import android.content.Context;
 import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hedgehog.ratingbar.RatingBar;
@@ -10,7 +8,7 @@ import com.jaeger.ninegridimageview.NineGridImageView;
 import com.jaeger.ninegridimageview.NineGridImageViewAdapter;
 import com.wktx.www.emperor.R;
 import com.wktx.www.emperor.apiresult.recruit.resume.EvaluateInfoData;
-import com.wktx.www.emperor.utils.ApiURL;
+import com.wktx.www.emperor.utils.GlideUtil;
 
 import java.util.List;
 
@@ -65,7 +63,7 @@ public class ResumeEvaluateAdapter extends BaseQuickAdapter<EvaluateInfoData, Ba
         rbDesignAbility.setStar(Float.parseFloat(item.getAbility()));
         rbResponseSpeed.setStar(Float.parseFloat(item.getResponse_speed()));
         //评价内容
-        if (item.getEvaluation_content().equals("")){
+        if (item.getEvaluation_content()==null||item.getEvaluation_content().equals("")){
             helper.setText(R.id.tv_evaluateContent,"没有留下任何评价！");
         }else {
             helper.setText(R.id.tv_evaluateContent,item.getEvaluation_content());
@@ -78,7 +76,7 @@ public class ResumeEvaluateAdapter extends BaseQuickAdapter<EvaluateInfoData, Ba
                 @Override
                 protected void onDisplayImage(Context context, ImageView imageView, String s) {
                     if (imageView != null && s != null) {
-                        Glide.with(mContext).load(ApiURL.GLOBAL_IMG_URL+s).into(imageView);
+                        GlideUtil.loadImage(s,R.drawable.img_loading,imageView);
                     }
                 }
                 @Override

@@ -1,11 +1,13 @@
 package com.wktx.www.emperor.ui.activity.login;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,7 +19,8 @@ import com.wktx.www.emperor.apiresult.login.login8register.RegisterInfoData;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.login.RegisterPresenter;
-import com.wktx.www.emperor.view.login.IRegisterView;
+import com.wktx.www.emperor.ui.view.login.IRegisterView;
+import com.wktx.www.emperor.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,6 +63,9 @@ public class RegisterActivity extends ABaseActivity<IRegisterView,RegisterPresen
 
     @OnClick({R.id.tb_IvReturn, R.id.tv_getcode, R.id.bt_register,R.id.tv_login})
     public void MyOnclick(View view) {
+        //将输入法隐藏
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(tvTitle.getWindowToken(), 0);
         switch (view.getId()) {
             case R.id.tb_IvReturn:
                 finish();
@@ -69,10 +75,10 @@ public class RegisterActivity extends ABaseActivity<IRegisterView,RegisterPresen
                     return;
                 }
                 if (TextUtils.isEmpty(getPhoneStr())){
-                    MyUtils.showToast(RegisterActivity.this,"请输入手机号！");
+                    ToastUtil.myToast("请输入手机号！");
                     etPhone.requestFocus();
                 }else if (!MyUtils.checkMobileNumber(getPhoneStr())){
-                    MyUtils.showToast(RegisterActivity.this,"手机号输入不正确！");
+                    ToastUtil.myToast("手机号输入不正确！");
                     etPhone.requestFocus();
                 }else {//获取验证码
                     getPresenter().onGetCode();
@@ -84,25 +90,25 @@ public class RegisterActivity extends ABaseActivity<IRegisterView,RegisterPresen
                 }
                 //判断输入框格式
                 if (TextUtils.isEmpty(getPhoneStr())){
-                    MyUtils.showToast(RegisterActivity.this,"请输入手机号！");
+                    ToastUtil.myToast("请输入手机号！");
                     etPhone.requestFocus();
                 }else if (!MyUtils.checkMobileNumber(getPhoneStr())) {
-                    MyUtils.showToast(RegisterActivity.this, "手机号输入不正确！");
+                    ToastUtil.myToast( "手机号输入不正确！");
                     etPhone.requestFocus();
                 }else if (TextUtils.isEmpty(getCodeStr())){
-                    MyUtils.showToast(RegisterActivity.this,"请输入验证码！");
+                    ToastUtil.myToast("请输入验证码！");
                     etCode.requestFocus();
                 }else if (TextUtils.isEmpty(getPwd1Str())){
-                    MyUtils.showToast(RegisterActivity.this,"请输入密码！");
+                    ToastUtil.myToast("请输入密码！");
                     etPwd1.requestFocus();
                 }else if (getPwd1Str().length()<6||getPwd1Str().length()>12){
-                    MyUtils.showToast(this,"密码输入不正确！");
+                    ToastUtil.myToast("密码输入不正确！");
                     etPwd1.requestFocus();
                 }else if (TextUtils.isEmpty(getPwd2Str())){
-                    MyUtils.showToast(RegisterActivity.this,"请输入确认密码！");
+                    ToastUtil.myToast("请输入确认密码！");
                     etPwd2.requestFocus();
                 }else if (getPwd2Str().length()<6||getPwd2Str().length()>12||!getPwd1Str().equals(getPwd2Str())){
-                    MyUtils.showToast(this,"确认密码输入不正确！");
+                    ToastUtil.myToast("确认密码输入不正确！");
                     etPwd2.requestFocus();
                 }else {//注册
                     btRegister.setEnabled(false);
@@ -161,7 +167,7 @@ public class RegisterActivity extends ABaseActivity<IRegisterView,RegisterPresen
     }
     @Override
     public void onSendCodeResult(boolean isSuccess,String msg) {
-        MyUtils.showToast(RegisterActivity.this, msg);
+        ToastUtil.myToast( msg);
         if (isSuccess){
             tvGetCode.setEnabled(false);
             tvGetCode.setText(time+"秒后重新获取");
@@ -186,14 +192,14 @@ public class RegisterActivity extends ABaseActivity<IRegisterView,RegisterPresen
     }
     @Override//注册成功，登录
     public void onRequestSuccess(RegisterInfoData tData) {
-        MyUtils.showToast(RegisterActivity.this,"注册成功！可以登录啦~");
+        ToastUtil.myToast("注册成功！可以登录啦~");
         startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
     @Override
     public void onRequestFailure(String result) {
         btRegister.setEnabled(true);
-        MyUtils.showToast(RegisterActivity.this,result);
+        ToastUtil.myToast(result);
     }
 
     @Override
@@ -203,5 +209,6 @@ public class RegisterActivity extends ABaseActivity<IRegisterView,RegisterPresen
         if (handler!=null){
             handler.removeCallbacksAndMessages(null);
         }
+        ToastUtil.cancleMyToast();
     }
 }
