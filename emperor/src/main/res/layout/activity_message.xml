@@ -8,21 +8,21 @@
     android:background="@color/color_ffffff"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.wktx.www.emperor.com.wktx.www.emperor.Activity.MessageActivity">
+    tools:context=".ui.activity.main.message.MessageActivity">
 
     <include layout="@layout/include_toolbar_activity" />
 
     <com.ogaclejapan.smarttablayout.SmartTabLayout
-        android:id="@+id/viewpagertab"
+        android:id="@+id/layout_smartTab"
         android:layout_width="match_parent"
-        android:layout_height="33dp"
-        android:background="@color/white"
-        android:paddingTop="5dp"
+        android:layout_height="@dimen/px_70"
+        android:background="@color/color_f7f7f7"
+        android:paddingTop="@dimen/px_20"
         app:stl_distributeEvenly="true"
         app:stl_indicatorInFront="false"
         app:stl_indicatorColor="@color/color_ffb321"
         app:stl_indicatorInterpolation="smart"
-        app:stl_indicatorThickness="2dp"
+        app:stl_indicatorThickness="@dimen/px_4"
         app:stl_dividerThickness="0dp"
         app:stl_underlineThickness="0dp"/>
     <android.support.v4.view.ViewPager

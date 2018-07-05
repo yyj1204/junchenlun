@@ -4,6 +4,8 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.jaeger.library.StatusBarUtil;
+import com.wktx.www.subjects.R;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 /**
@@ -20,10 +22,12 @@ public abstract class ABaseActivity<V extends IBaseView,P extends ABasePresenter
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//强制竖屏
+        //沉浸式状态栏
+        StatusBarUtil.setColor(ABaseActivity.this, getResources().getColor(R.color.color_ffb321),0);
+        //强制竖屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //初始化MVP
         initMVP();
-
     }
 
     /**
@@ -38,7 +42,7 @@ public abstract class ABaseActivity<V extends IBaseView,P extends ABasePresenter
             throw new NullPointerException("presenter 不能为空!");
         }
         //绑定view
-        presenter.attachMvpView((V) this);
+        presenter.attachMvpView((V) this,this);
     }
 
     @Override

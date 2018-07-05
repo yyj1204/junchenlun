@@ -15,9 +15,7 @@ import java.io.InputStreamReader;
 
  */
 
-public class GetJsonDataUtil
-{
-
+public class GetJsonDataUtil {
 
     public String getJson(Context context,String fileName) {
 

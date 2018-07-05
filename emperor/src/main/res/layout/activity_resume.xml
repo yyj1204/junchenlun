@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f0f0f0"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="com.wktx.www.emperor.ui.activity.recruit.resume.ResumeActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_96"
+        android:paddingRight="@dimen/px_30"
+        android:background="@color/color_ffb321"
+        android:gravity="center_vertical">
+        <com.ogaclejapan.smarttablayout.SmartTabLayout
+            android:id="@+id/layout_smartTab"
+            android:layout_width="match_parent"
+            android:layout_toRightOf="@+id/iv_return"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/color_ffb321"
+            android:paddingBottom="@dimen/px_8"
+            android:paddingTop="@dimen/px_26"
+            app:stl_distributeEvenly="true"
+            app:stl_dividerThickness="0dp"
+            app:stl_indicatorColor="@color/color_ffffff"
+            app:stl_indicatorInFront="false"
+            app:stl_indicatorInterpolation="smart"
+            app:stl_indicatorThickness="@dimen/px_6"
+            app:stl_titleOffset="auto_center"
+            android:layout_centerInParent="true"
+            app:stl_underlineThickness="0dp" />
+        <ImageView
+            android:id="@+id/iv_return"
+            android:layout_width="@dimen/px_100"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/px_20"
+            android:paddingBottom="@dimen/px_20"
+            android:paddingRight="@dimen/px_50"
+            android:paddingLeft="@dimen/px_30"
+            android:layout_gravity="center_vertical|left"
+            android:src="@drawable/ic_toolbar_return" />
+        <ImageView
+            android:layout_width="@dimen/px_66"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|left"
+            android:paddingBottom="@dimen/px_20"
+            android:paddingRight="@dimen/px_40"
+            android:paddingTop="@dimen/px_20"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrow_left_gray" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_2"
+        android:background="@color/color_f0f0f0"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/color_ffffff" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_1"
+        android:background="@color/color_f0f0f0"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_82"
+        android:background="@color/color_ffffff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/linear_weixin"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/selector_mine_linearlayout"
+            android:layout_weight="1"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="@dimen/px_46"
+                android:layout_height="@dimen/px_38"
+                android:src="@drawable/ic_resume_wx" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linear_qq"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/selector_mine_linearlayout"
+            android:layout_weight="1"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="@dimen/px_34"
+                android:layout_height="@dimen/px_38"
+                android:src="@drawable/ic_resume_qq" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linear_phone"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/selector_mine_linearlayout"
+            android:layout_weight="1"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="@dimen/px_38"
+                android:layout_height="@dimen/px_38"
+                android:src="@drawable/ic_resume_phone" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_employ"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:background="@drawable/selector_submit_selected"
+            android:gravity="center"
+            android:text="立即雇佣"
+            android:textColor="@color/color_ffffff"
+            android:textSize="@dimen/sp_15" />
+    </LinearLayout>
+</LinearLayout>

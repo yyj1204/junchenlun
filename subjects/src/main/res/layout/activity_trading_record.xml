@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f0f0f0"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar_activity" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_126"
+        android:layout_marginBottom="@dimen/px_20"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/linear_balance"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/selector_mine_linearlayout"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_balanceMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/px_20"
+                android:text="0"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="余额"
+                android:gravity="center"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/sp_13" />
+            <TextView
+                android:id="@+id/tv_balanceLine"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_4"
+                android:layout_marginLeft="@dimen/px_50"
+                android:layout_marginRight="@dimen/px_50"
+                android:background="@color/color_ffb321"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linear_trusteeship"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/px_2"
+            android:background="@drawable/selector_mine_linearlayout"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_trusteeshipMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/px_20"
+                android:text="0"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="托管中"
+                android:gravity="center"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/sp_13" />
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_trusteeshipLine"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_4"
+                android:layout_marginLeft="@dimen/px_50"
+                android:layout_marginRight="@dimen/px_50"
+                android:background="@color/color_ffb321"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/include_recyclerview_refresh" />
+
+</LinearLayout>

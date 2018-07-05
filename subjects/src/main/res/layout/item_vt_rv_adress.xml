@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/main_white"
+    android:background="@drawable/selector_mine_linearlayout"
     android:orientation="horizontal"
     android:paddingBottom="18dp"
     android:paddingLeft="@dimen/dp_fifteen"
@@ -13,7 +13,7 @@
         android:layout_height="53dp"
         android:layout_marginTop="21dp"
         android:scaleType="fitXY"
-        android:src="@drawable/head_women" />
+        android:src="@drawable/img_mine_head" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,14 +41,14 @@
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_marginLeft="@dimen/dp_ten"
-                android:src="@drawable/icon_women" />
+                android:src="@drawable/ic_sex_women" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="@dimen/dp_ten"
-                android:background="@drawable/shape_buttom_nine"
+                android:background="@drawable/shape_stroke_ffb321_10"
                 android:text="1年"
                 android:textColor="@color/title_color"
                 android:textSize="@dimen/sp_twelve" />
@@ -64,7 +64,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/time"
+                android:drawableLeft="@drawable/ic_collect_workyears"
                 android:drawablePadding="@dimen/dp_eight"
                 android:gravity="center"
                 android:text="一年以上"
@@ -75,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_thirty"
-                android:drawableLeft="@drawable/adress"
+                android:drawableLeft="@drawable/ic_collect_city"
                 android:drawablePadding="@dimen/dp_eight"
                 android:gravity="center"
                 android:text="福建-泉州-丰泽区"
@@ -93,7 +93,7 @@
             <ImageView
                 android:layout_width="15dp"
                 android:layout_height="13dp"
-                android:src="@drawable/specialty" />
+                android:src="@drawable/ic_collect_specialty" />
 
             <TextView
                 android:layout_width="wrap_content"
