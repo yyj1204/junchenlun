@@ -1,0 +1,83 @@
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.fragment.MineFragment">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_96"
+        android:background="@color/color_ffb321"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/title_tab_manager"
+            android:textColor="@color/color_ffffff"
+            android:textSize="@dimen/sp_23" />
+
+        <ImageView
+            android:id="@+id/iv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/px_100"
+            android:paddingRight="@dimen/px_40"
+            android:layout_gravity="center_vertical|right"
+            android:src="@drawable/ic_message" />
+    </android.support.v7.widget.Toolbar>
+
+    <include layout="@layout/include_recyclerview_refresh"
+        android:visibility="gone"/>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/linear_nothing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/px_30"
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/string_manage_hint1"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_20" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/px_30"
+            android:gravity="center"
+            android:text="@string/string_manage_hint2"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_15" />
+        <ImageView
+            android:layout_width="@dimen/px_578"
+            android:layout_height="@dimen/px_420"
+            android:layout_marginTop="@dimen/px_60"
+            android:src="@drawable/img_nothing_work" />
+        <TextView
+            android:id="@+id/tv_onlineExperience"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_96"
+            android:background="@drawable/selector_submit_selected_10"
+            android:textColor="@color/color_ffffff"
+            android:gravity="center"
+            android:text="在线体验办公"
+            android:textSize="@dimen/sp_18" />
+        <TextView
+            android:id="@+id/tv_selectWork"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_96"
+            android:layout_marginTop="@dimen/px_30"
+            android:background="@drawable/shape_stroke_ffb321_10"
+            android:gravity="center"
+            android:text="挑合适的工作"
+            android:textColor="@color/color_ffb321"
+            android:textSize="@dimen/sp_18" />
+    </com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

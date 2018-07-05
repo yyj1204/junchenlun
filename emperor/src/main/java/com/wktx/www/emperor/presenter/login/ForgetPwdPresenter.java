@@ -1,18 +1,18 @@
 package com.wktx.www.emperor.presenter.login;
 
+import com.wktx.www.emperor.apiresult.CommonSimpleData;
 import com.wktx.www.emperor.apiresult.CustomApiResult;
-import com.wktx.www.emperor.apiresult.login.ForgetPwdData;
-import com.wktx.www.emperor.apiresult.login.SendCodeData;
 import com.wktx.www.emperor.basemvp.ABasePresenter;
 import com.wktx.www.emperor.utils.ApiURL;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.LogUtil;
 import com.wktx.www.emperor.utils.Md5Util;
-import com.wktx.www.emperor.view.login.IForgetPwdView;
+import com.wktx.www.emperor.ui.view.login.IForgetPwdView;
 import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.callback.CallBackProxy;
 import com.zhouyou.http.callback.ProgressDialogCallBack;
 import com.zhouyou.http.exception.ApiException;
+import com.zhouyou.http.model.HttpParams;
 
 /**
  * Created by yyj on 2018/1/15.
@@ -32,8 +32,8 @@ public class ForgetPwdPresenter extends ABasePresenter<IForgetPwdView> {
         EasyHttp.post(ApiURL.COMMON_URL)
                 .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_SENCODE)
                 .params("phone",getmMvpView().getPhoneStr())
-                .execute(new CallBackProxy<CustomApiResult<SendCodeData>, SendCodeData>
-                        (new ProgressDialogCallBack<SendCodeData>(mProgressDialog) {
+                .execute(new CallBackProxy<CustomApiResult<CommonSimpleData>, CommonSimpleData>
+                        (new ProgressDialogCallBack<CommonSimpleData>(mProgressDialog) {
                             @Override
                             public void onError(ApiException e) {
                                 super.onError(e);
@@ -47,7 +47,7 @@ public class ForgetPwdPresenter extends ABasePresenter<IForgetPwdView> {
                             }
 
                             @Override
-                            public void onSuccess(SendCodeData result) {
+                            public void onSuccess(CommonSimpleData result) {
                                 if (result != null) {
                                     LogUtil.error("获取验证码","result=="+result.toString());
 
@@ -65,17 +65,17 @@ public class ForgetPwdPresenter extends ABasePresenter<IForgetPwdView> {
 
     //重置密码
     public void onResetPwd(){
-        LogUtil.error("忘记密码","json===phone:"+getmMvpView().getPhoneStr()
-                +"\nnew_password:"+Md5Util.md5(getmMvpView().getPwd1Str())
-                +"\ncode:"+getmMvpView().getCodeStr());
+        HttpParams httpParams = new HttpParams();
+        httpParams.put("phone",getmMvpView().getPhoneStr());
+        httpParams.put("new_password", Md5Util.md5(getmMvpView().getPwd1Str()));
+        httpParams.put("code",getmMvpView().getCodeStr());
+        LogUtil.error("忘记密码","json==="+httpParams.toString());
 
         EasyHttp.post(ApiURL.COMMON_URL)
                 .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_FORGET_PWD)
-                .params("phone",getmMvpView().getPhoneStr())
-                .params("new_password", Md5Util.md5(getmMvpView().getPwd1Str()))
-                .params("code",getmMvpView().getCodeStr())
-                .execute(new CallBackProxy<CustomApiResult<ForgetPwdData>, ForgetPwdData>
-                        (new ProgressDialogCallBack<ForgetPwdData>(mProgressDialog) {
+                .params(httpParams)
+                .execute(new CallBackProxy<CustomApiResult<CommonSimpleData>, CommonSimpleData>
+                        (new ProgressDialogCallBack<CommonSimpleData>(mProgressDialog) {
                             @Override
                             public void onError(ApiException e) {
                                 super.onError(e);
@@ -89,12 +89,12 @@ public class ForgetPwdPresenter extends ABasePresenter<IForgetPwdView> {
                             }
 
                             @Override
-                            public void onSuccess(ForgetPwdData result) {
+                            public void onSuccess(CommonSimpleData result) {
                                 if (result != null) {
                                     LogUtil.error("忘记密码","result=="+result.toString());
 
                                     if (result.getCode()==0){//密码重置成功
-                                        getmMvpView().onRequestSuccess(result);
+                                        getmMvpView().onRequestSuccess(result.getMsg());
                                     }else {//密码重置失败
                                         getmMvpView().onRequestFailure(result.getMsg());
                                     }

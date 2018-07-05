@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     android:background="@color/color_ffffff"
     android:fitsSystemWindows="true"
-    tools:context="com.wktx.www.subjects.ui.activity.mine.login.LoginActivity">
+    tools:context=".ui.activity.login.LoginActivity">
 
-    <include layout="@layout/include_toolbar_activity"/>
+    <include layout="@layout/include_toolbar_activity" />
 
     <ImageView
         android:id="@+id/image"
@@ -17,7 +17,7 @@
         android:layout_marginBottom="@dimen/px_60"
         android:layout_below="@+id/toolbar"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/login_theory"/>
+        android:src="@mipmap/ic_launcher"/>
 
     <LinearLayout
         android:id="@+id/loginLyName"
@@ -26,7 +26,6 @@
         android:layout_marginLeft="@dimen/px_60"
         android:layout_marginRight="@dimen/px_60"
         android:layout_below="@+id/image"
-        android:gravity="center_vertical"
         android:orientation="vertical">
         <EditText
             android:id="@+id/et_phone"
@@ -34,7 +33,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@null"
-            android:drawableLeft="@drawable/login_account"
+            android:drawableLeft="@drawable/ic_login_account"
             android:drawablePadding="@dimen/px_16"
             android:hint="请输入手机号码"
             android:inputType="phone"
@@ -55,7 +54,6 @@
         android:layout_alignLeft="@+id/loginLyName"
         android:layout_alignRight="@+id/loginLyName"
         android:layout_below="@+id/loginLyName"
-        android:gravity="center_vertical"
         android:orientation="vertical">
         <EditText
             android:id="@+id/et_pwd"
@@ -64,7 +62,7 @@
             android:paddingLeft="@dimen/px_5"
             android:layout_weight="1"
             android:background="@null"
-            android:drawableLeft="@drawable/login_psw"
+            android:drawableLeft="@drawable/ic_login_psw"
             android:drawablePadding="@dimen/px_21"
             android:hint="请输入密码(6-12位数字、字母)"
             android:singleLine="true"
@@ -98,10 +96,10 @@
         android:layout_alignRight="@+id/loginLyPsw"
         android:layout_below="@+id/loginLyPsw"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/submit_selected"
+        android:background="@drawable/selector_submit_selected_10"
         android:gravity="center"
         android:text="登录"
-        android:textColor="@color/main_white"
+        android:textColor="@color/color_ffffff"
         android:textSize="@dimen/sp_15"/>
 
     <LinearLayout

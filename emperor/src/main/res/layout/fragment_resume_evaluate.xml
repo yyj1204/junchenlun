@@ -4,5 +4,6 @@
     android:layout_height="match_parent"
     tools:context="com.wktx.www.emperor.ui.fragment.resume.ResumeEvaluateFragment">
 
-    <include layout="@layout/include_recycleview_refresh" />
+    <include layout="@layout/include_recyclerview_refresh" />
+
 </com.zhy.autolayout.AutoRelativeLayout>

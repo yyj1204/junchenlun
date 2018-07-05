@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="@color/color_f0f0f0"
+    tools:context="com.wktx.www.emperor.ui.activity.staff.StaffArrangeWorkActivity">
+
+    <include layout="@layout/include_toolbar_activity" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_62"
+            android:paddingLeft="@dimen/px_30"
+            android:paddingRight="@dimen/px_30"
+            android:background="@color/color_f0f0f0"
+            android:gravity="center_vertical"
+            android:text="需求标题"
+            android:textColor="@color/color_5d5d5d"
+            android:textSize="@dimen/sp_12" />
+        <EditText
+            android:id="@+id/et_demandTitle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_72"
+            android:paddingLeft="@dimen/px_30"
+            android:paddingRight="@dimen/px_30"
+            android:maxLength="10"
+            android:background="@color/color_ffffff"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:hint="如整店装修(10字之内)"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_14" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_52"
+            android:paddingLeft="@dimen/px_30"
+            android:paddingRight="@dimen/px_30"
+            android:background="@color/color_f0f0f0"
+            android:gravity="center_vertical"
+            android:text="需求详情"
+            android:textColor="@color/color_5d5d5d"
+            android:textSize="@dimen/sp_12" />
+        <EditText
+            android:id="@+id/et_demandContent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_214"
+            android:paddingTop="@dimen/px_20"
+            android:paddingBottom="@dimen/px_20"
+            android:paddingLeft="@dimen/px_30"
+            android:paddingRight="@dimen/px_30"
+            android:background="@color/color_ffffff"
+            android:gravity="top|left"
+            android:hint="请填写您的具体需求"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_52"
+            android:paddingLeft="@dimen/px_30"
+            android:paddingRight="@dimen/px_30"
+            android:background="@color/color_f0f0f0"
+            android:gravity="center_vertical"
+            android:text="店铺信息"
+            android:textColor="@color/color_5d5d5d"
+            android:textSize="@dimen/sp_12" />
+        <LinearLayout
+            android:id="@+id/linear_store"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_72"
+            android:paddingLeft="@dimen/px_30"
+            android:paddingRight="@dimen/px_30"
+            android:background="@drawable/selector_mine_linearlayout"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="选择店铺"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_13" />
+            <TextView
+                android:id="@+id/tv_store"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/sp_13" />
+            <ImageView
+                android:layout_width="@dimen/px_16"
+                android:layout_height="@dimen/px_20"
+                android:layout_marginLeft="@dimen/px_14"
+                android:src="@drawable/ic_demand_arrow_right_gray" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linear_endTime"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_72"
+            android:paddingLeft="@dimen/px_30"
+            android:paddingRight="@dimen/px_30"
+            android:layout_marginTop="@dimen/px_1"
+            android:background="@drawable/selector_mine_linearlayout"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="截止日期"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_13" />
+            <TextView
+                android:id="@+id/tv_endTime"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_13" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_sureArrange"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_90"
+        android:layout_gravity="bottom"
+        android:background="@drawable/selector_submit_selected"
+        android:gravity="center"
+        android:text="确定安排"
+        android:textColor="@color/color_ffffff"
+        android:textSize="@dimen/sp_15" />
+</LinearLayout>

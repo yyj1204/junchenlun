@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="@color/color_f0f0f0"
+    tools:context="com.wktx.www.emperor.ui.activity.staff.StaffRenewalActivity">
+
+    <include layout="@layout/include_toolbar_activity" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_ffffff"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:orientation="horizontal">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_head"
+            android:layout_width="@dimen/px_118"
+            android:layout_height="@dimen/px_118"
+            android:src="@drawable/img_mine_head"
+            android:layout_marginTop="@dimen/px_30"
+            android:layout_marginBottom="@dimen/px_30"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_20"
+            android:layout_toRightOf="@+id/iv_head"
+            android:orientation="vertical"
+            android:layout_centerVertical="true">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_staffName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="姓名"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_15" />
+                <ImageView
+                    android:id="@+id/iv_sex"
+                    android:layout_width="@dimen/px_24"
+                    android:layout_height="@dimen/px_24"
+                    android:layout_marginLeft="@dimen/px_10"
+                    android:src="@drawable/ic_sex_woman" />
+                <TextView
+                    android:id="@+id/tv_staffJob"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/px_12"
+                    android:text="职位"
+                    android:textColor="@color/color_ffb321"
+                    android:background="@drawable/shape_stroke_ffb321_18"
+                    android:textSize="@dimen/sp_12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/px_20"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="@dimen/px_30"
+                    android:layout_height="@dimen/px_26"
+                    android:src="@drawable/ic_demand_time" />
+                <TextView
+                    android:id="@+id/tv_hireTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="开始时间 - 结束时间"
+                    android:layout_marginLeft="@dimen/px_12"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_13" />
+            </LinearLayout>
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/iv_hireState"
+            android:layout_width="@dimen/px_84"
+            android:layout_height="@dimen/px_40"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_hirerecord_state1" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/color_ffffff"
+        android:padding="@dimen/px_30"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/px_20">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="续签时间："
+            android:layout_weight="1"
+            android:textSize="@dimen/sp_13"
+            android:textColor="@color/color_a0a0a0"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:background="@drawable/shape_stroke_888888_w1">
+            <RelativeLayout
+                android:id="@+id/rela_renewalTimeMinus"
+                android:layout_width="@dimen/px_44"
+                android:layout_height="@dimen/px_44">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_staff_minus"/>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="@dimen/px_1"
+                android:layout_height="match_parent"
+                android:background="@color/color_888888"/>
+            <TextView
+                android:id="@+id/tv_renewalTimeCount"
+                android:layout_width="@dimen/px_50"
+                android:layout_height="@dimen/px_42"
+                android:gravity="center"
+                android:text="1"
+                android:background="@color/color_f7f7f7"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_12"/>
+            <TextView
+                android:layout_width="@dimen/px_1"
+                android:layout_height="match_parent"
+                android:background="@color/color_888888"/>
+
+            <RelativeLayout
+                android:id="@+id/rela_renewalTimeAdd"
+                android:layout_width="@dimen/px_44"
+                android:layout_height="@dimen/px_44">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_staff_add"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="月"
+            android:layout_marginLeft="@dimen/px_16"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_13"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/color_ffffff"
+        android:padding="@dimen/px_30"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/px_1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="月薪要求："
+            android:layout_weight="1"
+            android:textSize="@dimen/sp_13"
+            android:textColor="@color/color_a0a0a0"/>
+        <TextView
+            android:id="@+id/tv_staffSalary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0元/月"
+            android:layout_marginLeft="8dp"
+            android:textColor="@color/color_000000"
+            android:textSize="13sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_pushMoney"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/px_30"
+        android:layout_marginTop="@dimen/px_1"
+        android:gravity="center_vertical"
+        android:background="@color/color_ffffff">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="提成方案："
+            android:textSize="@dimen/sp_13"
+            android:textColor="@color/color_a0a0a0"/>
+        <EditText
+            android:id="@+id/et_pushMoney"
+            android:layout_width="@dimen/px_320"
+            android:layout_height="match_parent"
+            android:textColor="@color/color_ffb321"
+            android:textColorHint="@color/color_999999"
+            android:textSize="@dimen/sp_13"
+            android:gravity="center_vertical|right"
+            android:hint="点击输入约定好的业绩分成"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:maxLength="3"
+            android:background="@null" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="%"
+            android:layout_marginLeft="@dimen/px_16"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_13"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_82"
+        android:background="@color/color_f0f0f0"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="@dimen/px_480"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="2"
+            android:background="@color/color_ffffff"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="续签总金额："
+                android:textSize="@dimen/sp_15"
+                android:textColor="@color/color_000000" />
+            <TextView
+                android:id="@+id/tv_totalMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="@dimen/sp_15"
+                android:textColor="@color/color_fa716f" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_sureRenewal"
+            android:layout_width="@dimen/px_240"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_submit_selected"
+            android:gravity="center"
+            android:text="确认续签"
+            android:textColor="@color/color_ffffff"
+            android:textSize="@dimen/sp_15" />
+    </LinearLayout>
+</LinearLayout>

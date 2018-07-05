@@ -21,7 +21,7 @@
         android:layout_marginTop="@dimen/px_20"
         android:text="作品标签"
         android:textColor="@color/color_999999"
-        android:drawableLeft="@drawable/ic_works_details_tag"
+        android:drawableLeft="@drawable/ic_worksdetails_tag"
         android:drawablePadding="@dimen/px_10"
         android:textSize="@dimen/sp_13" />
     <TextView

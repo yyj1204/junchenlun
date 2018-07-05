@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/color_ffffff"
+    android:background="@drawable/selector_mine_linearlayout"
     android:orientation="horizontal">
 
     <com.zhy.autolayout.AutoLinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:padding="@dimen/px_30"
@@ -16,7 +16,7 @@
             android:id="@+id/iv_head"
             android:layout_width="@dimen/px_196"
             android:layout_height="@dimen/px_196"
-            android:src="@drawable/img_head_woman" />
+            android:src="@drawable/img_mine_head" />
 
         <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="wrap_content"
@@ -31,9 +31,12 @@
                 android:orientation="horizontal">
                 <TextView
                     android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:singleLine="true"
                     android:text="姓名"
+                    android:textStyle="bold"
                     android:textColor="@color/color_000000"
                     android:textSize="@dimen/sp_15" />
                 <ImageView
@@ -88,6 +91,7 @@
                     android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/tv_payState"
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/px_12"
@@ -103,5 +107,6 @@
         android:layout_width="@dimen/px_84"
         android:layout_height="@dimen/px_40"
         android:layout_marginRight="@dimen/px_30"
+        android:layout_alignParentRight="true"
         android:src="@drawable/ic_hirerecord_state1" />
-</com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoRelativeLayout>

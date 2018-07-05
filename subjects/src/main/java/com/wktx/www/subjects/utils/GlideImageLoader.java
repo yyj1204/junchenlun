@@ -4,10 +4,12 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.wktx.www.subjects.R;
 import com.youth.banner.loader.ImageLoader;
 
 /**
  * Created by 柯燕峰 on 2016/11/21 0021.
+ * 图片加载器
  */
 
 public class GlideImageLoader extends ImageLoader {
@@ -24,7 +26,8 @@ public class GlideImageLoader extends ImageLoader {
 
         if (NetUtil.isNetConnected(context) || NetUtil.isWifiConnected(context)) {
             //Glide 加载图片简单用法
-            Glide.with(context).load(path).into(imageView);
+            GlideUtil.loadImage((String) path, R.drawable.img_loading,imageView);
+//            Glide.with(context).load(path).into(imageView);
         }
 
 //        //Picasso 加载图片简单用法

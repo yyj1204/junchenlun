@@ -1,0 +1,10 @@
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f0f0f0"
+    tools:context=".ui.fragment.message.Message1TaskFragment">
+
+    <include layout="@layout/include_recyclerview_refresh"/>
+
+</com.zhy.autolayout.AutoRelativeLayout>

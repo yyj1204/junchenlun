@@ -5,6 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+import com.jaeger.library.StatusBarUtil;
+import com.wktx.www.emperor.R;
+
 /**
  * Created by yyj on 2018/1/30.
  * 指定子类具体的View必须继承自 IBaseView
@@ -57,6 +60,8 @@ public abstract class ALazyLoadFragment<V extends IBaseView,P extends ABasePrese
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //沉浸式状态栏
+        StatusBarUtil.setColor(getActivity(), getResources().getColor(R.color.color_ffb321),0);
         initVariable();
         //初始化MVP
         initMVP();

@@ -8,10 +8,10 @@ import java.util.List;
  * id : 1
  * title : 淘宝首页设计
  * content : 淘宝首页设计淘宝首页设计淘宝首页设计
- * design_pattern : 2
+ * design_pattern : 其他设计
  * budget : 200.00
  * add_time : 1516930645
- * end_time : 0
+ * end_time : 1521388799
  * status_log : [{"remark":"您创建了需求","create_time":"1516930645","user_id":"2649"}]
  * status : 0
  */

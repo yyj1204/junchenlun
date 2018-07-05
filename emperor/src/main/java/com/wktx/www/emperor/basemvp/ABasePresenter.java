@@ -3,7 +3,6 @@ package com.wktx.www.emperor.basemvp;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-
 import com.zhouyou.http.subsciber.IProgressDialog;
 
 /**

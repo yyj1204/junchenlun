@@ -114,7 +114,7 @@ public class MyApplication extends Application {
 //
 //    //各个平台的配置，建议放在全局Application或者程序入口
 //    {
-//        PlatformConfig.setWeixin("wx46c0c2a1b9188bf6", "d7e233e973771374882e53f18ec6582d");
+//        PlatformConfig.setWeixin("wxdfb137b9c34a5a28", "d7e233e973771374882e53f18ec6582d");
 //        PlatformConfig.setSinaWeibo("187207382", "4798e0024a8c2c93fae8adff9ec3ec6b", "https://api.weibo.com/oauth2/default.html");
 //        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
 //    }

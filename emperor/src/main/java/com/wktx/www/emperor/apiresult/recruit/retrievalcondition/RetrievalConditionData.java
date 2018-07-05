@@ -2,7 +2,7 @@ package com.wktx.www.emperor.apiresult.recruit.retrievalcondition;
 
 /**
  * Created by yyj on 2018/1/24.
- * 检索条件信息
+ * 招聘检索条件信息
  * {
  * "ret": 200,"msg": "",
  * "data": {

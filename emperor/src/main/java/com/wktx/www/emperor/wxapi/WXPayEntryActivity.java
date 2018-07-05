@@ -10,7 +10,7 @@ import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-import com.wktx.www.emperor.pay.IPayView;
+import com.wktx.www.emperor.payutil.IPayView;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.LogUtil;
 import com.wktx.www.emperor.utils.MyUtils;

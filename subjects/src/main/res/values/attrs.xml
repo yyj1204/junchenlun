@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--多条件筛选-->
     <declare-styleable name="DropDownMenu">
-
         <attr name="ddunderlineColor" format="color"/>
         <attr name="dddividerColor" format="color"/>
         <attr name="ddtextSelectedColor" format="color"/>
@@ -14,12 +14,14 @@
         <attr name="dddividerHeight" format="dimension"></attr>
         <attr name="ddmenuIconOrientation">
             <flag name="left" value="0"/>
-
             <flag name="top" value="1"/>
-
             <flag name="right" value="2"/>
-
             <flag name="bottom" value="3"/>
         </attr>
+    </declare-styleable>
+
+    <!--自定义日历控件-->
+    <declare-styleable name="CustomCalendar">
+        <attr name="dateFormat" format="string" />
     </declare-styleable>
 </resources>

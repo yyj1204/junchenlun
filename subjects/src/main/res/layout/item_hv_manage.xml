@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_f0f0f0"
+    android:orientation="vertical">
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_ffffff"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:orientation="horizontal">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_head"
+            android:layout_width="@dimen/px_118"
+            android:layout_height="@dimen/px_118"
+            android:src="@drawable/img_mine_head"
+            android:layout_marginTop="@dimen/px_30"
+            android:layout_marginBottom="@dimen/px_30"/>
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_20"
+            android:layout_toRightOf="@+id/iv_head"
+            android:orientation="vertical"
+            android:layout_centerVertical="true">
+         <TextView
+             android:id="@+id/tv_bossName"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="姓名"
+             android:textColor="@color/color_000000"
+             android:textSize="@dimen/sp_15"
+             android:textStyle="bold"/>
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/px_20"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="@dimen/px_30"
+                    android:layout_height="@dimen/px_26"
+                    android:src="@drawable/ic_manage_time" />
+                <TextView
+                    android:id="@+id/tv_hireTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="开始时间 - 结束时间"
+                    android:layout_marginLeft="@dimen/px_12"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_13" />
+                <TextView
+                    android:id="@+id/tv_leave"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/px_12"
+                    android:paddingBottom="@dimen/px_12"
+                    android:paddingLeft="@dimen/px_46"
+                    android:paddingRight="@dimen/px_46"
+                    android:text="请假"
+                    android:textColor="@color/color_ffffff"
+                    android:background="@drawable/selector_submit_selected_10"/>
+            </com.zhy.autolayout.AutoLinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
+        <ImageView
+            android:id="@+id/iv_manage_state"
+            android:layout_width="@dimen/px_84"
+            android:layout_height="@dimen/px_40"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_manage_state1" />
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px_1"
+        android:background="@color/color_ffffff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/px_30">
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/linear_manage_salary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="@dimen/px_54"
+                android:layout_height="@dimen/px_54"
+                android:src="@drawable/ic_manage_salary" />
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/px_10"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="工资"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/sp_13" />
+                <TextView
+                    android:id="@+id/tv_manage_salary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/px_2"
+                    android:text="0"
+                    android:singleLine="true"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_13" />
+            </com.zhy.autolayout.AutoLinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/linear_manage_report"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="@dimen/px_62"
+                android:layout_height="@dimen/px_54"
+                android:src="@drawable/ic_manage_report" />
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/px_10"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="报告"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/sp_13" />
+                <TextView
+                    android:id="@+id/tv_manage_report"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/px_2"
+                    android:text="0"
+                    android:singleLine="true"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_13" />
+            </com.zhy.autolayout.AutoLinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/linear_manage_attendance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="@dimen/px_60"
+                android:layout_height="@dimen/px_60"
+                android:src="@drawable/ic_manage_attendance" />
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/px_10"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="签到"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/sp_13" />
+                <TextView
+                    android:id="@+id/tv_manage_attendance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/px_2"
+                    android:text="0"
+                    android:singleLine="true"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_13" />
+            </com.zhy.autolayout.AutoLinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/linear_manage_saleroom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/px_20"
+        android:layout_marginTop="@dimen/px_20"
+        android:background="@drawable/selector_mine_linearlayout"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/px_30">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_manage_sale"
+            android:drawablePadding="@dimen/px_14"
+            android:gravity="center_vertical"
+            android:text="@string/title_manage_saleroom"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_13" />
+        <ImageView
+            android:layout_width="@dimen/px_16"
+            android:layout_height="@dimen/px_20"
+            android:src="@drawable/ic_arrow_right_gray" />
+    </com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

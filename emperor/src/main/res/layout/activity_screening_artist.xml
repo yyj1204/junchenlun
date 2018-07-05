@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zhy="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_00000000"
+    android:fitsSystemWindows="true"
+    android:orientation="horizontal"
+    tools:context=".ui.activity.main.artistcase.ScreeningArtistActivity">
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="@dimen/px_260"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/color_ffffff"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_jobName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_96"
+            android:gravity="center"
+            android:text="作品筛选"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_15"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_2"
+            android:background="@color/color_f0f0f0"
+            android:layout_below="@+id/tv_jobName"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_jobName"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/px_30"
+                android:paddingTop="@dimen/px_30"
+                android:text="排序"
+                android:textColor="@color/color_5d5d5d"
+                android:textSize="@dimen/sp_thirteen" />
+            <com.zhy.view.flowlayout.TagFlowLayout
+                android:id="@+id/tagflow_sort"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/px_30"
+                android:paddingRight="@dimen/px_30"
+                android:paddingTop="@dimen/px_20"
+                android:paddingBottom="@dimen/px_20"
+                zhy:max_select="2">
+            </com.zhy.view.flowlayout.TagFlowLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_2"
+                android:background="@color/color_f0f0f0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_82"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="取消"
+                android:background="@color/color_f0f0f0"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_15" />
+            <TextView
+                android:id="@+id/tv_sure"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="确定"
+                android:background="@color/color_ffb321"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_15" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

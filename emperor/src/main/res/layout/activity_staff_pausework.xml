@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="@color/color_f0f0f0"
+    tools:context="com.wktx.www.emperor.ui.activity.staff.StaffPauseWorkActivity">
+
+    <include layout="@layout/include_toolbar_activity" />
+
+    <EditText
+        android:id="@+id/et_pauseCause"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_ffffff"
+        android:gravity="top|left"
+        android:hint="请填写暂停原因"
+        android:minHeight="@dimen/px_300"
+        android:padding="@dimen/px_30"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_15" />
+
+    <LinearLayout
+        android:id="@+id/linear_pauseTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/color_ffffff"
+        android:padding="@dimen/px_30"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/px_1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂停时间："
+            android:layout_weight="1"
+            android:textSize="@dimen/sp_13"
+            android:textColor="@color/color_a0a0a0"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:background="@drawable/shape_stroke_888888_w1">
+            <RelativeLayout
+                android:id="@+id/rela_pauseTimeMinus"
+                android:layout_width="@dimen/px_44"
+                android:layout_height="@dimen/px_44">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_staff_minus"/>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="@dimen/px_1"
+                android:layout_height="match_parent"
+                android:background="@color/color_888888"/>
+            <TextView
+                android:id="@+id/tv_pauseTimeCount"
+                android:layout_width="@dimen/px_50"
+                android:layout_height="@dimen/px_42"
+                android:gravity="center"
+                android:text="1"
+                android:background="@color/color_f7f7f7"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_12"/>
+            <TextView
+                android:layout_width="@dimen/px_1"
+                android:layout_height="match_parent"
+                android:background="@color/color_888888"/>
+
+            <RelativeLayout
+                android:id="@+id/rela_pauseTimeAdd"
+                android:layout_width="@dimen/px_44"
+                android:layout_height="@dimen/px_44">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_staff_add"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="天"
+            android:layout_marginLeft="@dimen/px_16"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_13"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_pauseTime1"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/color_ffffff"
+        android:padding="@dimen/px_30"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/px_1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂停时间："
+            android:layout_weight="1"
+            android:textSize="@dimen/sp_13"
+            android:textColor="@color/color_a0a0a0"/>
+        <TextView
+            android:id="@+id/tv_pauseTimeCount1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1天"
+            android:textColor="@color/color_fa716f"
+            android:textSize="@dimen/sp_13"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|right"
+        android:padding="@dimen/px_30"
+        android:textSize="12sp"
+        android:textColor="@color/color_999999"
+        android:text="@string/string_pausework_timehint"/>
+
+    <Button
+        android:id="@+id/bt_surePause"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_90"
+        android:layout_margin="@dimen/px_30"
+        android:background="@drawable/selector_submit_selected_10"
+        android:gravity="center"
+        android:text="确定暂停"
+        android:textColor="@color/color_ffffff"
+        android:textSize="@dimen/sp_15" />
+</LinearLayout>

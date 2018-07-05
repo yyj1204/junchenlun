@@ -103,7 +103,6 @@
             android:layout_width="@dimen/px_48"
             android:layout_height="@dimen/px_48"
             android:layout_centerVertical="true"
-            android:layout_weight="1"
             app:srcCompat="@drawable/ic_pay_alipay" />
         <TextView
             android:id="@+id/tv_alipay"
@@ -111,7 +110,6 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/iv_alipay"
-            android:layout_weight="1"
             android:paddingLeft="@dimen/px_14"
             android:text="支付宝"
             android:textColor="@color/color_000000"
@@ -122,8 +120,6 @@
             android:layout_height="@dimen/px_40"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_weight="1"
-            android:clickable="true"
             app:srcCompat="@drawable/selector_radiobutton" />
     </RelativeLayout>
 
@@ -143,7 +139,6 @@
             android:layout_width="@dimen/px_48"
             android:layout_height="@dimen/px_48"
             android:layout_centerVertical="true"
-            android:layout_weight="1"
             app:srcCompat="@drawable/ic_pay_wechat" />
         <TextView
             android:id="@+id/tv_wechat"
@@ -151,7 +146,6 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/iv_wechat"
-            android:layout_weight="1"
             android:paddingLeft="@dimen/px_14"
             android:text="微信"
             android:textColor="@color/color_000000"
@@ -162,8 +156,6 @@
             android:layout_height="@dimen/px_40"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_weight="1"
-            android:clickable="true"
             app:srcCompat="@drawable/selector_radiobutton" />
     </RelativeLayout>
 

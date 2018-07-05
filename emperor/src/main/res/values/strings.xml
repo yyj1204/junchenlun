@@ -1,84 +1,84 @@
 <resources>
-    <string name="app_name">君臣论-君主</string>
+    <string name="app_name">君臣论君主端</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- 界面顶部 -->
-    <!--登录-->
-    <string name="title_register">用户注册</string>
-    <string name="title_login">手机登录</string>
-    <string name="title_forget">忘记密码</string>
     <!--首页-->
-    <!--管理-->
+    <string name="title_recruit_guide">招聘指南</string>
+    <string name="title_message">消息通知</string>
+    <string name="title_notice_details">公告详情</string>
+    <string name="title_remind_details">提醒详情</string>
+    <string name="title_artist_case">美工案例</string>
+
     <!--招聘-->
     <string name="title_demand_list">需求列表</string>
     <string name="title_demand_details">需求详情</string>
     <string name="title_demand_release">发布需求</string>
     <string name="title_works_details">作品详情</string>
-    <string name="title_artist_employ">美工雇佣</string>
-    <string name="title_service_employ">客服雇佣</string>
+    <string name="title_sureorders_info">确认订单信息</string>
+    <string name="title_trusteeship_salary">托管工资</string>
+    <string name="title_pay_result">支付结果</string>
+
+    <!--员工-->
+    <string name="title_tab_staff">我的员工</string>
+    <string name="title_staff_manage">管理员工</string>
+    <string name="title_staff_renewal">员工续签</string>
+    <string name="title_staff_salary">员工工资</string>
+    <string name="title_staff_attendance">考勤记录</string>
+    <string name="title_staff_arrangework">安排工作</string>
+    <string name="title_staff_pausework">暂停工作</string>
+    <string name="title_staff_unpausework">恢复工作</string>
+    <string name="title_staff_complaint">发起投诉</string>
+    <string name="title_staff_uncomplaint">撤销投诉</string>
+    <string name="title_staff_fire">发起解雇</string>
+    <string name="title_staff_report">工作安排</string>
+    <string name="title_report1">待评价报告</string>
+    <string name="title_report2">已评价报告</string>
+    <string name="title_report_details">报告详情</string>
+    <string name="title_report_evaluate">评价报告</string>
+    <string name="title_report_saleroom">销售额</string>
+
     <!--我的账户-->
-    <string name="title_mine">我的账户</string>
-    <string name="title_companyinfo">公司信息</string>
+    <string name="title_tab_mine">我的账户</string>
+    <string name="title_set">设置</string>
+    <string name="title_browsing_record">浏览记录</string>
+    <string name="title_company_info">公司信息</string>
     <string name="title_account_certification">账户认证</string>
     <string name="title_certification_personal">个人认证</string>
     <string name="title_certification_store">店铺认证</string>
     <string name="title_my_purse">我的钱包</string>
     <string name="title_purse_recharge">钱包充值</string>
     <string name="title_purse_withdrawal">钱包提现</string>
+    <string name="title_store_info">店铺信息</string>
+    <string name="title_storeinfo_add">添加店铺</string>
+    <string name="title_storeinfo_edit">编辑店铺信息</string>
+    <string name="title_my_collect">我的收藏</string>
+    <string name="title_transaction_record">交易记录</string>
+    <string name="title_interview_record">面试记录</string>
+    <string name="title_hire_record">雇佣记录</string>
+    <string name="title_my_coupon">我的红包</string>
+    <string name="title_account_security">账号安全</string>
+    <string name="title_paypwd_set">设置支付密码</string>
+    <string name="title_contact_service">联系客服</string>
+    <!--登录-->
+    <string name="title_register">用户注册</string>
+    <string name="title_login">手机登录</string>
+    <string name="title_pwd_forget">忘记密码</string>
+    <string name="title_pwd_edit">修改登录密码</string>
 
-
-
-    <string name="title_tab_mine">我的账户</string>//
-    <string name="title_tab_staff">管理我的员工</string>
-    <string name="title_tab_recruit">招聘</string>
-    <string name="demo_tab_1">招美工</string>
-    <string name="demo_tab_2">招客服</string>
-    <string name="demo_tab_3">旅游酒店</string>
-    <string name="demo_tab_4">数码家电</string>
-    <string name="demo_tab_5">户外运动</string>
-    <string name="demo_tab_6">汽车用品</string>
-    <string name="title_UpdateNickName">修改昵称</string>
-    <string name="title_About_us">关于我们</string>
-    <string name="title_service">联系客服</string>
-    <string name="title_favor">我的收藏</string>
-    <string name="title_red_packet">我的红包</string>
-    <string name="title_paypsw">支付密码</string>
-    <string name="title_storeinfo">店铺信息</string>
-    <string name="title_employ">雇佣记录</string>
-    <string name="title_transact">交易记录</string>
-    <string name="title_interview">面试记录</string>
-    <string name="title_packet_rule">使用规则</string>
-    <string name="title_pay_psw">设置支付密码</string>
-    <string name="title_account">公司信息</string>//
-    <string name="title_chcek_list">浏览记录</string>
-    <string name="title_updatestore">编辑店铺信息</string>
-    <string name="title_message">消息通知</string>
-    <string name="title_message_notice">公告详情</string>
-    <string name="title_invite_guide">招聘指南</string>
-
-
-
-    <string name="title_arrange_work">安排工作</string>
-    <string name="title_staff_manage">我的员工</string>
-    <string name="title_staff_renew">员工续签</string>
-    <string name="title_staff_salary">员工工资</string>
-    <string name="title_staff_report">工作报告</string>
-    <string name="title_staff_report_sale">销售额</string>
-    <string name="title_staff_report_details">发布报告</string>
-    <string name="title_staff_attendance">考勤记录</string>
-    <string name="title_staff_arrangework">安排工作</string>
-    <string name="title_staff_pausework">暂停工作</string>
-    <string name="title_staff_complaint">发起投诉</string>
-    <string name="title_staff_fire">发起解雇</string>
-    <string name="title_manage_staff">员工管理</string>
-    <string name="title_works">作品</string>
-    <string name="title_orderinfo_confirm">确认订单信息</string>
-    <string name="title_salary_trusteeship">托管工资</string>
-    <string name="title_pay_result">支付结果</string>
 
 
     <!--密码输入限制-->
     <string name="string_pwd">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <!--员工tab 没有员工提示语-->
+    <string name="string_staff_hint1">在线全职办公管理</string>
+    <string name="string_staff_hint2">在线入职and移动办公</string>
+    <!--暂停工作时间提示语-->
+    <string name="string_pausework_timehint">最多仅能暂停一次，一次最多仅能暂停7天</string>
+    <!--投诉提示语-->
+    <string name="string_complaint_hint">客服将在3个工作日内介入</string>
+    <!--红包使用规则-->
+    <string name="string_coupon_userule">1.红包\n2.红包\n3.红包</string>
 
 </resources>

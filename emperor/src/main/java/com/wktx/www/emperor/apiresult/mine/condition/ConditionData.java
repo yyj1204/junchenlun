@@ -41,7 +41,7 @@ public class ConditionData {
 
     @Override
     public String toString() {
-        return "StoreConditionData{" +
+        return "ConditionData{" +
                 "code=" + code +
                 ", msg='" + msg + '\'' +
                 ", info=" + info +

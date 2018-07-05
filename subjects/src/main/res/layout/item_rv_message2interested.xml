@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_mine_linearlayout"
+    android:padding="@dimen/px_30"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_head"
+        android:layout_width="@dimen/px_106"
+        android:layout_height="@dimen/px_106"
+        android:src="@drawable/img_mine_head" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/px_14">
+        <TextView
+            android:id="@+id/tv_companyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="公司名称"
+            android:textColor="@color/color_000000"
+            android:textStyle="bold"
+            android:textSize="@dimen/sp_15" />
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/px_20"
+            android:text="时间"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_13"/>
+
+    </com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="@color/color_f0f0f0"
+    android:fitsSystemWindows="true"
     tools:context="com.wktx.www.emperor.ui.activity.mine.certification.CertificationPersonalActivity">
 
     <include layout="@layout/include_toolbar_activity" />

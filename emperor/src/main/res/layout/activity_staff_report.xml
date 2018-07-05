@@ -7,52 +7,25 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:background="@color/color_f0f0f0"
-    tools:context="com.wktx.www.emperor.com.wktx.www.emperor.Activity.StaffReportActivity">
+    tools:context="com.wktx.www.emperor.ui.activity.staff.report.StaffReportActivity">
 
     <include layout="@layout/include_toolbar_activity" />
 
-    <LinearLayout
+    <com.wktx.www.emperor.widget.DropDownMenu
+        android:id="@+id/dropDownMenu"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="全部"
-            android:gravity="center"
-            android:textColor="@color/title_gray_5d"
-            android:background="@color/white"
-            android:drawableRight="@drawable/selector_pull_down"
-            android:drawablePadding="@dimen/dp_ten" />
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        app:ddmenuTextSize="@dimen/sp_15"
+        app:ddtextSelectedColor="@color/color_ffb321"
+        app:ddtextUnselectedColor="@color/color_5d5d5d"
+        app:ddmenuSelectedIcon="@drawable/down_pull_selected"
+        app:ddmenuUnselectedIcon="@drawable/down_pull_normal"
+        app:ddmaskColor="@color/mask_color"
+        app:ddmenuBackgroundColor="@color/color_f7f7f7"
+        app:ddunderlineColor="@color/gray"
+        app:dddividerColor="@color/gray"
+        app:dddividerHeight="@dimen/px_20"
+        app:ddmenuIconOrientation="right">
+    </com.wktx.www.emperor.widget.DropDownMenu>
 
-    <LinearLayout
-        android:id="@+id/linear_report_sale"
-        android:layout_width="match_parent"
-        android:layout_height="43dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:gravity="center_vertical"
-        android:background="@color/color_ffffff"
-        android:layout_marginBottom="7dp"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_report_sale"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="10dp"
-            android:text="销售额"
-            android:textSize="13sp"
-            android:textColor="@color/title_color" />
-        <ImageView
-            android:layout_width="9dp"
-            android:layout_height="16dp"
-            android:src="@drawable/mine_arrow_right_gray" />
-    </LinearLayout>
-
-    <include layout="@layout/include_recycleview_f0f0f0"/>
 </LinearLayout>

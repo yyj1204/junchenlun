@@ -28,7 +28,7 @@ public class Bean implements Serializable{
 
     @Override
     public String toString() {
-        return "Bean{" +
+        return "StoreConditionBean{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 '}';

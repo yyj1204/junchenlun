@@ -11,6 +11,7 @@ public class AccountInfoData implements Serializable {
 
     private int user_id;//用户id
     private String token;//用户token
+    private String phone;//用户phone
     private int is_new;//是否新用户
 
     public AccountInfoData() {
@@ -30,6 +31,14 @@ public class AccountInfoData implements Serializable {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public int getIs_new() {

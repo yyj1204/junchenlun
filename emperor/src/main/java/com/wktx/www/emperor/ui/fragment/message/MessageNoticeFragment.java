@@ -3,7 +3,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,9 @@ import com.wktx.www.emperor.ui.adapter.main.MessageNoticeListAdapter;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
-import com.wktx.www.emperor.view.IView;
+import com.wktx.www.emperor.ui.view.IView;
+import com.wktx.www.emperor.utils.ToastUtil;
+import com.wktx.www.emperor.widget.MyLayoutManager;
 
 import java.util.List;
 
@@ -99,7 +100,7 @@ public class MessageNoticeFragment extends ALazyLoadFragment<IView,MessagePresen
         swipeRefreshLayout.setRefreshing(true);
         //设置分割线与垂直方向布局
         recyclerView.addItemDecoration(MyUtils.drawDivider(getContext(), LinearLayout.VERTICAL, R.drawable.divider_f0f0f0_14));
-        LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayout.VERTICAL, false);
+        MyLayoutManager manager = new MyLayoutManager(getContext(), LinearLayout.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
     }
 
@@ -139,8 +140,6 @@ public class MessageNoticeFragment extends ALazyLoadFragment<IView,MessagePresen
     }
     //刷新
     private void refresh() {
-        //这里的作用是防止下拉刷新的时候还可以上拉加载
-        adapter.setEnableLoadMore(false);
         getPresenter().onMessageList("0");
     }
 
@@ -162,10 +161,10 @@ public class MessageNoticeFragment extends ALazyLoadFragment<IView,MessagePresen
     public void onRequestFailure(String result) {
         if (result.equals("")){//没数据
             recyclerView.setBackgroundResource(R.drawable.img_nothing);
-            MyUtils.showToast(getContext(),"暂无任何公告消息！");
+            ToastUtil.myToast("暂无任何公告消息！");
         }else {
             recyclerView.setBackgroundResource(R.drawable.img_nothing_net);
-            MyUtils.showToast(getContext(),result);
+            ToastUtil.myToast(result);
         }
         adapter.setNewData(null);
         swipeRefreshLayout.setRefreshing(false);

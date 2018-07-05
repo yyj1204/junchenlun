@@ -71,6 +71,7 @@ public class MyUtils {
         }
         return flag;
     }
+
     /**
      * 设置手机号码中间4位*
      * 如（181****1675）
@@ -90,12 +91,12 @@ public class MyUtils {
         return sb.toString();
     }
 
-
     /**
      *防止按钮频繁点击
      */
     private static long lastClickTime;
-
+    private static long lastClickTime1;
+    //待弹框消失后方可再次点击
     public static boolean isFastClick() {
         long time = System.currentTimeMillis();
         long timeD = time - lastClickTime;
@@ -103,6 +104,16 @@ public class MyUtils {
             return true;
         }
         lastClickTime = time;
+        return false;
+    }
+    //没有弹框，则等待再次点击的时间可缩短
+    public static boolean isFastClick1() {
+        long time = System.currentTimeMillis();
+        long timeD = time - lastClickTime1;
+        if (0 < timeD && timeD < 1500) {
+            return true;
+        }
+        lastClickTime1 = time;
         return false;
     }
 
@@ -171,68 +182,5 @@ public class MyUtils {
         bit.compress(Bitmap.CompressFormat.JPEG, 100, bos);//参数100表示不压缩
         byte[] bytes=bos.toByteArray();
         return Base64.encodeToString(bytes, Base64.DEFAULT);
-    }
-
-    /**
-     * 保存文件
-     * @param bm
-     * @throws IOException
-     */
-    public static File saveFile(Bitmap bm) throws IOException {
-        String path = Environment.getExternalStorageDirectory().toString()+"/xpcw/icon_bitmap/";
-        File dirFile = new File(path);
-        if(!dirFile.exists()){
-            dirFile.mkdirs();
-        }
-        File myIconFile= new File(path + "headicon.jpg");
-        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(myIconFile));
-//        bm.compress(Bitmap.CompressFormat.JPEG, 80, bos);
-        bos.flush();
-        bos.close();
-        return myIconFile;
-    }
-
-
-    /**
-     * 从本地获取图片
-     * @param pathString 文件路径
-     * @return 图片
-     */
-    public static Bitmap getDiskBitmap(String pathString) {
-        Bitmap bitmap = null;
-        try {
-            File file = new File(pathString);
-            if(file.exists()) {
-                bitmap = BitmapFactory.decodeFile(pathString);
-            }
-        } catch (Exception e) {
-        }
-        return bitmap;
-    }
-    /**
-     * 根据图片的url路径获得Bitmap对象
-     * @param url
-     * @return
-     */
-    public static Bitmap returnBitmap(String url) {
-        URL fileUrl = null;
-        Bitmap bitmap = null;
-        try {
-            fileUrl = new URL(url);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            HttpURLConnection conn = (HttpURLConnection) fileUrl.openConnection();
-            conn.setDoInput(true);
-            conn.connect();
-            InputStream is = conn.getInputStream();
-            bitmap = BitmapFactory.decodeStream(is);
-            is.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bitmap;
     }
 }

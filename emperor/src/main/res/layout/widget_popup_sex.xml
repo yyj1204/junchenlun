@@ -1,0 +1,52 @@
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/dp_ten"
+        android:layout_marginRight="@dimen/dp_ten"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/sex_man"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:background="@drawable/shape_top_lr"
+            android:textSize="@dimen/sp_fifteen"
+            android:textColor="@color/tab_text_normal"
+            android:text="男" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:gravity="center"
+            android:background="@color/dividerLine"
+             />
+        <TextView
+            android:id="@+id/sex_women"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:background="@drawable/shape_bottom_ffffff_10"
+            android:textSize="@dimen/sp_fifteen"
+            android:textColor="@color/tab_text_normal"
+            android:text="女" />
+
+        <TextView
+            android:id="@+id/sex_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="55dp"
+            android:background="@drawable/shape_solid_ffffff_10"
+            android:textSize="@dimen/sp_fifteen"
+            android:textColor="@color/tab_text_normal"
+            android:text="取消" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+</com.zhy.autolayout.AutoRelativeLayout>

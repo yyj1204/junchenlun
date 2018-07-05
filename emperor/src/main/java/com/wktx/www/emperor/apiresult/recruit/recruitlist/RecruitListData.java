@@ -9,9 +9,8 @@ import java.util.List;
  * "ret": 200,"msg": "",
  * "data": {
  *   "code": 0,"msg": "",
- *   "info":[{"id": "2","name": "啊西歌","picture": "","working_years": "5",
- *   "sex": "1","monthly_money": "4800.00","is_job_hunting": "1",
- *   "bgat": "母婴玩具/精品鞋包/生活百货","bgas": "中国风/时尚简约/质感炫酷","resume_works": []}]
+ *   "info":[{"id": "2","name": "啊西歌","tow": "2","picture": "","working_years": "5","typing_speed": "0字/分","sex": "1",
+ *   "monthly_money": "0.01","is_job_hunting": "1","tow_name": "客服","bgat": "母婴玩具/精品鞋包/生活百货","bgas": "中国风/时尚简约/质感炫酷","resume_works": []}]
  *  }
  *}
  */

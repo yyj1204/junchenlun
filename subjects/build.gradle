@@ -5,18 +5,18 @@ android {
         subjects {
             keyAlias 'subjects'
             keyPassword 'subjects'
-            storeFile file('D:/android/workspace/as0819/jcl/subjects.jks')
+            storeFile file('D:/android/workspace/junchenlun/junchenlun/subjects.jks')
             storePassword 'subjects'
         }
     }
     compileSdkVersion 26
-    buildToolsVersion "27.0.0"
+    buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.wktx.www.subjects"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -41,50 +41,75 @@ dependencies {
     compile project(':lib_alphatabs')
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
-
-
     /*RxJava2+Retrofit2网络请求框架*/
     compile 'com.zhouyou:rxeasyhttp:2.0.5'
+
     /*下拉刷新上拉加载更多*/
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+
     /*butterknife 注解*/
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
     /*RecyclerView 万能适配器*/
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.32'
+
     /*侧滑删除*/
-    compile 'com.yanzhenjie:recyclerview-swipe:1.0.4'
+    compile 'com.yanzhenjie:recyclerview-swipe:1.1.4'
+
     /*轮播图*/
     compile 'com.youth.banner:banner:1.4.2'
+
     /*网络请求*/
     compile 'com.zhy:okhttputils:2.6.2'
+
     /*图片加载*/
-    compile 'com.github.bumptech.glide:glide:3.6.1'
+    implementation 'com.github.bumptech.glide:glide:4.4.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
+
     /*smarttablayout*/
     compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
     compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
+
     /*侧滑退出*/
     compile 'com.r0adkll:slidableactivity:2.0.5'
+
     /*gson*/
     compile 'com.google.code.gson:gson:2.2.4'
-    //刷新
+
     /*圆形图片*/
     compile 'de.hdodenhof:circleimageview:2.1.0'
-    /*检查权限*/
-    compile 'pub.devrel:easypermissions:1.0.0'
+
     /*地址选择器*/
-    compile 'com.contrarywind:Android-PickerView:3.2.5'
+    compile 'com.contrarywind:Android-PickerView:3.2.7'
+
     /*图片选择器*/
-    compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.0'
+    /*compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.0'*/
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.2'
+
     /*九宫格图片*/
     compile 'com.jaeger.ninegridimageview:library:1.1.0'
+
     /*星星评价*/
     compile 'com.xingliuhua:xlhratingbar_lib:1.0.1'
     compile 'com.hedgehog.ratingbar:app:1.1.2'
+
     /*流式布局*/
     compile 'com.hyman:flowlayout-lib:1.1.2'
+
     /*屏幕适配器*/
     compile 'com.zhy:autolayout:1.4.5'
 
+    /*沉浸式状态栏 */
+    compile 'com.jaeger.statusbarutil:library:1.4.0'
+
+    /*微信支付*/
+//    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.1.6'
+
+    /*支付宝*/
+//    compile files('libs/alipaySdk-20170922.jar')
+
+    /*Android6.0以上系统权限*/
+    compile 'pub.devrel:easypermissions:1.0.0'
 
 }

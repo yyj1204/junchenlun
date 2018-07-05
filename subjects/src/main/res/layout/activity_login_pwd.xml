@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="@color/color_ffffff"
+    tools:context="com.wktx.www.subjects.ui.activity.mine.security.LoginPwdActivity">
+
+    <include layout="@layout/include_toolbar_activity"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/px_30"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_90"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/et_pwdOld"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/px_5"
+                android:layout_weight="1"
+                android:background="@null"
+                android:drawableLeft="@drawable/ic_login_psw"
+                android:drawablePadding="@dimen/px_21"
+                android:hint="请输入旧密码(6-12位数字、字母)"
+                android:singleLine="true"
+                android:inputType="textPassword"
+                android:digits="@string/string_pwd"
+                android:textColorHint="@color/color_b2b2b2"
+                android:textCursorDrawable="@null"
+                android:textSize="@dimen/sp_14" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_2"
+                android:background="@color/color_f2f2f2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_90"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/et_pwdNew1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/px_5"
+                android:layout_weight="1"
+                android:background="@null"
+                android:drawableLeft="@drawable/ic_login_psw"
+                android:drawablePadding="@dimen/px_21"
+                android:hint="请输入新密码(6-12位数字、字母)"
+                android:singleLine="true"
+                android:inputType="textPassword"
+                android:digits="@string/string_pwd"
+                android:textColorHint="@color/color_b2b2b2"
+                android:textCursorDrawable="@null"
+                android:textSize="@dimen/sp_14" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_2"
+                android:background="@color/color_f2f2f2" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_90"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/et_pwdNew2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/px_5"
+                android:layout_weight="1"
+                android:background="@null"
+                android:drawableLeft="@drawable/ic_login_psw"
+                android:drawablePadding="@dimen/px_21"
+                android:hint="再次输入新密码"
+                android:singleLine="true"
+                android:inputType="textPassword"
+                android:digits="@string/string_pwd"
+                android:textColorHint="@color/color_b2b2b2"
+                android:textCursorDrawable="@null"
+                android:textSize="@dimen/sp_14" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_2"
+                android:background="@color/color_f2f2f2" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bt_editPwd"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_90"
+            android:layout_marginTop="@dimen/px_80"
+            android:background="@drawable/selector_submit_selected_10"
+            android:gravity="center"
+            android:text="修改密码"
+            android:textColor="@color/color_ffffff"
+            android:textSize="@dimen/sp_15" />
+    </LinearLayout>
+</LinearLayout>

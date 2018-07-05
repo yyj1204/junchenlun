@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_ffffff"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".ui.activity.main.notification.NotificationDetailsActivity">
+
+    <include layout="@layout/include_toolbar_activity" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/px_30"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/px_40"
+            android:textSize="@dimen/sp_24"
+            android:textColor="@color/color_000000"
+            android:text="消息标题"/>
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/px_30"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/color_999999"
+            android:text="消息时间"/>
+        <TextView
+            android:layout_width="@dimen/px_200"
+            android:layout_height="@dimen/px_1"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/px_30"
+            android:background="@color/color_999999"/>
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/px_40"
+            android:gravity="center"
+            android:textSize="@dimen/sp_13"
+            android:textColor="@color/color_999999"
+            android:text="消息内容"/>
+    </LinearLayout>
+</LinearLayout>

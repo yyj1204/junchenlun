@@ -21,4 +21,25 @@
         </attr>
     </declare-styleable>
 
+    <!--自定义日历控件-->
+    <declare-styleable name="CustomCalendar">
+        <attr name="dateFormat" format="string" />
+    </declare-styleable>
+
+    <!--自定义支付密码输入框-->
+    <declare-styleable name="CustomPwdEditView">
+        <attr name="length" format="integer" />
+        <attr name="borderColor" format="color" />
+        <attr name="borderWidth" format="dimension" />
+        <attr name="dividerColor" format="color" />
+        <attr name="dividerWidth" format="dimension" />
+        <attr name="code" format="string" />
+        <attr name="codeColor" format="color" />
+        <attr name="pointRadius" format="dimension" />
+        <attr name="textSize" format="dimension" />
+        <attr name="showType" format="enum">
+            <enum name="word" value="1" />
+            <enum name="password" value="2" />
+        </attr>
+    </declare-styleable>
 </resources>

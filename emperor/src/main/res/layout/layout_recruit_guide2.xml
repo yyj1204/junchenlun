@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/color_f0f0f0"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/color_ffffff"
+            android:textSize="20sp"
+            android:background="@drawable/ic_recruitguide_tag"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="在线雇佣"
+            android:textStyle="bold"
+            android:layout_marginLeft="17dp"
+            android:textColor="@color/color_000000"
+            android:textSize="20sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="浏览简历，直接面试"
+            android:layout_marginLeft="7dp"
+            android:textColor="@color/color_999999"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="13dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="30px">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_recruitguide2_gyyg"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:textColor="@color/color_000000"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:text="雇佣员工"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="  选择雇佣时间"
+                android:textSize="12sp"
+                android:layout_marginLeft="23dp"
+                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:textColor="@color/color_999999"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="  发送入职邀请"
+                android:textSize="12sp"
+                android:layout_marginLeft="23dp"
+                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:textColor="@color/color_999999"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_recruitguide2_zffs"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:textColor="@color/color_000000"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:text="支付方式"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="  支付宝支付"
+                android:textSize="12sp"
+                android:layout_marginLeft="23dp"
+                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:textColor="@color/color_999999"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="  微信支付"
+                android:textSize="12sp"
+                android:layout_marginLeft="23dp"
+                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:textColor="@color/color_999999"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_ffffff"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="13dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="30px">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_recruitguide2_tggz"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:textColor="@color/color_000000"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:text="托管工资"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="  第三方担保交易"
+                android:textSize="12sp"
+                android:layout_marginLeft="23dp"
+                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:textColor="@color/color_999999"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="  员工按雇佣时间确定入职"
+                android:textSize="12sp"
+                android:layout_marginLeft="23dp"
+                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:textColor="@color/color_999999"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="  确认工作满意后发放工资"
+                android:textSize="12sp"
+                android:layout_marginLeft="23dp"
+                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:textColor="@color/color_999999"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_recruitguide2_qcdb"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:textColor="@color/color_000000"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:text="全程担保"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="  雇主全程可以在工作"
+                android:textSize="12sp"
+                android:layout_marginLeft="23dp"
+                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:textColor="@color/color_999999"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="  管理后台中查看每一"
+                android:textSize="12sp"
+                android:layout_marginLeft="27dp"
+                android:textColor="@color/color_999999"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="  笔工资动向"
+                android:textSize="12sp"
+                android:layout_marginLeft="27dp"
+                android:textColor="@color/color_999999"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

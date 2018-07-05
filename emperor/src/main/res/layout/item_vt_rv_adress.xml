@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/main_white"
@@ -13,9 +13,9 @@
         android:layout_height="53dp"
         android:layout_marginTop="21dp"
         android:scaleType="fitXY"
-        android:src="@drawable/icon_head_woman" />
+        android:src="@drawable/img_mine_head" />
 
-    <LinearLayout
+    <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_ten"
@@ -23,7 +23,7 @@
         android:orientation="vertical"
         android:paddingTop="21dp">
 
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -34,6 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="胡图图"
+                android:textStyle="bold"
                 android:textColor="@color/title_color"
                 android:textSize="@dimen/sp_sixteen" />
 
@@ -41,20 +42,20 @@
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_marginLeft="@dimen/dp_ten"
-                android:src="@drawable/icon_sex_woman" />
+                android:src="@drawable/ic_sex_woman" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="@dimen/dp_ten"
-                android:background="@drawable/shape_buttom_nine"
-                android:text="1年"
+                android:background="@drawable/shape_buttom_ffb321_18"
+                android:text="0年"
                 android:textColor="@color/title_color"
                 android:textSize="@dimen/sp_twelve" />
-        </LinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
 
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_twelve"
@@ -64,7 +65,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/time"
+                android:drawableLeft="@drawable/ic_collect_workyears"
                 android:drawablePadding="@dimen/dp_eight"
                 android:gravity="center"
                 android:text="一年以上"
@@ -75,15 +76,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_thirty"
-                android:drawableLeft="@drawable/adress"
+                android:drawableLeft="@drawable/ic_collect_city"
                 android:drawablePadding="@dimen/dp_eight"
                 android:gravity="center"
                 android:text="福建-泉州-丰泽区"
                 android:textColor="@color/title_color_gray"
                 android:textSize="@dimen/sp_thirteen" />
-        </LinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
 
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_twelve"
@@ -93,7 +94,7 @@
             <ImageView
                 android:layout_width="15dp"
                 android:layout_height="13dp"
-                android:src="@drawable/specialty" />
+                android:src="@drawable/ic_collect_specialty" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -102,9 +103,9 @@
                 android:text="日韩小清新/中国风/时尚简约"
                 android:textColor="@color/title_color"
                 android:textSize="@dimen/sp_thirteen" />
-        </LinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
 
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_twelve"
@@ -128,6 +129,6 @@
                 android:textColor="@color/title_color"
                 android:textSize="@dimen/sp_sixteen"
                 android:textStyle="bold" />
-        </LinearLayout>
-    </LinearLayout>
-</LinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

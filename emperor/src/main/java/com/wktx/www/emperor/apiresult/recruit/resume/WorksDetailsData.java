@@ -8,7 +8,7 @@ package com.wktx.www.emperor.apiresult.recruit.resume;
  * "data": {
  *         "code":0,"msg":"",
  *         "info":{
- *                 "id":"1","title":"亚麻拖鞋详情","brief_intro":"亚麻拖鞋详情","bgat":"服装内衣/母婴玩具/精品鞋包"
+ *                 "rid":"1","id":"1","title":"亚麻拖鞋详情","brief_intro":"亚麻拖鞋详情","bgat":"服装内衣/母婴玩具/精品鞋包"
  *                 "content":["http://shop.jcl.55085.cn/public/upload/goods/2016/04-22/5719843a87434.jpg"]
  *                 }
  *         }

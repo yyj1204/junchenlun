@@ -7,7 +7,7 @@ import com.wktx.www.emperor.utils.ApiURL;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.LogUtil;
 import com.wktx.www.emperor.utils.Md5Util;
-import com.wktx.www.emperor.view.login.ILoginView;
+import com.wktx.www.emperor.ui.view.login.ILoginView;
 import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.callback.CallBackProxy;
 import com.zhouyou.http.callback.ProgressDialogCallBack;

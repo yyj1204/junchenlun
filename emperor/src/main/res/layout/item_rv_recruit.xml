@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/color_ffffff"
+    android:background="@drawable/selector_mine_linearlayout"
     android:orientation="vertical"
     android:paddingBottom="@dimen/px_30">
 
@@ -19,7 +19,7 @@
             android:id="@+id/iv_head"
             android:layout_width="@dimen/px_106"
             android:layout_height="@dimen/px_106"
-            android:src="@drawable/icon_head_woman" />
+            android:src="@drawable/img_mine_head" />
 
         <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
@@ -37,6 +37,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="姓名"
+                    android:singleLine="true"
+                    android:textStyle="bold"
                     android:textColor="@color/color_000000"
                     android:textSize="@dimen/sp_15" />
                 <ImageView
@@ -44,7 +46,7 @@
                     android:layout_width="@dimen/px_24"
                     android:layout_height="@dimen/px_24"
                     android:layout_marginLeft="@dimen/px_10"
-                    android:src="@drawable/icon_sex_woman" />
+                    android:src="@drawable/ic_sex_woman" />
                 <TextView
                     android:id="@+id/tv_workYears"
                     android:layout_width="wrap_content"
@@ -52,12 +54,23 @@
                     android:layout_marginLeft="@dimen/px_14"
                     android:layout_gravity="bottom"
                     android:text="0年"
-                    android:background="@drawable/shape_buttom_nine"
+                    android:visibility="gone"
+                    android:background="@drawable/shape_buttom_ffb321_18"
                     android:textColor="@color/color_000000"
                     android:textSize="@dimen/sp_12" />
                 <TextView
+                    android:id="@+id/tv_staffJob"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/px_12"
+                    android:text="职位"
+                    android:textColor="@color/color_ffb321"
+                    android:background="@drawable/shape_stroke_ffb321_18"
+                    android:textSize="@dimen/sp_12" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/px_6"
                     android:layout_weight="1"
                     android:gravity="right|bottom"
                     android:text="￥"
@@ -69,7 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/px_6"
-                    android:text="0元"
+                    android:text="0"
                     android:textColor="@color/color_000000"
                     android:textSize="@dimen/sp_15"
                     android:textStyle="bold" />

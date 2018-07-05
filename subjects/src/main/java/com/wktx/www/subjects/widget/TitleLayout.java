@@ -7,20 +7,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.wktx.www.subjects.R;
+import com.zhy.autolayout.AutoLinearLayout;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 /**
- * Created by Administrator on 2016/11/30 0030.
+ * 职位顶部搜索框控件
  */
-public class TitleLayout extends LinearLayout {
+public class TitleLayout extends AutoLinearLayout {
 
-    @BindView(R.id.title_layout)
-    LinearLayout mTitleLayout;
-    @BindView(R.id.title_search)
-    TextView mTitleSearch;
-    @BindView(R.id.tb_right_img)
-    ImageView mTitleNewInfo;
+    @BindView(R.id.linear_titleSearch)
+    LinearLayout llTitle;
+    @BindView(R.id.tv_titleSearch)
+    TextView tvSearch;
+    @BindView(R.id.iv_titleRight)
+    ImageView ivRight;
+
     private Context mContext;
 
 
@@ -40,12 +42,11 @@ public class TitleLayout extends LinearLayout {
     }
 
     public void setTitleLayoutColor(int color) {
-        mTitleLayout.setBackgroundColor(color);
+        llTitle.setBackgroundColor(color);
     }
 
     public void setSearchDrawableBackground(int shapeDrawable) {
-        mTitleSearch.setBackgroundResource(shapeDrawable);
+        tvSearch.setBackgroundResource(shapeDrawable);
     }
-
 
 }

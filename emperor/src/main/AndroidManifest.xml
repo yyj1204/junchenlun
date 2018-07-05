@@ -1,39 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wktx.www.emperor">
-
-    //RxJava2+Retrofit2 网络请求框架  请求权限
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-
+    //RxJava2+Retrofit2 网络请求框架 请求权限
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     //if you want to load images from the internet
-    <!--<uses-permission android:name="android.permission.INTERNET" />-->
-    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
+    <!-- <uses-permission android:name="android.permission.INTERNET" /> -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
-    <!--拨打电话-->
+    <!-- 拨打电话 -->
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <!-- 《支付宝 -->
-    <!--<uses-permission android:name="android.permission.INTERNET" />-->
-    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
-    <!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />-->
+    <!-- <uses-permission android:name="android.permission.INTERNET" /> -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
+
+    <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
     <!-- 支付宝 》 -->
 
+    //图片选择器 请求权限
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    //图片加载
+    <!--<uses-permission android:name="android.permission.INTERNET" />-->
+    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
+
     <application
-        android:name="com.wktx.www.emperor.application.MyApplication"
+        android:name=".application.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.wktx.www.emperor.ui.activity.MainActivity">
+
+        <!-- 欢迎界面 (解决点击桌面图标，APP重启问题) -->
+        <activity
+            android:name=".ui.activity.main.WelcomeActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,79 +54,98 @@
             <!-- 微信支付：这个intent-filter不要忘了 -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="wx31feb0aeb009c07b" /> <!-- 微信APPId -->
+
+                <data android:scheme="wxdfb137b9c34a5a28" /> <!-- 微信APPId -->
             </intent-filter>
-
         </activity>
-
-        <!--登录、注册、忘记密码-->
+        //首页
+        <!-- 首页、搜索、美工案例(排序筛选)、招聘指南、消息（详情） -->
+        <activity
+            android:name=".ui.activity.main.MainActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.activity.main.SearchActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity android:name=".ui.activity.main.artistcase.ArtistCaseActivity" />
+        <activity android:name=".ui.activity.main.artistcase.ScreeningArtistActivity" />
+        <activity android:name=".ui.activity.main.RecruitGuideActivity" />
+        <activity android:name=".ui.activity.main.message.MessageActivity" />
+        <activity android:name=".ui.activity.main.message.MessageDetailsActivity" />
+        //招聘
+        <!-- 筛选（工作经验、性别） -->
+        <activity android:name=".ui.activity.recruit.ScreeningResumeActivity" />
+        <!-- 发布需求 -->
+        <activity android:name=".ui.activity.recruit.demand.DemandActivity" />
+        <activity
+            android:name=".ui.activity.recruit.demand.DemandReleaseActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity android:name=".ui.activity.recruit.demand.DemandDetailsActivity" />
+        <!-- 简历、作品详情 -->
+        <activity android:name=".ui.activity.recruit.resume.ResumeActivity" />
+        <activity android:name=".ui.activity.recruit.resume.WorksDetailsActivity" />
+        <!-- 雇佣、确认订单信息、托管工资、支付结果、输入余额支付密码 -->
+        <activity
+            android:name=".ui.activity.recruit.hire.HireActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity android:name=".ui.activity.recruit.hire.OrdersInfoActivity" />
+        <activity android:name=".ui.activity.recruit.hire.TrusteeshipSalaryActivity" />
+        <activity android:name=".ui.activity.recruit.hire.PayResultActivity" />
+        <activity
+            android:name=".ui.activity.recruit.hire.InputPayPwdActivity"
+            android:theme="@style/PasswordTheme" />
+        //员工
+        <!-- 管理、续签、工资、考勤记录、安排工作、暂停工作、发起投诉、发起解雇、工作报告、销售额 -->
+        <activity android:name=".ui.activity.staff.StaffManageActivity" />
+        <activity android:name=".ui.activity.staff.StaffRenewalActivity" />
+        <activity android:name=".ui.activity.staff.StaffSalaryActivity" />
+        <activity android:name=".ui.activity.staff.StaffAttendanceActivity" />
+        <activity android:name=".ui.activity.staff.StaffArrangeWorkActivity" />
+        <activity android:name=".ui.activity.staff.StaffPauseWorkActivity" />
+        <activity android:name=".ui.activity.staff.StaffComplaintActivity" />
+        <activity android:name=".ui.activity.staff.StaffFireActivity" />
+        <activity android:name=".ui.activity.staff.report.StaffReportActivity" />
+        <activity android:name=".ui.activity.staff.report.ReportListActivity" />
+        <activity
+            android:name=".ui.activity.staff.report.ReportDetailsActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity android:name=".ui.activity.staff.report.ReportSaleroomActivity" />
+        //我的账户
+        <!-- 登录、注册、忘记密码 -->
         <activity android:name=".ui.activity.login.LoginActivity" />
         <activity android:name=".ui.activity.login.RegisterActivity" />
         <activity android:name=".ui.activity.login.ForgetPwdActivity" />
-
-        //招聘
-        <!--筛选（工作经验、性别）-->
-        <activity android:name="com.wktx.www.emperor.ui.activity.recruit.ScreeningActivity"/>
-        <!--发布需求-->
-        <activity android:name="com.wktx.www.emperor.ui.activity.recruit.demand.DemandActivity" />
-        <activity android:name="com.wktx.www.emperor.ui.activity.recruit.demand.DemandReleaseActivity" />
-        <activity android:name="com.wktx.www.emperor.ui.activity.recruit.demand.DemandDetailsActivity" />
-        <!--简历（雇佣、作品详情）-->
-        <activity android:name="com.wktx.www.emperor.ui.activity.recruit.resume.ArtistResumeActivity" />
-        <activity android:name="com.wktx.www.emperor.ui.activity.recruit.resume.ArtistEmployActivity" />
-        <activity android:name="com.wktx.www.emperor.ui.activity.recruit.resume.WorksDetailsActivity" />
-        <!--浏览记录-->
-        <activity android:name="com.wktx.www.emperor.ui.activity.recruit.BrowsingHistoryActivity" />
-
-        //我的账户
-        <!--公司信息-->
-        <activity android:name="com.wktx.www.emperor.ui.activity.mine.CompanyInfoActivity" />
-        <!--账户认证（个人、店铺）-->
-        <activity android:name="com.wktx.www.emperor.ui.activity.mine.certification.AccountCertificationActivity" />
-        <activity android:name="com.wktx.www.emperor.ui.activity.mine.certification.CertificationPersonalActivity" />
-        <activity android:name="com.wktx.www.emperor.ui.activity.mine.certification.CertificationStoreActivity" />
-
-        <!--搜索-->
-        <activity android:name="com.wktx.www.emperor.ui.activity.SearchActivity" />
-
-
-        <activity android:name="com.wktx.www.emperor.Activity.UpdateNickNameActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.AboutUsActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.ServiceActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.FavorActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.PacketActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.StoreInfoActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.EmployActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.TrasactActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.PacketRuleActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.PayPswctivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.InterviewActivity" />
-        <activity android:name="com.wktx.www.emperor.ui.activity.mine.purse.PurseWithdrawalActivity" />
-        <activity android:name="com.wktx.www.emperor.ui.activity.mine.purse.MyPurseActivity" />
-        <activity android:name="com.wktx.www.emperor.ui.activity.mine.purse.PurseRechargeActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.UpdateStoreActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.MessageActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.MessageDetailsActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.InviteGuideActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.ArrangeWorkActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.RecruitActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.StaffManageActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.StaffRenewActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.StaffArrangeWorkActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.StaffPauseWorkActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.StaffComplaintActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.StaffFireActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.StaffSalaryActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.StaffAttendanceActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.StaffReportActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.WorksActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.StaffSaleActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.StaffReportDetaisActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.OrdersInfoActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.SalaryTrusteeshipActivity" />
-        <activity android:name="com.wktx.www.emperor.Activity.PayResultActivity" />
-
+        <!-- 公司信息 -->
+        <activity android:name=".ui.activity.mine.CompanyInfoActivity" />
+        <!-- 账户认证（个人、店铺） -->
+        <activity android:name=".ui.activity.mine.certification.AccountCertificationActivity" />
+        <activity android:name=".ui.activity.mine.certification.CertificationPersonalActivity" />
+        <activity
+            android:name=".ui.activity.mine.certification.CertificationStoreActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- 设置（修改密码） -->
+        <activity android:name=".ui.activity.mine.SettingActivity" />
+        <!-- 我的钱包（钱包充值、钱包提现） -->
+        <activity android:name=".ui.activity.mine.purse.MyPurseActivity" />
+        <activity android:name=".ui.activity.mine.purse.PurseRechargeActivity" />
+        <activity android:name=".ui.activity.mine.purse.PurseWithdrawalActivity" />
+        <!-- 浏览记录、店铺信息(编辑添加)、我的收藏、交易记录、面试记录、雇佣记录、我的红包、账号安全、联系客服 -->
+        <activity android:name=".ui.activity.mine.BrowsingRecordActivity" />
+        <activity android:name=".ui.activity.mine.store.StoreInfoActivity" />
+        <activity android:name=".ui.activity.mine.store.StoreInfoEditActivity" />
+        <activity android:name=".ui.activity.mine.MyCollectActivity" />
+        <activity android:name=".ui.activity.mine.TransactionRecordActivity" />
+        <activity android:name=".ui.activity.mine.InterviewRecordActivity" />
+        <activity android:name=".ui.activity.mine.HireRecordActivity" />
+        <activity android:name=".ui.activity.mine.MyCouponActivity" />
+        <!--账号安全（修改登录密码、支付密码）-->
+        <activity android:name=".ui.activity.mine.security.AccountSecurityActivity"/>
+        <activity android:name=".ui.activity.mine.security.LoginPwdActivity" />
+        <activity android:name=".ui.activity.mine.security.PayPwdActivity" />
+        <activity android:name=".ui.activity.mine.ContactServiceActivity" />
+        <!-- 相关协议说明（关于我们、红包使用规则） -->
+        <activity android:name=".ui.activity.mine.WebExplainActivity" />
 
         <!-- 屏幕适配AutoLayout -->
         <meta-data
@@ -125,6 +155,7 @@
             android:name="design_height"
             android:value="1280" />
         <!-- 屏幕适配AutoLayout -->
+
 
         <!-- 《支付宝 -->
         <activity
@@ -141,12 +172,15 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <!-- 支付宝 》 -->
 
+
         <!-- 《微信支付 -->
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop" />
         <!-- 微信支付 》 -->
+
+
     </application>
 
 </manifest>

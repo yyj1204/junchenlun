@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_mine_linearlayout"
+    android:padding="@dimen/px_30"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_head"
+        android:layout_width="@dimen/px_106"
+        android:layout_height="@dimen/px_106"
+        android:src="@drawable/img_mine_head" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/px_16">
+
+        <TextView
+            android:id="@+id/tv_companyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="公司名称"
+            android:textColor="@color/color_000000"
+            android:textStyle="bold"
+            android:textSize="@dimen/sp_15" />
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/px_20"
+            android:text=""
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_13" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="right">
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="时间"
+            android:gravity="top"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_12"/>
+        <TextView
+            android:id="@+id/tv_invite"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/px_50"
+            android:paddingLeft="@dimen/px_20"
+            android:paddingRight="@dimen/px_20"
+            android:text="邀您加入"
+            android:gravity="center"
+            android:background="@drawable/shape_submit_unselect"
+            android:textColor="@color/color_ffffff"
+            android:textSize="@dimen/sp_12"/>
+    </com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

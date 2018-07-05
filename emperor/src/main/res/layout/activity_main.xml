@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_f4f4f4"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <android.support.v4.view.ViewPager
@@ -40,8 +41,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="@dimen/px_10"
-            app:tabIconNormal="@drawable/tab_sort_normal"
-            app:tabIconSelected="@drawable/tab_sort_selected"
+            app:tabIconNormal="@drawable/tab_recruit_normal"
+            app:tabIconSelected="@drawable/tab_recruit_selected"
             app:tabText="招聘"
             app:tabTextSize="@dimen/sp_12"
             app:textColorNormal="@color/color_000000"
@@ -52,8 +53,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="@dimen/px_10"
-            app:tabIconNormal="@drawable/tab_shoppingcart_normal"
-            app:tabIconSelected="@drawable/tab_shoppingcart_selected"
+            app:tabIconNormal="@drawable/tab_staff_normal"
+            app:tabIconSelected="@drawable/tab_staff_selected"
             app:tabText="员工"
             app:tabTextSize="@dimen/sp_12"
             app:textColorNormal="@color/color_000000"

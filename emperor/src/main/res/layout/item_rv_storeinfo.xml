@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/px_30"
+    android:gravity="center_vertical"
+    android:background="@drawable/selector_mine_linearlayout">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ_storeLogo"
+        android:layout_width="@dimen/px_60"
+        android:layout_height="@dimen/px_60"
+        android:src="@drawable/img_mine_head"/>
+    <TextView
+        android:id="@+id/tv_storeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/px_14"
+        android:text="精品鞋包"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_13"
+        android:layout_weight="1"/>
+    <ImageView
+        android:layout_width="@dimen/px_16"
+        android:layout_height="@dimen/px_20"
+        android:src="@drawable/ic_demand_arrow_right_gray"/>
+</com.zhy.autolayout.AutoLinearLayout>

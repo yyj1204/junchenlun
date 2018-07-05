@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,25 +13,22 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
 import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.mine.browsingrecord.BrowsingRecordInfoData;
 import com.wktx.www.emperor.apiresult.mine.condition.ConditionBean;
 import com.wktx.www.emperor.apiresult.mine.condition.ConditionInfoData;
-import com.wktx.www.emperor.apiresult.recruit.recruitlist.RecruitListInfoData;
-import com.wktx.www.emperor.apiresult.recruit.retrievalcondition.Bean;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.mine.BrowsingRecordPresenter;
 import com.wktx.www.emperor.ui.activity.recruit.resume.ResumeActivity;
 import com.wktx.www.emperor.ui.adapter.DropDownListAdapter;
 import com.wktx.www.emperor.ui.adapter.mine.BrowsingListAdapter;
-import com.wktx.www.emperor.ui.adapter.recruit.RecruitListAdapter;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
-import com.wktx.www.emperor.view.mine.IBrowsingRecordView;
+import com.wktx.www.emperor.ui.view.mine.IMyCollectView;
+import com.wktx.www.emperor.utils.ToastUtil;
 import com.wktx.www.emperor.widget.DropDownMenu;
 import com.wktx.www.emperor.widget.MyLayoutManager;
 
@@ -46,7 +42,7 @@ import butterknife.OnClick;
 /**
  * 个人中心---浏览记录
  */
-public class BrowsingRecordActivity extends ABaseActivity<IBrowsingRecordView,BrowsingRecordPresenter> implements IBrowsingRecordView {
+public class BrowsingRecordActivity extends ABaseActivity<IMyCollectView,BrowsingRecordPresenter> implements IMyCollectView {
     @BindView(R.id.tb_TvBarTitle)
     TextView tvTitle;
     @BindView(R.id.dropDownMenu)
@@ -112,6 +108,9 @@ public class BrowsingRecordActivity extends ABaseActivity<IBrowsingRecordView,Br
         jobTypeView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (MyUtils.isFastClick1()){
+                    return;
+                }
                 jobTypeId = jobTypeBeans.get(position).getId();
                 jobTypeAdapter.setCheckItem(position);
                 dropDownMenu.setTabText(jobTypeStrs.get(position));
@@ -122,7 +121,7 @@ public class BrowsingRecordActivity extends ABaseActivity<IBrowsingRecordView,Br
         //添加
         popupViews.add(jobTypeView);
         //展示条件筛选结果的内容控件
-        View contentView =  getLayoutInflater().inflate(R.layout.include_recycleview_refresh, null);
+        View contentView =  getLayoutInflater().inflate(R.layout.include_recyclerview_refresh, null);
         contentView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         swipeRefreshLayout = (SwipeRefreshLayout) contentView.findViewById(R.id.swipeRefreshLayout);
         recyclerView = (RecyclerView) contentView.findViewById(R.id.recyclerView);
@@ -138,7 +137,7 @@ public class BrowsingRecordActivity extends ABaseActivity<IBrowsingRecordView,Br
         swipeRefreshLayout.setRefreshing(true);
         //设置分割线与垂直方向布局
         recyclerView.addItemDecoration(MyUtils.drawDivider(BrowsingRecordActivity.this, LinearLayout.VERTICAL, R.drawable.divider_f0f0f0_14));
-        LinearLayoutManager manager = new LinearLayoutManager(BrowsingRecordActivity.this, LinearLayout.VERTICAL, false);
+        MyLayoutManager manager = new MyLayoutManager(BrowsingRecordActivity.this, LinearLayout.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
     }
 
@@ -219,7 +218,10 @@ public class BrowsingRecordActivity extends ABaseActivity<IBrowsingRecordView,Br
     }
     @Override
     public void onGetConditionFailureResult(String result) {
-        MyUtils.showToast(BrowsingRecordActivity.this,result);
+        ToastUtil.myToast(result);
+    }
+    @Override
+    public void onCancelCollectResumeResult(boolean isSuccess, String result) {
     }
     @Override
     public void onRequestSuccess(List<BrowsingRecordInfoData> tData) {
@@ -252,7 +254,7 @@ public class BrowsingRecordActivity extends ABaseActivity<IBrowsingRecordView,Br
                 adapter.loadMoreFail();
             }
         }
-        MyUtils.showToast(BrowsingRecordActivity.this,toastStr);
+        ToastUtil.myToast(toastStr);
     }
 
 
@@ -275,5 +277,11 @@ public class BrowsingRecordActivity extends ABaseActivity<IBrowsingRecordView,Br
         } else {
             adapter.loadMoreComplete();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ToastUtil.cancleMyToast();
     }
 }

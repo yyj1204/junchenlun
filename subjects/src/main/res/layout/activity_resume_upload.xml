@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f0f0f0"
+    android:fitsSystemWindows="true">
+
+    <include layout="@layout/include_toolbar_activity" />
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rela_resume"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_500"
+        android:layout_below="@id/toolbar"
+        android:layout_margin="@dimen/px_30"
+        android:background="@color/color_ffffff">
+        <ImageView
+            android:id="@+id/iv_resume"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"/>
+        <ImageView
+            android:id="@+id/iv_delete_resume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_photo_delete"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/linear_add_resume"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_500"
+        android:layout_margin="@dimen/px_30"
+        android:layout_below="@id/toolbar"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/selector_mine_linearlayout">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_photo_add"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_sureUpload"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_90"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/selector_submit_selected"
+        android:gravity="center"
+        android:text="确定上传"
+        android:textColor="@color/color_ffffff"
+        android:textSize="@dimen/sp_15" />
+</RelativeLayout>

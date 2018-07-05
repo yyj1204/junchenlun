@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_f4f4f4"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <android.support.v4.view.ViewPager
@@ -28,8 +29,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="@dimen/px_10"
-            app:tabIconNormal="@drawable/tab_jobs_normal"
-            app:tabIconSelected="@drawable/tab_jobs_selected"
+            app:tabIconNormal="@drawable/tab_position_normal"
+            app:tabIconSelected="@drawable/tab_position_selected"
             app:tabText="职位"
             app:tabTextSize="@dimen/sp_12"
             app:textColorNormal="@color/color_000000"

@@ -14,7 +14,8 @@ import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.DateUtil;
 import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
-import com.wktx.www.emperor.view.IView;
+import com.wktx.www.emperor.ui.view.IView;
+import com.wktx.www.emperor.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,12 +34,12 @@ public class DemandDetailsActivity extends ABaseActivity<IView,DemandDetailsPres
     TextView tvDemandContent;
     @BindView(R.id.tv_demandPrice)
     TextView tvDemandPrice;
-    @BindView(R.id.tv_demandReleaseTime)
-    TextView tvDemandReleaseTime;
+    @BindView(R.id.tv_demandEndTime)
+    TextView tvDemandEndTime;
     @BindView(R.id.tv_demandTimeUp)
     TextView tvDemandTimeUp;
-    @BindView(R.id.tv_demandCreateTime)
-    TextView tvDemandCreateTime;
+    @BindView(R.id.tv_demandReleaseTime)
+    TextView tvDemandReleaseTime;
 
     @OnClick(R.id.tb_IvReturn)
     public void MyOnclick(View view) {
@@ -89,15 +90,30 @@ public class DemandDetailsActivity extends ABaseActivity<IView,DemandDetailsPres
         tvDemandTitle.setText(tData.getTitle());
         tvDemandContent.setText(tData.getDesign_pattern()+"\n"+tData.getContent());
         tvDemandPrice.setText(tData.getBudget()+"元");
-        String addTime = tData.getAdd_time();
-        String addTimeStr1 = DateUtil.timeNYR(addTime);//XXXX年XX月XX日
-        String addTimeStr2 = DateUtil.timedate(addTime);//XXXX-XX-XX  XX:XX:XX
-        tvDemandReleaseTime.setText(addTimeStr1);
-        tvDemandTimeUp.setText("10天后到期");
-        tvDemandCreateTime.setText(addTimeStr2);
+        tvDemandEndTime.setText(DateUtil.getTimestamp2CustomType(tData.getEnd_time(),"yyyy年MM月dd日"));
+        tvDemandReleaseTime.setText(DateUtil.getTimestamp2CustomType(tData.getAdd_time(),"yyyy-MM-dd HH:mm:ss"));
+        //计算到期时间
+        long curTimeLong = System.currentTimeMillis()/1000L;
+        String curTimeStr = DateUtil.getTimestamp2CustomType(curTimeLong + "", "yyyy-MM-dd");
+        String endTimeStr = DateUtil.getTimestamp2CustomType(tData.getEnd_time(), "yyyy-MM-dd");
+        int gapDays = DateUtil.getGapDays(curTimeStr, endTimeStr)-1;
+        if (gapDays>0){
+            tvDemandTimeUp.setText(gapDays+"天后到期");
+        }else if (gapDays==0){
+            tvDemandTimeUp.setText("今日到期");
+        }else if (gapDays<0){
+            tvDemandTimeUp.setText("该需求已到期");
+        }
     }
     @Override
     public void onRequestFailure(String result) {
-        MyUtils.showToast(DemandDetailsActivity.this,result);
+        finish();
+        ToastUtil.myToast(result);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ToastUtil.cancleMyToast();
     }
 }

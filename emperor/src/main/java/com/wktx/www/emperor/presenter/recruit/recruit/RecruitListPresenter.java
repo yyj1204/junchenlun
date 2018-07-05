@@ -6,11 +6,12 @@ import com.wktx.www.emperor.basemvp.ABasePresenter;
 import com.wktx.www.emperor.utils.ApiURL;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.LogUtil;
-import com.wktx.www.emperor.view.recruit.IRecruitListView;
+import com.wktx.www.emperor.ui.view.recruit.IRecruitListView;
 import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.callback.CallBackProxy;
 import com.zhouyou.http.callback.SimpleCallBack;
 import com.zhouyou.http.exception.ApiException;
+import com.zhouyou.http.model.HttpParams;
 
 /**
  * Created by yyj on 2018/1/24.
@@ -24,21 +25,22 @@ public class RecruitListPresenter extends ABasePresenter<IRecruitListView> {
 
     //获取招聘职位检索结果列表
     public void onGetRecruitList(int page){
-        LogUtil.error("获取招聘列表","json===tow:"+getmMvpView().getJobTypeId() +"\nbgat:"+getmMvpView().getCategoryId()
-                +"\nbgap:"+getmMvpView().getPlatformId()+"\ncust_service_type:"+getmMvpView().getServiceId()
-                +"\nworking_years:"+getmMvpView().getExperienceId() +"\nsex:"+getmMvpView().getSexId()+"\npage:"+page);
+        HttpParams httpParams = new HttpParams();
+        httpParams.put("keyword","");
+        httpParams.put("tow",getmMvpView().getJobTypeId());
+        httpParams.put("bgat",getmMvpView().getCategoryId());
+        httpParams.put("bgap",getmMvpView().getPlatformId());
+        httpParams.put("cust_service_type",getmMvpView().getServiceId());
+        httpParams.put("working_years",getmMvpView().getExperienceId());
+        httpParams.put("sex",getmMvpView().getSexId());
+        httpParams.put("page",page+"");
+        httpParams.put("limit","10");
+
+        LogUtil.error("获取招聘列表","json==="+httpParams.toString());
 
         EasyHttp.post(ApiURL.COMMON_URL)
                 .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_RECRUIT_LIST)
-                .params("keyword","")
-                .params("tow",getmMvpView().getJobTypeId())
-                .params("bgat",getmMvpView().getCategoryId())
-                .params("bgap",getmMvpView().getPlatformId())
-                .params("cust_service_type",getmMvpView().getServiceId())
-                .params("working_years",getmMvpView().getExperienceId())
-                .params("sex",getmMvpView().getSexId())
-                .params("page",page+"")
-                .params("limit","10")
+                .params(httpParams)
                 .execute(new CallBackProxy<CustomApiResult<RecruitListData>, RecruitListData>
                         (new SimpleCallBack<RecruitListData>() {
                             @Override

@@ -1,10 +1,12 @@
 package com.wktx.www.emperor.ui.activity.recruit.demand;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,15 +16,18 @@ import com.bigkoo.pickerview.listener.CustomListener;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
 import com.wktx.www.emperor.apiresult.login.AccountInfoData;
+import com.wktx.www.emperor.apiresult.mine.store.StoreListInfoData;
 import com.wktx.www.emperor.apiresult.recruit.demand.DemandReleaseConditionInfoData;
 import com.wktx.www.emperor.apiresult.recruit.retrievalcondition.Bean;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.recruit.demand.DemandReleasePresenter;
 import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
-import com.wktx.www.emperor.view.recruit.IDemandReleaseView;
+import com.wktx.www.emperor.ui.view.recruit.IDemandReleaseView;
+import com.wktx.www.emperor.utils.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,13 +70,16 @@ public class DemandReleaseActivity extends ABaseActivity<IDemandReleaseView,Dema
 
     @OnClick({R.id.tb_IvReturn,R.id.linear_demandStore,R.id.linear_demandPlatfrom,R.id.linear_demandCategory,R.id.linear_demandPattern,R.id.bt_sureRelease})
     public void MyOnclick(View view) {
+        //将输入法隐藏
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(tvTitle.getWindowToken(), 0);
         switch (view.getId()){
             case R.id.tb_IvReturn:
                 finish();
                 break;
             case R.id.linear_demandStore://选择店铺
-                if (platformBeans.size()!=0){//TODO storeBeans
-                    initCustomOptionPicker(R.id.tv_demandStore,platformBeans);
+                if (storeBeans.size()!=0){
+                    initCustomOptionPicker(R.id.tv_demandStore,storeBeans);
                 }
                 break;
             case R.id.linear_demandPlatfrom://选择平台
@@ -95,25 +103,25 @@ public class DemandReleaseActivity extends ABaseActivity<IDemandReleaseView,Dema
                 }
                 //判断输入框格式
                 if (TextUtils.isEmpty(getDemandTitle())){
-                    MyUtils.showToast(DemandReleaseActivity.this,"请输入需求标题！");
+                    ToastUtil.myToast("请输入需求标题！");
                     etTitle.requestFocus();
                 }else if (TextUtils.isEmpty(getDemandContent())){
-                    MyUtils.showToast(DemandReleaseActivity.this,"请输入需求详情！");
+                    ToastUtil.myToast("请输入需求详情！");
                     etContent.requestFocus();
                 }else if (TextUtils.isEmpty(getDemandBudget())){
-                    MyUtils.showToast(DemandReleaseActivity.this,"请输入预算金额！");
+                    ToastUtil.myToast("请输入预算金额！");
                     etBudget.requestFocus();
                 }else if (TextUtils.isEmpty(storeId)){
-                    MyUtils.showToast(DemandReleaseActivity.this,"请选择店铺！");
+                    ToastUtil.myToast("请选择店铺！");
                 }else if (TextUtils.isEmpty(platformId)){
-                    MyUtils.showToast(DemandReleaseActivity.this,"请选择平台！");
+                    ToastUtil.myToast("请选择平台！");
                 }else if (TextUtils.isEmpty(categoryId)){
-                    MyUtils.showToast(DemandReleaseActivity.this,"请选择类目！");
+                    ToastUtil.myToast("请选择类目！");
                 }else if (TextUtils.isEmpty(patternId)){
-                    MyUtils.showToast(DemandReleaseActivity.this,"请选择需求！");
+                    ToastUtil.myToast("请选择需求！");
                 }else {//发布需求
                     btRelease.setEnabled(false);
-                    getPresenter().onDemandRelease(platformId,categoryId,patternId);
+                    getPresenter().onDemandRelease(platformId,categoryId,storeId,patternId);
                 }
                 break;
             default:
@@ -126,11 +134,15 @@ public class DemandReleaseActivity extends ABaseActivity<IDemandReleaseView,Dema
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demand_release);
         ButterKnife.bind(this);
-        // 设置右滑动返回
-        Slidr.attach(this);
         tvTitle.setText(R.string.title_demand_release);
+        initData();
         //预算输入框（小数点限制两位数）
         setEtListener(etBudget);
+    }
+
+    private void initData() {
+        getPresenter().onGetDemandCondition();
+        getPresenter().onGetStoreCondition();
     }
 
     @Override
@@ -139,7 +151,7 @@ public class DemandReleaseActivity extends ABaseActivity<IDemandReleaseView,Dema
     }
 
     //输入框的监听事件
-    private void setEtListener(EditText et) {
+    private void setEtListener(final EditText et) {
         et.addTextChangedListener(new TextWatcher() {
             @Override// 输入文本之前的状态
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -151,24 +163,24 @@ public class DemandReleaseActivity extends ABaseActivity<IDemandReleaseView,Dema
                         //判断小数点的位置大于倒3，将输入框的字符串截取到小数点后两位数
                         if (s.length() - 1 - s.toString().indexOf(".") > 2) {
                             s = s.toString().subSequence(0, s.toString().indexOf(".") + 3);
-                            etBudget.setText(s);
-                            etBudget.setSelection(s.length());
+                            et.setText(s);
+                            et.setSelection(s.length());
                         }
                     }
 
                     //判断字符串的第一位是小数点，则在小数点前面加个0
                     if (s.toString().trim().substring(0).equals(".")) {
                         s = "0" + s;
-                        etBudget.setText(s);
-                        etBudget.setSelection(2);
+                        et.setText(s);
+                        et.setSelection(2);
                     }
 
                     //判断字符串第一位是0
                     if (s.toString().startsWith("0") && s.toString().trim().length() > 1) {
                         //如果第二位不是小数点，限制不能输入
                         if (!s.toString().substring(1, 2).equals(".")) {
-                            etBudget.setText(s.subSequence(0, 1));
-                            etBudget.setSelection(1);
+                            et.setText(s.subSequence(0, 1));
+                            et.setSelection(1);
                             return;
                         }
                     }
@@ -199,9 +211,23 @@ public class DemandReleaseActivity extends ABaseActivity<IDemandReleaseView,Dema
     public String getDemandBudget() {
         return etBudget.getText().toString().trim();
     }
+    @Override
+    public void onGetStoreConditionSuccessResult(List<StoreListInfoData> result) {
+        for (int i = 0; i <result.size() ; i++) {
+            Bean bean = new Bean();
+            bean.setId(result.get(i).getId());
+            bean.setName(result.get(i).getShop_name());
+            storeBeans.add(bean);
+        }
+    }
+    @Override
+    public void onGetStoreConditionFailureResult(String result) {
+        ToastUtil.myToast(result);
+        finish();
+    }
     @Override//需求发布是否成功的回调
     public void onDemandReleaseResult(boolean isSuccess, String msg) {
-        MyUtils.showToast(DemandReleaseActivity.this,msg);
+        ToastUtil.myToast(msg);
         btRelease.setEnabled(true);
         if (isSuccess){
             finish();
@@ -215,8 +241,8 @@ public class DemandReleaseActivity extends ABaseActivity<IDemandReleaseView,Dema
     }
     @Override
     public void onRequestFailure(String result) {
+        ToastUtil.myToast(result);
         finish();
-        MyUtils.showToast(DemandReleaseActivity.this,result);
     }
 
     /**
@@ -248,11 +274,11 @@ public class DemandReleaseActivity extends ABaseActivity<IDemandReleaseView,Dema
                 }
             }
         })
-                .setLayoutRes(R.layout.layout_custom_pickerview, new CustomListener() {
+                .setLayoutRes(R.layout.widget_custom_pickerview, new CustomListener() {
                     @Override
                     public void customLayout(View v) {
                         final TextView tvSubmit = (TextView) v.findViewById(R.id.tv_finish);
-                        TextView tvCancel = (TextView) v.findViewById(R.id.iv_cancel);
+                        TextView tvCancel = (TextView) v.findViewById(R.id.tv_cancel);
                         tvSubmit.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -277,5 +303,11 @@ public class DemandReleaseActivity extends ABaseActivity<IDemandReleaseView,Dema
         }
         pvCustomOptions.setPicker(optionsItemStrs);//添加数据
         pvCustomOptions.show();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ToastUtil.cancleMyToast();
     }
 }

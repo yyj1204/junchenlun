@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.wktx.www.emperor.ui.activity.recruit.hire.InputPayPwdActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="@dimen/px_50">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_customdialog_ffffff"
+            android:gravity="center_horizontal">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/px_30">
+                <ImageView
+                    android:id="@+id/tb_IvReturn"
+                    android:layout_width="@dimen/px_40"
+                    android:layout_height="@dimen/px_40"
+                    android:src="@drawable/ic_search_clear"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="请输入支付密码"
+                    android:textColor="@color/color_000000"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textSize="@dimen/sp_15" />
+            </RelativeLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_2"
+                android:background="@color/color_f0f0f0"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="余额支付"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_12"
+                android:layout_marginTop="@dimen/px_30"/>
+            <TextView
+                android:id="@+id/tv_balanceMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¥0.00"
+                android:textStyle="bold"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_20"
+                android:layout_marginTop="@dimen/px_30"/>
+            <com.wktx.www.emperor.widget.CustomPwdEditView
+                android:id="@+id/pwdEditView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:showType="password"
+                android:layout_margin="@dimen/px_30"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <com.wktx.www.emperor.widget.CustomKeyboardView
+        android:id="@+id/keyboardView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_480">
+    </com.wktx.www.emperor.widget.CustomKeyboardView>
+
+</LinearLayout>

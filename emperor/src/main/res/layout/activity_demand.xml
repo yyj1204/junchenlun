@@ -10,6 +10,6 @@
 
     <include layout="@layout/include_toolbar_activity" />
 
-    <include layout="@layout/include_recycleview_refresh" />
+    <include layout="@layout/include_recyclerview_refresh" />
 
 </LinearLayout>

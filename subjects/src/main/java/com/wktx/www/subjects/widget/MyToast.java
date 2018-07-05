@@ -15,6 +15,7 @@ import com.wktx.www.subjects.R;
 
 public class MyToast {
     private Toast myToast;
+
     private MyToast(Context context, CharSequence text, int duration) {
         View v = LayoutInflater.from(context).inflate(R.layout.widget_toast, null);
         TextView textView = (TextView) v.findViewById(R.id.tv_toast);
@@ -32,6 +33,7 @@ public class MyToast {
             myToast.show();
         }
     }
+
     public void setGravity(int gravity, int xOffset, int yOffset) {
         if (myToast != null) {
             myToast.setGravity(gravity, xOffset, yOffset);

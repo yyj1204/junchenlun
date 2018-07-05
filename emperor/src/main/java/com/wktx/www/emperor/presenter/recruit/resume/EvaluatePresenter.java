@@ -6,11 +6,12 @@ import com.wktx.www.emperor.basemvp.ABasePresenter;
 import com.wktx.www.emperor.utils.ApiURL;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.LogUtil;
-import com.wktx.www.emperor.view.IView;
+import com.wktx.www.emperor.ui.view.IView;
 import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.callback.CallBackProxy;
 import com.zhouyou.http.callback.SimpleCallBack;
 import com.zhouyou.http.exception.ApiException;
+import com.zhouyou.http.model.HttpParams;
 
 /**
  * Created by yyj on 2018/1/24.
@@ -24,13 +25,16 @@ public class EvaluatePresenter extends ABasePresenter<IView> {
 
     //获取评价列表
     public void onGetRevaluateList(String resumeId,int page){
-        LogUtil.error("获取评价列表","json===resumeId:"+resumeId +"\npage:"+page);
+        HttpParams httpParams = new HttpParams();
+        httpParams.put("id", resumeId);
+        httpParams.put("page",page+"");
+        httpParams.put("limit","10");
+
+        LogUtil.error("获取评价列表","json==="+httpParams.toString());
 
         EasyHttp.post(ApiURL.COMMON_URL)
                 .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_RESUME_EVALUATE)
-                .params("id", resumeId)
-                .params("page", page+"")
-                .params("limit", "10")
+                .params(httpParams)
                 .execute(new CallBackProxy<CustomApiResult<EvaluateData>, EvaluateData>
                         (new SimpleCallBack<EvaluateData>() {
                             @Override

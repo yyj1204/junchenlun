@@ -9,91 +9,84 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.luck.picture.lib.PictureSelector;
-import com.luck.picture.lib.compress.Luban;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.r0adkll.slidr.Slidr;
-import com.wktx.www.emperor.Activity.UpdateNickNameActivity;
 import com.wktx.www.emperor.R;
 import com.wktx.www.emperor.apiresult.login.AccountInfoData;
-import com.wktx.www.emperor.apiresult.login.login8register.RegisterInfoData;
+import com.wktx.www.emperor.apiresult.mine.companyinfo.CompanyInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.mine.CompanyInfoPresenter;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.model.ProvinceJsonBean;
-import com.wktx.www.emperor.Model1.Login.LoginInfoDataInfo;
-import com.wktx.www.emperor.Model1.UpdateInfo.UpdateHeadInfo;
-import com.wktx.www.emperor.Model1.UpdateInfo.UpdateHeadInfoData;
-import com.wktx.www.emperor.Model1.UserInfo.UserInfoDataInfoUserinfo;
-import com.wktx.www.emperor.utils.Bitmap2Base64Util;
 import com.wktx.www.emperor.utils.GetJsonDataUtil;
-import com.wktx.www.emperor.utils.GsonUtil;
+import com.wktx.www.emperor.utils.GlideUtil;
+import com.wktx.www.emperor.utils.LogUtil;
 import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
-import com.wktx.www.emperor.utils.SaveObjectUtils;
-import com.wktx.www.emperor.utils.SharedPreferenceUtil;
-import com.wktx.www.emperor.view.mine.ICompanyInfoView;
-import com.wktx.www.emperor.widget.HeadPopup;
-import com.wktx.www.emperor.widget.LogoutPopup;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
+import com.wktx.www.emperor.ui.view.mine.ICompanyInfoView;
+import com.wktx.www.emperor.utils.ToastUtil;
+import com.wktx.www.emperor.widget.PopupPhoto;
 
 import org.json.JSONArray;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.Call;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
+
 /**
  * 个人中心---公司信息
  */
-public class CompanyInfoActivity extends ABaseActivity<ICompanyInfoView,CompanyInfoPresenter> implements ICompanyInfoView {
+public class CompanyInfoActivity extends ABaseActivity<ICompanyInfoView,CompanyInfoPresenter>
+        implements ICompanyInfoView ,EasyPermissions.PermissionCallbacks{
     @BindView(R.id.tb_TvBarTitle)
     TextView tvTitle;
     @BindView(R.id.civ_logo)
     ImageView ivLogo;
-    @BindView(R.id.tv_name)
-    TextView tvName;
+    @BindView(R.id.et_name)
+    EditText etName;
     @BindView(R.id.tv_address)
     TextView tvAddress;
-    @BindView(R.id.linear_address)
-    LinearLayout llAddress;
-    @BindView(R.id.et_company_introduce)
+    @BindView(R.id.et_phone)
+    EditText etPhone;
+    @BindView(R.id.et_qq)
+    EditText etQQ;
+    @BindView(R.id.et_wechat)
+    EditText etWechat;
+    @BindView(R.id.et_introduce)
     EditText etIntroduce;
-    @BindView(R.id.bt_logout)
-    Button btLogout;//退出登录
+    @BindView(R.id.bt_sureEdit)
+    Button btSureEdit;//确认修改
 
-    private HeadPopup logoPopup;//更换公司logo弹窗
-    private LogoutPopup logoutPopup;//退出登录弹窗
+    private boolean isEditApi=false;//是否修改信息接口请求
 
     /**
      * 照片
      */
+    private PopupPhoto popupPhoto;//更换公司logo弹窗
     private int themeId;//主题样式设置
     private int chooseMode = PictureMimeType.ofImage();//选择图片类型
-    private int compressMode = PictureConfig.SYSTEM_COMPRESS_MODE;//系统自带压缩
     private static List<LocalMedia> selectList = new ArrayList<>();
+    private String logoBase64Str="";//logo base64图片格式
 
     /**
      * 地址选择器
@@ -106,7 +99,6 @@ public class CompanyInfoActivity extends ABaseActivity<ICompanyInfoView,CompanyI
     private ArrayList<ProvinceJsonBean> options1Items = new ArrayList<>();//一级
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();//二级
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();//三级
-
 
     /**
      * 解析assets目录下的三级城市province.json数据
@@ -139,229 +131,13 @@ public class CompanyInfoActivity extends ABaseActivity<ICompanyInfoView,CompanyI
         }
     };
 
-
-
-    private LoginInfoDataInfo getSaveInfo;
-    private String token;
-    private int user_id;
-    private String state;
-    private UserInfoDataInfoUserinfo savaInfo;
-
-
-    @OnClick({R.id.tb_IvReturn, R.id.linear_logo, R.id.linear_name, R.id.linear_address, R.id.bt_logout})
-    public void MyOnclick(View view) {
-        switch (view.getId()) {
-            case R.id.tb_IvReturn:
-                finish();
-                break;
-            case R.id.linear_logo://公司logo
-                //触发展示相片来源popuwindow
-                showLogoPopup();
-                break;
-            case R.id.linear_name://公司名称
-                startActivityForResult(new Intent(this, UpdateNickNameActivity.class), ConstantUtil.REQUESTCODE_UPDATENAME);
-                break;
-            case R.id.linear_address://公司地址
-                if (isLoaded) {
-                    //将输入法隐藏，llAddress
-                    InputMethodManager imm = (InputMethodManager) getSystemService(
-                            Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(llAddress.getWindowToken(), 0);
-                    ShowPickerView();//地址选择器
-                } else {
-                    MyUtils.showToast(CompanyInfoActivity.this, "数据暂未解析成功，请等待");
-                }
-                break;
-            case R.id.bt_logout://退出登录
-                showLogoutPopup();
-                break;
-            default:
-                break;
-        }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_company_info);
-        ButterKnife.bind(this);
-        tvTitle.setText(R.string.title_companyinfo);
-        //设置右滑动返回
-        Slidr.attach(this);
-        //照片选择主题样式
-        themeId = R.style.picture_default_style;
-        mHandler.sendEmptyMessage(MSG_LOAD_DATA);
-        initData();
-    }
-
-    @Override
-    protected CompanyInfoPresenter createPresenter() {
-        return new CompanyInfoPresenter();
-    }
-
-    /**
-     * ICompanyInfoView
-     */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
-    @Override
-    public void onRequestSuccess(RegisterInfoData tData) {
-
-    }
-    @Override
-    public void onRequestFailure(String result) {
-
-    }
-    @Override
-    public void onLogout(boolean isSuccess, String msg) {
-        MyUtils.showToast(CompanyInfoActivity.this, msg);
-        if (isSuccess){
-            LoginUtil.getinit().logout();//将本地登录信息清除
-            finish();
-        }
-    }
-
-    /**
-     * 更换头像弹窗
-     */
-    private void showLogoPopup() {
-        logoPopup = new HeadPopup(CompanyInfoActivity.this, CompanyInfoActivity.this, selectList.size());
-        logoPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-        logoPopup.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
-        logoPopup.setClippingEnabled(false);
-        logoPopup.showPopupWindow(findViewById(R.id.set_act_parent));
-        logoPopup.setOnGetTypeClckListener(new HeadPopup.onGetTypeClckListener() {
-            @Override
-            public void getType(ConstantUtil.Type type) {
-                if (type == ConstantUtil.Type.CAMERA) {
-                    onAddPicClick(false);
-                } else if (type == ConstantUtil.Type.PHONE) {
-                    onAddPicClick(true);
-                }
-            }
-            @Override
-            public void getImgUri(Uri ImgUri, File file) {
-//TODO
-            }
-        });
-    }
-
-    /**
-     * 退出登录弹窗
-     */
-    private void showLogoutPopup() {
-        logoutPopup = new LogoutPopup(CompanyInfoActivity.this, CompanyInfoActivity.this);
-        logoutPopup.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-        logoutPopup.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
-        logoutPopup.setClippingEnabled(false);
-        logoutPopup.showPopupWindow(ivLogo);
-        logoutPopup.setOnGetTypeClckListener(new LogoutPopup.onGetTypeClckListener() {
-            @Override
-            public void getText(String sure) {
-                switch (sure) {
-                    case ConstantUtil.LOGOUT:
-                        getPresenter().onLogout();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
-    }
-
-    /**
-     * logo弹窗---选择：相册||拍照
-     */
-    public void onAddPicClick(boolean b) {
-        if (b) {//进入相册---以下是例子：不需要的api可以不写
-            PictureSelector.create(CompanyInfoActivity.this)
-                    .openGallery(chooseMode)// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
-                    .theme(themeId)// 主题样式设置 具体参考 values/styles   用法：R.style.picture.white.style
-                    .maxSelectNum(1)// 最大图片选择数量
-                    .minSelectNum(1)// 最小选择数量
-                    .imageSpanCount(4)// 每行显示个数
-                    .selectionMode(PictureConfig.MULTIPLE)// 多选 or 单选
-                    .previewImage(true)// 是否可预览图片
-                    .compress(true)// 是否压缩
-                    .compressGrade(Luban.THIRD_GEAR)// luban压缩档次，默认3档 Luban.FIRST_GEAR、Luban.CUSTOM_GEAR
-                    .isCamera(false)// 是否显示拍照按钮
-                    .isZoomAnim(true)// 图片列表点击 缩放效果 默认true
-                    .compressMode(compressMode)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
-                    .glideOverride(160, 160)// glide 加载宽高，越小图片列表越流畅，但会影响列表图片浏览的清晰度
-                    .isGif(false)// 是否显示gif图片
-                    .enableCrop(true)// 是否裁剪 true or false
-                    .circleDimmedLayer(true)// 是否圆形裁剪 true or false
-                    .rotateEnabled(true) // 裁剪是否可旋转图片 true or false
-                    .scaleEnabled(true)// 裁剪是否可放大缩小图片 true or false
-                    .showCropFrame(false)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false   true or false
-                    .showCropGrid(false)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
-                    .selectionMedia(null)// 是否传入已选图片
-                    .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
-        } else {//单独拍照
-            PictureSelector.create(CompanyInfoActivity.this)
-                    .openCamera(chooseMode)// 单独拍照，也可录像或也可音频 看你传入的类型是图片or视频
-                    .theme(themeId)// 主题样式设置 具体参考 values/styles
-                    .maxSelectNum(1)// 最大图片选择数量
-                    .minSelectNum(1)// 最小选择数量
-                    .selectionMode(PictureConfig.MULTIPLE)// 多选 or 单选
-                    .previewImage(true)// 是否可预览图片
-                    .compressGrade(Luban.THIRD_GEAR)// luban压缩档次，默认3档 Luban.FIRST_GEAR、Luban.CUSTOM_GEAR
-                    .isCamera(true)// 是否显示拍照按钮
-                    .compress(true)// 是否压缩
-                    .compressMode(compressMode)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
-                    .glideOverride(160, 160)// glide 加载宽高，越小图片列表越流畅，但会影响列表图片浏览的清晰度
-                    .isGif(false)// 是否显示gif图片
-                    .enableCrop(true)// 是否裁剪 true or false
-                    .circleDimmedLayer(true)// 是否圆形裁剪 true or false
-                    .rotateEnabled(true) // 裁剪是否可旋转图片 true or false
-                    .scaleEnabled(true)// 裁剪是否可放大缩小图片 true or false
-                    .showCropFrame(false)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false   true or false
-                    .showCropGrid(false)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
-                    .selectionMedia(null)// 是否传入已选图片
-                    .previewEggs(false)//预览图片时 是否增强左右滑动图片体验(图片滑动一半即可看到上一张是否选中)
-                    .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
-        }
-    }
-
-    /**
-     * 三级联动---地址选择器
-     */
-    private void ShowPickerView() {// 弹出选择器
-        OptionsPickerView pvOptions = new OptionsPickerView.Builder(this, new OptionsPickerView.OnOptionsSelectListener() {
-            @Override
-            public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                //返回的分别是三个级别的选中位置
-                String pickerViewStr = options1Items.get(options1).getPickerViewText()+"  "+
-                        options2Items.get(options1).get(options2) +"  "+
-                        options3Items.get(options1).get(options2).get(options3);
-                //选择器返回值赋值给 tvAddress
-                tvAddress.setText(pickerViewStr);
-            }
-        })
-                .setTitleText("地址选择")
-                .setDividerColor(getResources().getColor(R.color.color_f0f0f0))
-                .setTextColorCenter(getResources().getColor(R.color.color_000000)) //设置选中项文字颜色
-                .setContentTextSize(14)
-                .setOutSideCancelable(false)// 默认为 true
-                .setSubmitColor(getResources().getColor(R.color.color_ffb321))
-                .setCancelColor(getResources().getColor(R.color.color_000000))
-                .build();
-        /*pvOptions.setPicker(options1Items);//一级选择器
-        pvOptions.setPicker(options1Items, options2Items);//二级选择器*/
-        pvOptions.setPicker(options1Items, options2Items, options3Items);//三级选择器
-        pvOptions.show();
-    }
-
     /**
      * 解析 assets 目录下的Json数据
      * 注意：Json文件仅供参考，实际使用可自行替换文件
      * 关键逻辑在于循环体
      */
     private void initJsonData() {
-        String JsonData = new GetJsonDataUtil().getJson(this, "province.json");//获取assets目录下的json文件数据
+        String JsonData = new GetJsonDataUtil().getJson(this, "region.json");//获取assets目录下的json文件数据
         ArrayList<ProvinceJsonBean> jsonBean = parseData(JsonData);//用Gson 转成实体
         /**
          * 添加省份数据
@@ -421,43 +197,366 @@ public class CompanyInfoActivity extends ABaseActivity<ICompanyInfoView,CompanyI
         return detail;
     }
 
+    /**
+     * 普通点击事件
+     */
+    @OnClick({R.id.tb_IvReturn, R.id.linear_logo,R.id.linear_address, R.id.bt_sureEdit})
+    public void MyOnclick(View view) {
+        if (MyUtils.isFastClick1()){
+            return;
+        }
+
+        //将输入法隐藏
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(tvTitle.getWindowToken(), 0);
+        switch (view.getId()) {
+            case R.id.tb_IvReturn:
+                finish();
+                break;
+            case R.id.linear_logo://公司logo
+                //触发展示相片来源popuwindow
+                showLogoPopup();
+                break;
+            case R.id.linear_address://公司地址
+                if (isLoaded) {
+
+                    ShowPickerView();//地址选择器
+                } else {
+                    ToastUtil.myToast("数据暂未解析成功，请等待");
+                }
+                break;
+            case R.id.bt_sureEdit://确认修改
+                if (MyUtils.isFastClick()){
+                    return;
+                }
+                //判断输入框格式
+                if (TextUtils.isEmpty(getNickName())){
+                    ToastUtil.myToast("请输入公司名称！");
+                    etName.requestFocus();
+                }else if (TextUtils.isEmpty(getAddress())) {
+                    ToastUtil.myToast("请选择公司地址！");
+                }else if (TextUtils.isEmpty(getPhone())){
+                    ToastUtil.myToast("请输入手机号码！");
+                    etPhone.requestFocus();
+                }else if (!MyUtils.checkMobileNumber(getPhone())) {
+                    ToastUtil.myToast("手机号码输入不正确！");
+                    etPhone.requestFocus();
+                }else if (TextUtils.isEmpty(getQQ())){
+                    ToastUtil.myToast("请输入QQ号码！");
+                    etQQ.requestFocus();
+                }else if (TextUtils.isEmpty(getWechat())){
+                    ToastUtil.myToast("请输入微信号码！");
+                    etWechat.requestFocus();
+                }else if (TextUtils.isEmpty(getIntroduce())){
+                    ToastUtil.myToast("请输入公司简介！");
+                    etIntroduce.requestFocus();
+                }else {//修改公司信息
+                    isEditApi=true;
+                    btSureEdit.setEnabled(false);
+                    getPresenter().onEditCompanyInfo();
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_company_info);
+        ButterKnife.bind(this);
+        //设置右滑动返回
+        Slidr.attach(this);
+        tvTitle.setText(R.string.title_company_info);
+        //照片选择主题样式
+        themeId = R.style.picture_default_style;
+        mHandler.sendEmptyMessage(MSG_LOAD_DATA);
+        initData();
+    }
+
+
+    @Override
+    protected CompanyInfoPresenter createPresenter() {
+        return new CompanyInfoPresenter();
+    }
+
+    private void initData() {
+        getPresenter().onGetCompanyInfo();
+    }
+
+    /**
+     * 更换公司logo弹窗
+     */
+    private void showLogoPopup() {
+        popupPhoto = new PopupPhoto(CompanyInfoActivity.this, CompanyInfoActivity.this, selectList.size());
+        popupPhoto.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        popupPhoto.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+        popupPhoto.setClippingEnabled(false);
+        popupPhoto.showPopupWindow(findViewById(R.id.set_act_parent));
+        popupPhoto.setOnGetTypeClckListener(new PopupPhoto.onGetTypeClckListener() {
+            @Override
+            public void getType(ConstantUtil.Type type) {
+                if (type == ConstantUtil.Type.CAMERA) {//拍照
+                    checkPerm();//android系统6.0以上先检查权限
+                } else if (type == ConstantUtil.Type.PHONE) {//进入相册
+                    onAddPicClick(true);
+                }
+            }
+            @Override
+            public void getImgUri(Uri ImgUri, File file) {
+            }
+        });
+    }
+
+
+    /**
+     * logo弹窗---选择：相册||拍照
+     */
+    public void onAddPicClick(boolean b) {
+        if (b) {//进入相册---以下是例子：不需要的api可以不写
+            PictureSelector.create(CompanyInfoActivity.this)
+                    .openGallery(chooseMode)// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
+                    .theme(themeId)// 主题样式设置 具体参考 values/styles   用法：R.style.picture.white.style
+                    .maxSelectNum(1)// 最大图片选择数量
+                    .minSelectNum(1)// 最小选择数量
+                    .imageSpanCount(4)// 每行显示个数
+                    .previewImage(true)// 是否可预览图片
+                    .isZoomAnim(true)// 图片列表点击 缩放效果 默认true
+                    .enableCrop(true)// 是否裁剪 true or false
+                    .compress(true)// 是否压缩
+                    .glideOverride(160, 160)// glide 加载宽高，越小图片列表越流畅，但会影响列表图片浏览的清晰度
+                    .freeStyleCropEnabled(false)// 裁剪框是否可拖拽 true or false
+                    .circleDimmedLayer(true)//是否圆形裁剪 true or false
+                    .rotateEnabled(true) // 裁剪是否可旋转图片 true or false
+                    .scaleEnabled(true)// 裁剪是否可放大缩小图片 true or false
+                    .showCropFrame(false)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false   true or false
+                    .showCropGrid(false)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
+                    .cropCompressQuality(90)// 裁剪压缩质量 默认90 int
+                    .selectionMedia(null)// 是否传入已选图片
+                    .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
+        } else {//单独拍照
+            PictureSelector.create(CompanyInfoActivity.this)
+                    .openCamera(chooseMode)// 单独拍照，也可录像或也可音频 看你传入的类型是图片or视频
+                    .theme(themeId)// 主题样式设置 具体参考 values/styles
+                    .isCamera(true)// 是否显示拍照按钮
+                    .previewImage(true)// 是否可预览图片
+                    .enableCrop(true)// 是否裁剪 true or false
+                    .compress(true)// 是否压缩
+                    .glideOverride(160, 160)// glide 加载宽高，越小图片列表越流畅，但会影响列表图片浏览的清晰度
+                    .freeStyleCropEnabled(false)// 裁剪框是否可拖拽 true or false
+                    .circleDimmedLayer(true)// 是否圆形裁剪 true or false
+                    .rotateEnabled(true)// 裁剪是否可旋转图片 true or false
+                    .scaleEnabled(true)// 裁剪是否可放大缩小图片 true or false
+                    .showCropFrame(false)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false   true or false
+                    .showCropGrid(false)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
+                    .cropCompressQuality(90)// 裁剪压缩质量 默认90 int
+                    .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
+        }
+    }
+
+    /**
+     * 三级联动---地址选择器
+     */
+    private void ShowPickerView() {// 弹出选择器
+        OptionsPickerView pvOptions = new OptionsPickerView.Builder(this, new OptionsPickerView.OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                //返回的分别是三个级别的选中位置
+                String pickerViewStr = options1Items.get(options1).getPickerViewText()+"-"+
+                        options2Items.get(options1).get(options2) +"-"+
+                        options3Items.get(options1).get(options2).get(options3);
+                //选择器返回值赋值给 tvAddress
+                tvAddress.setText(pickerViewStr);
+            }
+        })
+                .setTitleText("地址选择")
+                .setDividerColor(getResources().getColor(R.color.color_f0f0f0))
+                .setTextColorCenter(getResources().getColor(R.color.color_000000)) //设置选中项文字颜色
+                .setContentTextSize(14)
+                .setOutSideCancelable(false)// 默认为 true
+                .setSubmitColor(getResources().getColor(R.color.color_ffb321))
+                .setCancelColor(getResources().getColor(R.color.color_000000))
+                .build();
+        /*pvOptions.setPicker(options1Items);//一级选择器
+        pvOptions.setPicker(options1Items, options2Items);//二级选择器*/
+        pvOptions.setPicker(options1Items, options2Items, options3Items);//三级选择器
+        pvOptions.show();
+    }
+
+
+    /**
+     * ICompanyInfoView
+     */
+    @Override
+    public AccountInfoData getUserInfo() {
+        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
+        return userInfo;
+    }
+    @Override
+    public String getHeadPic() {
+        return logoBase64Str;
+    }
+    @Override
+    public String getNickName() {
+        return etName.getText().toString().trim();
+    }
+    @Override
+    public String getAddress() {
+        return tvAddress.getText().toString().trim();
+    }
+    @Override
+    public String getPhone() {
+        return etPhone.getText().toString().trim();
+    }
+    @Override
+    public String getQQ() {
+        return etQQ.getText().toString().trim();
+    }
+    @Override
+    public String getWechat() {
+        return etWechat.getText().toString().trim();
+    }
+    @Override
+    public String getIntroduce() {
+        return etIntroduce.getText().toString().trim();
+    }
+    @Override//获取公司信息与修改公司信息共用一个回调方法
+    public void onRequestSuccess(CompanyInfoData tData) {
+        if (isEditApi){//如果是修改信息请求，按钮可重新点击
+            btSureEdit.setEnabled(true);
+            ToastUtil.myToast("公司信息修改成功！");
+            finish();
+        }else {
+            //设置圆形公司logo
+            if (tData.getHead_pic()==null||tData.getHead_pic().equals("")) {
+                ivLogo.setImageResource(R.drawable.img_mine_head);
+            }else {
+                GlideUtil.loadImage(tData.getHead_pic(),R.drawable.img_mine_head,ivLogo);
+            }
+            //设置公司昵称
+            if (tData.getNickname()==null||tData.getNickname().equals("")){
+                etName.setText(getUserInfo().getPhone());
+            }else {
+                etName.setText(tData.getNickname());
+            }
+            //设置公司地址
+            tvAddress.setText(tData.getAddress_from());
+            //设置电话
+            etPhone.setText(tData.getPhone());
+            //设置QQ
+            etQQ.setText(tData.getQq());
+            //设置微信
+            etWechat.setText(tData.getWeixin());
+            //设置公司简介
+            etIntroduce.setText(tData.getRemark());
+        }
+    }
+
+    @Override//获取公司信息与修改公司信息共用一个回调方法
+    public void onRequestFailure(String result) {
+        ToastUtil.myToast(result);
+        if (isEditApi){//如果是修改信息请求错误，按钮可重新点击
+            btSureEdit.setEnabled(true);
+        }else {//如果是获取信息请求错误，关闭界面
+            finish();
+        }
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
             if (resultCode == RESULT_OK) {
                 switch (requestCode) {
-                    case PictureConfig.CHOOSE_REQUEST:
-                        //图片选择结果回调
+                    case PictureConfig.CHOOSE_REQUEST://图片选择结果回调
                         selectList = PictureSelector.obtainMultipleResult(data);
+                        // 例如 LocalMedia 里面返回三种path
+                        // 1.media.getPath(); 为原图path
+                        // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true
+                        // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true（音频除外）
+                        // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
                         if (selectList != null) {
                             LocalMedia media = selectList.get(0);
                             String path = media.getCompressPath();
                             Bitmap bitmap = BitmapFactory.decodeFile(path);
                             if (bitmap != null) {
                                 ivLogo.setImageBitmap(bitmap);
+                                logoBase64Str = MyUtils.Bitmap2StrByBase64(bitmap);
+                                LogUtil.error("头像===","logoBase64Str==="+logoBase64Str);
                             }
-                            String s = Bitmap2Base64Util.Bitmap2StrByBase64(bitmap);
-                            SharedPreferenceUtil.saveData(this, ConstantUtil.HEADBASE64STR_KEY, s, ConstantUtil.HEADBASE64_NAME);
-                            //TODO 更换头像请求
-//                            updateHeadImg(s);
 
-                            // 例如 LocalMedia 里面返回三种path
-                            // 1.media.getPath(); 为原图path
-                            // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true
-                            // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true
-                            // 如果裁剪并压缩了，已取压缩路径为准，因为是先裁剪后压缩的
                         }
                         break;
                     default:
                         break;
                 }
-            } else if (resultCode == ConstantUtil.RESULTCODE_UPDATENAME) {
-                String sName = data.getStringExtra(ConstantUtil.NICKTEXT);
-                tvName.setText(sName);
             }
         }
+
+        //android系统6.0以上权限界面返回
+        if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {
+            //TODO （拍照权限）不做操作
+        }
     }
+
+
+    /**
+     * Android6.0以上系统通用动态获取权限
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        //将结果传入EasyPermissions中
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    /**
+     * EasyPermissions.PermissionCallbacks 两个方法
+     * Android6.0以上系统
+     */
+    @Override// 请求权限已经被授权
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        //打开相机
+        onAddPicClick(false);
+    }
+    @Override// 请求权限被拒绝
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        switch (requestCode){
+            case ConstantUtil.PERMS_CODE_CAMERA:
+                if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+                    new AppSettingsDialog.Builder(this)
+                            .setRationale("您未允许获取摄像头权限，您可在系统设置中开启")
+                            .setPositiveButton("去设置")
+                            .setNegativeButton("暂不")
+                            .setTitle("权限设置")
+                            .build()
+                            .show();
+                }
+
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * 检查权限
+     */
+    private void checkPerm() {
+        //判断相机权限是否开启
+        if (!EasyPermissions.hasPermissions(CompanyInfoActivity.this, ConstantUtil.PERMS_CAMERA)){//检查是否获取该权限
+            //第二个参数是被拒绝后再次申请该权限的解释
+            //第三个参数是请求码
+            //第四个参数是要申请的权限
+            EasyPermissions.requestPermissions(this,"拍照需要摄像头权限",ConstantUtil.PERMS_CODE_CAMERA,ConstantUtil.PERMS_CAMERA);
+        }else {
+            onAddPicClick(false);//打开相机
+        }
+    }
+
 
     @Override
     protected void onDestroy() {
@@ -466,161 +565,6 @@ public class CompanyInfoActivity extends ABaseActivity<ICompanyInfoView,CompanyI
         if (mHandler!=null){
             mHandler.removeCallbacksAndMessages(null);
         }
-    }
-
-
-    /**
-     * ------------------------------------------------------------------------------------------
-      */
-
-    private void initData() {
-        Intent intent = getIntent();
-        UserInfoDataInfoUserinfo dataInfo = (UserInfoDataInfoUserinfo) intent.getSerializableExtra(ConstantUtil.INTENT_IDTOKEN);
-        if (dataInfo != null) {
-            String head_pic = dataInfo.getHead_pic();
-            String nickname = dataInfo.getNickname();
-            String sex = dataInfo.getSex();
-
-            if (nickname != null) {
-                tvName.setText(nickname);
-            }
-            if (head_pic != null) {
-                //设置圆形图片
-                Glide.with(this).load(head_pic).into(ivLogo);
-            }
-        }
-        getSaveInfo = new SaveObjectUtils(this, ConstantUtil.LOGININFO).getObject(ConstantUtil.LOGININFO_OBJECT, LoginInfoDataInfo.class);
-        if (getSaveInfo != null) {
-            token = getSaveInfo.getToken();
-            user_id = getSaveInfo.getUser_id();
-            savaInfo = new SaveObjectUtils(CompanyInfoActivity.this, ConstantUtil.USERINFO_NAME).getObject(token, UserInfoDataInfoUserinfo.class);
-//            getUserInfo(user_id, token);
-        }
-    }
-
-    //更新信息的请求
-    private void updateInfo(String name, String str) {
-        SharedPreferenceUtil.saveData(this, ConstantUtil.THREADSTATE, name, ConstantUtil.THREADSTATE_NAME);
-        Map<String, String> params = new HashMap<>();
-        params.put("user_id", "" + user_id);
-        params.put("token", token);
-        params.put(name, str);
-        OkHttpUtils.post()//
-                .url(ConstantUtil.URL_EDITUSERINFO)//
-                .params(params)//
-                .build()//
-                .execute(new MyStringCallback());
-    }
-
-    //退出登录请求
-    private void outLogin() {
-        SharedPreferenceUtil.saveData(this, ConstantUtil.THREADSTATE, ConstantUtil.STATEOUTLOGIN, ConstantUtil.THREADSTATE_NAME);
-        Map<String, String> params = new HashMap<>();
-        params.put("user_id", "" + user_id);
-        params.put("token", token);
-        OkHttpUtils.post()//
-                .url(ConstantUtil.URL_USER_USER_INFO_LOGOUT)//
-                .params(params)//
-                .build()//
-                .execute(new MyStringCallback());
-    }
-
-    //更新头像的请求
-    private void updateHeadImg(String base64Head) {
-        SharedPreferenceUtil.saveData(this, ConstantUtil.THREADSTATE, ConstantUtil.UPDATEHEAD, ConstantUtil.THREADSTATE_NAME);
-        Map<String, String> params = new HashMap<>();
-        params.put("user_id", "" + user_id);
-        params.put("token", token);
-        params.put("base64", base64Head);
-        OkHttpUtils.post()//
-                .url(ConstantUtil.URL_UPDATEHEAD)//
-                .params(params)//
-                .build()//
-                .execute(new MyStringCallback());
-    }
-
-    //提交获取用户信息到后台验证
-    public void getUserInfo(int user_id, String token) {
-        SharedPreferenceUtil.saveData(this, ConstantUtil.THREADSTATE, ConstantUtil.GETUSERINFO, ConstantUtil.THREADSTATE_NAME);
-        Map<String, String> params = new HashMap<>();
-        params.put("user_id", "" + user_id);
-        params.put("token", token);
-        OkHttpUtils.post()//
-                .url(ConstantUtil.URL_GETUSERINFO)//
-                .params(params)//
-                .build()//
-                .execute(new MyStringCallback());
-    }
-
-    public class MyStringCallback extends StringCallback {
-        @Override
-        public void onError(Call call, Exception e, int id) {
-            Log.e("HomeDetailFragment", "null");
-        }
-        @Override
-        public void onResponse(String response, int id) {
-            state = (String) SharedPreferenceUtil.getData(CompanyInfoActivity.this, ConstantUtil.THREADSTATE, "", ConstantUtil.THREADSTATE_NAME);
-            if (response != null) {
-                switch (state) {
-//                    case ConstantUtil.GETUSERINFO:
-//                        userInfo = GsonUtil.parseJSON(response, UserInfo.class);
-//                        AccountInfoData data = userInfo.getData();
-//                        UserInfoDataInfo info = data.getInfo();
-//                        if (data != null & info != null) {
-//                            UserInfoDataInfoUserinfo userinfo = info.getUserinfo();
-//                            new SaveObjectUtils(CompanyInfoActivity.this, ConstantUtil.USERINFO_NAME).setObject(token, userinfo);
-//                            String nickname = userinfo.getNickname();
-//                            String head_pic = userinfo.getHead_pic();
-//                            sex = userinfo.getSex();
-//                            if (!nickname.equals("")) {
-//                                tvNickName.setText(nickname);
-//                            }
-//                            if (!head_pic.equals("")) {
-//                                //设置圆形图片
-//                                Glide.with(CompanyInfoActivity.this).load(head_pic).into(head);
-//                            }
-//                            if (!CompanyInfoActivity.this.sex.equals("")) {
-//                                switch (sex) {
-//                                    case "0":
-//                                        tvSex.setText("保密");
-//                                        break;
-//                                    case "1":
-//                                        tvSex.setText("男");
-//                                        break;
-//                                    case "2":
-//                                        tvSex.setText("女");
-//                                        break;
-//                                    default:
-//                                        break;
-//                                }
-//                            }
-//                        }
-//                        break;
-                    case ConstantUtil.UPDATEINFOSEX:
-//                        UpdateSexInfo updateSexInfo = GsonUtil.parseJSON(response, UpdateSexInfo.class);
-//                        UpdateSexInfoData data1 = updateSexInfo.getData();
-//                        String msg = data1.getMsg();
-//                        if (msg.equals("修改成功")) {
-//                            savaInfo.setSex(sexId);
-//                            new SaveObjectUtils(CompanyInfoActivity.this, ConstantUtil.USERINFO_NAME).setObject(token, savaInfo);
-//                        }
-//                        ToastUtil.toast(CompanyInfoActivity.this, msg);
-                        break;
-                    case ConstantUtil.UPDATEHEAD:
-                        UpdateHeadInfo updateHeadInfo = GsonUtil.parseJSON(response, UpdateHeadInfo.class);
-                        UpdateHeadInfoData updateHeadInfoData = updateHeadInfo.getData();
-                        String url = updateHeadInfoData.getUrl();
-                        if (url != null) {
-                            //把返回信息对象写入内存
-                            updateInfo("head_pic", url);
-                            savaInfo.setHead_pic(url);
-                            new SaveObjectUtils(CompanyInfoActivity.this, ConstantUtil.USERINFO_NAME).setObject(token, savaInfo);
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
+        ToastUtil.cancleMyToast();
     }
 }

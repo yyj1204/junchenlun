@@ -11,17 +11,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.wktx.www.emperor.ui.activity.recruit.resume.WorksDetailsActivity;
-import com.wktx.www.emperor.utils.SpaceItemDecoration;
 import com.wktx.www.emperor.R;
 import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.recruit.resume.WorksListInfoData;
 import com.wktx.www.emperor.basemvp.ALazyLoadFragment;
 import com.wktx.www.emperor.presenter.recruit.resume.WorksListPresenter;
-import com.wktx.www.emperor.ui.adapter.ResumeWorksAdapter;
+import com.wktx.www.emperor.ui.adapter.recruit.ResumeWorksAdapter;
 import com.wktx.www.emperor.utils.ConstantUtil;
-import com.wktx.www.emperor.utils.Dip2pxUtil;
 import com.wktx.www.emperor.utils.MyUtils;
-import com.wktx.www.emperor.view.IView;
+import com.wktx.www.emperor.ui.view.IView;
+import com.wktx.www.emperor.utils.ToastUtil;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -105,8 +105,7 @@ public class ResumeWorksFragment extends ALazyLoadFragment<IView,WorksListPresen
         //设置刷新圈圈的颜色
         swipeRefreshLayout.setColorSchemeColors(Color.rgb(255, 179, 33));
         swipeRefreshLayout.setRefreshing(true);
-        //设置分割线与网格布局
-        recyclerView.addItemDecoration(new SpaceItemDecoration(Dip2pxUtil.dip2px(getContext(), 10), 3));
+        //设置网格布局
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         recyclerView.setLayoutManager(gridLayoutManager);
     }
@@ -126,10 +125,14 @@ public class ResumeWorksFragment extends ALazyLoadFragment<IView,WorksListPresen
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (MyUtils.isFastClick1()){
+                    return;
+                }
                 //将作品ID 传递给 WorksDetailsActivity
                 WorksListInfoData info = (WorksListInfoData) adapter.getData().get(position);
                 Intent intent = new Intent(getActivity(), WorksDetailsActivity.class);
                 intent.putExtra(ConstantUtil.KEY_POSITION,info.getId());
+                intent.putExtra(ConstantUtil.KEY_ISOK,ConstantUtil.ACTIVITY_JL);
                 startActivity(intent);
             }
         });
@@ -160,6 +163,7 @@ public class ResumeWorksFragment extends ALazyLoadFragment<IView,WorksListPresen
         isRefresh=false;
         getPresenter().onGetResumeWorksList(resumeId,page);
     }
+
     /**
      * IView
      */
@@ -170,6 +174,7 @@ public class ResumeWorksFragment extends ALazyLoadFragment<IView,WorksListPresen
 
     @Override
     public void onRequestSuccess(List<WorksListInfoData> tData) {
+        recyclerView.setBackgroundResource(R.color.color_ffffff);
         setData(tData);
         if (isRefresh){//停止刷新
             mAdapter.setEnableLoadMore(true);
@@ -179,21 +184,27 @@ public class ResumeWorksFragment extends ALazyLoadFragment<IView,WorksListPresen
 
     @Override
     public void onRequestFailure(String result) {
-        if (result.equals("")){//没数据
-            MyUtils.showToast(getContext(),"暂无任何作品！");
-        }else {
-            MyUtils.showToast(getContext(),result);
-        }
+        String toastStr=result;
+        setData(null);
+        //如果是刷新，没数据代表全部没数据
         if (isRefresh){
+            if (result.equals("")){
+                toastStr="暂无任何作品！";
+                recyclerView.setBackgroundResource(R.drawable.img_nothing);
+            }else {
+                recyclerView.setBackgroundResource(R.drawable.img_nothing_net);
+            }
             mAdapter.setEnableLoadMore(true);
             swipeRefreshLayout.setRefreshing(false);
-        }else {
+        }else {//如果是加载，没数据代表加载完毕
             if (result.equals("")){//没数据
+                toastStr="已经到底了哦！";
                 mAdapter.loadMoreEnd();
             }else {//请求出错
                 mAdapter.loadMoreFail();
             }
         }
+       ToastUtil.myToast(toastStr);
     }
 
     /**

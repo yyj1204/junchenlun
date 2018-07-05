@@ -64,9 +64,10 @@
     <color name="color_ffd321">#ffd321</color>
     <color name="color_000000">#000000</color>
 
-    <color name="color_88888888">#88888888</color>
     <color name="color_00000000">#00000000</color>
+    <color name="color_88888888">#88888888</color>
     <color name="color_88ffffff">#88ffffff</color>
+    <color name="color_80000000">#80000000</color>
 
 
     <color name="drop_down_selected">#7B1FA2</color>

@@ -1,9 +1,11 @@
 package com.wktx.www.emperor.ui.activity.login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,7 +18,8 @@ import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.login.LoginPresenter;
 import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
-import com.wktx.www.emperor.view.login.ILoginView;
+import com.wktx.www.emperor.ui.view.login.ILoginView;
+import com.wktx.www.emperor.utils.ToastUtil;
 
 
 import butterknife.BindView;
@@ -40,6 +43,9 @@ public class LoginActivity extends ABaseActivity<ILoginView,LoginPresenter> impl
 
     @OnClick({R.id.tb_IvReturn, R.id.tv_forget_pwd, R.id.bt_login, R.id.tv_regiest})
     public void MyOnclick(View view) {
+        //将输入法隐藏
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(tvTitle.getWindowToken(), 0);
         switch (view.getId()) {
             case R.id.tb_IvReturn:
                 finish();
@@ -56,18 +62,18 @@ public class LoginActivity extends ABaseActivity<ILoginView,LoginPresenter> impl
                 }
                 //判断输入框格式
                 if (TextUtils.isEmpty(getPhoneStr())){
-                    MyUtils.showToast(LoginActivity.this,"请输入手机号！");
+                    ToastUtil.myToast("请输入手机号！");
                     etPhone.requestFocus();
                 }else if (!MyUtils.checkMobileNumber(getPhoneStr())) {
-                    MyUtils.showToast(LoginActivity.this, "手机号输入不正确！");
+                    ToastUtil.myToast( "手机号输入不正确！");
                     etPhone.requestFocus();
                 }else if (TextUtils.isEmpty(getPwdStr())){
-                    MyUtils.showToast(LoginActivity.this,"请输入密码！");
+                    ToastUtil.myToast("请输入密码！");
                     etPwd.requestFocus();
                 }else if (getPwdStr().length()<6||getPwdStr().length()>12){
-                    MyUtils.showToast(this,"密码输入不正确！");
+                    ToastUtil.myToast("密码输入不正确！");
                     etPwd.requestFocus();
-                }else {//注册
+                }else {//登录
                     btLogin.setEnabled(false);
                     getPresenter().onLogin();
                 }
@@ -122,15 +128,22 @@ public class LoginActivity extends ABaseActivity<ILoginView,LoginPresenter> impl
         }
         userInfo.setUser_id(tData.getUser_id());
         userInfo.setToken(tData.getToken());
+        userInfo.setPhone(getPhoneStr());
         userInfo.setIs_new(tData.getIs_new());
         LoginUtil.getinit().saveUserInfo(userInfo);
 
-        MyUtils.showToast(LoginActivity.this,"登录成功！");
+        ToastUtil.myToast("登录成功！");
         finish();
     }
     @Override
     public void onRequestFailure(String result) {
         btLogin.setEnabled(true);
-        MyUtils.showToast(LoginActivity.this,result);
+        ToastUtil.myToast(result);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ToastUtil.cancleMyToast();
     }
 }

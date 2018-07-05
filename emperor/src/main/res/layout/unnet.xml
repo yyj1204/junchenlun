@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<com.zhy.autolayout.AutoRelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/RlUnNet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_below="@+id/toolbar"
-    android:visibility="gone"
->
+    android:visibility="gone">
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_above="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/unnet"/>
+        android:src="@drawable/img_nothing_net"/>
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -36,6 +35,6 @@
         android:textColor="@color/main_white"
         android:visibility="gone"
         android:textSize="@dimen/sp_fourteen"/>
-</RelativeLayout>
+</com.zhy.autolayout.AutoRelativeLayout>
 
 

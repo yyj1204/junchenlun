@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:background="@color/color_f0f0f0"
-    tools:context="com.wktx.www.emperor.com.wktx.www.emperor.Activity.StaffSalaryActivity">
+    tools:context="com.wktx.www.emperor.ui.activity.staff.StaffSalaryActivity">
 
     <include layout="@layout/include_toolbar_activity" />
 
@@ -15,102 +15,108 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_ffffff"
-        android:padding="22dp"
+        android:padding="@dimen/px_30"
         android:gravity="center_horizontal"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/tv_salary_total"
+            android:id="@+id/tv_salaryTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="7000"
-            android:textSize="15sp"
+            android:text="0"
+            android:textSize="@dimen/sp_15"
+            android:textStyle="bold"
             android:textColor="@color/color_fa716f"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="累计支出总额"
-            android:textSize="15sp"
-            android:layout_marginTop="9dp"
+            android:textSize="@dimen/sp_15"
+            android:layout_marginTop="@dimen/px_20"
             android:textColor="@color/color_000000"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="( 托管工资 + 已发工资 )"
-            android:textSize="12sp"
-            android:layout_marginTop="7dp"
+            android:textSize="@dimen/sp_12"
+            android:layout_marginTop="@dimen/px_14"
             android:textColor="@color/color_999999"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/px_150"
         android:orientation="horizontal"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="1dp">
+        android:layout_marginBottom="@dimen/px_20"
+        android:layout_marginTop="@dimen/px_1">
 
         <LinearLayout
-            android:id="@+id/linear_salary_trusteeship"
-            android:layout_width="wrap_content"
+            android:id="@+id/linear_trusteeship"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:paddingTop="21dp"
-            android:background="@color/color_ffffff"
-            android:orientation="vertical"
+            android:layout_weight="1"
             android:gravity="center"
-            android:layout_weight="1">
+            android:background="@drawable/selector_mine_linearlayout"
+            android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/px_20"
                 android:text="托管中工资"
                 android:textColor="@color/color_000000"
-                android:textSize="12sp"/>
+                android:textSize="@dimen/sp_15" />
             <TextView
-                android:id="@+id/tv_salary_trusteeship"
+                android:id="@+id/tv_trusteeshipMoney"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="3500"
-                android:layout_marginTop="7dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="0"
+                android:gravity="center"
                 android:textColor="@color/color_fa716f"
-                android:textSize="15sp"/>
+                android:textSize="@dimen/sp_15" />
             <TextView
-                android:id="@+id/tv_underline1"
-                android:layout_width="79dp"
-                android:layout_height="2dp"
-                android:layout_marginTop="20dp"
+                android:id="@+id/tv_trusteeshipLine"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_4"
+                android:layout_marginLeft="@dimen/px_50"
+                android:layout_marginRight="@dimen/px_50"
                 android:background="@color/color_ffb321"/>
         </LinearLayout>
-
         <LinearLayout
-            android:id="@+id/linear_salary_pay"
-            android:layout_width="wrap_content"
+            android:id="@+id/linear_pay"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:paddingTop="21dp"
-            android:layout_marginLeft="1dp"
-            android:orientation="vertical"
-            android:background="@color/color_ffffff"
+            android:layout_weight="1"
             android:gravity="center"
-            android:layout_weight="1">
+            android:layout_marginLeft="@dimen/px_2"
+            android:background="@drawable/selector_mine_linearlayout"
+            android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/px_20"
                 android:text="已发工资"
                 android:textColor="@color/color_000000"
-                android:textSize="12sp"/>
+                android:textSize="@dimen/sp_15" />
             <TextView
-                android:id="@+id/tv_salary_pay"
+                android:id="@+id/tv_payMoney"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="3500"
-                android:layout_marginTop="7dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="0"
+                android:gravity="center"
                 android:textColor="@color/color_fa716f"
-                android:textSize="15sp"/>
+                android:textSize="@dimen/sp_15" />
             <TextView
-                android:id="@+id/tv_underline2"
-                android:layout_width="79dp"
-                android:layout_height="2dp"
-                android:visibility="invisible"
-                android:layout_marginTop="20dp"
+                android:visibility="gone"
+                android:id="@+id/tv_payLine"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_4"
+                android:layout_marginLeft="@dimen/px_50"
+                android:layout_marginRight="@dimen/px_50"
                 android:background="@color/color_ffb321"/>
         </LinearLayout>
     </LinearLayout>
-    <include layout="@layout/include_recycleview_f0f0f0" />
+
+    <include layout="@layout/include_recyclerview_refresh" />
+
 </LinearLayout>

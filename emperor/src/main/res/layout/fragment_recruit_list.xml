@@ -9,7 +9,7 @@
         android:id="@+id/dropDownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:ddmenuTextSize="@dimen/sp_15"
+        app:ddmenuTextSize="@dimen/sp_13"
         app:ddtextSelectedColor="@color/color_ffb321"
         app:ddtextUnselectedColor="@color/color_5d5d5d"
         app:ddmenuSelectedIcon="@drawable/down_pull_selected"
@@ -22,13 +22,4 @@
         app:ddmenuIconOrientation="right">
     </com.wktx.www.emperor.widget.DropDownMenu>
 
-    <ImageView
-        android:id="@+id/iv_browsingHistory"
-        android:layout_width="@dimen/px_82"
-        android:layout_height="@dimen/px_82"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="@dimen/px_50"
-        android:layout_marginRight="@dimen/px_30"
-        android:src="@drawable/browsinghistory" />
 </com.zhy.autolayout.AutoRelativeLayout>

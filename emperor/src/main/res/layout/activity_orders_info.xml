@@ -7,26 +7,26 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:background="@color/color_f0f0f0"
-    tools:context="com.wktx.www.emperor.com.wktx.www.emperor.Activity.OrdersInfoActivity">
+    tools:context="com.wktx.www.emperor.ui.activity.recruit.hire.OrdersInfoActivity">
 
     <include layout="@layout/include_toolbar_activity" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:background="@color/color_ffffff"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:padding="@dimen/px_30"
         android:orientation="horizontal">
-        <ImageView
-            android:layout_width="53dp"
-            android:layout_height="53dp"
-            android:scaleType="fitXY"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/icon_head_woman" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_head"
+            android:layout_width="@dimen/px_106"
+            android:layout_height="@dimen/px_106"
+            android:src="@drawable/img_mine_head" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="@dimen/px_16"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="vertical">
@@ -40,54 +40,58 @@
                     android:layout_height="wrap_content"
                     android:text="员工姓名："
                     android:textColor="@color/color_a0a0a0"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/sp_13" />
                 <TextView
+                    android:id="@+id/tv_staffName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="胡图图"
-                    android:textColor="@color/title_color"
-                    android:textSize="13sp" />
+                    android:textColor="@color/color_000000"
+                    android:layout_marginLeft="@dimen/px_20"
+                    android:textSize="@dimen/sp_13" />
                 <TextView
+                    android:id="@+id/tv_staffJob"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="美工"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_marginLeft="@dimen/dp_ten"
+                    android:textColor="@color/color_ffb321"
+                    android:layout_marginLeft="@dimen/px_20"
                     android:background="@drawable/shape_stroke_ffb321_18"
-                    android:textSize="@dimen/sp_twelve" />
+                    android:textSize="@dimen/sp_12" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/px_24"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="月薪要求："
                     android:textColor="@color/color_a0a0a0"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/sp_13" />
                 <TextView
+                    android:id="@+id/tv_staffSalary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4800元/月"
-                    android:textColor="@color/title_color"
-                    android:layout_marginLeft="@dimen/dp_ten"
-                    android:textSize="12sp"
+                    android:text="0元/月"
+                    android:textColor="@color/color_000000"
+                    android:layout_marginLeft="@dimen/px_20"
+                    android:textSize="@dimen/sp_13"
                     android:layout_weight="1"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="33dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:layout_marginTop="@dimen/px_20"
+        android:padding="@dimen/px_30"
         android:gravity="center_vertical"
         android:background="@color/color_ffffff">
         <TextView
@@ -95,23 +99,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="雇佣方式："
-            android:textSize="13sp"
+            android:textSize="@dimen/sp_13"
             android:textColor="@color/color_a0a0a0"/>
         <TextView
+            android:id="@+id/tv_hireWay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="包月"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp_13"
             android:textColor="@color/color_000000"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="33dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="1dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:layout_marginTop="@dimen/px_1"
+        android:padding="@dimen/px_30"
         android:gravity="center_vertical"
         android:background="@color/color_ffffff">
         <TextView
@@ -119,23 +122,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="项目时间："
-            android:textSize="13sp"
+            android:textSize="@dimen/sp_13"
             android:textColor="@color/color_a0a0a0"/>
         <TextView
+            android:id="@+id/tv_itemTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2017.10.16-2017.11.15"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp_13"
             android:textColor="@color/color_000000"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="33dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="1dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:layout_marginTop="@dimen/px_1"
+        android:padding="@dimen/px_30"
         android:gravity="center_vertical"
         android:background="@color/color_ffffff">
         <TextView
@@ -143,42 +145,74 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="雇佣总金额："
-            android:textSize="13sp"
+            android:textSize="@dimen/sp_13"
             android:textColor="@color/color_a0a0a0"/>
         <TextView
+            android:id="@+id/tv_hireMoney"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4800元"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp_13"
             android:textColor="@color/color_000000"/>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linear_usableBalance"
         android:layout_width="match_parent"
-        android:layout_height="33dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:layout_marginTop="@dimen/px_1"
+        android:padding="@dimen/px_30"
         android:gravity="center_vertical"
-        android:background="@color/color_f0f0f0">
+        android:background="@color/color_ffffff">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="可用余额："
+            android:textSize="@dimen/sp_13"
+            android:textColor="@color/color_a0a0a0"/>
+        <TextView
+            android:id="@+id/tv_usableBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0元"
+            android:textSize="@dimen/sp_13"
+            android:layout_marginRight="@dimen/px_20"
+            android:textColor="@color/color_000000"/>
+        <ImageView
+            android:id="@+id/iv_usableBalance"
+            android:layout_width="@dimen/px_38"
+            android:layout_height="@dimen/px_38"
+            app:srcCompat="@drawable/selector_radiobutton" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_usableDiscounts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/px_1"
+        android:padding="@dimen/px_30"
+        android:gravity="center_vertical">
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="可用优惠："
-            android:textSize="13sp"
+            android:textSize="@dimen/sp_13"
             android:textColor="@color/color_a0a0a0"/>
         <TextView
+            android:id="@+id/tv_usableDiscounts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="暂无可使用红包 >"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp_13"
+            android:text="暂无优惠可用"
             android:textColor="@color/color_a0a0a0"/>
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/px_1"
         android:background="@color/color_ffffff"/>
     <TextView
         android:layout_width="match_parent"
@@ -187,37 +221,40 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="41dp"
+        android:layout_height="@dimen/px_82"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal">
         <LinearLayout
-            android:layout_width="218dp"
+            android:layout_width="@dimen/px_480"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:background="@color/color_ffffff"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="雇佣总金额："
-                android:textSize="15sp"
+                android:text="待支付金额："
+                android:textSize="@dimen/sp_15"
                 android:textColor="@color/color_000000" />
+
             <TextView
+                android:id="@+id/tv_payMoney"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:textSize="15sp"
-                android:textColor="@color/color_fa716f" />
+                android:textColor="@color/color_fa716f"
+                android:textSize="@dimen/sp_15" />
         </LinearLayout>
         <TextView
-            android:id="@+id/tv_order_sure"
-            android:layout_width="142dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="15sp"
-            android:background="@color/color_ffb321"
-            android:textColor="@color/color_000000"
+            android:id="@+id/tv_sureOrders"
+            android:layout_width="@dimen/px_240"
             android:layout_height="match_parent"
-            android:text="确认下单"/>
+            android:layout_weight="1"
+            android:background="@drawable/selector_submit_selected"
+            android:gravity="center"
+            android:text="确认下单"
+            android:textColor="@color/color_ffffff"
+            android:textSize="@dimen/sp_15" />
     </LinearLayout>
 </LinearLayout>

@@ -5,16 +5,25 @@ import java.util.List;
 /**
  * Created by yyj on 2018/2/9.
  * 简历---作品列表---作品详情内容
- * "id":"1","title":"亚麻拖鞋详情","brief_intro":"亚麻拖鞋详情","bgat":"服装内衣/母婴玩具/精品鞋包"
+ * "rid":"1","id":"1","title":"亚麻拖鞋详情","brief_intro":"亚麻拖鞋详情","bgat":"服装内衣/母婴玩具/精品鞋包"
  * "content":["http://shop.jcl.55085.cn/public/upload/goods/2016/04-22/5719843a87434.jpg"]
  */
 
 public class WorksDetailsInfoData {
+    private String rid;//简历id
     private String id;
-    private String title;
-    private String brief_intro;
-    private String bgat;
-    private List<String> content;
+    private String title;//标题
+    private String brief_intro;//简介
+    private String bgat;//类目
+    private List<String> content;//作品内容
+
+    public String getRid() {
+        return rid;
+    }
+
+    public void setRid(String rid) {
+        this.rid = rid;
+    }
 
     public String getId() {
         return id;
@@ -60,7 +69,8 @@ public class WorksDetailsInfoData {
     @Override
     public String toString() {
         return "WorksDetailsInfoData{" +
-                "id='" + id + '\'' +
+                "rid='" + rid + '\'' +
+                ",id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", brief_intro='" + brief_intro + '\'' +
                 ", bgat='" + bgat + '\'' +

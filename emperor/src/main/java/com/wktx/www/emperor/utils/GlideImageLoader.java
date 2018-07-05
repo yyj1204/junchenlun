@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.wktx.www.emperor.R;
 import com.youth.banner.loader.ImageLoader;
 
 /**
@@ -24,7 +25,8 @@ public class GlideImageLoader extends ImageLoader {
 
         if (NetUtil.isNetConnected(context) || NetUtil.isWifiConnected(context)) {
             //Glide 加载图片简单用法
-            Glide.with(context).load(path).into(imageView);
+            GlideUtil.loadImage((String) path, R.drawable.img_loading,imageView);
+//            Glide.with(context).load(path).into(imageView);
         }
 
 //        //Picasso 加载图片简单用法

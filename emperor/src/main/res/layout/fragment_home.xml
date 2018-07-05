@@ -9,5 +9,5 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/px_96" />
 
-    <include layout="@layout/include_recycleview_refresh" />
+    <include layout="@layout/include_recyclerview_refresh" />
 </com.zhy.autolayout.AutoLinearLayout>

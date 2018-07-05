@@ -1,4 +1,5 @@
 package com.wktx.www.emperor.ui.fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,27 +11,28 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.wktx.www.emperor.apiresult.main.home.BannerBean;
 import com.wktx.www.emperor.apiresult.main.home.HomeInfoData;
+import com.wktx.www.emperor.apiresult.main.home.JobTypeInfoData;
 import com.wktx.www.emperor.apiresult.main.home.ResumeListBean;
 import com.wktx.www.emperor.apiresult.login.AccountInfoData;
-import com.wktx.www.emperor.basemvp.ABaseFragment;
+import com.wktx.www.emperor.basemvp.ALazyLoadFragment;
 import com.wktx.www.emperor.presenter.main.HomePresenter;
-import com.wktx.www.emperor.ui.activity.recruit.resume.ArtistResumeActivity;
-import com.wktx.www.emperor.Activity.InviteGuideActivity;
-import com.wktx.www.emperor.Activity.MessageActivity;
-import com.wktx.www.emperor.Activity.RecruitActivity;
-import com.wktx.www.emperor.ui.activity.SearchActivity;
-import com.wktx.www.emperor.Activity.WorksActivity;
-import com.wktx.www.emperor.model.HomeHorizonalBean;
+import com.wktx.www.emperor.ui.activity.login.LoginActivity;
+import com.wktx.www.emperor.ui.activity.main.artistcase.ArtistCaseActivity;
+import com.wktx.www.emperor.ui.activity.recruit.resume.ResumeActivity;
+import com.wktx.www.emperor.ui.activity.main.RecruitGuideActivity;
+import com.wktx.www.emperor.ui.activity.main.message.MessageActivity;
+import com.wktx.www.emperor.ui.activity.main.SearchActivity;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.ui.adapter.HomeListAdapter;
+import com.wktx.www.emperor.ui.adapter.main.HomeJobTypeAdapter;
+import com.wktx.www.emperor.ui.adapter.main.HomeListAdapter;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.GlideImageLoader;
 import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
-import com.wktx.www.emperor.view.IView;
+import com.wktx.www.emperor.ui.view.main.IHomeView;
+import com.wktx.www.emperor.utils.ToastUtil;
 import com.wktx.www.emperor.widget.MyLayoutManager;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -42,10 +44,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 /**
- * 首页
+ * 首页片段
  */
-public class HomeFragment extends ABaseFragment<IView,HomePresenter> implements IView<HomeInfoData> {
+public class HomeFragment extends ALazyLoadFragment<IHomeView,HomePresenter> implements IHomeView {
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.recyclerView)
@@ -57,32 +60,39 @@ public class HomeFragment extends ABaseFragment<IView,HomePresenter> implements 
     private boolean isRefresh;//是下拉刷新还是加载更多  ：下拉刷新
     //RecyclerView 适配器
     private HomeListAdapter adapter;
-    private BaseQuickAdapter<HomeHorizonalBean, BaseViewHolder> hzAdapter;
+    private HomeJobTypeAdapter hzAdapter;
 
-    List<String> mDatas = new ArrayList<>();
-
-    private List<HomeHorizonalBean> horizonalBeans;
-    int[] hzImages = {R.drawable.home_artist, R.drawable.home_service, R.drawable.home_operation,
-            R.drawable.home_example, R.drawable.home_guide};
-    String[] hzNames = {"招美工", "招客服", "招运营", "美工案例", "招聘指南"};
 
     @OnClick({R.id.linear_titleSearch, R.id.iv_titleRight})
     public void MyOnclick(View view) {
+        if (MyUtils.isFastClick1()){
+            return;
+        }
         switch (view.getId()) {
             case R.id.linear_titleSearch://搜索
                 startActivity(new Intent(getActivity(), SearchActivity.class));
                 break;
             case R.id.iv_titleRight://消息通知
-                startActivity(new Intent(getActivity(), MessageActivity.class));
+                isLoginStartActivity(MessageActivity.class);
                 break;
             default:
                 break;
         }
     }
 
-    public HomeFragment() {
+    /**
+     * 登录了才能打开对应的界面
+     */
+    private void isLoginStartActivity(Class<?> clazz) {
+        if (getUserInfo()!=null){
+            startActivity(new Intent(getActivity(), clazz));
+        }else {
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+        }
     }
 
+    public HomeFragment() {
+    }
     public static HomeFragment newInstance(String info) {
         Bundle args = new Bundle();
         HomeFragment fragment = new HomeFragment();
@@ -90,18 +100,14 @@ public class HomeFragment extends ABaseFragment<IView,HomePresenter> implements 
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
-
-        initHorizonalData();
         initRecycleView();
         initAdapter();
         initHeadView();
         initRefreshLayout();
-        refresh();
         return view;
     }
 
@@ -111,15 +117,36 @@ public class HomeFragment extends ABaseFragment<IView,HomePresenter> implements 
     }
 
     /**
-     * 初始化 横向推荐
+     * 片段是否可见
+     * @param isVisible falese 可见 -> 不可见
+     *  此时 isRefresh=true，在片段不可见时候将 isRefresh = false
+     * @param isVisible true  不可见 -> 可见
+     *  如果 isRefresh=false 说明已经创建过，防止多次请求接口，加判断
      */
-    private void initHorizonalData() {
-        horizonalBeans = new ArrayList<>();
-        int length = hzNames.length;
-        for (int i = 0; i < length; i++) {
-            horizonalBeans.add(new HomeHorizonalBean(hzNames[i], hzImages[i]));
+    @Override
+    protected void onFragmentVisibleChange(boolean isVisible) {
+        if (isVisible){
+            if (!isRefresh){
+                refresh();
+            }
+        }else {
+            if (isRefresh){
+                isRefresh=false;
+                swipeRefreshLayout.setRefreshing(false);
+            }
         }
     }
+
+    /**
+     * 片段第一次被创建（可见）时才会执行到这个方法
+     * 加载数据
+     * isRefresh=true
+     */
+    @Override
+    protected void onFragmentFirstVisible() {
+        refresh();
+    }
+
 
     /**
      * 初始化 RecycleView
@@ -129,7 +156,7 @@ public class HomeFragment extends ABaseFragment<IView,HomePresenter> implements 
         swipeRefreshLayout.setColorSchemeColors(Color.rgb(255, 179, 33));
         swipeRefreshLayout.setRefreshing(true);
         //设置分割线与垂直方向布局
-        recycleView.addItemDecoration(MyUtils.drawDivider(getActivity(), LinearLayout.VERTICAL, R.drawable.divider_f0f0f0_2));
+        recycleView.addItemDecoration(MyUtils.drawDivider(getActivity(), LinearLayout.VERTICAL, R.drawable.divider_f0f0f0_6));
         MyLayoutManager myLayoutManager = new MyLayoutManager(getActivity(), LinearLayout.VERTICAL, false);
         recycleView.setLayoutManager(myLayoutManager);
     }
@@ -150,9 +177,12 @@ public class HomeFragment extends ABaseFragment<IView,HomePresenter> implements 
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                //将简历ID 传递给 ArtistResumeActivity
+                if (MyUtils.isFastClick1()){
+                    return;
+                }
+                //将简历ID 传递给 ResumeActivity
                 ResumeListBean info = (ResumeListBean) adapter.getData().get(position);
-                Intent intent = new Intent(getActivity(), ArtistResumeActivity.class);
+                Intent intent = new Intent(getActivity(), ResumeActivity.class);
                 intent.putExtra(ConstantUtil.KEY_POSITION,info.getId());
                 startActivity(intent);
             }
@@ -163,41 +193,38 @@ public class HomeFragment extends ABaseFragment<IView,HomePresenter> implements 
      * 为 RecyclerView 添加头部控件（轮播图、横向推荐）
      */
     private void initHeadView() {
-        hvBanner = getActivity().getLayoutInflater().inflate(R.layout.item_hv_banner, (ViewGroup) recycleView.getParent(), false);
-        View hvHorizontalRv = getActivity().getLayoutInflater().inflate(R.layout.item_hv_home, (ViewGroup) recycleView.getParent(), false);
+        hvBanner = getActivity().getLayoutInflater().inflate(R.layout.item_hv_home_banner, (ViewGroup) recycleView.getParent(), false);
+        View hvHorizontalRv = getActivity().getLayoutInflater().inflate(R.layout.item_hv_home_horizontal, (ViewGroup) recycleView.getParent(), false);
         initHzRv(hvHorizontalRv);
         adapter.addHeaderView(hvBanner);
         adapter.addHeaderView(hvHorizontalRv);
     }
     /**
-     * 初始化横向热品推荐
+     * 初始化横向职业类型推荐
      */
     private void initHzRv(View view) {
         RecyclerView rv_horizontal = (RecyclerView) view.findViewById(R.id.recyclerView);
         MyLayoutManager myLayoutManager = new MyLayoutManager(getActivity(), LinearLayout.HORIZONTAL, false);
         rv_horizontal.setLayoutManager(myLayoutManager);
-        hzAdapter = new BaseQuickAdapter<HomeHorizonalBean, BaseViewHolder>(R.layout.item_rv_home_horizontal, horizonalBeans) {
-            @Override
-            protected void convert(BaseViewHolder helper, HomeHorizonalBean item) {
-                helper.setText(R.id.tv_name, item.getName());
-                helper.setImageResource(R.id.iv_img, item.getImg());
-            }
-        };
+        hzAdapter = new HomeJobTypeAdapter(getContext());
         rv_horizontal.setAdapter(hzAdapter);
         hzAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                if (position != 0 && position % 4 == 0) {//招聘指南
-                    startActivity(new Intent(getActivity(), InviteGuideActivity.class));
-                } else if (position != 0 && position % 3 == 0) {
-                    startActivity(new Intent(getActivity(), WorksActivity.class));
+                if (MyUtils.isFastClick1()){
+                    return;
+                }
+
+                if (position==adapter.getData().size()-1){//招聘指南
+                    startActivity(new Intent(getActivity(), RecruitGuideActivity.class));
+                }else  if (position==adapter.getData().size()-2){//案例库
+                    startActivity(new Intent(getActivity(), ArtistCaseActivity.class));
                 } else {
-                    //TODO 招聘界面还没处理
-                    Intent intent = new Intent(getActivity(), RecruitActivity.class);
-                    Bundle mBundle = new Bundle();
-                    mBundle.putInt("position", position);//压入数据
-                    intent.putExtras(mBundle);
-                    startActivity(intent);
+                    //将选中的职业类型id传给 MainActivity，MainActivity 再传给 RecruitFragment
+                    JobTypeInfoData jobTypeInfoData = (JobTypeInfoData) adapter.getData().get(position);
+                    if (listener!=null){
+                        listener.onDataChanged(jobTypeInfoData.getId());
+                    }
                 }
             }
         });
@@ -221,6 +248,9 @@ public class HomeFragment extends ABaseFragment<IView,HomePresenter> implements 
         isRefresh=true;
         //这里的作用是防止下拉刷新的时候还可以上拉加载
         adapter.setEnableLoadMore(false);
+        //顶部横向的职位类型
+        getPresenter().onGetTypeOfWorkList();
+        //轮播图、简历列表
         getPresenter().onGetHomeInfo(page);
     }
 
@@ -230,15 +260,27 @@ public class HomeFragment extends ABaseFragment<IView,HomePresenter> implements 
         getPresenter().onGetHomeInfo(page);
     }
 
+
     /**
-     * IView
+     * IHomeView
      */
     @Override
     public AccountInfoData getUserInfo() {
         AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
         return userInfo;
     }
+    @Override//获取职业类型
+    public void onGetJobTypeSuccessResult(List<JobTypeInfoData> result) {
+        //添加案例、招聘指南两个类型
+        result.add(new JobTypeInfoData("","美工案例",""));
+        result.add(new JobTypeInfoData("","招聘指南",""));
+        hzAdapter.setNewData(result);
+    }
     @Override
+    public void onGetJobTypeFailureResult(String result) {
+        ToastUtil.myToast(result);
+    }
+    @Override//获取轮播图、简历列表
     public void onRequestSuccess(HomeInfoData tData) {
         setData(tData.getResume_list());
         if (isRefresh){//停止刷新
@@ -253,11 +295,12 @@ public class HomeFragment extends ABaseFragment<IView,HomePresenter> implements 
     }
     @Override
     public void onRequestFailure(String result) {
+        ToastUtil.myToast(result);
         if (isRefresh){
             adapter.setEnableLoadMore(true);
             swipeRefreshLayout.setRefreshing(false);
         }else {
-                adapter.loadMoreFail();
+            adapter.loadMoreFail();
         }
     }
 
@@ -309,9 +352,26 @@ public class HomeFragment extends ABaseFragment<IView,HomePresenter> implements 
         }
     }
 
+
+    /**
+     * 接口
+     * 点击横向布局的职业类型时，需定位到 RecruitFragment 对应职业位置
+     */
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        horizonalBeans.clear();
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        // 这是为了保证Activity容器实现了用以回调的接口。如果没有，它会抛出一个异常。
+        try {
+            listener = (onChangedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + "must implement onChangedListener");
+        }
+    }
+
+    private onChangedListener listener;
+
+    public interface onChangedListener {
+        void onDataChanged(String jobTypeId);//参数为用户需要传递的数据内容,这里我用的是一个横向布局的被选中职业类型id
     }
 }

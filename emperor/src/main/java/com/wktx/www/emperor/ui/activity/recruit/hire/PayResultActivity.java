@@ -17,7 +17,8 @@ import com.wktx.www.emperor.ui.activity.main.MainActivity;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
-import com.wktx.www.emperor.view.IView;
+import com.wktx.www.emperor.ui.view.IView;
+import com.wktx.www.emperor.utils.ToastUtil;
 import com.wktx.www.emperor.widget.CustomDialog;
 
 import butterknife.BindView;
@@ -47,7 +48,7 @@ public class PayResultActivity extends ABaseActivity<IView,PayResultPresenter> i
     public void MyOnclick(View view) {
         switch (view.getId()) {
             case R.id.bt_payAgain://重新支付
-                MyUtils.showToast(this,"请重新支付！");
+               ToastUtil.myToast("请重新支付！");
                 finish();
                 break;
             case R.id.bt_payCancel://取消支付
@@ -58,7 +59,7 @@ public class PayResultActivity extends ABaseActivity<IView,PayResultPresenter> i
                 if (isActivity.equals(ConstantUtil.ACTIVITY_TGGZ)){
                     showCancelOrdersDialog();
                 }else if (isActivity.equals(ConstantUtil.ACTIVITY_QBCZ)){//如果是钱包充值，返回个人中心
-                    MyUtils.showToast(this,"取消支付");
+                   ToastUtil.myToast("取消支付");
                     startMainActivity();
                 }
                 break;
@@ -160,12 +161,12 @@ public class PayResultActivity extends ABaseActivity<IView,PayResultPresenter> i
     }
     @Override
     public void onRequestSuccess(String tData) {
-        MyUtils.showToast(this,tData);
+       ToastUtil.myToast(tData);
         startMainActivity();
     }
     @Override
     public void onRequestFailure(String result) {
-        MyUtils.showToast(this,result);
+       ToastUtil.myToast(result);
     }
 
 
@@ -189,7 +190,7 @@ public class PayResultActivity extends ABaseActivity<IView,PayResultPresenter> i
                     }
                 }
             }else if (isActivity.equals(ConstantUtil.ACTIVITY_QBCZ)){//如果是钱包充值，返回个人中心
-                MyUtils.showToast(this,"取消支付");
+               ToastUtil.myToast("取消支付");
                 startMainActivity();
             }
         }
@@ -203,5 +204,7 @@ public class PayResultActivity extends ABaseActivity<IView,PayResultPresenter> i
             customDialog.dismiss();
             customDialog=null;
         }
+
+        ToastUtil.cancleMyToast();
     }
 }

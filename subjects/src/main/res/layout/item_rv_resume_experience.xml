@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_mine_linearlayout"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="@dimen/px_30">
+    <TextView
+        android:id="@+id/tv_companyName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="公司名称"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_12" />
+    <TextView
+        android:id="@+id/tv_workTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="工作时间段"
+        android:textColor="@color/color_a0a0a0"
+        android:textSize="@dimen/sp_12" />
+    <ImageView
+        android:layout_width="@dimen/px_18"
+        android:layout_height="@dimen/px_32"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/px_10"
+        android:src="@drawable/ic_mine_arrow_right_gray" />
+</com.zhy.autolayout.AutoLinearLayout>

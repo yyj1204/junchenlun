@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="@color/color_f0f0f0"
+    tools:context="com.wktx.www.emperor.ui.activity.mine.security.AccountSecurityActivity">
+
+    <include layout="@layout/include_toolbar_activity"/>
+
+    <LinearLayout
+        android:id="@+id/linear_loginPwd"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_86"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/selector_mine_linearlayout"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="修改登录密码"
+            android:textColor="@color/color_000000" />
+        <ImageView
+            android:layout_width="@dimen/px_18"
+            android:layout_height="@dimen/px_32"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_mine_arrow_right_gray" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_payPwd"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_86"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:layout_marginTop="@dimen/px_1"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/selector_mine_linearlayout"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="修改支付密码"
+            android:textColor="@color/color_000000" />
+        <ImageView
+            android:layout_width="@dimen/px_18"
+            android:layout_height="@dimen/px_32"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_mine_arrow_right_gray" />
+    </LinearLayout>
+
+</LinearLayout>

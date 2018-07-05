@@ -4,9 +4,11 @@ package com.wktx.www.subjects.utils;
  */
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Environment;
+import android.graphics.drawable.Drawable;
+import android.support.v7.widget.DividerItemDecoration;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.view.Gravity;
@@ -15,22 +17,14 @@ import android.widget.Toast;
 
 import com.wktx.www.subjects.widget.MyToast;
 
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
 public class MyUtils {
-
     /**
      * 自定义弹窗
      */
@@ -70,6 +64,7 @@ public class MyUtils {
         }
         return flag;
     }
+
     /**
      * 设置手机号码中间4位*
      * 如（181****1675）
@@ -89,12 +84,13 @@ public class MyUtils {
         return sb.toString();
     }
 
-
     /**
      *防止按钮频繁点击
      */
     private static long lastClickTime;
+    private static long lastClickTime1;
 
+    //待弹框消失后方可再次点击
     public static boolean isFastClick() {
         long time = System.currentTimeMillis();
         long timeD = time - lastClickTime;
@@ -104,7 +100,27 @@ public class MyUtils {
         lastClickTime = time;
         return false;
     }
+    //没有弹框，则等待再次点击的时间可缩短
+    public static boolean isFastClick1() {
+        long time = System.currentTimeMillis();
+        long timeD = time - lastClickTime1;
+        if (0 < timeD && timeD < 1500) {
+            return true;
+        }
+        lastClickTime1 = time;
+        return false;
+    }
 
+    /**
+     *水平分割线
+     */
+    public static DividerItemDecoration drawDivider(Context context, int oriention, int id) {
+        //水平分割线
+        Drawable drawable = context.getResources().getDrawable(id);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(context, oriention);
+        dividerItemDecoration.setDrawable(drawable);
+        return  dividerItemDecoration;
+    }
 
     /**
      * 订单号必须唯一。
@@ -134,6 +150,23 @@ public class MyUtils {
     }
 
     /**
+     * 判断是否安装目标应用
+     * QQ：com.tencent.mobileqq
+     */
+    public static boolean checkQQApkExist(Context context, String packageName) {
+        if (packageName == null || "".equals(packageName)){
+            return false;
+        }else {
+            try {
+                ApplicationInfo info = context.getPackageManager().getApplicationInfo(packageName,
+                        PackageManager.GET_UNINSTALLED_PACKAGES);
+                return true;
+            } catch (PackageManager.NameNotFoundException e) {
+                return false;
+            }
+        }
+    }
+    /**
      * 通过Base32将Bitmap转换成Base64字符串
      * @param bit
      * @return
@@ -143,68 +176,5 @@ public class MyUtils {
         bit.compress(Bitmap.CompressFormat.JPEG, 100, bos);//参数100表示不压缩
         byte[] bytes=bos.toByteArray();
         return Base64.encodeToString(bytes, Base64.DEFAULT);
-    }
-
-    /**
-     * 保存文件
-     * @param bm
-     * @throws IOException
-     */
-    public static File saveFile(Bitmap bm) throws IOException {
-        String path = Environment.getExternalStorageDirectory().toString()+"/xpcw/icon_bitmap/";
-        File dirFile = new File(path);
-        if(!dirFile.exists()){
-            dirFile.mkdirs();
-        }
-        File myIconFile= new File(path + "headicon.jpg");
-        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(myIconFile));
-//        bm.compress(Bitmap.CompressFormat.JPEG, 80, bos);
-        bos.flush();
-        bos.close();
-        return myIconFile;
-    }
-
-
-    /**
-     * 从本地获取图片
-     * @param pathString 文件路径
-     * @return 图片
-     */
-    public static Bitmap getDiskBitmap(String pathString) {
-        Bitmap bitmap = null;
-        try {
-            File file = new File(pathString);
-            if(file.exists()) {
-                bitmap = BitmapFactory.decodeFile(pathString);
-            }
-        } catch (Exception e) {
-        }
-        return bitmap;
-    }
-    /**
-     * 根据图片的url路径获得Bitmap对象
-     * @param url
-     * @return
-     */
-    public static Bitmap returnBitmap(String url) {
-        URL fileUrl = null;
-        Bitmap bitmap = null;
-        try {
-            fileUrl = new URL(url);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            HttpURLConnection conn = (HttpURLConnection) fileUrl.openConnection();
-            conn.setDoInput(true);
-            conn.connect();
-            InputStream is = conn.getInputStream();
-            bitmap = BitmapFactory.decodeStream(is);
-            is.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bitmap;
     }
 }

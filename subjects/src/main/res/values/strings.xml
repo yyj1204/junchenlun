@@ -1,44 +1,63 @@
 <resources>
-    <string name="app_name">subjects</string>
+    <string name="app_name">君臣论臣民端</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- 界面顶部 -->
+    <!-- 职位 -->
+    <string name="title_position_details">职位详情</string>
+    <string name="title_message">消息通知</string>
+    <string name="title_notice_details">公告详情</string>
+    <string name="title_remind_details">提醒详情</string>
+
+    <!--管理-->
+    <string name="title_tab_manager">我的工作</string>
+    <string name="title_manage">管理我的工作</string>
+    <string name="title_fire_details">解雇详情</string>
+    <string name="title_manage_salary">我的工资</string>
+    <string name="title_manage_attendance">签到记录</string>
+    <string name="title_manage_saleroom">销售额</string>
+    <string name="title_manage_report">工作安排</string>
+    <string name="title_report_list">工作报告</string>
+    <string name="title_report_details">报告详情</string>
+    <string name="title_report_release">提交报告</string>
+
+    <!--消息-->
+    <string name="title_company_recruit">招聘列表</string>
+    <string name="title_invite_details">邀请详情</string>
+
+    <!--我的账户-->
+    <string name="title_tab_mine">我的账户</string>
+    <string name="title_person_info">个人信息</string>
+    <string name="title_certification">个人认证</string>
+    <string name="title_my_resume">我的简历</string>
+    <string name="title_resume_upload">上传简历</string>
+    <string name="title_resume_preview">预览简历</string>
+    <string name="title_work_experience">工作经历</string>
+    <string name="title_experience_add">新增工作经历</string>
+    <string name="title_experience_edit">编辑工作经历</string>
+    <string name="title_position_add">新增应聘职位</string>
+    <string name="title_position_edit">编辑应聘职位</string>
+    <string name="title_my_works">我的作品</string>
+    <string name="title_works_details">作品详情</string>
+    <string name="title_works_upload">上传作品</string>
+    <string name="title_my_collect">我的收藏</string>
+    <string name="title_trading_record">交易记录</string>
+    <string name="title_interview_record">面试记录</string>
+    <string name="title_account_security">账号安全</string>
+    <string name="title_pwd_edit">修改登录密码</string>
+    <string name="title_contact_service">联系客服</string>
+
+    <!-- 登录注册 -->
     <string name="title_register">用户注册</string>
     <string name="title_login">手机登录</string>
-    <string name="title_forget">忘记密码</string>
-    <string name="title_mine">我的账户</string>
-
-
-    <string name="title_message">消息通知</string>
-    <string name="title_message_notice">公告详情</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="title_About_us">关于我们</string>
-    <string name="title_service">联系客服</string>
-    <string name="title_favor">我的收藏</string>
-    <string name="title_storeinfo">店铺信息</string>
-    <string name="title_transact">交易记录</string>
-    <string name="title_interview">面试记录</string>
-    <string name="title_packet_rule">使用规则</string>
-    <string name="title_account">个人资料</string>
-    <string name="title_purse">提现</string>
-    <string name="title_cash">账户余额</string>
-    <string name="title_tab_manager">应聘记录</string>
-    <string name="title_staff_manager">管理我的工作</string>
-    <string name="title_staff_report">工作报告</string>
-    <string name="title_staff_renew">工资</string>
-    <string name="title_staff_salary">工资</string>
-    <string name="title_staff_report_details">发布报告</string>
-    <string name="title_staff_attendance">签到记录</string>
-    <string name="title_workdetail">工作详情</string>
-    <string name="title_resume">我的简历</string>
-    <string name="title_SubmitResume">上传简历</string>
-    <string name="title_PreviewResume">预览简历</string>
-    <string name="title_EditPersonalInfo">编辑个人信息</string>
-    <string name="title_SalesVolume">销售额</string>
+    <string name="title_pwd_forget">忘记密码</string>
 
 
     <!--密码输入限制-->
     <string name="string_pwd">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
 
+    <!--管理tab 没有工作提示语-->
+    <string name="string_manage_hint1">在线全职办公管理</string>
+    <string name="string_manage_hint2">在线入职and移动办公</string>
 </resources>

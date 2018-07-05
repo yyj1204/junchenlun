@@ -1,14 +1,14 @@
 <component name="libraryTable">
   <library name="com.android.support:appcompat-v7-24.2.1">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.1.aar/733799a639a20fdac5185f74cdfc0d4a/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.1.aar/733799a639a20fdac5185f74cdfc0d4a/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.1.aar/5a7880fad3b5682c0c7b2a1471b72d0f/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/appcompat-v7-24.2.1.aar/5a7880fad3b5682c0c7b2a1471b72d0f/res" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/../../../android_sdk0819/extras/android/m2repository/com/android/support/appcompat-v7/24.2.1/appcompat-v7-24.2.1-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../android-sdk_0817/extras/android/m2repository/com/android/support/appcompat-v7/24.2.1/appcompat-v7-24.2.1-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../../android_sdk0819/extras/android/m2repository/com/android/support/appcompat-v7/24.2.1/appcompat-v7-24.2.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../android-sdk_0817/extras/android/m2repository/com/android/support/appcompat-v7/24.2.1/appcompat-v7-24.2.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

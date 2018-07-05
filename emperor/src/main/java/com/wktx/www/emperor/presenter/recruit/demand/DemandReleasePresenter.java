@@ -1,18 +1,21 @@
 package com.wktx.www.emperor.presenter.recruit.demand;
 
+import com.wktx.www.emperor.apiresult.CommonSimpleData;
 import com.wktx.www.emperor.apiresult.CustomApiResult;
+import com.wktx.www.emperor.apiresult.mine.store.StoreListData;
 import com.wktx.www.emperor.apiresult.recruit.demand.DemandReleaseConditionData;
-import com.wktx.www.emperor.apiresult.recruit.demand.DemandReleaseData;
 import com.wktx.www.emperor.basemvp.ABasePresenter;
 import com.wktx.www.emperor.utils.ApiURL;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.LogUtil;
-import com.wktx.www.emperor.view.recruit.IDemandReleaseView;
+import com.wktx.www.emperor.ui.view.recruit.IDemandReleaseView;
 import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.callback.CallBackProxy;
 import com.zhouyou.http.callback.ProgressDialogCallBack;
 import com.zhouyou.http.callback.SimpleCallBack;
 import com.zhouyou.http.exception.ApiException;
+import com.zhouyou.http.model.HttpParams;
+
 /**
  * Created by yyj on 2018/1/24.
  * 需求发布界面
@@ -21,10 +24,49 @@ import com.zhouyou.http.exception.ApiException;
 public class DemandReleasePresenter extends ABasePresenter<IDemandReleaseView> {
 
     public DemandReleasePresenter() {
-        onGetDemandCondition();
     }
 
-    //获取发布需求需要的选择参数(店铺、平台、类目、需求模式)
+    //获取店铺检索条件
+    public void onGetStoreCondition(){
+        HttpParams httpParams = new HttpParams();
+        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("token", getmMvpView().getUserInfo().getToken());
+
+        EasyHttp.post(ApiURL.COMMON_URL)
+                .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_STORE_LIST)
+                .params(httpParams)
+                .execute(new CallBackProxy<CustomApiResult<StoreListData>, StoreListData>
+                        (new ProgressDialogCallBack<StoreListData>(mProgressDialog){
+                            @Override
+                            public void onError(ApiException e) {
+                                super.onError(e);
+                                LogUtil.error("获取店铺检索条件","e=="+e.getMessage());
+
+                                if (e.getMessage().equals("无法解析该域名")){
+                                    getmMvpView().onGetStoreConditionFailureResult(ConstantUtil.TOAST_NONET);
+                                }else {
+                                    getmMvpView().onGetStoreConditionFailureResult(e.getMessage());
+                                }
+                            }
+
+                            @Override
+                            public void onSuccess(StoreListData result) {
+                                if (result != null) {
+                                    LogUtil.error("获取店铺列表检索条件","result=="+result.toString());
+
+                                    if (result.getCode()==0){//获取店铺检索条件成功
+                                        getmMvpView().onGetStoreConditionSuccessResult(result.getInfo());
+                                    }else {//获取店铺检索条件失败
+                                        getmMvpView().onGetStoreConditionFailureResult(result.getMsg());
+                                    }
+                                }else {
+                                    getmMvpView().onGetStoreConditionFailureResult(ConstantUtil.TOAST_ERROR);
+                                }
+                            }
+                        }) {});
+    }
+
+    //获取发布需求需要的选择参数(平台、类目、需求模式)
     public void onGetDemandCondition(){
         EasyHttp.post(ApiURL.COMMON_URL)
                 .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_DEMAND_RELEASE_CONDITION)
@@ -58,23 +100,25 @@ public class DemandReleasePresenter extends ABasePresenter<IDemandReleaseView> {
     }
 
     //需求发布
-    public void onDemandRelease(String platformId,String categoryId,String patternId){
-        LogUtil.error("需求发布","json===user_id:"+getmMvpView().getUserInfo().getUser_id()
-                +"\ntoken:"+getmMvpView().getUserInfo().getToken()+"\nid:"+"");
+    public void onDemandRelease(String platformId,String categoryId,String storeId,String patternId){
+        HttpParams httpParams = new HttpParams();
+        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("token", getmMvpView().getUserInfo().getToken());
+        httpParams.put("title", getmMvpView().getDemandTitle());
+        httpParams.put("content", getmMvpView().getDemandContent());
+        httpParams.put("bgap", platformId);
+        httpParams.put("bgat", categoryId);
+        httpParams.put("store_id", storeId);
+        httpParams.put("design_pattern", patternId);
+        httpParams.put("budget", getmMvpView().getDemandBudget());
+
+        LogUtil.error("需求发布","json==="+httpParams.toString());
 
         EasyHttp.post(ApiURL.COMMON_URL)
                 .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_DEMAND_RELEASE)
-                .params("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()))
-                .params("token", getmMvpView().getUserInfo().getToken())
-                .params("title", getmMvpView().getDemandTitle())
-                .params("content", getmMvpView().getDemandContent())
-                .params("bgap", platformId)
-                .params("bgat", categoryId)
-                .params("store_id", "1")//TODO
-                .params("design_pattern", patternId)
-                .params("budget", getmMvpView().getDemandBudget())
-                .execute(new CallBackProxy<CustomApiResult<DemandReleaseData>, DemandReleaseData>
-                        (new ProgressDialogCallBack<DemandReleaseData>(mProgressDialog) {
+                .params(httpParams)
+                .execute(new CallBackProxy<CustomApiResult<CommonSimpleData>, CommonSimpleData>
+                        (new ProgressDialogCallBack<CommonSimpleData>(mProgressDialog) {
                             @Override
                             public void onError(ApiException e) {
                                 super.onError(e);
@@ -87,7 +131,7 @@ public class DemandReleasePresenter extends ABasePresenter<IDemandReleaseView> {
                                 }
                             }
                             @Override
-                            public void onSuccess(DemandReleaseData result) {
+                            public void onSuccess(CommonSimpleData result) {
                                 if (result != null) {
                                     LogUtil.error("需求发布","result=="+result.toString());
 

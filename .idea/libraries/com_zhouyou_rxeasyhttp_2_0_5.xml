@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="com.zhouyou:rxeasyhttp-2.0.5">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/rxeasyhttp-2.0.5.aar/10fe8087bbbb94b90ba527aa1bb00daf/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/rxeasyhttp-2.0.5.aar/10fe8087bbbb94b90ba527aa1bb00daf/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/rxeasyhttp-2.0.5.aar/0203d2f4b1178586c02ff303a669251a/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/rxeasyhttp-2.0.5.aar/0203d2f4b1178586c02ff303a669251a/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

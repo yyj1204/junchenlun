@@ -1,15 +1,15 @@
 package com.wktx.www.emperor.ui.activity.main;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,7 +26,9 @@ import com.wktx.www.emperor.ui.adapter.recruit.RecruitListAdapter;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.utils.String2ListUtil;
-import com.wktx.www.emperor.view.main.ISearchView;
+import com.wktx.www.emperor.ui.view.main.ISearchView;
+import com.wktx.www.emperor.utils.ToastUtil;
+import com.wktx.www.emperor.widget.MyLayoutManager;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
@@ -40,6 +42,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 搜索
+ */
 public class SearchActivity extends ABaseActivity<ISearchView,SearchPresenter> implements ISearchView {
     @BindView(R.id.et_search)
     EditText etSearch;
@@ -70,6 +75,9 @@ public class SearchActivity extends ABaseActivity<ISearchView,SearchPresenter> i
 
     @OnClick({R.id.tb_IvReturn,R.id.tv_search,R.id.tv_delete})
     public void MyOnclick(View view) {
+        //将输入法隐藏
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(llHistory.getWindowToken(), 0);
         switch (view.getId()) {
             case R.id.tb_IvReturn:
                 finish();
@@ -80,7 +88,7 @@ public class SearchActivity extends ABaseActivity<ISearchView,SearchPresenter> i
                 }
 
                 if (TextUtils.isEmpty(getKeyStrStr())) {
-                    MyUtils.showToast(this, "请输入臣民昵称进行搜索！");
+                   ToastUtil.myToast("请输入关键字进行搜索！");
                     etSearch.requestFocus();
                 } else {//遍历本地历史搜索记录，判断是否已存在该关键字
                     for (String str : historyList) {
@@ -101,7 +109,7 @@ public class SearchActivity extends ABaseActivity<ISearchView,SearchPresenter> i
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    editor.putString("searchhistorystr", historystrs);
+                    editor.putString("searchhistorystrBoss", historystrs);
                     editor.commit();
                     refresh();
                 }
@@ -113,7 +121,7 @@ public class SearchActivity extends ABaseActivity<ISearchView,SearchPresenter> i
                 historyList.clear();
                 editor.clear();
                 editor.commit();
-                MyUtils.showToast(SearchActivity.this,"历史搜索记录清除成功!");
+                ToastUtil.myToast("历史搜索记录清除成功!");
                 break;
             default:
                 break;
@@ -124,11 +132,10 @@ public class SearchActivity extends ABaseActivity<ISearchView,SearchPresenter> i
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//强制竖屏
         ButterKnife.bind(this);
         // 设置右滑动返回
-        Slidr.attach(this);
-        sharedPreferences = getSharedPreferences("SearchHistory", MODE_PRIVATE);
+//        Slidr.attach(this);
+        sharedPreferences = getSharedPreferences("SearchHistoryBoss", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         initData();
         initUI();
@@ -147,7 +154,7 @@ public class SearchActivity extends ABaseActivity<ISearchView,SearchPresenter> i
      * 将字符串转换成字符串集合
      */
     private void initData() {
-        historystrs = sharedPreferences.getString("searchhistorystr", "");
+        historystrs = sharedPreferences.getString("searchhistorystrBoss", "");
         historyList = new ArrayList<>();
         if (!TextUtils.isEmpty(historystrs)) {
             try {
@@ -168,7 +175,7 @@ public class SearchActivity extends ABaseActivity<ISearchView,SearchPresenter> i
             llHistory.setBackgroundResource(R.drawable.img_nothing);
             tvDelete.setVisibility(View.GONE);
             tagflowHistory.setVisibility(View.GONE);
-            MyUtils.showToast(SearchActivity.this,"暂无任何历史搜索");
+            ToastUtil.myToast("暂无任何历史搜索");
         } else {//不为空，显示出来
             initFlowLayout();
             llHistory.setBackgroundResource(R.color.color_f0f0f0);
@@ -215,7 +222,7 @@ public class SearchActivity extends ABaseActivity<ISearchView,SearchPresenter> i
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                editor.putString("searchhistorystr", historystrs);
+                editor.putString("searchhistorystrBoss", historystrs);
                 editor.commit();
                 //进行搜索请求
                 etSearch.setText(search);
@@ -234,7 +241,7 @@ public class SearchActivity extends ABaseActivity<ISearchView,SearchPresenter> i
         swipeRefreshLayout.setRefreshing(true);
         //设置分割线与垂直方向布局
         recyclerView.addItemDecoration(MyUtils.drawDivider(SearchActivity.this, LinearLayout.VERTICAL, R.drawable.divider_f0f0f0_6));
-        LinearLayoutManager manager = new LinearLayoutManager(SearchActivity.this, LinearLayout.VERTICAL, false);
+        MyLayoutManager manager = new MyLayoutManager(SearchActivity.this, LinearLayout.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
     }
 
@@ -336,7 +343,7 @@ public class SearchActivity extends ABaseActivity<ISearchView,SearchPresenter> i
                 adapter.loadMoreFail();
             }
         }
-        MyUtils.showToast(SearchActivity.this,toastStr);
+        ToastUtil.myToast(toastStr);
     }
 
     /**
@@ -360,4 +367,9 @@ public class SearchActivity extends ABaseActivity<ISearchView,SearchPresenter> i
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ToastUtil.cancleMyToast();
+    }
 }

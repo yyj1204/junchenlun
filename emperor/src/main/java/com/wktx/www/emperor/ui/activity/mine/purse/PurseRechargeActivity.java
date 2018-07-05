@@ -1,6 +1,7 @@
 package com.wktx.www.emperor.ui.activity.mine.purse;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +10,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,7 +34,8 @@ import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.LogUtil;
 import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
-import com.wktx.www.emperor.view.mine.purse.IPurseRechargeView;
+import com.wktx.www.emperor.ui.view.mine.purse.IPurseRechargeView;
+import com.wktx.www.emperor.utils.ToastUtil;
 import com.wktx.www.emperor.wxapi.WXPayEntryActivity;
 
 import java.util.Map;
@@ -44,7 +47,6 @@ import butterknife.OnClick;
  * 我的钱包---充值界面
  */
 public class PurseRechargeActivity extends ABaseActivity<IPurseRechargeView,PurseRechargePresenter> implements IPurseRechargeView, IPayView {
-
     @BindView(R.id.tb_TvBarTitle)
     TextView tvTitle;
     @BindView(R.id.et_recharge)
@@ -61,6 +63,9 @@ public class PurseRechargeActivity extends ABaseActivity<IPurseRechargeView,Purs
 
     @OnClick({R.id.tb_IvReturn,R.id.rela_alipay,R.id.rela_wechat,R.id.bt_recharge})
     public void MyOnclick(View view) {
+        //将输入法隐藏
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(tvTitle.getWindowToken(), 0);
         switch (view.getId()) {
             case R.id.tb_IvReturn:
                 finish();
@@ -84,7 +89,7 @@ public class PurseRechargeActivity extends ABaseActivity<IPurseRechargeView,Purs
 
                 //判断输入框格式
                 if (TextUtils.isEmpty(getMoneyStr())){
-                    MyUtils.showToast(PurseRechargeActivity.this,"请输入充值金额！");
+                    ToastUtil.myToast("请输入充值金额！");
                     etRecharge.requestFocus();
                 }else {//充值
                     btRecharge.setEnabled(false);
@@ -122,7 +127,7 @@ public class PurseRechargeActivity extends ABaseActivity<IPurseRechargeView,Purs
     }
 
     //输入框的监听事件
-    private void setEtListener(EditText et) {
+    private void setEtListener(final EditText et) {
         et.addTextChangedListener(new TextWatcher() {
             @Override// 输入文本之前的状态
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -134,24 +139,24 @@ public class PurseRechargeActivity extends ABaseActivity<IPurseRechargeView,Purs
                     //判断小数点的位置大于倒3，将输入框的字符串截取到小数点后两位数
                     if (s.length() - 1 - s.toString().indexOf(".") > 2) {
                         s = s.toString().subSequence(0, s.toString().indexOf(".") + 3);
-                        etRecharge.setText(s);
-                        etRecharge.setSelection(s.length());
+                        et.setText(s);
+                        et.setSelection(s.length());
                     }
                 }
 
                 //判断字符串的第一位是小数点，则在小数点前面加个0
                 if (s.toString().trim().substring(0).equals(".")) {
                     s = "0" + s;
-                    etRecharge.setText(s);
-                    etRecharge.setSelection(2);
+                    et.setText(s);
+                    et.setSelection(2);
                 }
 
                 //判断字符串第一位是0
                 if (s.toString().startsWith("0") && s.toString().trim().length() > 1) {
                     //如果第二位不是小数点，限制不能输入
                     if (!s.toString().substring(1, 2).equals(".")) {
-                        etRecharge.setText(s.subSequence(0, 1));
-                        etRecharge.setSelection(1);
+                        et.setText(s.subSequence(0, 1));
+                        et.setSelection(1);
                         return;
                     }
                 }
@@ -202,7 +207,7 @@ public class PurseRechargeActivity extends ABaseActivity<IPurseRechargeView,Purs
             payThread.start();
         }else {
             btRecharge.setEnabled(true);
-            MyUtils.showToast(PurseRechargeActivity.this,msg);
+            ToastUtil.myToast(msg);
         }
     }
     @Override//微信支付
@@ -224,7 +229,7 @@ public class PurseRechargeActivity extends ABaseActivity<IPurseRechargeView,Purs
     @Override
     public void onRequestFailure(String result) {
         btRecharge.setEnabled(true);
-        MyUtils.showToast(PurseRechargeActivity.this,result);
+        ToastUtil.myToast(result);
     }
 
     /**
@@ -257,6 +262,9 @@ public class PurseRechargeActivity extends ABaseActivity<IPurseRechargeView,Purs
         intent.putExtra(ConstantUtil.KEY_ISOK,isOk);
         startActivity(intent);
         btRecharge.setEnabled(true);
+        if (isOk){
+            finish();
+        }
     }
 
     /**
@@ -279,14 +287,14 @@ public class PurseRechargeActivity extends ABaseActivity<IPurseRechargeView,Purs
                     // 判断resultStatus 为9000则代表支付成功
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-                        MyUtils.showToast(PurseRechargeActivity.this, "支付成功");
+                        ToastUtil.myToast( "支付成功");
                         alipaySuccess();
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                         if (TextUtils.equals(resultStatus, "6001")){
-                            MyUtils.showToast(PurseRechargeActivity.this, "取消支付");
+                            ToastUtil.myToast( "取消支付");
                         }else {
-                            MyUtils.showToast(PurseRechargeActivity.this, "支付失败");
+                            ToastUtil.myToast( "支付失败");
                         }
                         alipayFailed();
                     }
@@ -302,10 +310,10 @@ public class PurseRechargeActivity extends ABaseActivity<IPurseRechargeView,Purs
                     if (TextUtils.equals(resultStatus, "9000") && TextUtils.equals(authResult.getResultCode(), "200")) {
                         // 获取alipay_open_id，调支付时作为参数extern_token 的value
                         // 传入，则支付账户为该授权账户
-                        MyUtils.showToast(PurseRechargeActivity.this, "授权成功\n" + String.format("authCode:%s", authResult.getAuthCode()));
+                        ToastUtil.myToast( "授权成功\n" + String.format("authCode:%s", authResult.getAuthCode()));
                     } else {
                         // 其他状态值则为授权失败
-                        MyUtils.showToast(PurseRechargeActivity.this, "授权失败" + String.format("authCode:%s", authResult.getAuthCode()));
+                        ToastUtil.myToast( "授权失败" + String.format("authCode:%s", authResult.getAuthCode()));
                     }
                     break;
                 }
@@ -322,5 +330,6 @@ public class PurseRechargeActivity extends ABaseActivity<IPurseRechargeView,Purs
         if (mHandler!=null){
             mHandler.removeCallbacksAndMessages(null);
         }
+        ToastUtil.cancleMyToast();
     }
 }

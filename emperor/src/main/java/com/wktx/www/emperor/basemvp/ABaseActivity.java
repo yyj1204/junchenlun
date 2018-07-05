@@ -6,8 +6,6 @@ import android.support.annotation.Nullable;
 
 import com.jaeger.library.StatusBarUtil;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.ui.activity.main.MainActivity;
-import com.wktx.www.emperor.ui.activity.mine.AboutUsActivity;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 /**
@@ -30,7 +28,6 @@ public abstract class ABaseActivity<V extends IBaseView,P extends ABasePresenter
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //初始化MVP
         initMVP();
-
     }
 
     /**

@@ -63,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0元"
-            android:drawableLeft="@drawable/demand_price"
+            android:drawableLeft="@drawable/ic_demand_price"
             android:drawablePadding="@dimen/px_14"
             android:textColor="@color/color_000000"
             android:textSize="@dimen/sp_13"/>
@@ -79,12 +79,12 @@
         android:orientation="horizontal"
         android:gravity="center_vertical">
         <TextView
-            android:id="@+id/tv_demandReleaseTime"
+            android:id="@+id/tv_demandEndTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="发布时间"
-            android:drawableLeft="@drawable/demand_time"
+            android:text="截止时间"
+            android:drawableLeft="@drawable/ic_demand_time"
             android:drawablePadding="@dimen/px_14"
             android:textColor="@color/color_000000"
             android:textSize="@dimen/sp_13"/>
@@ -112,18 +112,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="您创建了需求"
-            android:drawableLeft="@drawable/demand_circle"
+            android:drawableLeft="@drawable/ic_demand_circle"
             android:drawablePadding="@dimen/px_18"
             android:textColor="@color/color_000000"
             android:textStyle="bold"
             android:textSize="@dimen/sp_fifteen"/>
         <TextView
-            android:id="@+id/tv_demandCreateTime"
+            android:id="@+id/tv_demandReleaseTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/px_50"
             android:layout_marginTop="@dimen/px_10"
-            android:text="创建时间"
+            android:text="发布时间"
             android:textColor="@color/color_000000"
             android:textSize="@dimen/sp_13"/>
     </LinearLayout>

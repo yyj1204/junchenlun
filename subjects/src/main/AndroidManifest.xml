@@ -1,19 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wktx.www.subjects">
-
-    //RxJava2+Retrofit2 网络请求框架  请求权限
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-
+    //RxJava2+Retrofit2 网络请求框架 请求权限
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     //if you want to load images from the internet
-    <!--<uses-permission android:name="android.permission.INTERNET" />-->
-    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
+    <!-- <uses-permission android:name="android.permission.INTERNET" /> -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
+    <!-- 拨打电话 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <!-- 《支付宝 -->
+    <!-- <uses-permission android:name="android.permission.INTERNET" /> -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
+    <!-- 支付宝 》 -->
+
+    //图片选择器 请求权限
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    //图片加载
+    <!--<uses-permission android:name="android.permission.INTERNET" />-->
+    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
 
     <application
         android:name=".application.MyApplication"
@@ -23,46 +40,90 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.MainActivity">
+
+        <!-- 欢迎界面 (解决点击桌面图标，APP重启问题) -->
+        <activity
+            android:name=".ui.activity.WelcomeActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        //职位
+        <!-- 首页、搜索、期望薪资筛选、消息（详情） -->
+        <activity android:name=".ui.activity.MainActivity" />
+        <activity
+            android:name=".ui.activity.main.SearchActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity android:name=".ui.activity.main.ScreeningSalaryActivity" />
+        <activity android:name=".ui.activity.main.PositionDetailsActivity" />
+        <activity android:name=".ui.activity.main.notification.NotificationActivity" />
+        <activity android:name=".ui.activity.main.notification.NotificationDetailsActivity" />
 
-        <!--登录、注册、忘记密码-->
-        <activity android:name=".ui.activity.mine.login.LoginActivity" />
-        <activity android:name=".ui.activity.mine.login.RegisterActivity" />
-        <activity android:name=".ui.activity.mine.login.ForgetPwdActivity" />
+        //管理
+        <!--解雇详情、工资、销售额、签到、工作报告（安排工作列表、报告列表、报告详情）-->
+        <activity android:name=".ui.activity.manage.ManageActivity" />
+        <activity android:name=".ui.activity.manage.FireDetailsActivity"/>
+        <activity android:name=".ui.activity.manage.ManageSalaryActivity" />
+        <activity android:name=".ui.activity.manage.ManageAttendanceActivity" />
+        <activity android:name=".ui.activity.manage.ManageSaleroomActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <activity android:name=".ui.activity.manage.ManageReportActivity" />
+        <activity android:name=".ui.activity.manage.ReportListActivity" />
+        <activity android:name=".ui.activity.manage.ReportDetailsActivity" />
+        <activity
+            android:name=".ui.activity.manage.ReportReleaseActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
+        //消息
+        <!-- 公司招聘列表 -->
+        <activity android:name=".ui.activity.message.CompanyRecruitActivity" />
+        <!-- 邀请函详情 -->
+        <activity android:name=".ui.activity.message.InviteDetailsActivity" />
 
-        <activity android:name=".Activity.ScreeningActivity" />
-        <activity android:name=".Activity.MessageActivity" />
-        <activity android:name=".Activity.MessageDetailsActivity" />
-        <activity android:name=".Activity.SearchActivity" />
-        <activity android:name=".Activity.AccountProfileActivity" />
-        <activity android:name=".Activity.CashActivity" />
-        <activity android:name=".Activity.InterviewActivity" />
-        <activity android:name=".Activity.AboutUsActivity" />
-        <activity android:name=".Activity.TrasactActivity" />
-        <activity android:name=".Activity.ServiceActivity" />
-        <activity android:name=".Activity.FavorActivity" />
-        <activity android:name=".Activity.StaffManageActivity" />
-        <activity android:name=".Activity.StaffAttendanceActivity" />
-        <activity android:name=".Activity.StaffReportDetaisActivity" />
-        <activity android:name=".Activity.StaffRenewActivity" />
-        <activity android:name=".Activity.StaffReportActivity" />
-        <activity android:name=".Activity.StaffSalaryActivity" />
-        <activity android:name=".Activity.WorkDetailActivity" />
-        <activity android:name=".Activity.ResumeActivity" />
-        <activity android:name=".Activity.SubmitResumeActivity" />
-        <activity android:name=".Activity.PreviewResumeActivity" />
-        <activity android:name=".Activity.PersonalInfoActivity" />
-        <activity android:name=".Activity.PersonalInfoEditActivity"></activity>
-        <activity android:name=".Activity.WorkReportActivity" />
-        <activity android:name=".Activity.GoodPickActivity"></activity>
-
+        //我的
+        <!-- 登录、注册、忘记密码 -->
+        <activity android:name=".ui.activity.login.LoginActivity" />
+        <activity android:name=".ui.activity.login.RegisterActivity" />
+        <activity android:name=".ui.activity.login.ForgetPwdActivity" />
+        <!-- 我的简历(上传简历、工作经历、工作经历详情、应聘职位、预览简历、类目多选界面) -->
+        <activity android:name=".ui.activity.mine.resume.MyResumeActivity" />
+        <activity android:name=".ui.activity.mine.resume.ResumeUploadActivity" />
+        <activity
+            android:name=".ui.activity.mine.resume.WorkExperienceActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity
+            android:name=".ui.activity.mine.resume.ResumePositionActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity android:name=".ui.activity.mine.resume.ResumePreviewActivity" />
+        <activity android:name=".ui.activity.mine.resume.CategoryPickActivity" />
+        <!-- 我的作品 -->
+        <activity android:name=".ui.activity.mine.works.MyWorksActivity" />
+        <activity
+            android:name=".ui.activity.mine.works.WorksDetailsActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- 个人信息、个人认证(失败、重新认证)、我的收藏、交易记录、面试记录 -->
+        <activity
+            android:name=".ui.activity.mine.PersonInfoActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity
+            android:name=".ui.activity.mine.certification.CertificationActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity
+            android:name=".ui.activity.mine.certification.CertificationDetailsActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity android:name=".ui.activity.mine.MyCollectActivity" />
+        <activity android:name=".ui.activity.mine.TradingRecordActivity" />
+        <activity android:name=".ui.activity.mine.InterviewRecordActivity" />
+        <!-- 相关协议说明（关于我们） -->
+        <activity android:name=".ui.activity.mine.WebExplainActivity" />
+        <!-- 账号安全（修改登录密码） -->
+        <activity android:name=".ui.activity.mine.security.AccountSecurityActivity" />
+        <activity android:name=".ui.activity.mine.security.LoginPwdActivity" />
+        <!-- 联系客服 -->
+        <activity android:name=".ui.activity.mine.ContactServiceActivity" />
 
         <!-- 屏幕适配AutoLayout -->
         <meta-data
@@ -72,8 +133,6 @@
             android:name="design_height"
             android:value="1280" />
         <!-- 屏幕适配AutoLayout -->
-
-
     </application>
 
 </manifest>
