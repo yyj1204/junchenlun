@@ -9,9 +9,9 @@ package com.wktx.www.emperor.apiresult.main.home;
  *    "code": 0,"msg": "",
  *    "info": {
  *    "resume_list": [{
- *          "id": "2","name": "啊西歌","tow": "1","tow_name": "美工","picture": "","working_years": "5",
- *          "typing_speed": "0字/分","sex": "1","monthly_money": "4800.00","is_job_hunting": "1",
- *          "bgat": "母婴玩具/精品鞋包/生活百货","bgas": "中国风/时尚简约/质感炫酷"}],
+ *          "id": "2","name": "啊西歌","tow": "1","tow_name": "美工","picture": "","working_years": "5","tags": [],
+ *          "typing_speed": "0字/分","sex": "1","monthly_money": "4800.00","is_job_hunting": "1","hire_id": 0
+ *          "bgap": "淘宝","bgat": "母婴玩具/精品鞋包/生活百货","bgas": "中国风/时尚简约/质感炫酷"}],
  *    "top_ad": [{
  *          "ad_id": "73","ad_name": "1","ad_link": "",
  *          "ad_code": "http://shop.jcl.55085.cn/public/upload/ad/2018/02-06/202308a2572800c0a0662ea337dfdd44.jpg"}]

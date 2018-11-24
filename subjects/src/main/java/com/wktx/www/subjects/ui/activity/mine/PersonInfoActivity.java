@@ -28,19 +28,18 @@ import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.wktx.www.subjects.R;
-import com.wktx.www.subjects.apiresult.login.AccountInfoData;
 import com.wktx.www.subjects.apiresult.main.condition.ConditionBean;
 import com.wktx.www.subjects.apiresult.mine.personinfo.PersonConditionInfoData;
 import com.wktx.www.subjects.apiresult.mine.personinfo.PersonInfoData;
 import com.wktx.www.subjects.basemvp.ABaseActivity;
 import com.wktx.www.subjects.model.ProvinceJsonBean;
 import com.wktx.www.subjects.presenter.mine.PersonInfoPresenter;
+import com.wktx.www.subjects.ui.activity.ImageActivity;
 import com.wktx.www.subjects.ui.view.mine.IPersonInfoView;
 import com.wktx.www.subjects.utils.ConstantUtil;
 import com.wktx.www.subjects.utils.DateUtil;
 import com.wktx.www.subjects.utils.GetJsonDataUtil;
 import com.wktx.www.subjects.utils.GlideUtil;
-import com.wktx.www.subjects.utils.LoginUtil;
 import com.wktx.www.subjects.utils.MyUtils;
 import com.wktx.www.subjects.utils.ToastUtil;
 import com.wktx.www.subjects.widget.PopupPhoto;
@@ -99,6 +98,7 @@ public class PersonInfoActivity extends ABaseActivity<IPersonInfoView,PersonInfo
     private String headpicStr;//头像路径
     private String sexId;//性别
 
+    private List<String> imageUrlList = new ArrayList<>();//图片url集合
 
     /**
      * 照片
@@ -107,6 +107,7 @@ public class PersonInfoActivity extends ABaseActivity<IPersonInfoView,PersonInfo
     private int themeId;//主题样式设置
     private int chooseMode = PictureMimeType.ofImage();//选择图片类型
     private static List<LocalMedia> selectList = new ArrayList<>();
+    private String base64Str="";//base64图片格式;
 
     //自定义条件选择器
     private OptionsPickerView pvCustomOptions;
@@ -231,7 +232,7 @@ public class PersonInfoActivity extends ABaseActivity<IPersonInfoView,PersonInfo
     /**
      * 普通点击事件
      */
-    @OnClick({R.id.tb_IvReturn, R.id.linear_head,R.id.linear_sex,R.id.linear_education,
+    @OnClick({R.id.tb_IvReturn, R.id.linear_head,R.id.civ_head,R.id.linear_sex,R.id.linear_education,
             R.id.linear_birth,R.id.linear_city, R.id.bt_sureEdit})
     public void MyOnclick(View view) {
         if (MyUtils.isFastClick1()){
@@ -247,6 +248,20 @@ public class PersonInfoActivity extends ABaseActivity<IPersonInfoView,PersonInfo
             case R.id.linear_head://头像
                 //触发展示相片来源popupwindow
                 showPhotoPopup();
+                break;
+            case R.id.civ_head://查看头像大图
+                if (TextUtils.isEmpty(base64Str)){//网络图片
+                    if (imageUrlList.size()==0){
+                        return;
+                    }
+                    String[] imageUrls = imageUrlList.toArray(new String[imageUrlList.size()]);
+                    Intent intent = new Intent(PersonInfoActivity.this, ImageActivity.class);
+                    intent.putExtra(ConstantUtil.KEY_DATA, imageUrls);
+                    intent.putExtra(ConstantUtil.KEY_POSITION, 0);
+                    startActivity(intent);
+                }else {//本地裁剪后的图片
+                    PictureSelector.create(PersonInfoActivity.this).themeStyle(themeId).openExternalPreview(0, selectList);
+                }
                 break;
             case R.id.linear_sex://性别
                 //触发展示性别选项popupwindow
@@ -349,7 +364,7 @@ public class PersonInfoActivity extends ABaseActivity<IPersonInfoView,PersonInfo
      * 更换头像弹窗
      */
     private void showPhotoPopup() {
-        popupPhoto = new PopupPhoto(PersonInfoActivity.this, PersonInfoActivity.this, selectList.size());
+        popupPhoto = new PopupPhoto(PersonInfoActivity.this, PersonInfoActivity.this);
         popupPhoto.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         popupPhoto.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         popupPhoto.setClippingEnabled(false);
@@ -394,6 +409,8 @@ public class PersonInfoActivity extends ABaseActivity<IPersonInfoView,PersonInfo
                     .showCropGrid(false)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
                     .cropCompressQuality(90)// 裁剪压缩质量 默认90 int
                     .selectionMedia(null)// 是否传入已选图片
+                    .withAspectRatio(1,1)// int 裁剪比例 如16:9 3:2 3:4 1:1 可自定义
+                    .previewEggs(true)// 预览图片时 是否增强左右滑动图片体验(图片滑动一半即可看到上一张是否选中) true or false
                     .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
         } else {//单独拍照
             PictureSelector.create(PersonInfoActivity.this)
@@ -411,6 +428,7 @@ public class PersonInfoActivity extends ABaseActivity<IPersonInfoView,PersonInfo
                     .showCropFrame(false)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false   true or false
                     .showCropGrid(false)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
                     .cropCompressQuality(90)// 裁剪压缩质量 默认90 int
+                    .withAspectRatio(1,1)// int 裁剪比例 如16:9 3:2 3:4 1:1 可自定义
                     .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
         }
     }
@@ -561,13 +579,8 @@ public class PersonInfoActivity extends ABaseActivity<IPersonInfoView,PersonInfo
 
 
     /**
-     * IDemoView
+     * IPersonInfoView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
     @Override
     public String getHeadPic() {
         return headpicStr;
@@ -638,7 +651,7 @@ public class PersonInfoActivity extends ABaseActivity<IPersonInfoView,PersonInfo
     public void onRequestSuccess(PersonInfoData tData) {
         //设置圆形头像
         headpicStr = tData.getPicture();
-        if (headpicStr==null||headpicStr.equals("")) {
+        if (TextUtils.isEmpty(headpicStr)) {
             if (tData.getSex().equals("1")){
                 ivHead.setImageResource(R.drawable.img_head_man);
             }else if (tData.getSex().equals("2")){
@@ -647,11 +660,12 @@ public class PersonInfoActivity extends ABaseActivity<IPersonInfoView,PersonInfo
                 ivHead.setImageResource(R.drawable.img_mine_head);
             }
         }else {
+            imageUrlList.add(tData.getPicture());
             GlideUtil.loadImage(headpicStr,R.drawable.img_mine_head,ivHead);
         }
         //设置昵称
-        if (tData.getName()==null||tData.getName().equals("")){
-            etName.setText(getUserInfo().getPhone());
+        if (TextUtils.isEmpty(tData.getName())){
+            etName.setText(MyUtils.setPhone(getUserInfo().getPhone()));
         }else {
             etName.setText(tData.getName());
         }
@@ -670,7 +684,7 @@ public class PersonInfoActivity extends ABaseActivity<IPersonInfoView,PersonInfo
             }
         }
         //出生年月
-        if (tData.getDate_of_birth()!=null&&!tData.getDate_of_birth().equals("")){
+        if (!TextUtils.isEmpty(tData.getDate_of_birth())){
             tvBirth.setText(tData.getDate_of_birth());
         }
         //设置所在城市
@@ -710,11 +724,10 @@ public class PersonInfoActivity extends ABaseActivity<IPersonInfoView,PersonInfo
                             Bitmap bitmap = BitmapFactory.decodeFile(path);
                             if (bitmap != null) {
                                 ivHead.setImageBitmap(bitmap);
-                                String base64Str = MyUtils.Bitmap2StrByBase64(bitmap);
+                                base64Str = MyUtils.Bitmap2StrByBase64(bitmap);
                                 //获取图片路径
                                 getPresenter().getImgUrl(base64Str);
                             }
-
                         }
                         break;
                     default:

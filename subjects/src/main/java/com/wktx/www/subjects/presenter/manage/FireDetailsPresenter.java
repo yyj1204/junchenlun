@@ -29,7 +29,7 @@ public class FireDetailsPresenter extends ABasePresenter<IFireDetailsView> {
     //获取解雇详情
     public void getInfo(String fireId){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("id",fireId);
 
@@ -47,6 +47,8 @@ public class FireDetailsPresenter extends ABasePresenter<IFireDetailsView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }
@@ -71,7 +73,7 @@ public class FireDetailsPresenter extends ABasePresenter<IFireDetailsView> {
     //接受解雇
     public void acceptFire(String fireId){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("id", fireId);
 
@@ -89,6 +91,8 @@ public class FireDetailsPresenter extends ABasePresenter<IFireDetailsView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onFireResult(false, ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onFireResult(false,e.getMessage());
                                 }
@@ -113,7 +117,7 @@ public class FireDetailsPresenter extends ABasePresenter<IFireDetailsView> {
     //拒绝解雇
     public void refuseFire(String fireId){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("id", fireId);
 
@@ -131,6 +135,8 @@ public class FireDetailsPresenter extends ABasePresenter<IFireDetailsView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onFireResult(false, ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onFireResult(false,e.getMessage());
                                 }
@@ -143,6 +149,50 @@ public class FireDetailsPresenter extends ABasePresenter<IFireDetailsView> {
                                     if (result.getCode()==0){//拒绝解雇 成功
                                         getmMvpView().onFireResult(true,result.getMsg());
                                     }else {//拒绝解雇 失败
+                                        getmMvpView().onFireResult(false,result.getMsg());
+                                    }
+                                }else {
+                                    getmMvpView().onFireResult(false,ConstantUtil.TOAST_ERROR);
+                                }
+                            }
+                        }) {});
+    }
+
+    //申请介入
+    public void applyFire(String fireId){
+        HttpParams httpParams = new HttpParams();
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
+        httpParams.put("token", getmMvpView().getUserInfo().getToken());
+        httpParams.put("id", fireId);
+
+        LogUtil.error("申请介入","json==="+httpParams.toString());
+
+        EasyHttp.post(ApiURL.COMMON_URL)
+                .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_FIRE_APPLY)
+                .params(httpParams)
+                .execute(new CallBackProxy<CustomApiResult<CommonSimpleData>, CommonSimpleData>
+                        (new ProgressDialogCallBack<CommonSimpleData>(mProgressDialog) {
+                            @Override
+                            public void onError(ApiException e) {
+                                super.onError(e);
+                                LogUtil.error("申请介入","e=="+e.getMessage());
+
+                                if (e.getMessage().equals("无法解析该域名")){
+                                    getmMvpView().onFireResult(false, ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
+                                }else {
+                                    getmMvpView().onFireResult(false,e.getMessage());
+                                }
+                            }
+                            @Override
+                            public void onSuccess(CommonSimpleData result) {
+                                if (result != null) {
+                                    LogUtil.error("申请介入","result=="+result.toString());
+
+                                    if (result.getCode()==0){//申请介入 成功
+                                        getmMvpView().onFireResult(true,result.getMsg());
+                                    }else {//申请介入 失败
                                         getmMvpView().onFireResult(false,result.getMsg());
                                     }
                                 }else {

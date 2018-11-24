@@ -17,7 +17,7 @@ import java.lang.Override;
 public class ManageActivity_ViewBinding implements Unbinder {
   private ManageActivity target;
 
-  private View view2131231164;
+  private View view2131689766;
 
   @UiThread
   public ManageActivity_ViewBinding(ManageActivity target) {
@@ -33,7 +33,7 @@ public class ManageActivity_ViewBinding implements Unbinder {
     target.swipeRefreshLayout = Utils.findRequiredViewAsType(source, R.id.swipeRefreshLayout, "field 'swipeRefreshLayout'", SwipeRefreshLayout.class);
     target.recyclerView = Utils.findRequiredViewAsType(source, R.id.recyclerView, "field 'recyclerView'", RecyclerView.class);
     view = Utils.findRequiredView(source, R.id.tb_IvReturn, "method 'MyOnclick'");
-    view2131231164 = view;
+    view2131689766 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -53,7 +53,7 @@ public class ManageActivity_ViewBinding implements Unbinder {
     target.swipeRefreshLayout = null;
     target.recyclerView = null;
 
-    view2131231164.setOnClickListener(null);
-    view2131231164 = null;
+    view2131689766.setOnClickListener(null);
+    view2131689766 = null;
   }
 }

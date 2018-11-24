@@ -1,6 +1,7 @@
 package com.wktx.www.emperor.ui.adapter.mine;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -26,8 +27,16 @@ public class BrowsingListAdapter extends BaseQuickAdapter<BrowsingRecordInfoData
 
     @Override
     protected void convert(BaseViewHolder helper, BrowsingRecordInfoData item) {
-        helper.setText(R.id.tv_name,item.getName());
-        helper.setText(R.id.tv_city,item.getResidential_city());
+        if (TextUtils.isEmpty(item.getName())){
+            helper.setText(R.id.tv_name,"匿名用户");
+        }else {
+            helper.setText(R.id.tv_name,item.getName());
+        }
+        if (TextUtils.isEmpty(item.getResidential_city())){
+            helper.setText(R.id.tv_city,"未设置");
+        }else {
+            helper.setText(R.id.tv_city,item.getResidential_city());
+        }
         helper.setText(R.id.tv_category,item.getBgat());
         helper.setText(R.id.tv_salary,item.getMonthly_money()+"元/月");
         helper.setText(R.id.tv_staffJob,item.getTow_name());
@@ -35,7 +44,7 @@ public class BrowsingListAdapter extends BaseQuickAdapter<BrowsingRecordInfoData
 
         //头像
         CircleImageView ivHead = helper.getView(R.id.iv_head);
-        if (item.getPicture()==null||item.getPicture().equals("")){
+        if (TextUtils.isEmpty(item.getPicture())){
             if (item.getSex().equals("1")){
                 ivHead.setImageResource(R.drawable.img_head_man);
             }else if (item.getSex().equals("2")){
@@ -69,8 +78,8 @@ public class BrowsingListAdapter extends BaseQuickAdapter<BrowsingRecordInfoData
             helper.setText(R.id.tv_workYears,"一年");
             helper.setText(R.id.tv_workExperience,"一年");
         }else if (working_years.equals("3")){
-            helper.setText(R.id.tv_workYears,"两年");
-            helper.setText(R.id.tv_workExperience,"两年");
+            helper.setText(R.id.tv_workYears,"二年");
+            helper.setText(R.id.tv_workExperience,"二年");
         }else if (working_years.equals("4")){
             helper.setText(R.id.tv_workYears,"三年");
             helper.setText(R.id.tv_workExperience,"三年");

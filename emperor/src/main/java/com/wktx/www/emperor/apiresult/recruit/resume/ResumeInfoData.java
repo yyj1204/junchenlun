@@ -6,16 +6,18 @@ import java.util.List;
 /**
  * Created by yyj on 2018/2/2.
  * 简历详情内容
- * "id":"1","tow":"1","tow_name": "美工","name":"胡图图","picture":"","highest_education":"本科","working_years":"一年","sex":"2","is_job_hunting":"1",
+ * "id":"1","tow":"1","uid": "2700","tow_name": "美工","name":"胡图图","picture":"","highest_education":"本科","working_years":"一年","sex":"2","is_job_hunting":"1",
  * "date_of_birth":"1992.05","residential_city":"浙江-杭州","character_introduction":"脾气好、只做一家","resume_content":"",
- * "monthly_money":"3500.00","wechat":"","qq":"","phone":"0","typing_speed": "0字/分","bgat":"服装内衣/母婴玩具/精品鞋包","bgas":"日韩小清新/中国风/时尚简约",
- * "is_collection":0,"evaluate_num":0,"service_attitude":"0","ability":"0","response_speed":"0","no_pay_order": "0","hire_id": "0","is_hiring": "1", *
- * "work_experience":[{"work_date":{"start_date":"2014/07","end_date":"2016/08"},"company":"福建网客天下科技有限公司",
- * "bgat":"服装内衣","position":"视觉传达设计师","introduction":"负责整个店铺页面装修，活动页面制作，商品详情"}]
+ * "monthly_money":"3500.00","wechat":"","qq":"","phone":"0","typing_speed": "0字/分", "bgap": "淘宝","bgat":"服装内衣/母婴玩具/精品鞋包",
+ * "bgas":"日韩小清新/中国风/时尚简约","is_collection":0,"evaluate_num":0,"service_attitude":"0","ability":"0",
+ * "response_speed":"0", "no_pay_order": "0","no_pay_order_id": "0","is_hiring": "1", "hire_id": "0","tags": [],
+ * "work_experience":[{"work_date":{"start_date":"2014/07","end_date":"2016/08"},"company":"福建网客天下科技有限公司",bgap : "0",
+ * "bgat":"服装内衣","position":"视觉传达设计师","introduction":"负责整个店铺页面装修，活动页面制作，商品详情",monthly_money : 0}]
  */
 
 public class ResumeInfoData implements Serializable{
     private String id;//简历id
+    private String uid;//员工id
     private String tow;//工作类型 1:美工2:客服3:运营
     private String tow_name;//工作类型名称 1:美工2:客服3:运营
     private String name;
@@ -31,6 +33,7 @@ public class ResumeInfoData implements Serializable{
     private String wechat;
     private String qq;
     private String phone;
+    private String bgap;//擅长平台
     private String bgat;//擅长类目
     private String bgas;//擅长风格
     private String typing_speed;//打字速度
@@ -40,10 +43,14 @@ public class ResumeInfoData implements Serializable{
     private String ability;//能力星级
     private String response_speed;//相应速度星级
     private String no_pay_order;//是否有未支付的雇佣订单 0:否 1:是
-    private String hire_id;//未支付的雇佣订单id
-    private String is_hiring;//0:未被雇佣 1:正在被雇佣（一对多，暂时不需要这个参数）
+    private String no_pay_order_id;//未支付的雇佣订单id
+    private String is_hiring;//0:未被雇佣 1:正在被雇佣（暂不用）
+    private String hire_id;//雇佣id，不为0代表已雇佣
     private String is_job_hunting;//找工作中 0:否 1:是
+    private List<String> tags;//个人标签
     private List<WorkExperienceBean> work_experience;//工作经历
+
+
 
     public String getId() {
         return id;
@@ -51,6 +58,15 @@ public class ResumeInfoData implements Serializable{
     public void setId(String id) {
         this.id = id;
     }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
     public String getTow() {
         return tow;
     }
@@ -141,6 +157,15 @@ public class ResumeInfoData implements Serializable{
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public String getBgap() {
+        return bgap;
+    }
+
+    public void setBgap(String bgap) {
+        this.bgap = bgap;
+    }
+
     public String getBgat() {
         return bgat;
     }
@@ -201,12 +226,12 @@ public class ResumeInfoData implements Serializable{
         this.no_pay_order = no_pay_order;
     }
 
-    public String getHire_id() {
-        return hire_id;
+    public String getNo_pay_order_id() {
+        return no_pay_order_id;
     }
 
-    public void setHire_id(String hire_id) {
-        this.hire_id = hire_id;
+    public void setNo_pay_order_id(String no_pay_order_id) {
+        this.no_pay_order_id = no_pay_order_id;
     }
 
     public String getIs_hiring() {
@@ -217,12 +242,28 @@ public class ResumeInfoData implements Serializable{
         this.is_hiring = is_hiring;
     }
 
+    public String getHire_id() {
+        return hire_id;
+    }
+
+    public void setHire_id(String hire_id) {
+        this.hire_id = hire_id;
+    }
+
     public String getIs_job_hunting() {
         return is_job_hunting;
     }
 
     public void setIs_job_hunting(String is_job_hunting) {
         this.is_job_hunting = is_job_hunting;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 
     public List<WorkExperienceBean> getWork_experience() {
@@ -237,6 +278,7 @@ public class ResumeInfoData implements Serializable{
     public String toString() {
         return "ResumeInfoData{" +
                 "id='" + id + '\'' +
+                ", uid='" + uid + '\'' +
                 ", tow='" + tow + '\'' +
                 ", tow_name='" + tow_name + '\'' +
                 ", name='" + name + '\'' +
@@ -252,6 +294,7 @@ public class ResumeInfoData implements Serializable{
                 ", wechat='" + wechat + '\'' +
                 ", qq='" + qq + '\'' +
                 ", phone='" + phone + '\'' +
+                ", bgap='" + bgap + '\'' +
                 ", bgat='" + bgat + '\'' +
                 ", bgas='" + bgas + '\'' +
                 ", typing_speed='" + typing_speed + '\'' +
@@ -261,9 +304,11 @@ public class ResumeInfoData implements Serializable{
                 ", ability='" + ability + '\'' +
                 ", response_speed='" + response_speed + '\'' +
                 ", no_pay_order='" + no_pay_order + '\'' +
-                ", hire_id='" + hire_id + '\'' +
+                ", no_pay_order_id='" + no_pay_order_id + '\'' +
                 ", is_hiring='" + is_hiring + '\'' +
+                ", hire_id='" + hire_id + '\'' +
                 ", is_job_hunting='" + is_job_hunting + '\'' +
+                ", tags=" + tags +'\'' +
                 ", work_experience=" + work_experience +
                 '}';
     }
@@ -271,49 +316,89 @@ public class ResumeInfoData implements Serializable{
     public static class WorkExperienceBean implements Serializable{
         private WorkDateBean work_date;//工作日期
         private String company;//公司
+        private String bgap;//	擅长平台
         private String bgat;//	擅长类目
+        private String store;//	网址
         private String position;//工作类型
         private String introduction;//介绍
+        private String monthly_money;//薪资
 
         public WorkDateBean getWork_date() {
             return work_date;
         }
+
         public void setWork_date(WorkDateBean work_date) {
             this.work_date = work_date;
         }
+
         public String getCompany() {
             return company;
         }
+
         public void setCompany(String company) {
             this.company = company;
         }
+
+        public String getBgap() {
+            return bgap;
+        }
+
+        public void setBgap(String bgap) {
+            this.bgap = bgap;
+        }
+
         public String getBgat() {
             return bgat;
         }
+
         public void setBgat(String bgat) {
             this.bgat = bgat;
         }
+
+        public String getStore() {
+            return store;
+        }
+
+        public void setStore(String store) {
+            this.store = store;
+        }
+
         public String getPosition() {
             return position;
         }
+
         public void setPosition(String position) {
             this.position = position;
         }
+
         public String getIntroduction() {
             return introduction;
         }
+
         public void setIntroduction(String introduction) {
             this.introduction = introduction;
         }
+
+        public String getMonthly_money() {
+            return monthly_money;
+        }
+
+        public void setMonthly_money(String monthly_money) {
+            this.monthly_money = monthly_money;
+        }
+
 
         @Override
         public String toString() {
             return "WorkExperienceBean{" +
                     "work_date=" + work_date +
                     ", company='" + company + '\'' +
+                    ", bgap='" + bgap + '\'' +
                     ", bgat='" + bgat + '\'' +
+                    ", store='" + store + '\'' +
                     ", position='" + position + '\'' +
                     ", introduction='" + introduction + '\'' +
+                    ", monthly_money='" + monthly_money + '\'' +
                     '}';
         }
 

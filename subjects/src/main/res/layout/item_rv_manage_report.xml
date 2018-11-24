@@ -18,7 +18,7 @@
         android:id="@+id/tv_demandContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:lineSpacingExtra="@dimen/px_20"
+        android:lineSpacingExtra="@dimen/px_10"
         android:paddingLeft="@dimen/px_30"
         android:paddingRight="@dimen/px_30"
         android:textColor="@color/color_999999"
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/px_1"
         android:background="@color/color_f0f0f0"
-        android:layout_marginTop="@dimen/px_30"/>
+        android:layout_marginTop="@dimen/px_20"/>
 
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"

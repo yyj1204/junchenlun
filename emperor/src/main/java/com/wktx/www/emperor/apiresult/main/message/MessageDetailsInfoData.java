@@ -2,7 +2,7 @@ package com.wktx.www.emperor.apiresult.main.message;
 
 /**
  * Created by yyj on 2018/2/12.
- * 消息通知详情内容
+ * 系统消息通知详情内容
  * "status": "1","title": "测试消息1",
  * "message": "11111111111111111111111113333333","send_time": "1520321981"
  */
@@ -48,7 +48,7 @@ public class MessageDetailsInfoData {
 
     @Override
     public String toString() {
-        return "MessageInfoData{" +
+        return "MessageDetailsInfoData{" +
                 "status='" + status + '\'' +
                 ", title='" + title + '\'' +
                 ", message='" + message + '\'' +

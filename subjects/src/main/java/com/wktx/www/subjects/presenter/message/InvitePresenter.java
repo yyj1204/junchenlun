@@ -1,6 +1,6 @@
 package com.wktx.www.subjects.presenter.message;
 import com.wktx.www.subjects.apiresult.CustomApiResult;
-import com.wktx.www.subjects.apiresult.manage.WorkListData;
+import com.wktx.www.subjects.apiresult.message.InviteListData;
 import com.wktx.www.subjects.basemvp.ABasePresenter;
 import com.wktx.www.subjects.ui.view.IView;
 import com.wktx.www.subjects.utils.ApiURL;
@@ -25,27 +25,29 @@ public class InvitePresenter extends ABasePresenter<IView> {
     //获取公司邀请列表
     public void getInfo(){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         LogUtil.error("获取公司邀请列表","json==="+httpParams.toString());
 
         EasyHttp.post(ApiURL.COMMON_URL)
                 .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_INVITE_LIST)
                 .params(httpParams)
-                .execute(new CallBackProxy<CustomApiResult<WorkListData>, WorkListData>
-                        (new SimpleCallBack<WorkListData>() {
+                .execute(new CallBackProxy<CustomApiResult<InviteListData>, InviteListData>
+                        (new SimpleCallBack<InviteListData>() {
                             @Override
                             public void onError(ApiException e) {
                                 LogUtil.error("获取公司邀请列表","e=="+e.getMessage());
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }
                             }
                             @Override
-                            public void onSuccess(WorkListData result) {
+                            public void onSuccess(InviteListData result) {
                                 if (result != null) {
                                     LogUtil.error("获取公司邀请列表","result=="+result.toString());
 

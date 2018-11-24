@@ -43,11 +43,14 @@
     <color name="color_5d5d5d">#5d5d5d</color>
     <color name="color_272930">#272930</color>
     <color name="color_26a8e0">#26a8e0</color>
+    <color name="color_08aaeb">#08aaeb</color>
     <color name="color_fa716f">#fa716f</color>
     <color name="color_fa6865">#fa6865</color>
+    <color name="color_ff8342">#ff8342</color>
     <color name="color_ffb321">#ffb321</color>
     <color name="color_ffd321">#ffd321</color>
     <color name="color_000000">#000000</color>
 
     <color name="color_00000000">#00000000</color>
+    <color name="color_00ffffff">#00ffffff</color>
 </resources>

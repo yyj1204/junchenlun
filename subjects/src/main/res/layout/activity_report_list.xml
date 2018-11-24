@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:background="@color/color_f0f0f0"
-    tools:context="com.wktx.www.subjects.ui.activity.manage.ReportListActivity">
+    tools:context="com.wktx.www.subjects.ui.activity.manage.report.ReportListActivity">
 
     <include layout="@layout/include_toolbar_activity" />
 

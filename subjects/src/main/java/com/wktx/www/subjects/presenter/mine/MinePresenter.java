@@ -1,6 +1,6 @@
 package com.wktx.www.subjects.presenter.mine;
 
-import com.wktx.www.subjects.apiresult.mine.CertificationData;
+import com.wktx.www.subjects.apiresult.mine.authent.AuthentPersonalData;
 import com.wktx.www.subjects.apiresult.mine.center.CenterData;
 import com.wktx.www.subjects.apiresult.CustomApiResult;
 import com.wktx.www.subjects.basemvp.ABasePresenter;
@@ -28,7 +28,7 @@ public class MinePresenter extends ABasePresenter<IMineView> {
     //获取个人中心信息
     public void getInfo(){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
 
         LogUtil.error("获取个人中心信息","json==="+httpParams.toString());
@@ -44,6 +44,8 @@ public class MinePresenter extends ABasePresenter<IMineView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }
@@ -66,52 +68,10 @@ public class MinePresenter extends ABasePresenter<IMineView> {
                         }) {});
     }
 
-    //获取认证（个人）详情
-    public void getCertificationInfo(String authentState){
-        HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
-        httpParams.put("token", getmMvpView().getUserInfo().getToken());
-        httpParams.put("paid", authentState);
-        LogUtil.error("认证（个人）详情","json==="+httpParams.toString());
-
-        EasyHttp.post(ApiURL.COMMON_URL)
-                .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_CERTIFICATION_INFO)
-                .params(httpParams)
-                .execute(new CallBackProxy<CustomApiResult<CertificationData>, CertificationData>
-                        (new ProgressDialogCallBack<CertificationData>(mProgressDialog) {
-                            @Override
-                            public void onError(ApiException e) {
-                                super.onError(e);
-                                LogUtil.error("认证（个人）详情","e=="+e.getMessage());
-
-                                if (e.getMessage().equals("无法解析该域名")){
-                                    getmMvpView().onGetCertificationFailure(ConstantUtil.TOAST_NONET);
-                                }else {
-                                    getmMvpView().onGetCertificationFailure(e.getMessage());
-                                }
-                            }
-                            @Override
-                            public void onSuccess(CertificationData result) {
-                                if (result != null) {
-                                    LogUtil.error("认证（个人）详情","result=="+result.toString());
-
-                                    if (result.getCode()==0){//认证（个人）详情 成功
-                                        getmMvpView().onGetCertificationSuccess(result.getInfo());
-                                    }else {//认证（个人）详情 失败
-                                        getmMvpView().onGetCertificationFailure(result.getMsg());
-                                    }
-                                }else {
-                                    getmMvpView().onGetCertificationFailure(ConstantUtil.TOAST_ERROR);
-                                }
-                            }
-                        }) {});
-    }
-
-
     //退出登录
     public void onLogout(){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
 
         LogUtil.error("退出登录","json==="+httpParams.toString());
@@ -128,6 +88,8 @@ public class MinePresenter extends ABasePresenter<IMineView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onLogout(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onLogout(false,e.getMessage());
                                 }

@@ -90,6 +90,7 @@
     <dimen name="px_34">34px</dimen>
     <dimen name="px_36">36px</dimen>
     <dimen name="px_40">40px</dimen>
+    <dimen name="px_42">42px</dimen>
     <dimen name="px_44">44px</dimen>
     <dimen name="px_46">46px</dimen>
     <dimen name="px_48">48px</dimen>
@@ -122,8 +123,11 @@
     <dimen name="px_148">148px</dimen>
     <dimen name="px_150">150px</dimen>
     <dimen name="px_160">160px</dimen>
+    <dimen name="px_196">196px</dimen>
     <dimen name="px_200">200px</dimen>
+    <dimen name="px_214">214px</dimen>
     <dimen name="px_240">240px</dimen>
+    <dimen name="px_250">250px</dimen>
     <dimen name="px_260">260px</dimen>
     <dimen name="px_280">280px</dimen>
     <dimen name="px_320">320px</dimen>
@@ -133,6 +137,7 @@
     <dimen name="px_384">384px</dimen>
     <dimen name="px_420">420px</dimen>
     <dimen name="px_440">440px</dimen>
+    <dimen name="px_480">480px</dimen>
     <dimen name="px_500">500px</dimen>
     <dimen name="px_578">578px</dimen>
     <dimen name="px_600">600px</dimen>

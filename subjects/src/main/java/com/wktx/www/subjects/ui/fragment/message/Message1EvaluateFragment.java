@@ -17,7 +17,7 @@ import com.wktx.www.subjects.apiresult.login.AccountInfoData;
 import com.wktx.www.subjects.apiresult.message.EvaluateListInfoData;
 import com.wktx.www.subjects.basemvp.ALazyLoadBaseFragment;
 import com.wktx.www.subjects.presenter.message.EvaluatePresenter;
-import com.wktx.www.subjects.ui.activity.manage.ReportDetailsActivity;
+import com.wktx.www.subjects.ui.activity.manage.report.ReportDetailsActivity;
 import com.wktx.www.subjects.ui.view.IView;
 import com.wktx.www.subjects.utils.ConstantUtil;
 import com.wktx.www.subjects.utils.LoginUtil;

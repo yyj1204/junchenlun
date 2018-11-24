@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f0f0f0"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="com.wktx.www.subjects.ui.activity.mine.AboutUsActivity">
+
+    <include layout="@layout/include_toolbar_activity" />
+
+    <ImageView
+        android:layout_width="174px"
+        android:layout_height="174px"
+        android:src="@drawable/ic_about_us"
+        android:layout_margin="@dimen/px_30"/>
+
+    <TextView
+        android:id="@+id/tvVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="版本名称"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/color_000000"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="@dimen/px_30"
+        android:text="      《君臣论》平台隶属于泉州劲氏软件科技有限公司，是互联网及电商运营技术人才云端工作方式的威客和众包服务平台。企业通过平台可以快速雇佣、管理、工资托管互联网人才，提升企业竞争力；互联网人才可以通过平台云端工作、提交工作报告，实现高效、自由的工作方式。平台自正式运营以来，互联网企业雇主数超过30000家，经过实名认证的互联网人才数超过10000人次。\n      云端全职作为一种工作模式，不仅降低了互联网企业用人成本，还解决了企业当地互联网技术人才资源问题，提高了工作效率，而且让互联网人才的专业能力得到更大的发挥，收入得到明显提高。"
+        android:textSize="@dimen/sp_12"
+        android:lineSpacingExtra="@dimen/px_10"
+        android:textColor="@color/color_000000"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/string_aboutus_web"
+        android:textSize="@dimen/sp_12"
+        android:textColor="@color/color_000000"
+        android:layout_marginBottom="@dimen/px_30"/>
+
+</LinearLayout>

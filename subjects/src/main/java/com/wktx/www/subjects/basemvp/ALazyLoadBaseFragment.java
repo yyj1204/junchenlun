@@ -1,5 +1,6 @@
 package com.wktx.www.subjects.basemvp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,11 @@ import android.view.View;
 
 import com.jaeger.library.StatusBarUtil;
 import com.wktx.www.subjects.R;
+import com.wktx.www.subjects.apiresult.login.AccountInfoData;
+import com.wktx.www.subjects.ui.activity.login.LoginActivity;
+import com.wktx.www.subjects.utils.ConstantUtil;
+import com.wktx.www.subjects.utils.LoginUtil;
+import com.wktx.www.subjects.utils.MyUtils;
 
 /**
  * Created by yyj on 2018/1/30.
@@ -174,5 +180,21 @@ public abstract class ALazyLoadBaseFragment<V extends IBaseView,P extends ABaseP
      */
     public P getPresenter() {
         return presenter;
+    }
+
+    @Override
+    public AccountInfoData getUserInfo() {
+        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
+        return userInfo;
+    }
+    @Override
+    public void onLoginFailure(String msg) {
+        MyUtils.showToast(getContext(),msg);
+        if (getUserInfo()!=null){
+            LoginUtil.getinit().logout();//将本地登录信息清除
+        }
+        Intent intent = new Intent(getContext(), LoginActivity.class);
+        intent.putExtra(ConstantUtil.KEY_WHETHER,true);
+        startActivity(intent);
     }
 }

@@ -15,9 +15,15 @@ import java.lang.Override;
 public class AccountSecurityActivity_ViewBinding implements Unbinder {
   private AccountSecurityActivity target;
 
-  private View view2131231164;
+  private View view2131689766;
 
-  private View view2131230969;
+  private View view2131689652;
+
+  private View view2131689653;
+
+  private View view2131689654;
+
+  private View view2131689655;
 
   @UiThread
   public AccountSecurityActivity_ViewBinding(AccountSecurityActivity target) {
@@ -30,8 +36,9 @@ public class AccountSecurityActivity_ViewBinding implements Unbinder {
 
     View view;
     target.tvTitle = Utils.findRequiredViewAsType(source, R.id.tb_TvBarTitle, "field 'tvTitle'", TextView.class);
+    target.tvAlipayState = Utils.findRequiredViewAsType(source, R.id.tv_alipayState, "field 'tvAlipayState'", TextView.class);
     view = Utils.findRequiredView(source, R.id.tb_IvReturn, "method 'MyOnclick'");
-    view2131231164 = view;
+    view2131689766 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -39,7 +46,31 @@ public class AccountSecurityActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.linear_loginPwd, "method 'MyOnclick'");
-    view2131230969 = view;
+    view2131689652 = view;
+    view.setOnClickListener(new DebouncingOnClickListener() {
+      @Override
+      public void doClick(View p0) {
+        target.MyOnclick(p0);
+      }
+    });
+    view = Utils.findRequiredView(source, R.id.linear_payPwd, "method 'MyOnclick'");
+    view2131689653 = view;
+    view.setOnClickListener(new DebouncingOnClickListener() {
+      @Override
+      public void doClick(View p0) {
+        target.MyOnclick(p0);
+      }
+    });
+    view = Utils.findRequiredView(source, R.id.linear_loginPhone, "method 'MyOnclick'");
+    view2131689654 = view;
+    view.setOnClickListener(new DebouncingOnClickListener() {
+      @Override
+      public void doClick(View p0) {
+        target.MyOnclick(p0);
+      }
+    });
+    view = Utils.findRequiredView(source, R.id.linear_alipay, "method 'MyOnclick'");
+    view2131689655 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -56,10 +87,17 @@ public class AccountSecurityActivity_ViewBinding implements Unbinder {
     this.target = null;
 
     target.tvTitle = null;
+    target.tvAlipayState = null;
 
-    view2131231164.setOnClickListener(null);
-    view2131231164 = null;
-    view2131230969.setOnClickListener(null);
-    view2131230969 = null;
+    view2131689766.setOnClickListener(null);
+    view2131689766 = null;
+    view2131689652.setOnClickListener(null);
+    view2131689652 = null;
+    view2131689653.setOnClickListener(null);
+    view2131689653 = null;
+    view2131689654.setOnClickListener(null);
+    view2131689654 = null;
+    view2131689655.setOnClickListener(null);
+    view2131689655 = null;
   }
 }

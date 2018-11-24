@@ -30,7 +30,7 @@ public class RecruitListPresenter extends ABasePresenter<IRecruitListView> {
         httpParams.put("tow",getmMvpView().getJobTypeId());
         httpParams.put("bgat",getmMvpView().getCategoryId());
         httpParams.put("bgap",getmMvpView().getPlatformId());
-        httpParams.put("cust_service_type",getmMvpView().getServiceId());
+//        httpParams.put("cust_service_type",getmMvpView().getServiceId());
         httpParams.put("working_years",getmMvpView().getExperienceId());
         httpParams.put("sex",getmMvpView().getSexId());
         httpParams.put("page",page+"");

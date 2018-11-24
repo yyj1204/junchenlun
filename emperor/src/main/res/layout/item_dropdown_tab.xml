@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:gravity="center">
+    <TextView
+        android:id="@+id/tv_tab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:drawablePadding="@dimen/px_14"
+        android:gravity="center"
+        android:paddingBottom="@dimen/px_24"
+        android:paddingLeft="@dimen/px_10"
+        android:paddingRight="@dimen/px_10"
+        android:paddingTop="@dimen/px_24"
+        android:textColor="@color/color_a0a0a0" />
+</com.zhy.autolayout.AutoLinearLayout>

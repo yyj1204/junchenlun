@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.listener.CustomListener;
 import com.wktx.www.subjects.R;
-import com.wktx.www.subjects.apiresult.login.AccountInfoData;
 import com.wktx.www.subjects.apiresult.main.condition.ConditionBean;
 import com.wktx.www.subjects.apiresult.mine.resume.ResumeInfoData;
 import com.wktx.www.subjects.apiresult.main.condition.ConditionInfoData;
@@ -24,7 +23,7 @@ import com.wktx.www.subjects.basemvp.ABaseActivity;
 import com.wktx.www.subjects.presenter.mine.resume.ResumePositionPresenter;
 import com.wktx.www.subjects.ui.view.mine.resume.IResumePositionView;
 import com.wktx.www.subjects.utils.ConstantUtil;
-import com.wktx.www.subjects.utils.LoginUtil;
+import com.wktx.www.subjects.utils.LogUtil;
 import com.wktx.www.subjects.utils.MyUtils;
 import com.wktx.www.subjects.utils.ToastUtil;
 
@@ -75,6 +74,8 @@ public class ResumePositionActivity extends ABaseActivity<IResumePositionView,Re
     private String experienceId;//经验ID
     private String styleIds;//风格ID（多个）
     private String styleStr="";//风格名称（多个）
+    private ArrayList<ConditionBean> categoryList= new ArrayList<>();//选中类目名称
+    private ArrayList<ConditionBean> styleList= new ArrayList<>();//选中风格名称
     private ArrayList<ConditionBean> positionBeans = new ArrayList<>();//职位名称
     private ArrayList<ConditionBean> categoryBeans = new ArrayList<>();//类目名称
     private ArrayList<ConditionBean> platformBeans = new ArrayList<>();//平台名称
@@ -97,7 +98,7 @@ public class ResumePositionActivity extends ABaseActivity<IResumePositionView,Re
                 ShowCustomPickerView(tvPosition,positionBeans);
                 break;
             case R.id.linear_category://类目
-                startPickActivity(categoryBeans,ConstantUtil.REQUESTCODE_CATEGORY);
+                startPickActivity(categoryList,categoryBeans,ConstantUtil.REQUESTCODE_CATEGORY);
                 break;
             case R.id.linear_platform://平台
                 ShowCustomPickerView(tvPlatform,platformBeans);
@@ -106,7 +107,7 @@ public class ResumePositionActivity extends ABaseActivity<IResumePositionView,Re
                 ShowCustomPickerView(tvExperience,experienceBeans);
                 break;
             case R.id.linear_style://擅长风格
-                startPickActivity(styleBeans,ConstantUtil.REQUESTCODE_STYLE);
+                startPickActivity(styleList,styleBeans,ConstantUtil.REQUESTCODE_STYLE);
                 break;
             case R.id.bt_save://保存
                 if (MyUtils.isFastClick()){
@@ -149,11 +150,12 @@ public class ResumePositionActivity extends ABaseActivity<IResumePositionView,Re
     /**
      * 打开多项选择弹窗界面
      */
-    private void startPickActivity(ArrayList<ConditionBean> beans, int requestCode) {
+    private void startPickActivity(ArrayList<ConditionBean> selectBeans,ArrayList<ConditionBean> beans, int requestCode) {
         if (MyUtils.isFastClick1()){
             return;
         }
         Intent intent = new Intent(ResumePositionActivity.this, CategoryPickActivity.class);
+        intent.putExtra(ConstantUtil.KEY_POSITION, selectBeans);
         intent.putExtra(ConstantUtil.KEY_DATA, beans);
         startActivityForResult(intent,requestCode);
     }
@@ -163,8 +165,6 @@ public class ResumePositionActivity extends ABaseActivity<IResumePositionView,Re
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resume_position);
         ButterKnife.bind(this);
-        // 设置右滑动返回
-//        Slidr.attach(this);
         initData();
         initUI();
     }
@@ -318,11 +318,6 @@ public class ResumePositionActivity extends ABaseActivity<IResumePositionView,Re
      * IResumePositionView
      */
     @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
-    @Override
     public String getPositionId() {
         return positionId;
     }
@@ -356,7 +351,10 @@ public class ResumePositionActivity extends ABaseActivity<IResumePositionView,Re
         categoryBeans = tData.getBgatList();
         platformBeans = tData.getBgapList();
         styleBeans = tData.getBgasList();
+        //将工作经验的"未设置"替换成"无经验"
+        ConditionBean cotitionBean = new ConditionBean("0", "无经验");
         experienceBeans = tData.getWorkingYearsList();
+        experienceBeans.set(0,cotitionBean);
 
         //如果是编辑，则设置控件数据
         if (!isAdd){
@@ -365,15 +363,15 @@ public class ResumePositionActivity extends ABaseActivity<IResumePositionView,Re
             tvPosition.setText(resumeInfoData.getTow().getName());
             changePositionState();
             //类目(多个)
-            List<ConditionBean> categoryList = resumeInfoData.getBgatList();
+            categoryList = resumeInfoData.getBgatList();
             if (categoryList.size()!=0){
-                for (int i = 0; i <categoryList.size() ; i++) {
+                for (int i = 0; i < categoryList.size() ; i++) {
                     if (i==0){
                         categoryIds = categoryList.get(i).getId();
                         categoryStr = categoryList.get(i).getName();
                     }else {
-                        categoryIds = categoryIds+","+categoryList.get(i).getId();
-                        categoryStr = categoryStr +"/"+categoryList.get(i).getName();
+                        categoryIds = categoryIds+","+ categoryList.get(i).getId();
+                        categoryStr = categoryStr +"/"+ categoryList.get(i).getName();
                     }
                 }
             }
@@ -383,17 +381,21 @@ public class ResumePositionActivity extends ABaseActivity<IResumePositionView,Re
             tvPlatform.setText(resumeInfoData.getBgap().getName());
             //经验
             experienceId = resumeInfoData.getWorking_years().getId();
-            tvExperience.setText(resumeInfoData.getWorking_years().getName());
+            String workYears = resumeInfoData.getWorking_years().getName();
+            if (workYears.equals("未设置")){
+                workYears="无经验";
+            }
+            tvExperience.setText(workYears);
             //风格（多个）
-            List<ConditionBean> styleList = resumeInfoData.getBgasList();
+            styleList = resumeInfoData.getBgasList();
             if (styleList.size()!=0){
-                for (int i = 0; i <styleList.size() ; i++) {
+                for (int i = 0; i < styleList.size() ; i++) {
                     if (i==0){
                         styleIds = styleList.get(i).getId();
                         styleStr = styleList.get(i).getName();
                     }else {
-                        styleIds = styleIds+","+styleList.get(i).getId();
-                        styleStr = styleStr +"/"+styleList.get(i).getName();
+                        styleIds = styleIds+","+ styleList.get(i).getId();
+                        styleStr = styleStr +"/"+ styleList.get(i).getName();
                     }
                 }
             }
@@ -431,6 +433,7 @@ public class ResumePositionActivity extends ABaseActivity<IResumePositionView,Re
                 ArrayList<ConditionBean> content = (ArrayList<ConditionBean>) data.getSerializableExtra(ConstantUtil.KEY_DATA);
                 switch (requestCode){
                     case ConstantUtil.REQUESTCODE_CATEGORY://类目
+                        categoryList=content;
                         for (int i = 0; i <content.size() ; i++) {
                             if (i==0){
                                 categoryIds = content.get(i).getId();
@@ -443,6 +446,7 @@ public class ResumePositionActivity extends ABaseActivity<IResumePositionView,Re
                         tvCategory.setText(categoryStr);
                         break;
                     case ConstantUtil.REQUESTCODE_STYLE://风格
+                        styleList=content;
                         for (int i = 0; i <content.size() ; i++) {
                             if (i==0){
                                 styleIds = content.get(i).getId();

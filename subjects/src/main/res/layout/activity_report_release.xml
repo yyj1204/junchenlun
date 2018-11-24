@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="@color/color_f0f0f0"
-    tools:context=".ui.activity.manage.ReportReleaseActivity">
+    tools:context=".ui.activity.manage.report.ReportReleaseActivity">
 
     <include layout="@layout/include_toolbar_activity" />
 
@@ -150,20 +150,21 @@
                     android:textSize="@dimen/sp_13"/>
             </LinearLayout>
             <TextView
+                android:id="@+id/tv_imgNum"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/px_62"
                 android:paddingLeft="@dimen/px_30"
                 android:paddingRight="@dimen/px_30"
                 android:background="@color/color_f0f0f0"
                 android:gravity="center_vertical"
-                android:text="数据表现"
+                android:text="数据表现（0张）"
                 android:textColor="@color/color_5d5d5d"
                 android:textSize="@dimen/sp_12" />
 
             <LinearLayout
                 android:id="@+id/linear_imgAdd"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/px_62"
+                android:layout_height="@dimen/px_80"
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:background="@drawable/selector_mine_linearlayout" >

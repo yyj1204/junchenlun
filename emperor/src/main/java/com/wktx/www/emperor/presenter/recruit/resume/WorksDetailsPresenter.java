@@ -24,7 +24,7 @@ public class WorksDetailsPresenter extends ABasePresenter<IView> {
 
     //获取作品详情
     public void onGetWorksInfo(String worksId){
-        LogUtil.error("获取作品详情","json===worksId:"+worksId);
+        LogUtil.error("获取作品详情","json===id:"+worksId);
 
         EasyHttp.post(ApiURL.COMMON_URL)
                 .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_RESUME_WORKS_INFO)

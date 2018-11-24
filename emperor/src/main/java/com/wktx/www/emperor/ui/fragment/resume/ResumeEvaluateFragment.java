@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.recruit.resume.EvaluateInfoData;
 import com.wktx.www.emperor.basemvp.ALazyLoadFragment;
 import com.wktx.www.emperor.presenter.recruit.resume.EvaluatePresenter;
@@ -154,11 +153,6 @@ public class ResumeEvaluateFragment extends ALazyLoadFragment<IView,EvaluatePres
     /**
      * IView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        return null;
-    }
-
     @Override
     public void onRequestSuccess(List<EvaluateInfoData> tData) {
         recyclerView.setBackgroundResource(R.color.color_f0f0f0);

@@ -18,7 +18,7 @@
         android:id="@+id/tv_workTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="工作时间段"
+        android:text="工作时间"
         android:textColor="@color/color_a0a0a0"
         android:textSize="@dimen/sp_12" />
     <ImageView

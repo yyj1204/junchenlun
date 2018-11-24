@@ -113,6 +113,28 @@
         android:paddingLeft="@dimen/px_30"
         android:paddingRight="@dimen/px_30"
         android:paddingTop="@dimen/px_20"
+        android:background="@color/color_ffffff">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="个人标签:"
+            android:textColor="@color/color_a0a0a0"
+            android:textSize="@dimen/sp_13" />
+        <TextView
+            android:id="@+id/tv_tags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_30"
+            android:text="未填写"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_13" />
+    </com.zhy.autolayout.AutoLinearLayout>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:paddingTop="@dimen/px_20"
         android:paddingBottom="@dimen/px_30"
         android:background="@color/color_ffffff">
         <TextView
@@ -167,13 +189,15 @@
     <ImageView
         android:id="@+id/iv_resume"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/px_480"
         android:layout_marginTop="@dimen/px_1"
         android:scaleType="fitXY"
+        android:src="@drawable/img_loading"
         android:background="@color/color_ffffff"
         android:paddingBottom="@dimen/px_20"/>
 
     <TextView
+        android:id="@+id/tv_experience"
         android:layout_width="match_parent"
         android:layout_height="@dimen/px_60"
         android:layout_marginTop="@dimen/px_20"

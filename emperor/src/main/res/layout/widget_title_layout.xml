@@ -16,7 +16,7 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/px_60"
         android:layout_weight="1"
-        android:text="搜索臣民昵称"
+        android:text="搜索臣子昵称"
         android:gravity="center|left"
         android:textColor="@color/color_c5c5c5"
         android:layout_marginLeft="@dimen/px_40"

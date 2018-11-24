@@ -17,7 +17,7 @@ import java.lang.Override;
 public class NotificationActivity_ViewBinding implements Unbinder {
   private NotificationActivity target;
 
-  private View view2131231164;
+  private View view2131689766;
 
   @UiThread
   public NotificationActivity_ViewBinding(NotificationActivity target) {
@@ -33,7 +33,7 @@ public class NotificationActivity_ViewBinding implements Unbinder {
     target.viewPager = Utils.findRequiredViewAsType(source, R.id.viewpager, "field 'viewPager'", ViewPager.class);
     target.smartTab = Utils.findRequiredViewAsType(source, R.id.layout_smartTab, "field 'smartTab'", SmartTabLayout.class);
     view = Utils.findRequiredView(source, R.id.tb_IvReturn, "method 'MyOnclick'");
-    view2131231164 = view;
+    view2131689766 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -53,7 +53,7 @@ public class NotificationActivity_ViewBinding implements Unbinder {
     target.viewPager = null;
     target.smartTab = null;
 
-    view2131231164.setOnClickListener(null);
-    view2131231164 = null;
+    view2131689766.setOnClickListener(null);
+    view2131689766 = null;
   }
 }

@@ -44,7 +44,7 @@ public class RegisterActivity extends ABaseActivity<IRegisterView,RegisterPresen
     @BindView(R.id.et_pwd2)
     EditText etPwd2;
     @BindView(R.id.bt_register)//确认注册
-    Button btRegister;
+            Button btRegister;
 
     private int time = 60;
     @SuppressLint("HandlerLeak")
@@ -66,14 +66,14 @@ public class RegisterActivity extends ABaseActivity<IRegisterView,RegisterPresen
         //将输入法隐藏
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(tvTitle.getWindowToken(), 0);
+        if (MyUtils.isFastClick()){
+            return;
+        }
         switch (view.getId()) {
             case R.id.tb_IvReturn:
                 finish();
                 break;
             case R.id.tv_getcode://获取验证码
-                if (MyUtils.isFastClick()){
-                    return;
-                }
                 if (TextUtils.isEmpty(getPhoneStr())){
                     ToastUtil.myToast("请输入手机号！");
                     etPhone.requestFocus();
@@ -85,9 +85,6 @@ public class RegisterActivity extends ABaseActivity<IRegisterView,RegisterPresen
                 }
                 break;
             case R.id.bt_register://确认注册
-                if (MyUtils.isFastClick()){
-                    return;
-                }
                 //判断输入框格式
                 if (TextUtils.isEmpty(getPhoneStr())){
                     ToastUtil.myToast("请输入手机号！");
@@ -101,13 +98,13 @@ public class RegisterActivity extends ABaseActivity<IRegisterView,RegisterPresen
                 }else if (TextUtils.isEmpty(getPwd1Str())){
                     ToastUtil.myToast("请输入密码！");
                     etPwd1.requestFocus();
-                }else if (getPwd1Str().length()<6||getPwd1Str().length()>12){
+                }else if (getPwd1Str().length()<6||getPwd1Str().length()>20){
                     ToastUtil.myToast("密码输入不正确！");
                     etPwd1.requestFocus();
                 }else if (TextUtils.isEmpty(getPwd2Str())){
                     ToastUtil.myToast("请输入确认密码！");
                     etPwd2.requestFocus();
-                }else if (getPwd2Str().length()<6||getPwd2Str().length()>12||!getPwd1Str().equals(getPwd2Str())){
+                }else if (getPwd2Str().length()<6||getPwd2Str().length()>20||!getPwd1Str().equals(getPwd2Str())){
                     ToastUtil.myToast("确认密码输入不正确！");
                     etPwd2.requestFocus();
                 }else {//注册
@@ -116,9 +113,6 @@ public class RegisterActivity extends ABaseActivity<IRegisterView,RegisterPresen
                 }
                 break;
             case R.id.tv_login://已有账号，立即登录
-                if (MyUtils.isFastClick1()){
-                    return;
-                }
                 startActivity(new Intent(this, LoginActivity.class));
                 finish();
                 break;
@@ -145,10 +139,6 @@ public class RegisterActivity extends ABaseActivity<IRegisterView,RegisterPresen
     /**
      * IRegisterView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        return null;
-    }
     @Override
     public String getPhoneStr() {
         return etPhone.getText().toString().trim();

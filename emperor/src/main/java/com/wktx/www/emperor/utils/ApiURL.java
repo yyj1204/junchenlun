@@ -32,7 +32,7 @@ public class ApiURL {
     public static final String PARAMS_KEY = "service";
 
     //协议说明展示接口
-    public static final String URL_EXPLAIN ="http://api.jcl.55085.cn/api/index.php?service=Exhibition.Index&ename=";
+    public static final String URL_EXPLAIN ="http://api.junchenlun.com/api/index.php?service=Exhibition.Index&ename=";
 
     /**
      * 用户管理
@@ -47,10 +47,6 @@ public class ApiURL {
     public static final String PARAMS_LOGOUT = "User_User_Info.Logout";
     //忘记密码
     public static final String PARAMS_FORGET_PWD = "User_User_Info.ForgetPassword";
-    //修改登录密码
-    public static final String PARAMS_EDIT_PWD = "User_User_Info.EditUserPassword";
-    //修改支付密码
-    public static final String PARAMS_EDIT_PAYPWD = "User_User_Info.EditPayPassword";
 
     /**
      * 首页
@@ -109,6 +105,14 @@ public class ApiURL {
      */
     //员工续签
     public static final String PARAMS_MANAGE_RENEWAL= "Hire.HireRenewal";
+    //员工考核指标
+    public static final String PARAMS_MANAGE_KPI= "Management.GetStaffInfo";
+    //员工请假记录
+    public static final String PARAMS_MANAGE_LEAVE_LIST= "Management.LeaveList";
+    //同意员工请假
+    public static final String PARAMS_MANAGE_LEAVE_AGREE= "Management.AgreeLeave";
+    //拒绝员工请假
+    public static final String PARAMS_MANAGE_LEAVE_REFUSE= "Management.RefuseLeave";
     //员工工资
     public static final String PARAMS_MANAGE_SALARY= "Management.EmployeeSalary";
     //考勤记录
@@ -127,12 +131,18 @@ public class ApiURL {
     public static final String PARAMS_MANAGE_COMPLAIN_INFO= "Management.GetComplaintInfo";
     //撤销投诉
     public static final String PARAMS_MANAGE_UNCOMPLAIN= "Management.UnInitiateComplaint";
-    //发起解雇信息
-    public static final String PARAMS_MANAGE_FIRE_INFO= "Management.LaunchDismissal";
+    //获取发起解雇信息
+    public static final String PARAMS_MANAGE_LAUNCH_FIREINFO= "Management.LaunchDismissal";
     //确认解雇
     public static final String PARAMS_MANAGE_FIRE= "Management.ConfirmDismissal";
-    //工作报告(任务)列表
-    public static final String PARAMS_MANAGE_REPORT= "Management.WorkReport";
+    //获取解雇详情
+    public static final String PARAMS_MANAGE_FIREINFO= "Management.GetDismissalInfo";
+    //撤销解雇
+    public static final String PARAMS_MANAGE_FIRE_CANCEL= "Management.RepealDismissal";
+    //申请后台介入解雇
+    public static final String PARAMS_MANAGE_FIRE_APPLY= "Management.ServiceIntervene";
+    //工作安排列表
+    public static final String PARAMS_MANAGE_WORK_LIST= "Management.WorkReport";
     //工作报告列表
     public static final String PARAMS_MANAGE_REPORT_LIST= "Management.WorkReportList";
     //工作报告详情
@@ -141,6 +151,10 @@ public class ApiURL {
     public static final String PARAMS_MANAGE_REPORT_EVALUATE= "Management.AssessmentReport";
     //销售额
     public static final String PARAMS_MANAGE_REPORT_SALEROOM= "Management.SalesVolume";
+    //上传评价员工图片Base64
+    public static final String PARAMS_MANAGE_EVALUATE_BASE64= "Upload.UploadResumeEvaluate";
+    //评价员工
+    public static final String PARAMS_MANAGE_EVALUATE= "Hire.OrderEvaluate";
 
     /**
      * 我的
@@ -155,9 +169,15 @@ public class ApiURL {
     public static final String PARAMS_LIST_CONDITION = "Center.GetHireCondition";
     //账户认证（个人&店铺）
     public static final String PARAMS_CERTIFICATION = "Center.IdentityAuthent";
+    //账户认证详情（个人&店铺）
+    public static final String PARAMS_CERTIFICATION_INFO = "Center.AuthentInfo";
     //钱包充值
     public static final String PARAMS_PURSE_RECHARGE = "Center.WalletRecharge";
-    //店铺列表（安排工作、工作报告检索条件）
+    //钱包提现
+    public static final String PARAMS_PURSE_WITHDRAW = "Center.Withdraw";
+    //钱包提现记录
+    public static final String PARAMS_WITHDRAW_LIST = "Center.WithdrawList";
+    //店铺列表（发布需求、安排工作、工作报告检索条件）
     public static final String PARAMS_STORE_LIST = "Center.GetOnlineStoreList";
     //店铺信息
     public static final String PARAMS_STORE_INFO = "Center.GetOnlineStoreInfo";
@@ -177,8 +197,20 @@ public class ApiURL {
     public static final String PARAMS_HIRE_RECORD = "Center.HireRecord";
     //雇佣记录信息（我的员工管理）
     public static final String PARAMS_HIRE_RECORD_INFO = "Center.HireRecordInfo";
+    //修改登录密码
+    public static final String PARAMS_EDIT_PWD = "User_User_Info.EditUserPassword";
+    //修改支付密码
+    public static final String PARAMS_EDIT_PAYPWD = "User_User_Info.EditPayPassword";
+    //修改手机号码
+    public static final String PARAMS_EDIT_PHONE = "Center.EditPhone";
+    //支付宝认证
+    public static final String PARAMS_ALIPAY_AUTHENT = "Center.AlipayAuthent";
+    //支付宝认证详情
+    public static final String PARAMS_ALIPAY_AUTHENT_INFO = "Center.AlipayAuthentInfo";
     //我的红包
     public static final String PARAMS_COUPON_LIST = "Center.MyCoupon";
     //联系客服信息
     public static final String PARAMS_CONTACT_SERVICE = "Center.GetCustomerServiceInfo";
+    //给客服留言
+    public static final String PARAMS_CONTACT_MESSAGE = "Center.LeaveWord";
 }

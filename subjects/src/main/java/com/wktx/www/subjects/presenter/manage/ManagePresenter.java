@@ -26,7 +26,7 @@ public class ManagePresenter extends ABasePresenter<IView> {
     //获取工作列表
     public void getInfo(int page){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("page", page+"");
         httpParams.put("pageSize", "10");
@@ -43,6 +43,8 @@ public class ManagePresenter extends ABasePresenter<IView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }
@@ -71,7 +73,7 @@ public class ManagePresenter extends ABasePresenter<IView> {
     //获取工作详情
     public void getWorkInfo(String hireId){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("hid", hireId);
         LogUtil.error("获取工作详情","json==="+httpParams.toString());
@@ -87,6 +89,8 @@ public class ManagePresenter extends ABasePresenter<IView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }

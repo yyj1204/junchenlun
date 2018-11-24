@@ -34,6 +34,7 @@ public class AlipayUtil {
     public Handler getalipayHandler() {
         @SuppressLint("HandlerLeak")
         Handler mHandler = new Handler() {
+            @Override
             @SuppressWarnings("unused")
             public void handleMessage(Message msg) {
                 switch (msg.what) {

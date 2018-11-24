@@ -23,7 +23,7 @@ public class WorksDetailsInfoData {
     private String title;//作品标题
     private String brief_intro;//作品简介
     private ConditionBean design_pattern;//设计类型
-    private List<ConditionBean> bgatList;//多个类目
+    private ArrayList<ConditionBean> bgatList;//多个类目
     private String image;//封面图片
     private ArrayList<String> content;//多张作品图片
     private String add_time;//添加时间
@@ -68,11 +68,11 @@ public class WorksDetailsInfoData {
         this.design_pattern = design_pattern;
     }
 
-    public List<ConditionBean> getBgatList() {
+    public ArrayList<ConditionBean> getBgatList() {
         return bgatList;
     }
 
-    public void setBgatList(List<ConditionBean> bgatList) {
+    public void setBgatList(ArrayList<ConditionBean> bgatList) {
         this.bgatList = bgatList;
     }
 

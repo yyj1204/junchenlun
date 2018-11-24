@@ -26,16 +26,17 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.mine.companyinfo.CompanyInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.mine.CompanyInfoPresenter;
+import com.wktx.www.emperor.ui.activity.ImageActivity;
+import com.wktx.www.emperor.ui.activity.mine.authent.AuthentStoreDetailsActivity;
+import com.wktx.www.emperor.ui.activity.recruit.resume.WorksDetailsActivity;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.model.ProvinceJsonBean;
 import com.wktx.www.emperor.utils.GetJsonDataUtil;
 import com.wktx.www.emperor.utils.GlideUtil;
 import com.wktx.www.emperor.utils.LogUtil;
-import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.mine.ICompanyInfoView;
 import com.wktx.www.emperor.utils.ToastUtil;
@@ -78,6 +79,8 @@ public class CompanyInfoActivity extends ABaseActivity<ICompanyInfoView,CompanyI
     Button btSureEdit;//确认修改
 
     private boolean isEditApi=false;//是否修改信息接口请求
+
+    private List<String> imageUrlList = new ArrayList<>();//图片url集合
 
     /**
      * 照片
@@ -200,7 +203,7 @@ public class CompanyInfoActivity extends ABaseActivity<ICompanyInfoView,CompanyI
     /**
      * 普通点击事件
      */
-    @OnClick({R.id.tb_IvReturn, R.id.linear_logo,R.id.linear_address, R.id.bt_sureEdit})
+    @OnClick({R.id.tb_IvReturn, R.id.linear_logo,R.id.civ_logo,R.id.linear_address, R.id.bt_sureEdit})
     public void MyOnclick(View view) {
         if (MyUtils.isFastClick1()){
             return;
@@ -217,9 +220,22 @@ public class CompanyInfoActivity extends ABaseActivity<ICompanyInfoView,CompanyI
                 //触发展示相片来源popuwindow
                 showLogoPopup();
                 break;
+            case R.id.civ_logo://查看logo大图
+                if (TextUtils.isEmpty(logoBase64Str)){//网络图片
+                    if (imageUrlList.size()==0){
+                        return;
+                    }
+                    String[] imageUrls = imageUrlList.toArray(new String[imageUrlList.size()]);
+                    Intent intent = new Intent(CompanyInfoActivity.this, ImageActivity.class);
+                    intent.putExtra(ConstantUtil.KEY_DATA, imageUrls);
+                    intent.putExtra(ConstantUtil.KEY_POSITION, 0);
+                    startActivity(intent);
+                }else {//本地裁剪后的图片
+                    PictureSelector.create(CompanyInfoActivity.this).themeStyle(themeId).openExternalPreview(0, selectList);
+                }
+                break;
             case R.id.linear_address://公司地址
                 if (isLoaded) {
-
                     ShowPickerView();//地址选择器
                 } else {
                     ToastUtil.myToast("数据暂未解析成功，请等待");
@@ -289,7 +305,7 @@ public class CompanyInfoActivity extends ABaseActivity<ICompanyInfoView,CompanyI
      * 更换公司logo弹窗
      */
     private void showLogoPopup() {
-        popupPhoto = new PopupPhoto(CompanyInfoActivity.this, CompanyInfoActivity.this, selectList.size());
+        popupPhoto = new PopupPhoto(CompanyInfoActivity.this, CompanyInfoActivity.this);
         popupPhoto.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         popupPhoto.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         popupPhoto.setClippingEnabled(false);
@@ -334,6 +350,8 @@ public class CompanyInfoActivity extends ABaseActivity<ICompanyInfoView,CompanyI
                     .showCropGrid(false)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
                     .cropCompressQuality(90)// 裁剪压缩质量 默认90 int
                     .selectionMedia(null)// 是否传入已选图片
+                    .withAspectRatio(1,1)// int 裁剪比例 如16:9 3:2 3:4 1:1 可自定义
+                    .previewEggs(true)// 预览图片时 是否增强左右滑动图片体验(图片滑动一半即可看到上一张是否选中) true or false
                     .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
         } else {//单独拍照
             PictureSelector.create(CompanyInfoActivity.this)
@@ -351,6 +369,7 @@ public class CompanyInfoActivity extends ABaseActivity<ICompanyInfoView,CompanyI
                     .showCropFrame(false)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false   true or false
                     .showCropGrid(false)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
                     .cropCompressQuality(90)// 裁剪压缩质量 默认90 int
+                    .withAspectRatio(1,1)// int 裁剪比例 如16:9 3:2 3:4 1:1 可自定义
                     .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
         }
     }
@@ -389,11 +408,6 @@ public class CompanyInfoActivity extends ABaseActivity<ICompanyInfoView,CompanyI
      * ICompanyInfoView
      */
     @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
-    @Override
     public String getHeadPic() {
         return logoBase64Str;
     }
@@ -429,14 +443,15 @@ public class CompanyInfoActivity extends ABaseActivity<ICompanyInfoView,CompanyI
             finish();
         }else {
             //设置圆形公司logo
-            if (tData.getHead_pic()==null||tData.getHead_pic().equals("")) {
+            if (TextUtils.isEmpty(tData.getHead_pic())) {
                 ivLogo.setImageResource(R.drawable.img_mine_head);
             }else {
+                imageUrlList.add(tData.getHead_pic());
                 GlideUtil.loadImage(tData.getHead_pic(),R.drawable.img_mine_head,ivLogo);
             }
             //设置公司昵称
-            if (tData.getNickname()==null||tData.getNickname().equals("")){
-                etName.setText(getUserInfo().getPhone());
+            if (TextUtils.isEmpty(tData.getNickname())){
+                etName.setText(MyUtils.setPhone(getUserInfo().getPhone()));
             }else {
                 etName.setText(tData.getNickname());
             }
@@ -484,9 +499,7 @@ public class CompanyInfoActivity extends ABaseActivity<ICompanyInfoView,CompanyI
                             if (bitmap != null) {
                                 ivLogo.setImageBitmap(bitmap);
                                 logoBase64Str = MyUtils.Bitmap2StrByBase64(bitmap);
-                                LogUtil.error("头像===","logoBase64Str==="+logoBase64Str);
                             }
-
                         }
                         break;
                     default:

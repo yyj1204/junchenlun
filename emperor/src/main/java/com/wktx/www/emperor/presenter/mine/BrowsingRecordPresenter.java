@@ -63,7 +63,7 @@ public class BrowsingRecordPresenter extends ABasePresenter<IMyCollectView> {
     //获取浏览记录
     public void onGetBrowsingRecord(int page){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("tow", getmMvpView().getJobType());
         httpParams.put("page",page+"");
@@ -82,6 +82,8 @@ public class BrowsingRecordPresenter extends ABasePresenter<IMyCollectView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }
@@ -91,11 +93,11 @@ public class BrowsingRecordPresenter extends ABasePresenter<IMyCollectView> {
                                 if (result != null) {
                                     LogUtil.error("获取浏览记录","result=="+result.toString());
 
-                                    if (result.getCode()==0){//获取浏览记录成功
+                                    if (result.getCode()==0){//获取浏览记录 成功
                                         getmMvpView().onRequestSuccess(result.getInfo());
-                                    }else if (result.getCode()==1){//获取浏览记录失败(无数据)
+                                    }else if (result.getCode()==1){//获取浏览记录 失败(无数据)
                                         getmMvpView().onRequestFailure("");
-                                    }else {//获取浏览记录失败
+                                    }else {//获取浏览记录 失败
                                         getmMvpView().onRequestFailure(result.getMsg());
                                     }
                                 }else {

@@ -27,7 +27,7 @@ public class StaffPauseWorkPresenter extends ABasePresenter<IStaffPauseWorkView>
     //获取暂停内容
     public void getPauseWorkInfo(String hireId){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("hire_id", hireId);
 
@@ -45,6 +45,8 @@ public class StaffPauseWorkPresenter extends ABasePresenter<IStaffPauseWorkView>
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onGetPauseFailureResult(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onGetPauseFailureResult(e.getMessage());
                                 }
@@ -69,7 +71,7 @@ public class StaffPauseWorkPresenter extends ABasePresenter<IStaffPauseWorkView>
     //恢复工作
     public void onUnPauseWork(String pauseId){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("id", pauseId);
 
@@ -87,6 +89,8 @@ public class StaffPauseWorkPresenter extends ABasePresenter<IStaffPauseWorkView>
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }
@@ -111,7 +115,7 @@ public class StaffPauseWorkPresenter extends ABasePresenter<IStaffPauseWorkView>
     //暂停工作
     public void onPauseWork(String hireId){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("hire_id", hireId);
         httpParams.put("describe", getmMvpView().getPauseCause());
@@ -131,6 +135,8 @@ public class StaffPauseWorkPresenter extends ABasePresenter<IStaffPauseWorkView>
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }

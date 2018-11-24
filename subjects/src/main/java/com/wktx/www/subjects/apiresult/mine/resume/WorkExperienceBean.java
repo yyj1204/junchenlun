@@ -8,19 +8,23 @@ import java.io.Serializable;
  *
  * work_date : {"start_date":"2018/05","end_date":"2018/06"}
  * company : 尚仁
+ * bgap : "0"
  * bgat : "0"
  * store : http://www.sr35.com/
  * position : 客服性格介绍性格介绍性格介绍
  * introduction : 尚仁尚仁尚仁尚仁性格介绍性格介绍性格介绍
+ * monthly_money : 0
  */
 
 public class WorkExperienceBean implements Serializable{
     private WorkDateBean work_date;//工作时间
     private String company;//公司
-    private String bgat;//类目
-    private String store;//店铺地址
-    private String position;//职位
-    private String introduction;//工作内容
+    private String bgap;//	擅长平台
+    private String bgat;//	擅长类目
+    private String store;//	网址
+    private String position;//工作类型
+    private String introduction;//介绍
+    private String monthly_money;//薪资
 
     public WorkDateBean getWork_date() {
         return work_date;
@@ -36,6 +40,14 @@ public class WorkExperienceBean implements Serializable{
 
     public void setCompany(String company) {
         this.company = company;
+    }
+
+    public String getBgap() {
+        return bgap;
+    }
+
+    public void setBgap(String bgap) {
+        this.bgap = bgap;
     }
 
     public String getBgat() {
@@ -70,15 +82,25 @@ public class WorkExperienceBean implements Serializable{
         this.introduction = introduction;
     }
 
+    public String getMonthly_money() {
+        return monthly_money;
+    }
+
+    public void setMonthly_money(String monthly_money) {
+        this.monthly_money = monthly_money;
+    }
+
     @Override
     public String toString() {
         return "WorkExperienceBean{" +
                 "work_date=" + work_date +
                 ", company='" + company + '\'' +
-                ", bgat=" + bgat +
+                ", bgap='" + bgap + '\'' +
+                ", bgat='" + bgat + '\'' +
                 ", store='" + store + '\'' +
                 ", position='" + position + '\'' +
                 ", introduction='" + introduction + '\'' +
+                ", monthly_money='" + monthly_money + '\'' +
                 '}';
     }
 

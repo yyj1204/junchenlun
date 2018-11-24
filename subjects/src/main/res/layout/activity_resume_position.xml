@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical|right"
             android:textColor="@color/color_999999"
-            android:hint="点击选择职位"
+            android:hint="请选择"
             android:textSize="@dimen/sp_13" />
         <ImageView
             android:layout_width="@dimen/px_16"
@@ -54,19 +54,21 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="擅长类目"
             android:textColor="@color/color_000000"
             android:textSize="@dimen/sp_13" />
         <TextView
             android:id="@+id/tv_category"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical|right"
             android:textColor="@color/color_999999"
-            android:hint="点击选择类目"
-            android:textSize="@dimen/sp_13" />
+            android:hint="请选择"
+            android:textSize="@dimen/sp_13"
+            android:singleLine="true"
+            android:layout_marginLeft="@dimen/px_15"/>
         <ImageView
             android:layout_width="@dimen/px_16"
             android:layout_height="@dimen/px_20"
@@ -97,7 +99,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical|right"
             android:textColor="@color/color_999999"
-            android:hint="点击选择平台"
+            android:hint="请选择"
             android:textSize="@dimen/sp_13" />
         <ImageView
             android:layout_width="@dimen/px_16"
@@ -129,7 +131,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical|right"
             android:textColor="@color/color_999999"
-            android:hint="点击选择经验"
+            android:hint="请选择"
             android:textSize="@dimen/sp_13" />
         <ImageView
             android:layout_width="@dimen/px_16"
@@ -138,8 +140,8 @@
             android:src="@drawable/ic_mine_arrow_right_gray" />
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/linear_style"
         android:visibility="gone"
+        android:id="@+id/linear_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/px_1"
@@ -161,8 +163,10 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical|right"
             android:textColor="@color/color_999999"
-            android:hint="点击选择风格"
-            android:textSize="@dimen/sp_13" />
+            android:hint="请选择"
+            android:textSize="@dimen/sp_13"
+            android:singleLine="true"
+            android:layout_marginLeft="@dimen/px_15" />
         <ImageView
             android:layout_width="@dimen/px_16"
             android:layout_height="@dimen/px_20"
@@ -237,7 +241,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="元"
+            android:text="元/月"
             android:textColor="@color/color_000000"
             android:textSize="@dimen/sp_13"
             android:layout_marginLeft="@dimen/px_14"/>

@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -12,7 +13,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.staff.salary.SalaryPayBean;
 import com.wktx.www.emperor.apiresult.staff.salary.SalaryTrusteeshipBean;
 import com.wktx.www.emperor.apiresult.staff.salary.StaffSalaryInfoData;
@@ -20,7 +20,6 @@ import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.staff.StaffSalaryPresenter;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.DateUtil;
-import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.IView;
 import com.wktx.www.emperor.utils.ToastUtil;
@@ -34,7 +33,6 @@ import butterknife.OnClick;
  * 管理我的员工---员工工资
  */
 public class StaffSalaryActivity extends ABaseActivity<IView,StaffSalaryPresenter> implements IView<StaffSalaryInfoData> {
-
     @BindView(R.id.tb_TvBarTitle)
     TextView tvTitle;
     @BindView(R.id.tv_salaryTotal)
@@ -55,29 +53,14 @@ public class StaffSalaryActivity extends ABaseActivity<IView,StaffSalaryPresente
 
     private String hireId;//雇佣id
 
-    private BaseQuickAdapter<SalaryTrusteeshipBean, BaseViewHolder> trusteeshipAdapter;
-    private BaseQuickAdapter<SalaryPayBean, BaseViewHolder> payAdapter;
-
-    private boolean isShowPay=false;//false：显示托管工资列表 ， true：显示已发工资列表
+    private BaseQuickAdapter<SalaryPayBean, BaseViewHolder> mAdapter;
 
 
-    @OnClick({R.id.tb_IvReturn,R.id.linear_trusteeship,R.id.linear_pay})
+    @OnClick({R.id.tb_IvReturn})
     public void MyOnclick(View view) {
         switch (view.getId()) {
             case R.id.tb_IvReturn://返回
                 finish();
-                break;
-            case R.id.linear_trusteeship://托管中工资
-                isShowPay=false;
-                tvTrusteeshipLine.setVisibility(View.VISIBLE);
-                tvPayLine.setVisibility(View.INVISIBLE);
-                refresh();
-                break;
-            case R.id.linear_pay://已发工资
-                isShowPay=true;
-                tvTrusteeshipLine.setVisibility(View.INVISIBLE);
-                tvPayLine.setVisibility(View.VISIBLE);
-                refresh();
                 break;
             default:
                 break;
@@ -128,29 +111,15 @@ public class StaffSalaryActivity extends ABaseActivity<IView,StaffSalaryPresente
      * 为 RecyclerView 加载 Adapter
      */
     private void initAdapter() {
-        trusteeshipAdapter = new BaseQuickAdapter<SalaryTrusteeshipBean, BaseViewHolder>(R.layout.item_rv_staffsalary, null) {
-            @Override
-            protected void convert(BaseViewHolder helper, SalaryTrusteeshipBean item) {
-                String beginTime = DateUtil.getTimestamp2CustomType(item.getStart_time(), "yyyy.MM.dd");
-                String endTime = DateUtil.getTimestamp2CustomType(item.getEnd_time(), "yyyy.MM.dd");
-                helper.setText(R.id.tv_time,beginTime+"-"+endTime);
-                //判断金额格式，小数点后为"00"，直接取整
-                String money = item.getTrusteeship_wages();
-                String[] mSplit = money.split("[.]");
-                String moneyStr="";
-                if (mSplit[1].equals("00")){
-                    moneyStr=mSplit[0];
-                }else {
-                    moneyStr=money;
-                }
-                helper.setText(R.id.tv_money,moneyStr);
-            }
-        };
-        payAdapter = new BaseQuickAdapter<SalaryPayBean, BaseViewHolder>(R.layout.item_rv_staffsalary, null) {
+        mAdapter = new BaseQuickAdapter<SalaryPayBean, BaseViewHolder>(R.layout.item_rv_staffsalary, null) {
             @Override
             protected void convert(BaseViewHolder helper, SalaryPayBean item) {
-                String payTime = DateUtil.getTimestamp2CustomType(item.getPaid_time(), "yyyy.MM.dd");
-                helper.setText(R.id.tv_time,payTime);
+                if (TextUtils.isEmpty(item.getRemark())){
+                    helper.setText(R.id.tv_remark,"无备注");
+                }else {
+                    helper.setText(R.id.tv_remark,item.getRemark());
+                }
+                helper.setText(R.id.tv_time, item.getAdd_time());
                 //判断金额格式，小数点后为"00"，直接取整
                 String money = item.getAmount();
                 String[] mSplit = money.split("[.]");
@@ -163,6 +132,7 @@ public class StaffSalaryActivity extends ABaseActivity<IView,StaffSalaryPresente
                 helper.setText(R.id.tv_money,moneyStr);
             }
         };
+        recyclerView.setAdapter(mAdapter);
     }
 
     /**
@@ -185,37 +155,18 @@ public class StaffSalaryActivity extends ABaseActivity<IView,StaffSalaryPresente
      * IView
      */
     @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
-    @Override
     public void onRequestSuccess(StaffSalaryInfoData tData) {
-        tvSalaryTotal.setText(tData.getTotal_expenditure());
-        tvTrusteeshipMoney.setText(tData.getTrusteeship_amount());
-        tvPayMoney.setText(tData.getAlready_amount());
-        if (isShowPay){//如果是已发工资---显示已发工资列表
-            payAdapter.setNewData(tData.getAlready_hire());
-            recyclerView.setAdapter(payAdapter);
-            //如果没数据代表全部没数据
-            if (tData.getAlready_hire()==null||tData.getAlready_hire().size()==0){
-                ToastUtil.myToast("暂无任何已发工资！");
-                recyclerView.setBackgroundResource(R.drawable.img_nothing_transaction);
-            }else {
-                recyclerView.setBackgroundResource(R.color.color_f0f0f0);
-            }
-        }else {//如果是托管工资---显示托管工资列表
-            trusteeshipAdapter.setNewData(tData.getTrusteeship_list());
-            recyclerView.setAdapter(trusteeshipAdapter);
-            //如果没数据代表全部没数据
-            if (tData.getTrusteeship_list()==null||tData.getTrusteeship_list().size()==0){
-                ToastUtil.myToast("暂无任何托管中工资！");
-                recyclerView.setBackgroundResource(R.drawable.img_nothing_transaction);
-            }else {
-                recyclerView.setBackgroundResource(R.color.color_f0f0f0);
-            }
+        tvSalaryTotal.setText(tData.getHire_price());
+        tvTrusteeshipMoney.setText(tData.getTrusteeship_wages());
+        tvPayMoney.setText(tData.getPaid_wages());
+        mAdapter.setNewData(tData.getPayList());
+        //如果没数据代表全部没数据
+        if (tData.getPayList() == null || tData.getPayList().size() == 0) {
+            ToastUtil.myToast("暂无任何已收工资！");
+            recyclerView.setBackgroundResource(R.drawable.img_nothing_transaction);
+        } else {
+            recyclerView.setBackgroundResource(R.color.color_f0f0f0);
         }
-
         swipeRefreshLayout.setRefreshing(false);
     }
 

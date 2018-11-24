@@ -8,10 +8,21 @@ package com.wktx.www.emperor.apiresult.recruit.demand;
  *   "data": {
  *        "code": 0,"msg": "",
  *        "info": {
- *            "id": "1","title": "淘宝首页设计","content": "淘宝首页设计淘宝首页设计淘宝首页设计",
- *             "design_pattern": "其他设计","budget": "200.00","add_time": "1516930645","1521388799": "0",
- *             "status_log": [{"remark": "您创建了需求","create_time": "1516930645","user_id": "2649"}],
- *             "status": "0"
+ * id : 30
+ * bgap : {"id":"4","name":"苏宁"}
+ * bgat : {"id":"4","name":"生活百货"}
+ * title : 装修房子
+ * content : 给我揉揉孙洪涛VSOP瑞图你女聚聚提督这1838386881我可以盔子
+ * design_pattern : {"id":"5","name":"海报BANNERE设计"}
+ * budget : 2000.00
+ * add_time : 1532577426
+ * end_time : 1532966400
+ * status_log : [{"remark":"您创建了需求","create_time":"1532577426","user_id":"2649"}]
+ * status : 0
+ * hire_type : 包月
+ * tow : {"id":"1","name":"美工"}
+ * working_years : 两年
+ * store : {"id":"13","shop_name":"张公子茶叶店","shop_logo":"http://shop.junchenlun.com/public/upload/store_logo/2018/07-01/201807011803044062.jpg"}
  *                }
  *          }
  * }

@@ -16,7 +16,9 @@ import com.wktx.www.subjects.apiresult.login.AccountInfoData;
 import com.wktx.www.subjects.apiresult.login.login8register.RegisterInfoData;
 import com.wktx.www.subjects.basemvp.ABaseActivity;
 import com.wktx.www.subjects.presenter.login.LoginPresenter;
+import com.wktx.www.subjects.ui.activity.MainActivity;
 import com.wktx.www.subjects.ui.view.login.ILoginView;
+import com.wktx.www.subjects.utils.ConstantUtil;
 import com.wktx.www.subjects.utils.LoginUtil;
 import com.wktx.www.subjects.utils.MyUtils;
 import com.wktx.www.subjects.utils.ToastUtil;
@@ -40,6 +42,7 @@ public class LoginActivity extends ABaseActivity<ILoginView,LoginPresenter> impl
     Button btLogin;
 
     private AccountInfoData userInfo;
+    private boolean isTokenExpire;//登录token是否过期
 
     @OnClick({R.id.tb_IvReturn, R.id.tv_forget_pwd, R.id.bt_login, R.id.tv_regiest})
     public void MyOnclick(View view) {
@@ -48,6 +51,12 @@ public class LoginActivity extends ABaseActivity<ILoginView,LoginPresenter> impl
         imm.hideSoftInputFromWindow(tvTitle.getWindowToken(), 0);
         switch (view.getId()) {
             case R.id.tb_IvReturn:
+                //如果是token过期，回到首页
+                if (isTokenExpire){
+                    Intent intent = new Intent(this, MainActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
                 finish();
                 break;
             case R.id.tv_forget_pwd://忘记密码
@@ -70,7 +79,7 @@ public class LoginActivity extends ABaseActivity<ILoginView,LoginPresenter> impl
                 }else if (TextUtils.isEmpty(getPwdStr())){
                     ToastUtil.myToast("请输入密码！");
                     etPwd.requestFocus();
-                }else if (getPwdStr().length()<6||getPwdStr().length()>12){
+                }else if (getPwdStr().length()<6||getPwdStr().length()>20){
                     ToastUtil.myToast("密码输入不正确！");
                     etPwd.requestFocus();
                 }else {//登录
@@ -98,6 +107,7 @@ public class LoginActivity extends ABaseActivity<ILoginView,LoginPresenter> impl
         tvTitle.setText(R.string.title_login);
         //设置右滑动返回
         Slidr.attach(this);
+        isTokenExpire = getIntent().getBooleanExtra(ConstantUtil.KEY_WHETHER, false);
     }
 
     @Override
@@ -108,10 +118,6 @@ public class LoginActivity extends ABaseActivity<ILoginView,LoginPresenter> impl
     /**
      * ILoginView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        return null;
-    }
     @Override
     public String getPhoneStr() {
         return etPhone.getText().toString().trim();

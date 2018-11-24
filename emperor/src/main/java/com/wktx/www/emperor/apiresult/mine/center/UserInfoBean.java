@@ -1,16 +1,18 @@
 package com.wktx.www.emperor.apiresult.mine.center;
 
+import java.io.Serializable;
+
 /**
  * Created by yyj on 2018/1/18.
  * 用户信息内容
  */
 
-public class UserInfoBean {
+public class UserInfoBean implements Serializable{
     private String nickname;//昵称
     private String head_pic;//头像
     private String sex;//性别 1:男 2:女
     private String user_money;//余额
-    private String available_balance;//可用余额
+    private String frozen_money;//冻结余额
     private String mobile;//手机号
 
     public String getNickname() {
@@ -45,12 +47,12 @@ public class UserInfoBean {
         this.user_money = user_money;
     }
 
-    public String getAvailable_balance() {
-        return available_balance;
+    public String getFrozen_money() {
+        return frozen_money;
     }
 
-    public void setAvailable_balance(String available_balance) {
-        this.available_balance = available_balance;
+    public void setFrozen_money(String frozen_money) {
+        this.frozen_money = frozen_money;
     }
 
     public String getMobile() {
@@ -69,7 +71,7 @@ public class UserInfoBean {
                 ", head_pic='" + head_pic + '\'' +
                 ", sex=" + sex +
                 ", user_money='" + user_money + '\'' +
-                ", available_balance='" + available_balance + '\'' +
+                ", frozen_money='" + frozen_money + '\'' +
                 ", mobile='" + mobile + '\'' +
                 '}';
     }

@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,7 +13,6 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.subjects.R;
-import com.wktx.www.subjects.apiresult.login.AccountInfoData;
 import com.wktx.www.subjects.apiresult.main.condition.ConditionBean;
 import com.wktx.www.subjects.apiresult.mine.resume.ResumeInfoData;
 import com.wktx.www.subjects.basemvp.ABaseActivity;
@@ -23,13 +23,14 @@ import com.wktx.www.subjects.ui.adapter.mine.ResumeExperienceAdapter;
 import com.wktx.www.subjects.ui.view.mine.resume.IMyResumeView;
 import com.wktx.www.subjects.utils.ConstantUtil;
 import com.wktx.www.subjects.utils.GlideUtil;
-import com.wktx.www.subjects.utils.LoginUtil;
+import com.wktx.www.subjects.utils.LogUtil;
 import com.wktx.www.subjects.utils.MyUtils;
 import com.wktx.www.subjects.widget.MyLayoutManager;
 import com.wktx.www.subjects.utils.ToastUtil;
-
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
+import com.zhy.view.flowlayout.TagFlowLayout;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -50,6 +51,8 @@ public class MyResumeActivity extends ABaseActivity<IMyResumeView,MyResumePresen
     private CircleImageView civHead;
     private TextView tvName;
     private ImageView ivSex;
+    private TagFlowLayout tfTags;
+    private TextView tvTags;
     //应聘职位信息
     private LinearLayout llPositionAdd;
     private LinearLayout llPosition;
@@ -83,7 +86,7 @@ public class MyResumeActivity extends ABaseActivity<IMyResumeView,MyResumePresen
                 break;
             case R.id.bt_previewResume://预览简历
                 if (resumeInfoData.getTow()==null){
-                     ToastUtil.myToast("暂无应聘职位，无法预览简历！");
+                    ToastUtil.myToast("暂无应聘职位，无法预览简历！");
                 }else {
                     Intent intent = new Intent(MyResumeActivity.this, ResumePreviewActivity.class);
                     intent.putExtra(ConstantUtil.KEY_DATA,resumeInfoData.getId());
@@ -97,25 +100,26 @@ public class MyResumeActivity extends ABaseActivity<IMyResumeView,MyResumePresen
 
     @Override
     public void onClick(View view) {
+        if (MyUtils.isFastClick1()){
+            return;
+        }
         switch (view.getId()) {
             case R.id.linear_info://编辑个人信息
-                if (MyUtils.isFastClick1()){
-                    return;
-                }
                 startActivity(new Intent(MyResumeActivity.this,PersonInfoActivity.class));
                 break;
-            case R.id.linear_positionAdd://新增应聘职位
-                if (MyUtils.isFastClick1()){
-                    return;
+            case R.id.tv_tagsAdd://添加个人标签
+                if (resumeInfoData.getTags().size()<10){
+                    startTagsActivity(-1);
+                }else {
+                    ToastUtil.myToast("最多只能添加10个标签！");
                 }
+                break;
+            case R.id.linear_positionAdd://新增应聘职位
                 startPositionActivity(true);
                 break;
             case R.id.linear_position://编辑应聘职位
-                if (MyUtils.isFastClick1()){
-                    return;
-                }
                 if (isOpen){
-                     ToastUtil.myToast("正在找工作，无法编辑该职位！");
+                    ToastUtil.myToast("正在找工作，无法编辑该职位！");
                 }else {
                     startPositionActivity(false);
                 }
@@ -127,21 +131,12 @@ public class MyResumeActivity extends ABaseActivity<IMyResumeView,MyResumePresen
                 changeHuntingState(false);
                 break;
             case R.id.linear_uploadResume://上传个性简历
-                if (MyUtils.isFastClick1()){
-                    return;
-                }
                 startSomeActivity(ResumeUploadActivity.class);
                 break;
             case R.id.linear_uploadWorks://上传作品
-                if (MyUtils.isFastClick1()){
-                    return;
-                }
                 startSomeActivity(MyWorksActivity.class);
                 break;
             case R.id.linear_experienceAdd://新增工作经历
-                if (MyUtils.isFastClick1()){
-                    return;
-                }
                 //打开工作经历详情界面
                 startExperienceActivity(true,0);
                 break;
@@ -151,14 +146,21 @@ public class MyResumeActivity extends ABaseActivity<IMyResumeView,MyResumePresen
     }
 
     /**
+     * 打开个人标签编辑界面
+     */
+    private void startTagsActivity(int position) {
+        Intent intent = new Intent(MyResumeActivity.this, EditTagsActivity.class);
+        intent.putExtra(ConstantUtil.KEY_POSITION,position);
+        intent.putExtra(ConstantUtil.KEY_DATA,resumeInfoData);
+        startActivity(intent);
+    }
+
+    /**
      * 修改找工作状态按钮
      */
     private void changeHuntingState(boolean isHunting) {
-        //如果找工作状态已打开，点击打开不做反应，已关闭，点击关机不做反应
+        //如果找工作状态已打开，点击打开不做反应，已关闭，点击关闭不做反应
         if (isOpen==isHunting){
-            return;
-        }
-        if (MyUtils.isFastClick()){
             return;
         }
         tvOpen.setEnabled(false);
@@ -194,7 +196,7 @@ public class MyResumeActivity extends ABaseActivity<IMyResumeView,MyResumePresen
     }
 
     /**
-     * 打开图片职位详情界面
+     * 打开应聘职位详情界面
      * isAdd：是新增还是编辑
      */
     private void startPositionActivity(boolean isAdd) {
@@ -274,6 +276,8 @@ public class MyResumeActivity extends ABaseActivity<IMyResumeView,MyResumePresen
         civHead = hv.findViewById(R.id.civ_head);
         tvName = hv.findViewById(R.id.tv_name);
         ivSex = hv.findViewById(R.id.iv_sex);
+        tvTags = hv.findViewById(R.id.tv_tags);
+        tfTags = hv.findViewById(R.id.tagflow);
         //应聘职位信息
         llPositionAdd = hv.findViewById(R.id.linear_positionAdd);
         llPosition = hv.findViewById(R.id.linear_position);
@@ -298,6 +302,7 @@ public class MyResumeActivity extends ABaseActivity<IMyResumeView,MyResumePresen
         hv.findViewById(R.id.linear_info).setOnClickListener(this);
         hv.findViewById(R.id.linear_uploadResume).setOnClickListener(this);
         hv.findViewById(R.id.linear_uploadWorks).setOnClickListener(this);
+        hv.findViewById(R.id.tv_tagsAdd).setOnClickListener(this);
         hv.findViewById(R.id.linear_experienceAdd).setOnClickListener(this);
     }
 
@@ -322,15 +327,10 @@ public class MyResumeActivity extends ABaseActivity<IMyResumeView,MyResumePresen
      * IMyResumeView
      */
     @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
-    @Override
     public void onRequestSuccess(ResumeInfoData tData) {
         resumeInfoData = tData;
         //头像(根据性别显示对应头像图片)
-        if (tData.getPicture()==null||tData.getPicture().equals("")){
+        if (TextUtils.isEmpty(tData.getPicture())){
             if (tData.getSex().equals("1")){
                 civHead.setImageResource(R.drawable.img_head_man);
             }else if (tData.getSex().equals("2")){
@@ -342,8 +342,8 @@ public class MyResumeActivity extends ABaseActivity<IMyResumeView,MyResumePresen
             GlideUtil.loadImage(tData.getPicture(),R.drawable.img_mine_head,civHead);
         }
         //名字
-        if (tData.getName()==null||tData.getName().equals("")){
-            tvName.setText(getUserInfo().getPhone());
+        if (TextUtils.isEmpty(tData.getName())){
+            tvName.setText(MyUtils.setPhone(getUserInfo().getPhone()));
         }else {
             tvName.setText(tData.getName());
         }
@@ -354,6 +354,15 @@ public class MyResumeActivity extends ABaseActivity<IMyResumeView,MyResumePresen
             ivSex.setImageResource(R.drawable.ic_sex_women);
         }else {
             ivSex.setVisibility(View.GONE);
+        }
+        //个人标签
+        if (tData.getTags().size()==0){
+            tvTags.setVisibility(View.VISIBLE);
+            tfTags.setVisibility(View.GONE);
+        }else {
+            tvTags.setVisibility(View.GONE);
+            tfTags.setVisibility(View.VISIBLE);
+            initFlowLayout();
         }
         //职位
         ConditionBean tow = tData.getTow();
@@ -385,7 +394,11 @@ public class MyResumeActivity extends ABaseActivity<IMyResumeView,MyResumePresen
             //平台
             tvPlatform.setText(tData.getBgap().getName());
             //工作经验
-            tvExperience.setText(tData.getWorking_years().getName());
+            String workYears = tData.getWorking_years().getName();
+            if (workYears.equals("未设置")){
+                workYears="无经验";
+            }
+            tvExperience.setText(workYears);
             //薪资
             tvSalary.setText(tData.getMonthly_money()+"元/月");
             //美工-风格、客服-打字速度
@@ -418,14 +431,14 @@ public class MyResumeActivity extends ABaseActivity<IMyResumeView,MyResumePresen
     }
     @Override
     public void onRequestFailure(String result) {
-         ToastUtil.myToast(result);
+        ToastUtil.myToast(result);
         finish();
     }
     @Override//修改找工作状态
     public void onChangeHuntingResult(boolean isSuccess, String result) {
         tvOpen.setEnabled(true);
         tvClose.setEnabled(true);
-         ToastUtil.myToast(result);
+        ToastUtil.myToast(result);
         if (isSuccess){
             isOpen = !isOpen;
             setHuntingState(isOpen);
@@ -446,6 +459,32 @@ public class MyResumeActivity extends ABaseActivity<IMyResumeView,MyResumePresen
             tvOpen.setBackground(null);
             tvClose.setBackground(getResources().getDrawable(R.drawable.shape_buttom_ffb321_38));
         }
+    }
+
+    /**
+     * 初始化流式布局
+     */
+    private void initFlowLayout() {
+        //tag赋值
+        TagAdapter<String> tagAdapter = new TagAdapter<String>(resumeInfoData.getTags()) {
+            @Override
+            public View getView(FlowLayout parent, int position, String s) {
+                TextView tv = (TextView) getLayoutInflater().inflate(R.layout.item_flowlayout_resumetags,
+                        tfTags, false);
+                tv.setTextSize(13);
+                tv.setText(s);
+                return tv;
+            }
+        };
+        tfTags.setAdapter(tagAdapter);
+        //tag点击事件
+        tfTags.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+            @Override
+            public boolean onTagClick(View view, int position, FlowLayout parent) {
+                startTagsActivity(position);
+                return true;
+            }
+        });
     }
 
     @Override

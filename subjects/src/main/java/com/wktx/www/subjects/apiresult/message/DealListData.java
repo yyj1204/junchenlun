@@ -10,7 +10,7 @@ import java.util.List;
  * "ret": 200,"msg": "",
  * "data": {
  *         "code":0,"msg":"",
- *         "info": [ "id": "8","hire_id": "232","amount": "4000.00","add_time": "2018-05-17 16:38:34","remark": "支付薪资"]
+ *         "info": [ "id": "8","hire_id": "232","amount": "4000.00","add_time": "2018-05-17 16:38:34","remark": "支付薪资", "nickname": "阿饭","tow": "客服"]
  *         }
  * }
  */

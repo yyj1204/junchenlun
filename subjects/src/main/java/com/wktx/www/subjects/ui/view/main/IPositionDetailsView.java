@@ -1,5 +1,5 @@
 package com.wktx.www.subjects.ui.view.main;
-import com.wktx.www.subjects.apiresult.main.PositionDetailsInfoData;
+import com.wktx.www.subjects.apiresult.main.demand.DemandDetailsInfoData;
 import com.wktx.www.subjects.ui.view.IView;
 
 /**
@@ -7,7 +7,7 @@ import com.wktx.www.subjects.ui.view.IView;
  * 职位详情
  */
 
-public interface IPositionDetailsView extends IView<PositionDetailsInfoData> {
+public interface IPositionDetailsView extends IView<DemandDetailsInfoData> {
 
     /**
      * 获取取消、收藏是否成功的回调

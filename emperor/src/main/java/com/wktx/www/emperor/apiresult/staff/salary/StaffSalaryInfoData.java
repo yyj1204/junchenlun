@@ -5,66 +5,57 @@ import java.util.List;
 /**
  * Created by yyj on 2018/3/21.
  * 我的员工---管理员工---员工工资内容
- * "total_expenditure": "0.01","trusteeship_amount": "0.01","already_amount": "0.00",
- * "trusteeship_list": [{"start_time": "1521388800","end_time": "1524067199","trusteeship_wages": "0.01"}],
- * "already_hair": [{"paid_time": "1519920000","amount": "3500.00"}]
+ * hire_price : 3.00
+ * trusteeship_wages : 0.00
+ * paid_wages : 0.00
+ * payList : [{"id":"40","amount":"1.00","add_time":"2018-06-26 17:10:18","remark":"同意解雇申请，雇主支付薪资"}]
  */
 
 public class StaffSalaryInfoData {
-    private String total_expenditure;//累计支出总额
-    private String trusteeship_amount;//托管金额
-    private String already_amount;//已发工资
-    private List<SalaryTrusteeshipBean> trusteeship_list;//托管的工资列表
-    private List<SalaryPayBean> already_hire;//支付薪资记录列表
+    private String hire_price;//雇佣薪资总额
+    private String trusteeship_wages;//托管工资
+    private String paid_wages;//已发工资
+    private List<SalaryPayBean> payList;//薪资发放记录列表
 
-    public String getTotal_expenditure() {
-        return total_expenditure;
+    public String getHire_price() {
+        return hire_price;
     }
 
-    public void setTotal_expenditure(String total_expenditure) {
-        this.total_expenditure = total_expenditure;
+    public void setHire_price(String hire_price) {
+        this.hire_price = hire_price;
     }
 
-    public String getTrusteeship_amount() {
-        return trusteeship_amount;
+    public String getTrusteeship_wages() {
+        return trusteeship_wages;
     }
 
-    public void setTrusteeship_amount(String trusteeship_amount) {
-        this.trusteeship_amount = trusteeship_amount;
+    public void setTrusteeship_wages(String trusteeship_wages) {
+        this.trusteeship_wages = trusteeship_wages;
     }
 
-    public String getAlready_amount() {
-        return already_amount;
+    public String getPaid_wages() {
+        return paid_wages;
     }
 
-    public void setAlready_amount(String already_amount) {
-        this.already_amount = already_amount;
+    public void setPaid_wages(String paid_wages) {
+        this.paid_wages = paid_wages;
     }
 
-    public List<SalaryTrusteeshipBean> getTrusteeship_list() {
-        return trusteeship_list;
+    public List<SalaryPayBean> getPayList() {
+        return payList;
     }
 
-    public void setTrusteeship_list(List<SalaryTrusteeshipBean> trusteeship_list) {
-        this.trusteeship_list = trusteeship_list;
-    }
-
-    public List<SalaryPayBean> getAlready_hire() {
-        return already_hire;
-    }
-
-    public void setAlready_hire(List<SalaryPayBean> already_hire) {
-        this.already_hire = already_hire;
+    public void setPayList(List<SalaryPayBean> payList) {
+        this.payList = payList;
     }
 
     @Override
     public String toString() {
         return "StaffSalaryInfoData{" +
-                "total_expenditure='" + total_expenditure + '\'' +
-                ", trusteeship_amount='" + trusteeship_amount + '\'' +
-                ", already_amount='" + already_amount + '\'' +
-                ", trusteeship_list=" + trusteeship_list +
-                ", already_hire=" + already_hire +
+                "hire_price='" + hire_price + '\'' +
+                ", trusteeship_wages='" + trusteeship_wages + '\'' +
+                ", paid_wages='" + paid_wages + '\'' +
+                ", payList=" + payList +
                 '}';
     }
 }

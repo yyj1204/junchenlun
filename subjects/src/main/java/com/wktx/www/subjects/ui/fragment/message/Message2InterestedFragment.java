@@ -15,7 +15,7 @@ import com.wktx.www.subjects.apiresult.login.AccountInfoData;
 import com.wktx.www.subjects.apiresult.message.InterestedListInfoData;
 import com.wktx.www.subjects.basemvp.ALazyLoadBaseFragment;
 import com.wktx.www.subjects.presenter.message.InterestedPresenter;
-import com.wktx.www.subjects.ui.activity.message.CompanyRecruitActivity;
+import com.wktx.www.subjects.ui.activity.message.CompanyDemandActivity;
 import com.wktx.www.subjects.ui.adapter.message.InterestedAdapter;
 import com.wktx.www.subjects.ui.view.IView;
 import com.wktx.www.subjects.utils.ConstantUtil;
@@ -126,7 +126,7 @@ public class Message2InterestedFragment extends ALazyLoadBaseFragment<IView,Inte
                     return;
                 }
                 //打开公司招聘列表界面
-                Intent intent = new Intent(getActivity(), CompanyRecruitActivity.class);
+                Intent intent = new Intent(getActivity(), CompanyDemandActivity.class);
                 intent.putExtra(ConstantUtil.KEY_DATA,mAdapter.getData().get(position).getCompany_id());
                 startActivity(intent);
             }

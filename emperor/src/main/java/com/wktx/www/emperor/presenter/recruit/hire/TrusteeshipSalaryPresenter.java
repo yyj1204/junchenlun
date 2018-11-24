@@ -30,7 +30,7 @@ public class TrusteeshipSalaryPresenter extends ABasePresenter<ITrusteeshipSalar
     //取消雇佣订单
     public void onCancelOrders(){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("id", getmMvpView().getHireId());
 
@@ -48,6 +48,8 @@ public class TrusteeshipSalaryPresenter extends ABasePresenter<ITrusteeshipSalar
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onCancelOrdersResult(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onCancelOrdersResult(false,e.getMessage());
                                 }
@@ -73,7 +75,7 @@ public class TrusteeshipSalaryPresenter extends ABasePresenter<ITrusteeshipSalar
     //获取支付订单信息
     public void getHireOrdersInfo(){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("hire_id", getmMvpView().getHireId());
 
@@ -91,6 +93,8 @@ public class TrusteeshipSalaryPresenter extends ABasePresenter<ITrusteeshipSalar
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }
@@ -117,7 +121,7 @@ public class TrusteeshipSalaryPresenter extends ABasePresenter<ITrusteeshipSalar
     //获取支付宝支付订单号金额
     public void getAliPayInfo(){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("hire_id", getmMvpView().getHireId());
         httpParams.put("pay_method", "alipay");//支付方式
@@ -136,6 +140,8 @@ public class TrusteeshipSalaryPresenter extends ABasePresenter<ITrusteeshipSalar
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onAlipayResult(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onAlipayResult(false,e.getMessage());
                                 }
@@ -162,7 +168,7 @@ public class TrusteeshipSalaryPresenter extends ABasePresenter<ITrusteeshipSalar
     //获取微信支付订单号金额
     public void getWeChatPayInfo(){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("hire_id", getmMvpView().getHireId());
         httpParams.put("pay_method", "wxpay");//支付方式
@@ -181,6 +187,8 @@ public class TrusteeshipSalaryPresenter extends ABasePresenter<ITrusteeshipSalar
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onWechatFailureResult(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onWechatFailureResult(e.getMessage());
                                 }
@@ -206,7 +214,7 @@ public class TrusteeshipSalaryPresenter extends ABasePresenter<ITrusteeshipSalar
     //余额支付
     public void onBalancePay(){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("hire_id", getmMvpView().getHireId());
         httpParams.put("pay_method", "usermoneypay");//支付方式
@@ -226,6 +234,8 @@ public class TrusteeshipSalaryPresenter extends ABasePresenter<ITrusteeshipSalar
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onBanlancePayResult(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onBanlancePayResult(false,e.getMessage());
                                 }

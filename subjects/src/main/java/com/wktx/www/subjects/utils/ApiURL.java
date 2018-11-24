@@ -13,10 +13,11 @@ public class ApiURL {
      *  API的全局URL
      */
 //    public static final String GLOBAL_URL = "http://cts.jcl.55085.cn";
+//    public static final String GLOBAL_URL_JZ = "http://api.jcl.55085.cn";
     //臣民端api
     public static final String GLOBAL_URL = "http://cts.junchenlun.com";
     //君主端api
-    public static final String GLOBAL_URL1 = "http://api.junchenlun.com";
+    public static final String GLOBAL_URL_JZ = "http://api.junchenlun.com";
 
     /**
      *共同部分URL
@@ -29,7 +30,7 @@ public class ApiURL {
     public static final String PARAMS_KEY = "service";
 
     //协议说明展示接口
-    public static final String URL_EXPLAIN ="http://cts.jcl.55085.cn/api/index.php?service=Exhibition.Index&ename=";
+    public static final String URL_EXPLAIN ="http://cts.junchenlun.com/api/index.php?service=Exhibition.Index&ename=";
 
     /**
      * 用户管理
@@ -44,8 +45,6 @@ public class ApiURL {
     public static final String PARAMS_LOGOUT = "User_User_Info.Logout";
     //忘记密码
     public static final String PARAMS_FORGET_PWD = "User_User_Info.ForgetPassword";
-    //修改登录密码
-    public static final String PARAMS_EDIT_PWD = "User_User_Info.EditUserPassword";
 
 
     /**
@@ -77,12 +76,28 @@ public class ApiURL {
     public static final String PARAMS_WORK_LIST = "Work.GetMyWorkList";
     //我的工作详情
     public static final String PARAMS_WORK_INFO = "Work.GetMyWorkInfo";
+    //请假
+    public static final String PARAMS_WORK_LEAVE = "Work.Leave";
+    //上传请假图片Base64
+    public static final String PARAMS_LEAVE_BASE64 = "Upload.UploadleaveSales";
+    //请假记录
+    public static final String PARAMS_WORK_LEAVELIST = "Work.LeaveList";
+    //我的绩效考核详情
+    public static final String PARAMS_MANAGE_KPI = "Work.GetStaffInfo";
+    //公司店铺列表
+    public static final String PARAMS_COMPANY_STORELIST = "Work.CompanyShopList";
     //公司解雇详情
     public static final String PARAMS_FIRE_INFO = "Work.GetDismissalInfo";
     //接受公司解雇
     public static final String PARAMS_FIRE_ACCEPT = "Work.ReceiveDismissal";
     //拒绝公司解雇
     public static final String PARAMS_FIRE_REFUSE = "Work.RefuseDismissal";
+    //申请介入公司解雇
+    public static final String PARAMS_FIRE_APPLY = "Work.ServiceIntervene";
+    //公司暂停工作详情
+    public static final String PARAMS_PAUSE_INFO = "Work.SuspendWorkInfo";
+    //公司投诉详情
+    public static final String PARAMS_COMPLAINT_INFO = "Work.ComplaintInfo";
     //获取工作安排的工作报告列表
     public static final String PARAMS_REPORT_LIST = "Work.GetArrangementWorkReportList";
     //获取工作报告详情
@@ -116,7 +131,7 @@ public class ApiURL {
     //对我感兴趣公司列表
     public static final String PARAMS_INTERESTED_LIST = "Company.GetBeInterestedInMeList";
     //公司招聘列表
-    public static final String PARAMS_COMPANYRECRUIT_LIST = "Company.GetDemandList";
+    public static final String PARAMS_COMPANY_DEMANDLIST = "Company.GetDemandList";
     //公司邀请列表
     public static final String PARAMS_INVITE_LIST = "Work.GetCompanyInvite";
     //公司邀请详情
@@ -139,14 +154,10 @@ public class ApiURL {
     public static final String PARAMS_PERSON_EDITINFO = "Resume.EditPersonalInfo";
     //个人信息参数(学历)
     public static final String PARAMS_PERSON_CONDITION = "Center.GetEditUserCondition";
-    //账户认证（个人）
+    //账户认证（个人&工作室）
     public static final String PARAMS_CERTIFICATION = "Center.IdentityAuthent";
-    //编辑认证信息
-    public static final String PARAMS_CERTIFICATION_EDITINFO = "Center.EditPersonalAuthent";
-    //账户认证（个人）信息
-    public static final String PARAMS_CERTIFICATION_INFO = "Center.GetPersonalAuthent";
-    //上传认证图片Base64(身份证)
-    public static final String PARAMS_CERTIFICATION_BASE64 = "Upload.UploadIdentityAuthent";
+    //账户认证详情（个人&工作室）
+    public static final String PARAMS_CERTIFICATION_INFO = "Center.AuthentInfo";
     //上传简历相关图片（作品，个性简历）Base64
     public static final String PARAMS_RESUME_BASE64 = "Upload.UploadResume";
     //上传头像图片Base64
@@ -165,6 +176,8 @@ public class ApiURL {
     public static final String PARAMS_RESUME_JOBHUNTING = "Resume.IsJobHunting";
     //编辑工作经历(增删改)
     public static final String PARAMS_RESUME_EXPERIENCE = "Resume.EditWorkExp";
+    //添加标签
+    public static final String PARAMS_RESUME_TAGS = "Resume.EditTags";
     //我的作品列表
     public static final String PARAMS_WORKS_LIST = "Works.GetWorksList";
     //我的作品参数（类目、设计模式）
@@ -175,17 +188,43 @@ public class ApiURL {
     public static final String PARAMS_WORKS_EDITINFO = "Works.EditWorks";
     //删除作品
     public static final String PARAMS_WORKS_DELETE = "Works.DeleteWorks";
+    //浏览记录
+    public static final String PARAMS_BROWSING_RECORD = "Center.GetMyBrowseRecords";
     //我的收藏
     public static final String PARAMS_COLLECT_LIST = "DemandCollect.GetDemandCollectList";
     //面试记录
     public static final String PARAMS_INTERVIEW_LIST = "Interview.GetInterviewList";
+    //雇佣记录
+    public static final String PARAMS_HIRE_LIST = "Center.GetHireRecord";
     //交易记录
-    public static final String PARAMS_TRADING_LIST = "TradingRecord.GetTradingRecordList";
-    //交易记录-账户余额与托管资金
-    public static final String PARAMS_TRADING_INFO = "TradingRecord.GetAccount";
-    //联系客服信息（与君主端一样）
+    public static final String PARAMS_TRADING_LIST = "TradingRecord.TransactionRecord";
+    //修改登录密码
+    public static final String PARAMS_EDIT_PWD = "User_User_Info.EditUserPassword";
+    //修改支付密码
+    public static final String PARAMS_EDIT_PAYPWD = "User_User_Info.EditPayPassword";
+    //修改手机号码
+    public static final String PARAMS_EDIT_PHONE = "Center.EditPhone";
+    //给客服留言
+    public static final String PARAMS_CONTACT_MESSAGE = "Center.LeaveWord";
+
+
+    /**
+     * 使用君主端API接口
+     */
+    //支付宝认证
+    public static final String PARAMS_ALIPAY_AUTHENT = "Center.AlipayAuthent";
+    //支付宝认证详情
+    public static final String PARAMS_ALIPAY_AUTHENT_INFO = "Center.AlipayAuthentInfo";
+    //钱包提现
+    public static final String PARAMS_PURSE_WITHDRAW = "Center.Withdraw";
+    //钱包提现记录
+    public static final String PARAMS_WITHDRAW_LIST = "Center.WithdrawList";
+    //钱包充值
+    public static final String PARAMS_PURSE_RECHARGE = "Center.WalletRecharge";
+    //联系客服信息
     public static final String PARAMS_CONTACT_SERVICE = "Center.GetCustomerServiceInfo";
 
 
-    //获取文章、查看任务、修改支付密码、修改用户、店铺信息、用户信息（5个）不需要
+    //获取文章、查看任务、修改用户、店铺信息、用户信息（5个）不需要
+
 }

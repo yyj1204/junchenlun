@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.recruit.hire.HireInfoData;
 import com.wktx.www.emperor.apiresult.recruit.resume.ResumeInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
@@ -25,7 +24,6 @@ import com.wktx.www.emperor.utils.ArithUtil;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.DateUtil;
 import com.wktx.www.emperor.utils.GlideUtil;
-import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.recruit.hire.IHireView;
 import com.wktx.www.emperor.utils.ToastUtil;
@@ -202,28 +200,23 @@ public class HireActivity extends ABaseActivity<IHireView,HirePresenter> impleme
                 }
 
                 //判断输入框格式
-                if (isService){//客服类型
-                    if (TextUtils.isEmpty(getPushMoney())){
-                        ToastUtil.myToast("请输入约定好的业绩分成！");
-                        etPushMoney.requestFocus();
+                if (isCustom){
+                    //如果开始日期大于结束日期，需要重新选择开始日期
+                    if (beginDateLong > endDateLong ){
+                        ToastUtil.myToast("项目开始时间需在结束时间之前!");
+                        pickDate(tvBeginTime,true,"选择项目开始时间");
                         return;
-                    }
-                }else {//其他职位类型
-                    if (isCustom){
-                        //如果开始日期大于结束日期，需要重新选择开始日期
-                        if (beginDateLong > endDateLong ){
-                            ToastUtil.myToast("项目开始时间需在结束时间之前!");
-                            pickDate(tvBeginTime,true,"选择项目开始时间");
-                            return;
-                        }else if (TextUtils.isEmpty(getcustomPrice())){
-                            ToastUtil.myToast("请输入定制价格！");
-                            etCustomPrice.requestFocus();
-                            return;
-                        }
+                    }else if (TextUtils.isEmpty(getcustomPrice())){
+                        ToastUtil.myToast("请输入定制价格！");
+                        etCustomPrice.requestFocus();
+                        return;
                     }
                 }
 
-                if (TextUtils.isEmpty(getDemandContent())){
+                if (TextUtils.isEmpty(getPushMoney())){
+                    ToastUtil.myToast("请输入约定好的业绩分成！");
+                    etPushMoney.requestFocus();
+                }else if (TextUtils.isEmpty(getDemandContent())) {
                     ToastUtil.myToast("请输入需求内容！");
                     etDemand.requestFocus();
                 }else if (TextUtils.isEmpty(getQQNumber())){
@@ -256,8 +249,10 @@ public class HireActivity extends ABaseActivity<IHireView,HirePresenter> impleme
         return new HirePresenter();
     }
 
+    /**
+     * 接收 ResumeActivity 传递过来的员工简历信息
+     */
     private void initData() {
-        //接收 ResumeActivity 传递过来的员工简历信息
         resumeInfoData = (ResumeInfoData) getIntent().getSerializableExtra(ConstantUtil.KEY_DATA);
         //月薪
         salaryStr = resumeInfoData.getMonthly_money();
@@ -265,7 +260,7 @@ public class HireActivity extends ABaseActivity<IHireView,HirePresenter> impleme
 
     private void initUI() {
         //头像
-        if (resumeInfoData.getPicture()==null||resumeInfoData.getPicture().equals("")){
+        if (TextUtils.isEmpty(resumeInfoData.getPicture())){
             if (resumeInfoData.getSex().equals("1")){
                 ivHead.setImageResource(R.drawable.img_head_man);
             }else if (resumeInfoData.getSex().equals("2")){
@@ -308,7 +303,6 @@ public class HireActivity extends ABaseActivity<IHireView,HirePresenter> impleme
             llhireWay2.setVisibility(View.VISIBLE);
             llEndTime.setVisibility(View.GONE);
             llCustomPrice.setVisibility(View.GONE);
-            llPushMoney.setVisibility(View.VISIBLE);
         }else {//其他
             isService=false;
             tvWayMonth.setSelected(true);
@@ -317,7 +311,6 @@ public class HireActivity extends ABaseActivity<IHireView,HirePresenter> impleme
             llhireWay2.setVisibility(View.GONE);
             llEndTime.setVisibility(View.GONE);
             llCustomPrice.setVisibility(View.GONE);
-            llPushMoney.setVisibility(View.GONE);
         }
     }
 
@@ -457,11 +450,6 @@ public class HireActivity extends ABaseActivity<IHireView,HirePresenter> impleme
     /**
      * IHireView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
     //雇佣方式
     @Override
     public String getHireWay() {

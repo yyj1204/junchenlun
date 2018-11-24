@@ -29,6 +29,11 @@ public interface IDemandReleaseView extends IView<DemandReleaseConditionInfoData
     String getDemandBudget();
 
     /**
+     * 获取截止时间
+     */
+    String getEndTime();
+
+    /**
      * 获取店铺检索成功的回调
      */
     void onGetStoreConditionSuccessResult(List<StoreListInfoData> result);

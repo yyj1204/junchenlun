@@ -7,7 +7,7 @@ import java.util.List;
  *"id":"1","tow":"1","name":"胡图图","picture":"","highest_education":"本科","working_years":"一年","sex":"2",
  *"date_of_birth":"1992.05","residential_city":"浙江-杭州","character_introduction":"脾气好、只做一家","resume_content":"",
  *"monthly_money":"3500.00","wechat":"","qq":"","phone":"0","typing_speed": "0字/分","bgat":"服装内衣/母婴玩具/精品鞋包",
- *"bgas":"日韩小清新/中国风/时尚简约","tow_name": "美工",,"is_job_hunting":"1"
+ *"bgas":"日韩小清新/中国风/时尚简约","tow_name": "美工",,"is_job_hunting":"1","tags": [],
  *"work_experience":[{"work_date":{"start_date":"2014/07","end_date":"2016/08"},"company":"福建网客天下科技有限公司",
  *                "bgat":"服装内衣","position":"视觉传达设计师","introduction":"负责整个店铺页面装修，活动页面制作，商品详情"}]
  */
@@ -29,10 +29,12 @@ public class ResumePreviewInfoData {
     private String wechat;
     private String qq;
     private String phone;
+    private String bgap;//擅长平台
     private String bgat;//擅长类目
     private String bgas;//擅长风格
     private String typing_speed;//打字速度
     private String is_job_hunting;//找工作中 0:否 1:是
+    private List<String> tags;//个人标签
     private List<WorkExperienceBean> work_experience;//工作经历
 
     public String getId() {
@@ -131,6 +133,15 @@ public class ResumePreviewInfoData {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public String getBgap() {
+        return bgap;
+    }
+
+    public void setBgap(String bgap) {
+        this.bgap = bgap;
+    }
+
     public String getBgat() {
         return bgat;
     }
@@ -160,6 +171,14 @@ public class ResumePreviewInfoData {
         this.is_job_hunting = is_job_hunting;
     }
 
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
     public List<WorkExperienceBean> getWork_experience() {
         return work_experience;
     }
@@ -187,10 +206,12 @@ public class ResumePreviewInfoData {
                 ", wechat='" + wechat + '\'' +
                 ", qq='" + qq + '\'' +
                 ", phone='" + phone + '\'' +
+                ", bgap='" + bgap + '\'' +
                 ", bgat='" + bgat + '\'' +
                 ", bgas='" + bgas + '\'' +
                 ", typing_speed='" + typing_speed + '\'' +
                 ", is_job_hunting='" + is_job_hunting + '\'' +
+                ", tags='" + tags + '\'' +
                 ", work_experience=" + work_experience +
                 '}';
     }

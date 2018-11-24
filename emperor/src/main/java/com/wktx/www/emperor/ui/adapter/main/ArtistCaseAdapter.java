@@ -1,5 +1,6 @@
 package com.wktx.www.emperor.ui.adapter.main;
 import android.content.Context;
+import android.text.TextUtils;
 import android.widget.ImageView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -16,7 +17,7 @@ public class ArtistCaseAdapter extends BaseQuickAdapter<WorksListInfoData, BaseV
     private Context mContext;
 
     public ArtistCaseAdapter(Context context) {
-        super(R.layout.item_rv_artistcase, null);
+        super(R.layout.item_rv_cases, null);
         this.mContext = context;
     }
 
@@ -24,7 +25,7 @@ public class ArtistCaseAdapter extends BaseQuickAdapter<WorksListInfoData, BaseV
     protected void convert(BaseViewHolder helper, WorksListInfoData item) {
         helper.setText(R.id.tv_worksTitle,item.getTitle());
         ImageView ivWorksImage = helper.getView(R.id.iv_worksImage);
-        if (item.getImage()==null||item.getImage().equals("")){
+        if (TextUtils.isEmpty(item.getImage())){
             ivWorksImage.setImageResource(R.drawable.img_load_error);
         }else {
             GlideUtil.loadImage(item.getImage(),R.drawable.img_loading,ivWorksImage);

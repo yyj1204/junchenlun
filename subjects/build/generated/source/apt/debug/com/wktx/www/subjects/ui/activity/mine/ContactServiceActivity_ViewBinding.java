@@ -4,6 +4,8 @@ package com.wktx.www.subjects.ui.activity.mine;
 import android.support.annotation.CallSuper;
 import android.support.annotation.UiThread;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import butterknife.Unbinder;
 import butterknife.internal.DebouncingOnClickListener;
@@ -15,11 +17,13 @@ import java.lang.Override;
 public class ContactServiceActivity_ViewBinding implements Unbinder {
   private ContactServiceActivity target;
 
-  private View view2131231164;
+  private View view2131689665;
 
-  private View view2131230937;
+  private View view2131689766;
 
-  private View view2131230978;
+  private View view2131689693;
+
+  private View view2131689696;
 
   @UiThread
   public ContactServiceActivity_ViewBinding(ContactServiceActivity target) {
@@ -36,8 +40,19 @@ public class ContactServiceActivity_ViewBinding implements Unbinder {
     target.tvServiceTime1 = Utils.findRequiredViewAsType(source, R.id.tv_serviceTime1, "field 'tvServiceTime1'", TextView.class);
     target.tvPhoneNumber = Utils.findRequiredViewAsType(source, R.id.tv_phoneNumber, "field 'tvPhoneNumber'", TextView.class);
     target.tvServiceTime2 = Utils.findRequiredViewAsType(source, R.id.tv_serviceTime2, "field 'tvServiceTime2'", TextView.class);
+    target.etMessageContent = Utils.findRequiredViewAsType(source, R.id.et_messageContent, "field 'etMessageContent'", EditText.class);
+    target.etContactWay = Utils.findRequiredViewAsType(source, R.id.et_contactWay, "field 'etContactWay'", EditText.class);
+    view = Utils.findRequiredView(source, R.id.bt_sure, "field 'btSure' and method 'MyOnclick'");
+    target.btSure = Utils.castView(view, R.id.bt_sure, "field 'btSure'", Button.class);
+    view2131689665 = view;
+    view.setOnClickListener(new DebouncingOnClickListener() {
+      @Override
+      public void doClick(View p0) {
+        target.MyOnclick(p0);
+      }
+    });
     view = Utils.findRequiredView(source, R.id.tb_IvReturn, "method 'MyOnclick'");
-    view2131231164 = view;
+    view2131689766 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -45,7 +60,7 @@ public class ContactServiceActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.linear_QQ, "method 'MyOnclick'");
-    view2131230937 = view;
+    view2131689693 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -53,7 +68,7 @@ public class ContactServiceActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.linear_phone, "method 'MyOnclick'");
-    view2131230978 = view;
+    view2131689696 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -74,12 +89,17 @@ public class ContactServiceActivity_ViewBinding implements Unbinder {
     target.tvServiceTime1 = null;
     target.tvPhoneNumber = null;
     target.tvServiceTime2 = null;
+    target.etMessageContent = null;
+    target.etContactWay = null;
+    target.btSure = null;
 
-    view2131231164.setOnClickListener(null);
-    view2131231164 = null;
-    view2131230937.setOnClickListener(null);
-    view2131230937 = null;
-    view2131230978.setOnClickListener(null);
-    view2131230978 = null;
+    view2131689665.setOnClickListener(null);
+    view2131689665 = null;
+    view2131689766.setOnClickListener(null);
+    view2131689766 = null;
+    view2131689693.setOnClickListener(null);
+    view2131689693 = null;
+    view2131689696.setOnClickListener(null);
+    view2131689696 = null;
   }
 }

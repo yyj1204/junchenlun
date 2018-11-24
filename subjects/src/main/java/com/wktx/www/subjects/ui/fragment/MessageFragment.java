@@ -23,7 +23,6 @@ import com.wktx.www.subjects.ui.fragment.message.Message1EvaluateFragment;
 import com.wktx.www.subjects.ui.fragment.message.Message1TaskFragment;
 import com.wktx.www.subjects.ui.fragment.message.Message2InterestedFragment;
 import com.wktx.www.subjects.ui.fragment.message.Message2InviteFragment;
-import com.wktx.www.subjects.utils.LogUtil;
 import com.wktx.www.subjects.utils.LoginUtil;
 
 import butterknife.BindView;
@@ -110,7 +109,6 @@ public class MessageFragment extends ALazyLoadFragment{
     @Override
     public void onResume() {
         super.onResume();
-        LogUtil.error("刷新===","isWork=="+isWork);
         setTitle(isWork);
         if (getUserInfo()!=null){
             initSmartVp();
@@ -128,12 +126,10 @@ public class MessageFragment extends ALazyLoadFragment{
     protected void onFragmentVisibleChange(boolean isVisible) {
         if (isVisible){
             if (!isFirstVisible){
-                LogUtil.error("可见===","isWork=="+isWork);
                 setTitle(isWork);
             }
         }else {
             isFirstVisible=false;
-            LogUtil.error("不可见===","isWork=="+isWork);
         }
     }
 
@@ -145,7 +141,6 @@ public class MessageFragment extends ALazyLoadFragment{
     @Override
     protected void onFragmentFirstVisible() {
         isFirstVisible=true;
-        LogUtil.error("第一次创建===","isWork=="+isWork);
         setTitle(isWork);
     }
 

@@ -3,9 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/color_f0f0f0"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/px_20">
 
-    <com.zhy.autolayout.AutoRelativeLayout
+    <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_ffffff"
@@ -17,70 +18,92 @@
             android:layout_width="@dimen/px_118"
             android:layout_height="@dimen/px_118"
             android:src="@drawable/img_mine_head"
-            android:layout_marginTop="@dimen/px_30"
-            android:layout_marginBottom="@dimen/px_30"/>
+            android:layout_gravity="center"/>
+
         <com.zhy.autolayout.AutoLinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/px_20"
-            android:layout_toRightOf="@+id/iv_head"
+            android:layout_marginLeft="@dimen/px_16"
             android:orientation="vertical"
-            android:layout_centerVertical="true">
-         <TextView
-             android:id="@+id/tv_bossName"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="姓名"
-             android:textColor="@color/color_000000"
-             android:textSize="@dimen/sp_15"
-             android:textStyle="bold"/>
+            android:paddingTop="@dimen/px_30"
+            android:paddingBottom="@dimen/px_30">
+            <TextView
+                android:id="@+id/tv_bossName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="姓名"
+                android:singleLine="true"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_15"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_hireTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/px_10"
+                android:drawableLeft="@drawable/ic_manage_time"
+                android:drawablePadding="@dimen/px_12"
+                android:singleLine="true"
+                android:text="开始时间 - 结束时间"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_13" />
 
             <com.zhy.autolayout.AutoLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/px_20"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="@dimen/px_30"
-                    android:layout_height="@dimen/px_26"
-                    android:src="@drawable/ic_manage_time" />
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/px_10">
                 <TextView
-                    android:id="@+id/tv_hireTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="开始时间 - 结束时间"
-                    android:layout_marginLeft="@dimen/px_12"
+                    android:text="工作类型："
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/sp_12" />
+                <TextView
+                    android:id="@+id/tv_position"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:singleLine="true"
                     android:textColor="@color/color_000000"
-                    android:textSize="@dimen/sp_13" />
-                <TextView
-                    android:id="@+id/tv_leave"
-                    android:visibility="gone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/px_12"
-                    android:paddingBottom="@dimen/px_12"
-                    android:paddingLeft="@dimen/px_46"
-                    android:paddingRight="@dimen/px_46"
-                    android:text="请假"
-                    android:textColor="@color/color_ffffff"
-                    android:background="@drawable/selector_submit_selected_10"/>
+                    android:textSize="@dimen/sp_12" />
             </com.zhy.autolayout.AutoLinearLayout>
         </com.zhy.autolayout.AutoLinearLayout>
-        <ImageView
-            android:id="@+id/iv_manage_state"
-            android:layout_width="@dimen/px_84"
-            android:layout_height="@dimen/px_40"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/ic_manage_state1" />
-    </com.zhy.autolayout.AutoRelativeLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="right"
+            android:paddingBottom="@dimen/px_30">
+            <ImageView
+                android:id="@+id/iv_manage_state"
+                android:layout_width="@dimen/px_84"
+                android:layout_height="@dimen/px_40"
+                android:src="@drawable/ic_manage_state1" />
+            <TextView
+                android:id="@+id/tv_leave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/px_20"
+                android:paddingRight="@dimen/px_20"
+                android:paddingTop="@dimen/px_10"
+                android:paddingBottom="@dimen/px_10"
+                android:layout_marginTop="@dimen/px_40"
+                android:text="请假"
+                android:background="@drawable/selector_submit_selected_10"
+                android:textColor="@color/color_ffffff"
+                android:textSize="@dimen/sp_12"/>
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoLinearLayout>
 
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/px_1"
+        android:layout_marginBottom="@dimen/px_20"
         android:background="@color/color_ffffff"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -104,7 +127,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="工资"
+                    android:text="财务(提成)"
                     android:textColor="@color/color_999999"
                     android:textSize="@dimen/sp_13" />
                 <TextView
@@ -112,7 +135,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/px_2"
-                    android:text="0"
+                    android:text="0(0%)"
                     android:singleLine="true"
                     android:textColor="@color/color_000000"
                     android:textSize="@dimen/sp_13" />
@@ -192,8 +215,6 @@
         android:id="@+id/linear_manage_saleroom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/px_20"
-        android:layout_marginTop="@dimen/px_20"
         android:background="@drawable/selector_mine_linearlayout"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -211,6 +232,99 @@
         <ImageView
             android:layout_width="@dimen/px_16"
             android:layout_height="@dimen/px_20"
-            android:src="@drawable/ic_arrow_right_gray" />
+            android:src="@drawable/ic_purse_arrow_right_gray" />
     </com.zhy.autolayout.AutoLinearLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/linear_manage_leavelist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_mine_linearlayout"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/px_1"
+        android:padding="@dimen/px_30">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/title_leave_list"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_13" />
+        <ImageView
+            android:layout_width="@dimen/px_16"
+            android:layout_height="@dimen/px_20"
+            android:src="@drawable/ic_purse_arrow_right_gray" />
+    </com.zhy.autolayout.AutoLinearLayout>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:visibility="gone"
+        android:id="@+id/linear_manage_fire"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_mine_linearlayout"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/px_1"
+        android:padding="@dimen/px_30">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/title_fire_details"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_13" />
+        <ImageView
+            android:layout_width="@dimen/px_16"
+            android:layout_height="@dimen/px_20"
+            android:src="@drawable/ic_purse_arrow_right_gray" />
+    </com.zhy.autolayout.AutoLinearLayout>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:visibility="gone"
+        android:id="@+id/linear_manage_pause"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_mine_linearlayout"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/px_1"
+        android:padding="@dimen/px_30">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/title_pause_details"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_13" />
+        <ImageView
+            android:layout_width="@dimen/px_16"
+            android:layout_height="@dimen/px_20"
+            android:src="@drawable/ic_purse_arrow_right_gray" />
+    </com.zhy.autolayout.AutoLinearLayout>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:visibility="gone"
+        android:id="@+id/linear_manage_complaint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_mine_linearlayout"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/px_1"
+        android:padding="@dimen/px_30">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/title_complaint_details"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_13" />
+        <ImageView
+            android:layout_width="@dimen/px_16"
+            android:layout_height="@dimen/px_20"
+            android:src="@drawable/ic_purse_arrow_right_gray" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
 </com.zhy.autolayout.AutoLinearLayout>

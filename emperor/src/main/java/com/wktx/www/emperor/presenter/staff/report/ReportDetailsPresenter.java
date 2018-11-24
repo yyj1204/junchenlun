@@ -27,7 +27,7 @@ public class ReportDetailsPresenter extends ABasePresenter<IReportDetailsView> {
     //获取工作报告详情
     public void onGetReportInfo(String reportId){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("id", reportId);
 
@@ -44,6 +44,8 @@ public class ReportDetailsPresenter extends ABasePresenter<IReportDetailsView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }
@@ -69,7 +71,7 @@ public class ReportDetailsPresenter extends ABasePresenter<IReportDetailsView> {
     //评价工作报告
     public void onEvaluateReport(String reportId){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("id", reportId);
         httpParams.put("attitude", getmMvpView().getAttitude());
@@ -90,6 +92,8 @@ public class ReportDetailsPresenter extends ABasePresenter<IReportDetailsView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onEvaluateReportResult(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onEvaluateReportResult(false,e.getMessage());
                                 }

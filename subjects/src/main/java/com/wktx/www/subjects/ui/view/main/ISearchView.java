@@ -1,6 +1,6 @@
 package com.wktx.www.subjects.ui.view.main;
 import com.wktx.www.subjects.apiresult.main.CompanyListInfoData;
-import com.wktx.www.subjects.apiresult.main.position.PositionListInfoData;
+import com.wktx.www.subjects.apiresult.main.demand.DemandListInfoData;
 import com.wktx.www.subjects.ui.view.IView;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  * 搜索界面
  */
 
-public interface ISearchView extends IView<List<PositionListInfoData>> {
+public interface ISearchView extends IView<List<DemandListInfoData>> {
 
     /**
      * 获取输入搜索关键字

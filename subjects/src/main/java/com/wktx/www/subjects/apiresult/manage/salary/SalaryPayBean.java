@@ -2,7 +2,7 @@ package com.wktx.www.subjects.apiresult.manage.salary;
 
 /**
  * Created by 369 on 2018/3/21.
- * 支付列表
+ * 薪资发放记录列表
  * id : 40
  * amount : 1.00
  * add_time : 2018-06-26 17:10:18

@@ -1,7 +1,7 @@
 package com.wktx.www.subjects.presenter.main;
 import com.wktx.www.subjects.apiresult.CustomApiResult;
-import com.wktx.www.subjects.apiresult.main.position.BannerData;
-import com.wktx.www.subjects.apiresult.main.position.PositionListData;
+import com.wktx.www.subjects.apiresult.main.demand.BannerData;
+import com.wktx.www.subjects.apiresult.main.demand.DemandListData;
 import com.wktx.www.subjects.apiresult.main.condition.ConditionData;
 import com.wktx.www.subjects.basemvp.ABasePresenter;
 import com.wktx.www.subjects.ui.view.main.IMainView;
@@ -62,7 +62,7 @@ public class MainPresenter extends ABasePresenter<IMainView> {
     public void getBannerInfo(){
         HttpParams httpParams = new HttpParams();
         if (getmMvpView().getUserInfo()!=null){
-            httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+            httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
             httpParams.put("token", getmMvpView().getUserInfo().getToken());
         }
         LogUtil.error("获取轮播图","json==="+httpParams.toString());
@@ -78,6 +78,8 @@ public class MainPresenter extends ABasePresenter<IMainView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onGetBannerFailureResult(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onGetBannerFailureResult(e.getMessage());
                                 }
@@ -106,8 +108,10 @@ public class MainPresenter extends ABasePresenter<IMainView> {
     //获取职位招聘列表
     public void getInfo(int page){
         HttpParams httpParams = new HttpParams();
+        httpParams.put("tow", getmMvpView().getPositionId());
         httpParams.put("bgat", getmMvpView().getCategoryId());
         httpParams.put("bgap", getmMvpView().getPlatformId());
+        httpParams.put("working_years", getmMvpView().getExperienceId());
         if (!getmMvpView().getMinSalary().equals("")){
             httpParams.put("minBudget", getmMvpView().getMinSalary());
         }
@@ -122,8 +126,8 @@ public class MainPresenter extends ABasePresenter<IMainView> {
         EasyHttp.post(ApiURL.COMMON_URL)
                 .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_POSITION_LIST)
                 .params(httpParams)
-                .execute(new CallBackProxy<CustomApiResult<PositionListData>, PositionListData>
-                        (new SimpleCallBack<PositionListData>() {
+                .execute(new CallBackProxy<CustomApiResult<DemandListData>, DemandListData>
+                        (new SimpleCallBack<DemandListData>() {
                             @Override
                             public void onError(ApiException e) {
                                 LogUtil.error("获取职位招聘列表","e=="+e.getMessage());
@@ -135,7 +139,7 @@ public class MainPresenter extends ABasePresenter<IMainView> {
                                 }
                             }
                             @Override
-                            public void onSuccess(PositionListData result) {
+                            public void onSuccess(DemandListData result) {
                                 if (result != null) {
                                     LogUtil.error("获取职位招聘列表","result=="+result.toString());
 

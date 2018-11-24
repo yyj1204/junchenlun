@@ -8,7 +8,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:background="@color/color_f0f0f0"
-    tools:context="com.wktx.www.subjects.ui.activity.manage.ReportDetailsActivity">
+    tools:context="com.wktx.www.subjects.ui.activity.manage.report.ReportDetailsActivity">
 
     <include layout="@layout/include_toolbar_activity" />
 
@@ -153,9 +153,10 @@
                 android:gravity="center_vertical"
                 android:background="@color/color_ffffff">
                 <TextView
+                    android:id="@+id/tv_imgNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="数据表现"
+                    android:text="数据表现（0张）"
                     android:layout_marginBottom="@dimen/px_12"
                     android:textColor="@color/color_000000"
                     android:textSize="@dimen/sp_14"/>
@@ -200,7 +201,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="服务态度"
+                        android:text="工作态度"
                         android:textColor="@color/color_999999"
                         android:textSize="13sp"/>
                     <com.hedgehog.ratingbar.RatingBar
@@ -254,7 +255,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="响应速度"
+                        android:text="工作效率"
                         android:textColor="@color/color_999999"
                         android:textSize="13sp"/>
                     <com.hedgehog.ratingbar.RatingBar
@@ -290,15 +291,13 @@
                     android:textColor="@color/color_000000"/>
                 <TextView
                     android:id="@+id/tv_evaluate"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/px_144"
-                    android:layout_marginTop="@dimen/px_12"
-                    android:layout_marginBottom="@dimen/px_30"
-                    android:textColor="@color/color_000000"
-                    android:lineSpacingExtra="@dimen/px_15"
-                    android:background="@drawable/shape_stroke_cccccc_26"
-                    android:textSize="@dimen/sp_14"
-                    android:gravity="top|left"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/px_20"
+                    android:text="评价留言"
+                    android:textSize="@dimen/sp_13"
+                    android:lineSpacingExtra="@dimen/px_10"
+                    android:textColor="@color/color_999999"/>
 
             </LinearLayout>
         </LinearLayout>

@@ -34,6 +34,7 @@
             android:src="@drawable/ic_mine_arrow_right_gray" />
     </LinearLayout>
 
+
     <LinearLayout
         android:id="@+id/linear_payPwd"
         android:layout_width="match_parent"
@@ -54,6 +55,65 @@
         <ImageView
             android:layout_width="@dimen/px_18"
             android:layout_height="@dimen/px_32"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_mine_arrow_right_gray" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_loginPhone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_86"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:layout_marginTop="@dimen/px_1"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/selector_mine_linearlayout"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="修改手机号码"
+            android:textColor="@color/color_000000" />
+        <ImageView
+            android:layout_width="@dimen/px_18"
+            android:layout_height="@dimen/px_32"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_mine_arrow_right_gray" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_alipay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_86"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:layout_marginTop="@dimen/px_1"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/selector_mine_linearlayout"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="支付宝账户"
+            android:textColor="@color/color_000000" />
+        <TextView
+            android:id="@+id/tv_alipayState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_14"
+            android:background="@drawable/shape_solid_cccccc_10"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/color_ffffff"
+            android:gravity="center"
+            android:text="认证状态"/>
+        <ImageView
+            android:layout_width="@dimen/px_18"
+            android:layout_height="@dimen/px_32"
+            android:layout_marginLeft="@dimen/px_14"
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_mine_arrow_right_gray" />
     </LinearLayout>

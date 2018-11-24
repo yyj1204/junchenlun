@@ -1,5 +1,6 @@
 package com.wktx.www.emperor.ui.activity.mine;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -14,10 +15,8 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.r0adkll.slidr.Slidr;
-import com.wktx.www.emperor.ui.activity.recruit.resume.ResumeActivity;
 import com.wktx.www.emperor.ui.activity.staff.StaffManageActivity;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.mine.condition.ConditionBean;
 import com.wktx.www.emperor.apiresult.mine.condition.ConditionInfoData;
 import com.wktx.www.emperor.apiresult.staff.staff.StaffInfoData;
@@ -27,10 +26,10 @@ import com.wktx.www.emperor.ui.activity.recruit.hire.TrusteeshipSalaryActivity;
 import com.wktx.www.emperor.ui.adapter.DropDownListAdapter;
 import com.wktx.www.emperor.ui.adapter.staff.StaffListAdapter;
 import com.wktx.www.emperor.utils.ConstantUtil;
-import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.staff.IStaffView;
 import com.wktx.www.emperor.utils.ToastUtil;
+import com.wktx.www.emperor.widget.CustomDialog;
 import com.wktx.www.emperor.widget.DropDownMenu;
 import com.wktx.www.emperor.widget.MyLayoutManager;
 
@@ -57,7 +56,7 @@ public class HireRecordActivity extends ABaseActivity<IStaffView,StaffPresenter>
     private DropDownListAdapter hireStateAdapter;//雇佣状态筛选适配器
     private StaffListAdapter mAdapter;//RecyclerView 适配器
 
-    private String tabTexts[] = {"工作类型","雇佣状态"};
+    private String[] tabTexts = {"工作类型", "雇佣状态"};
     private List<ConditionBean> jobTypeBeans = new ArrayList<>();//工作类型集合
     private List<ConditionBean> hireStateBeans = new ArrayList<>();//雇佣状态集合
     private List<String> jobTypeStrs = new ArrayList<>();//工作类型名称
@@ -71,6 +70,8 @@ public class HireRecordActivity extends ABaseActivity<IStaffView,StaffPresenter>
     private int page = 1;
     private static final int PAGE_SIZE = 10;//请求每页的数据量
     private boolean isRefresh;//是下拉刷新还是加载更多  false：加载更多，true：下拉刷新
+
+    private CustomDialog customDialog;
 
     @OnClick({R.id.tb_IvReturn})
     public void MyOnclick(View view) {
@@ -193,33 +194,44 @@ public class HireRecordActivity extends ABaseActivity<IStaffView,StaffPresenter>
 
                 StaffInfoData info = mAdapter.getData().get(position);
                 Intent intent = new Intent();
-                if (info.getIs_pay().equals("0")){//未支付，前往托管工资界面
+                if (info.getIs_pay().equals("0")&&info.getType().equals("0")){//未支付，前往托管工资界面
                     //传递 雇佣ID
                     intent.setClass(HireRecordActivity.this, TrusteeshipSalaryActivity.class);
                     intent.putExtra(ConstantUtil.KEY_DATA,info.getHire_id());
                     intent.putExtra(ConstantUtil.KEY_POSITION,ConstantUtil.ACTIVITY_GYJL);
                     startActivity(intent);
-                }else if (info.getIs_pay().equals("1")){//已支付
-                    //雇佣状态 0:全部状态 1:合作中(雇佣成功) 2:请假中 3:暂停中 4:投诉中 5:被解雇 6:完结 7:退款 9:续约中. 10:待入职
+                }else{//已支付
+                    //雇佣状态 0:全部状态 1:合作中(雇佣成功) 2:请假中 3:暂停中 4:投诉中 5:被解雇 6:完结 7:退款 8.已取消 9:续约中 10:待入职
                     switch (info.getType()){
                         case "1":
                         case "2":
                         case "3":
                         case "4":
-                        case "9"://传递 雇佣ID，前往我的员工界面
-                            intent.putExtra(ConstantUtil.KEY_DATA,info.getHire_id());
-                            intent.setClass(HireRecordActivity.this, StaffManageActivity.class);
-                            startActivity(intent);
-                            break;
                         case "5":
                         case "6":
-                        case "7"://如果雇佣状态=被解雇或完结或退款，将简历ID 传递给 ResumeActivity
-                            intent.setClass(HireRecordActivity.this, ResumeActivity.class);
-                            intent.putExtra(ConstantUtil.KEY_POSITION,info.getRid());
+                        case "7":
+                        case "9"://传递 雇佣ID，前往我的员工界面
+                            intent.setClass(HireRecordActivity.this, StaffManageActivity.class);
+                            intent.putExtra(ConstantUtil.KEY_DATA,info.getHire_id());
                             startActivity(intent);
                             break;
+                        case "8"://已取消（支付超时、取消、拒绝）
+                            switch (info.getStatus_desc()){
+                                case ConstantUtil.HIRESTATE_OVERTIME:
+                                    ToastUtil.myToast("该订单超时未支付已取消！");
+                                    break;
+                                case ConstantUtil.HIRESTATE_CANCEL:
+                                    ToastUtil.myToast("您已取消该订单！");
+                                    break;
+                                case ConstantUtil.HIRESTATE_REFUSED:
+                                    ToastUtil.myToast("该员工拒绝您的入职邀请！");
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
                         case "10"://如果雇佣状态待入职
-                            ToastUtil.myToast("等待员工入职!");
+                            showCancelOrdersDialog(info.getHire_id());
                             break;
                         default:
                             break;
@@ -227,6 +239,34 @@ public class HireRecordActivity extends ABaseActivity<IStaffView,StaffPresenter>
                 }
             }
         });
+    }
+
+    /**
+     * 取消雇佣订单对话框
+     */
+    private void showCancelOrdersDialog(final String hireId) {
+        CustomDialog.Builder builder = new CustomDialog.Builder(this);
+        builder.setTitle("系统提示");
+        builder.setMessage("该员工待入职，是否继续等待？");
+        builder.setPositiveButton("继续等待", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton("取消订单",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        getPresenter().onCancelOrders(hireId);
+                    }
+                });
+
+        customDialog = builder.create();
+        customDialog.setCanceledOnTouchOutside(false);
+        customDialog.show();
     }
 
     /**
@@ -260,11 +300,6 @@ public class HireRecordActivity extends ABaseActivity<IStaffView,StaffPresenter>
      * IStaffView
      */
     @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
-    @Override
     public String getJobType() {
         return jobTypeId;
     }
@@ -290,6 +325,13 @@ public class HireRecordActivity extends ABaseActivity<IStaffView,StaffPresenter>
     @Override
     public void onGetConditionFailureResult(String result) {
         ToastUtil.myToast(result);
+    }
+    @Override//取消订单
+    public void onCancelOrdersResult(boolean isSuccess, String result) {
+        ToastUtil.myToast(result);
+        if (isSuccess){
+            refresh();
+        }
     }
     @Override
     public void onRequestSuccess(List<StaffInfoData> tData) {
@@ -349,6 +391,11 @@ public class HireRecordActivity extends ABaseActivity<IStaffView,StaffPresenter>
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (customDialog!=null){
+            customDialog.dismiss();
+            customDialog=null;
+        }
+
         ToastUtil.cancleMyToast();
     }
 }

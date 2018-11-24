@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,10 +9,10 @@
 
     <TextView
         android:id="@+id/tv_time"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:gravity="center_vertical"
-        android:layout_centerVertical="true"
         android:textColor="@color/color_000000"
         android:text="时间"
         android:textSize="@dimen/sp_13" />
@@ -20,18 +20,15 @@
         android:id="@+id/tv_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/tv_time"
         android:layout_marginLeft="@dimen/px_14"
-        android:background="@drawable/shape_solid_fa716f_10"
+        android:background="@drawable/shape_solid_ffb321_10"
         android:textSize="@dimen/sp_12"
         android:textColor="@color/color_ffffff"
         android:gravity="center"
-        android:layout_centerVertical="true"
         android:text="未评价"/>
     <ImageView
         android:layout_width="@dimen/px_16"
         android:layout_height="@dimen/px_20"
-        android:src="@drawable/ic_arrow_right_gray"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"/>
-</com.zhy.autolayout.AutoRelativeLayout>
+        android:layout_marginLeft="@dimen/px_14"
+        android:src="@drawable/ic_purse_arrow_right_gray"/>
+</com.zhy.autolayout.AutoLinearLayout>

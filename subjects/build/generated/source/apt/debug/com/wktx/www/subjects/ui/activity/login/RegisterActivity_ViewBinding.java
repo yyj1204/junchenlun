@@ -17,13 +17,13 @@ import java.lang.Override;
 public class RegisterActivity_ViewBinding implements Unbinder {
   private RegisterActivity target;
 
-  private View view2131231245;
+  private View view2131689709;
 
-  private View view2131230780;
+  private View view2131689851;
 
-  private View view2131231164;
+  private View view2131689766;
 
-  private View view2131231254;
+  private View view2131689853;
 
   @UiThread
   public RegisterActivity_ViewBinding(RegisterActivity target) {
@@ -38,7 +38,7 @@ public class RegisterActivity_ViewBinding implements Unbinder {
     target.tvTitle = Utils.findRequiredViewAsType(source, R.id.tb_TvBarTitle, "field 'tvTitle'", TextView.class);
     view = Utils.findRequiredView(source, R.id.tv_getcode, "field 'tvGetCode' and method 'MyOnclick'");
     target.tvGetCode = Utils.castView(view, R.id.tv_getcode, "field 'tvGetCode'", TextView.class);
-    view2131231245 = view;
+    view2131689709 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -51,7 +51,7 @@ public class RegisterActivity_ViewBinding implements Unbinder {
     target.etPwd2 = Utils.findRequiredViewAsType(source, R.id.et_pwd2, "field 'etPwd2'", EditText.class);
     view = Utils.findRequiredView(source, R.id.bt_register, "field 'btRegister' and method 'MyOnclick'");
     target.btRegister = Utils.castView(view, R.id.bt_register, "field 'btRegister'", Button.class);
-    view2131230780 = view;
+    view2131689851 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -59,7 +59,7 @@ public class RegisterActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.tb_IvReturn, "method 'MyOnclick'");
-    view2131231164 = view;
+    view2131689766 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -67,7 +67,7 @@ public class RegisterActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.tv_login, "method 'MyOnclick'");
-    view2131231254 = view;
+    view2131689853 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -91,13 +91,13 @@ public class RegisterActivity_ViewBinding implements Unbinder {
     target.etPwd2 = null;
     target.btRegister = null;
 
-    view2131231245.setOnClickListener(null);
-    view2131231245 = null;
-    view2131230780.setOnClickListener(null);
-    view2131230780 = null;
-    view2131231164.setOnClickListener(null);
-    view2131231164 = null;
-    view2131231254.setOnClickListener(null);
-    view2131231254 = null;
+    view2131689709.setOnClickListener(null);
+    view2131689709 = null;
+    view2131689851.setOnClickListener(null);
+    view2131689851 = null;
+    view2131689766.setOnClickListener(null);
+    view2131689766 = null;
+    view2131689853.setOnClickListener(null);
+    view2131689853 = null;
   }
 }

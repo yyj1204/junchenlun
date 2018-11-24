@@ -29,7 +29,7 @@ public class ConditionBean implements Serializable{
 
     @Override
     public String toString() {
-        return "WorksConditionBean{" +
+        return "ConditionBean{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 '}';

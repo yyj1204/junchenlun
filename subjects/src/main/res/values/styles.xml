@@ -40,8 +40,14 @@
         <item name="android:windowExitAnimation">@anim/popup_out</item>
     </style>
 
+    <!--复选框选中效果-->
     <style name="CustomCheckBoxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/selector_checkbox</item>
+    </style>
+
+    <!--解决部分手机Activity跳转可以看到桌面：把MainActivity中的windowIsTranslucent设置为false-->
+    <style name="MainTheme" parent="@style/AppTheme">
+        <item name="android:windowIsTranslucent">false</item>
     </style>
 
 </resources>

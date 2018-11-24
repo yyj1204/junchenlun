@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.luck.picture.lib.tools.ScreenUtils;
 import com.wktx.www.subjects.R;
 import com.wktx.www.subjects.utils.ConstantUtil;
+import com.wktx.www.subjects.utils.ScreenUtil;
 
 /**
  * 邀请详情联系弹窗(电话、QQ、微信)
@@ -48,7 +49,7 @@ public class PopupContact extends PopupWindow implements OnClickListener {
         // 设置SelectPicPopupWindow弹出窗体的宽
         this.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         // 设置SelectPicPopupWindow弹出窗体的高
-        this.setHeight(ScreenUtils.getScreenHeight(mContext));
+        this.setHeight(ScreenUtil.getScreenHeight(mContext));
         // 设置SelectPicPopupWindow弹出窗体可点�?
         this.setTouchable(true);
         this.setFocusable(true);

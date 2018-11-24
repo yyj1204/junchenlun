@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_mine_linearlayout"
+    android:gravity="center_horizontal"
+    android:padding="@dimen/px_30"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_store_add"
+        android:drawablePadding="@dimen/px_20"
+        android:gravity="center_vertical"
+        android:text="安排工作"
+        android:textColor="@color/color_ffb321"
+        android:textSize="@dimen/sp_15" />
+</com.zhy.autolayout.AutoLinearLayout>

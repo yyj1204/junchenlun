@@ -26,7 +26,7 @@ public class MyResumePresenter extends ABasePresenter<IMyResumeView> {
     //获取我的简历信息
     public void getInfo(){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
 
         LogUtil.error("获取我的简历信息","json==="+httpParams.toString());
@@ -43,6 +43,8 @@ public class MyResumePresenter extends ABasePresenter<IMyResumeView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }
@@ -68,7 +70,7 @@ public class MyResumePresenter extends ABasePresenter<IMyResumeView> {
     //修改找工作状态
     public void changeHuntingState(String resumeId,String huntingState){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("id", resumeId);
         httpParams.put("is_job_hunting", huntingState);
@@ -87,6 +89,8 @@ public class MyResumePresenter extends ABasePresenter<IMyResumeView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onChangeHuntingResult(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onChangeHuntingResult(false,e.getMessage());
                                 }

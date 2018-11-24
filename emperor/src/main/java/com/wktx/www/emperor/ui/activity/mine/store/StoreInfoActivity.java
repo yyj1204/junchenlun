@@ -5,23 +5,21 @@ import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.mine.store.StoreListInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.mine.store.StoreInfoPresenter;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.GlideUtil;
-import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.IView;
 import com.wktx.www.emperor.utils.ToastUtil;
@@ -105,7 +103,7 @@ public class StoreInfoActivity extends ABaseActivity<IView,StoreInfoPresenter> i
                 helper.setText(R.id.tv_storeName, item.getShop_name());
                 CircleImageView ivLogo = helper.getView(R.id.civ_storeLogo);
                 //设置圆形店铺logo
-                if (item.getShop_logo()==null||item.getShop_logo().equals("")) {
+                if (TextUtils.isEmpty(item.getShop_logo())) {
                     ivLogo.setImageResource(R.drawable.img_mine_head);
                 }else {
                     GlideUtil.loadImage(item.getShop_logo(),R.drawable.img_mine_head,ivLogo);
@@ -184,11 +182,6 @@ public class StoreInfoActivity extends ABaseActivity<IView,StoreInfoPresenter> i
     /**
      * IView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
     @Override
     public void onRequestSuccess(List<StoreListInfoData> tData) {
         setData(tData);

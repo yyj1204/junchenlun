@@ -12,12 +12,24 @@ public class ConstantUtil {
     public static final String TOAST_NONET= "请检查网络!";
     public static final String TOAST_LOGOUT= "请先登录！";
     public static final String TOAST_ERROR= "请求出错了~";
+
+    //雇佣状态status_desc字符串
+    public static final String HIRESTATE_OVERTIME= "订单超时未支付已自动取消";
+    public static final String HIRESTATE_CANCEL= "手动取消订单";
+    public static final String HIRESTATE_REFUSED= "臣民拒绝邀请";
+
     //退出登录弹窗
     public static final String LOGOUT = "退出";
     //修改公司logo弹窗
     public static enum Type {
         PHONE, CAMERA
     }
+
+    //职位详情应聘弹窗(电话、QQ、微信、邀请面试)
+    public static enum InterviewWay {
+        PHONE, QQ,WX,INTERVIEW;
+    }
+
     //SharedPreferenceUtil
     public static final String HEADBASE64_NAME = "headBase64_Name";
     public static final String HEADBASE64STR_KEY = "headBase64Str";
@@ -61,7 +73,7 @@ public class ConstantUtil {
     //（区分是哪个界面进入作品详情界面的）
     public static final String  ACTIVITY_SS= "SearchActivity";//搜索
     public static final String  ACTIVITY_ZP= "RecruitListFragment";//招聘
-    public static final String  ACTIVITY_AL= "ArtistCaseActivity";//美工案例
+    public static final String  ACTIVITY_AL= "CasesActivity";//美工案例
 
     /**
      * 支付宝支付结果

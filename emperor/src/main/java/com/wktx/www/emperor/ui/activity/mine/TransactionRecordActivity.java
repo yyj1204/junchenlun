@@ -1,9 +1,11 @@
 package com.wktx.www.emperor.ui.activity.mine;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -11,12 +13,13 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
+import com.wktx.www.emperor.apiresult.mine.transactionrecord.TransactionBean;
 import com.wktx.www.emperor.apiresult.mine.transactionrecord.TransactionRecordInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.mine.TransactionRecordPresenter;
+import com.wktx.www.emperor.ui.activity.staff.StaffManageActivity;
 import com.wktx.www.emperor.ui.adapter.mine.TransactionListAdapter;
-import com.wktx.www.emperor.utils.LoginUtil;
+import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.IView;
 import com.wktx.www.emperor.utils.ToastUtil;
@@ -30,7 +33,6 @@ import butterknife.OnClick;
  * 个人中心---交易记录
  */
 public class TransactionRecordActivity extends ABaseActivity<IView,TransactionRecordPresenter> implements IView<TransactionRecordInfoData> {
-
     @BindView(R.id.tb_TvBarTitle)
     TextView tvTitle;
     @BindView(R.id.tv_payMoney)
@@ -121,6 +123,38 @@ public class TransactionRecordActivity extends ABaseActivity<IView,TransactionRe
             }
         });
         recyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (MyUtils.isFastClick1()){
+                    return;
+                }
+                TransactionBean transactionBean = mAdapter.getData().get(position);
+                //雇佣状态 0:全部状态 1:合作中(雇佣成功) 2:请假中 3:暂停中 4:投诉中 5:被解雇 6:完结 7:退款 8:已取消 9:续约中 10:待入职
+                switch (transactionBean.getStatus()){
+                    case "1":
+                    case "2":
+                    case "3":
+                    case "4":
+                    case "5":
+                    case "6":
+                    case "7":
+                    case "9"://传递 雇佣ID，前往我的员工界面
+                        Intent intent = new Intent(TransactionRecordActivity.this, StaffManageActivity.class);
+                        intent.putExtra(ConstantUtil.KEY_DATA,transactionBean.getHire_id());
+                        startActivity(intent);
+                        break;
+                    case "8":
+                        ToastUtil.myToast("该订单已取消！");
+                        break;
+                    case "10"://如果雇佣状态待入职
+                        ToastUtil.myToast("等待员工入职!");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
     }
 
 
@@ -153,14 +187,17 @@ public class TransactionRecordActivity extends ABaseActivity<IView,TransactionRe
      * IView
      */
     @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
-    @Override
     public void onRequestSuccess(TransactionRecordInfoData tData) {
-        tvPayMoney.setText(tData.getTransa_amount());
-        tvTrusteeshipMoney.setText(tData.getTrusteeship_amount());
+        if (TextUtils.isEmpty(tData.getTransa_amount())){
+            tvPayMoney.setText("0");
+        }else {
+            tvPayMoney.setText(tData.getTransa_amount());
+        }
+        if (TextUtils.isEmpty(tData.getTrusteeship_amount())){
+            tvTrusteeshipMoney.setText("0");
+        }else {
+            tvTrusteeshipMoney.setText(tData.getTrusteeship_amount());
+        }
         setData(tData.getList());
         if (isRefresh){//刷新
             //如果是刷新，没数据代表全部没数据

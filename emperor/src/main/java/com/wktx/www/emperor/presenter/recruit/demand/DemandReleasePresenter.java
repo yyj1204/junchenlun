@@ -7,6 +7,7 @@ import com.wktx.www.emperor.apiresult.recruit.demand.DemandReleaseConditionData;
 import com.wktx.www.emperor.basemvp.ABasePresenter;
 import com.wktx.www.emperor.utils.ApiURL;
 import com.wktx.www.emperor.utils.ConstantUtil;
+import com.wktx.www.emperor.utils.DateUtil;
 import com.wktx.www.emperor.utils.LogUtil;
 import com.wktx.www.emperor.ui.view.recruit.IDemandReleaseView;
 import com.zhouyou.http.EasyHttp;
@@ -29,7 +30,7 @@ public class DemandReleasePresenter extends ABasePresenter<IDemandReleaseView> {
     //获取店铺检索条件
     public void onGetStoreCondition(){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
 
         EasyHttp.post(ApiURL.COMMON_URL)
@@ -44,6 +45,8 @@ public class DemandReleasePresenter extends ABasePresenter<IDemandReleaseView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onGetStoreConditionFailureResult(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onGetStoreConditionFailureResult(e.getMessage());
                                 }
@@ -56,6 +59,8 @@ public class DemandReleasePresenter extends ABasePresenter<IDemandReleaseView> {
 
                                     if (result.getCode()==0){//获取店铺检索条件成功
                                         getmMvpView().onGetStoreConditionSuccessResult(result.getInfo());
+                                    }else if (result.getCode()==1){//获取店铺检索条件失败(无数据)
+                                        getmMvpView().onGetStoreConditionFailureResult("");
                                     }else {//获取店铺检索条件失败
                                         getmMvpView().onGetStoreConditionFailureResult(result.getMsg());
                                     }
@@ -66,7 +71,7 @@ public class DemandReleasePresenter extends ABasePresenter<IDemandReleaseView> {
                         }) {});
     }
 
-    //获取发布需求需要的选择参数(平台、类目、需求模式)
+    //获取发布需求需要的选择参数(平台、类目、设计模式、工作类型、工作经验)
     public void onGetDemandCondition(){
         EasyHttp.post(ApiURL.COMMON_URL)
                 .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_DEMAND_RELEASE_CONDITION)
@@ -100,17 +105,26 @@ public class DemandReleasePresenter extends ABasePresenter<IDemandReleaseView> {
     }
 
     //需求发布
-    public void onDemandRelease(String platformId,String categoryId,String storeId,String patternId){
+    public void onDemandRelease(String platformId,String categoryId,String storeId,String patternId,String positionId,String experienceId,boolean isCustom){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("title", getmMvpView().getDemandTitle());
         httpParams.put("content", getmMvpView().getDemandContent());
         httpParams.put("bgap", platformId);
         httpParams.put("bgat", categoryId);
         httpParams.put("store_id", storeId);
+        httpParams.put("tow", positionId);
+        httpParams.put("working_years", experienceId);
         httpParams.put("design_pattern", patternId);
         httpParams.put("budget", getmMvpView().getDemandBudget());
+        httpParams.put("end_time", DateUtil.getCustomType2Timestamp(getmMvpView().getEndTime(),"yyyy-MM-dd"));
+
+        if (isCustom){//雇佣方式 1:包月,2:定制, 3:雇佣单人（班次）
+            httpParams.put("hire_type", "2");
+        }else {
+            httpParams.put("hire_type", "1");
+        }
 
         LogUtil.error("需求发布","json==="+httpParams.toString());
 
@@ -126,6 +140,8 @@ public class DemandReleasePresenter extends ABasePresenter<IDemandReleaseView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onDemandReleaseResult(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onDemandReleaseResult(false,e.getMessage());
                                 }

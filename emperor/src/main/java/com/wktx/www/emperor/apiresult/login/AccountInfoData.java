@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 public class AccountInfoData implements Serializable {
 
-    private int user_id;//用户id
+    private String user_id;//用户id
     private String token;//用户token
     private String phone;//用户phone
     private int is_new;//是否新用户
@@ -17,11 +17,11 @@ public class AccountInfoData implements Serializable {
     public AccountInfoData() {
     }
 
-    public int getUser_id() {
+    public String getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
 

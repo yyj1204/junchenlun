@@ -1,6 +1,8 @@
 package com.wktx.www.subjects.ui.adapter.message;
 
 import android.content.Context;
+import android.text.TextUtils;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.wktx.www.subjects.R;
@@ -25,7 +27,7 @@ public class InterestedAdapter extends BaseQuickAdapter<InterestedListInfoData, 
         helper.setText(R.id.tv_companyName,item.getNickname());
         helper.setText(R.id.tv_time,item.getAdd_time());
         CircleImageView ivHead = helper.getView(R.id.iv_head);
-        if (item.getHead_pic()==null||item.getHead_pic().equals("")){
+        if (TextUtils.isEmpty(item.getHead_pic())){
             ivHead.setImageResource(R.drawable.img_mine_head);
         }else {
             GlideUtil.loadImage(item.getHead_pic(),R.drawable.img_mine_head,ivHead);

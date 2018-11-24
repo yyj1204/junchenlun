@@ -8,54 +8,54 @@ package com.youth.banner;
 
 public final class R {
     public static final class animator {
-        public static final int scale_with_alpha = 0x7f020001;
+        public static final int scale_with_alpha = 0x7f060001;
     }
     public static final class attr {
-        public static final int delay_time = 0x7f030085;
-        public static final int image_scale_type = 0x7f0300c3;
-        public static final int indicator_drawable_selected = 0x7f0300c6;
-        public static final int indicator_drawable_unselected = 0x7f0300c7;
-        public static final int indicator_height = 0x7f0300c8;
-        public static final int indicator_margin = 0x7f0300c9;
-        public static final int indicator_width = 0x7f0300ca;
-        public static final int is_auto_play = 0x7f0300ce;
-        public static final int title_background = 0x7f030212;
-        public static final int title_height = 0x7f030213;
-        public static final int title_textcolor = 0x7f030214;
-        public static final int title_textsize = 0x7f030215;
+        public static final int delay_time = 0x7f010109;
+        public static final int image_scale_type = 0x7f010114;
+        public static final int indicator_drawable_selected = 0x7f010112;
+        public static final int indicator_drawable_unselected = 0x7f010113;
+        public static final int indicator_height = 0x7f010110;
+        public static final int indicator_margin = 0x7f010111;
+        public static final int indicator_width = 0x7f01010f;
+        public static final int is_auto_play = 0x7f01010a;
+        public static final int title_background = 0x7f01010b;
+        public static final int title_height = 0x7f01010e;
+        public static final int title_textcolor = 0x7f01010c;
+        public static final int title_textsize = 0x7f01010d;
     }
     public static final class drawable {
-        public static final int black_background = 0x7f07005f;
-        public static final int gray_radius = 0x7f07007b;
-        public static final int white_radius = 0x7f070151;
+        public static final int black_background = 0x7f02005a;
+        public static final int gray_radius = 0x7f020076;
+        public static final int white_radius = 0x7f020167;
     }
     public static final class id {
-        public static final int bannerTitle = 0x7f080030;
-        public static final int center_crop = 0x7f08004a;
-        public static final int fit_xy = 0x7f08008c;
-        public static final int indicator = 0x7f0800ab;
-        public static final int indicatorInside = 0x7f0800ac;
-        public static final int numIndicator = 0x7f080143;
-        public static final int numIndicatorInside = 0x7f080144;
-        public static final int titleView = 0x7f0801cf;
-        public static final int viewpager = 0x7f080264;
+        public static final int bannerTitle = 0x7f0f01c7;
+        public static final int center_crop = 0x7f0f0055;
+        public static final int fit_xy = 0x7f0f0056;
+        public static final int indicator = 0x7f0f01c4;
+        public static final int indicatorInside = 0x7f0f01c9;
+        public static final int numIndicator = 0x7f0f01c5;
+        public static final int numIndicatorInside = 0x7f0f01c8;
+        public static final int titleView = 0x7f0f01c6;
+        public static final int viewpager = 0x7f0f010c;
     }
     public static final class layout {
-        public static final int banner = 0x7f0a0042;
+        public static final int banner = 0x7f040059;
     }
     public static final class styleable {
-        public static final int[] Banner = { 0x7f030085, 0x7f0300c3, 0x7f0300c6, 0x7f0300c7, 0x7f0300c8, 0x7f0300c9, 0x7f0300ca, 0x7f0300ce, 0x7f030212, 0x7f030213, 0x7f030214, 0x7f030215 };
+        public static final int[] Banner = { 0x7f010109, 0x7f01010a, 0x7f01010b, 0x7f01010c, 0x7f01010d, 0x7f01010e, 0x7f01010f, 0x7f010110, 0x7f010111, 0x7f010112, 0x7f010113, 0x7f010114 };
         public static final int Banner_delay_time = 0;
-        public static final int Banner_image_scale_type = 1;
-        public static final int Banner_indicator_drawable_selected = 2;
-        public static final int Banner_indicator_drawable_unselected = 3;
-        public static final int Banner_indicator_height = 4;
-        public static final int Banner_indicator_margin = 5;
+        public static final int Banner_is_auto_play = 1;
+        public static final int Banner_title_background = 2;
+        public static final int Banner_title_textcolor = 3;
+        public static final int Banner_title_textsize = 4;
+        public static final int Banner_title_height = 5;
         public static final int Banner_indicator_width = 6;
-        public static final int Banner_is_auto_play = 7;
-        public static final int Banner_title_background = 8;
-        public static final int Banner_title_height = 9;
-        public static final int Banner_title_textcolor = 10;
-        public static final int Banner_title_textsize = 11;
+        public static final int Banner_indicator_height = 7;
+        public static final int Banner_indicator_margin = 8;
+        public static final int Banner_indicator_drawable_selected = 9;
+        public static final int Banner_indicator_drawable_unselected = 10;
+        public static final int Banner_image_scale_type = 11;
     }
 }

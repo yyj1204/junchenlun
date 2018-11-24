@@ -14,7 +14,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/px_1"
         android:background="@color/color_ffffff"
         android:gravity="center_vertical"
         android:padding="@dimen/px_30"
@@ -97,6 +96,30 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="已合作天数："
+            android:layout_weight="1"
+            android:textSize="@dimen/sp_13"
+            android:textColor="@color/color_a0a0a0"/>
+        <TextView
+            android:id="@+id/tv_workDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="@dimen/sp_13"
+            android:textColor="@color/color_999999"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_72"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:layout_marginTop="@dimen/px_1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/color_ffffff">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="应支付工资："
             android:layout_weight="1"
             android:textSize="@dimen/sp_13"
@@ -151,7 +174,7 @@
         android:background="@color/color_ffffff"
         android:gravity="center_vertical"
         android:text=""
-        android:textColor="@color/color_fa716f"
+        android:textColor="@color/color_ffb321"
         android:textSize="@dimen/sp_13" />
     <TextView
         android:layout_width="match_parent"
@@ -170,7 +193,7 @@
         android:background="@color/color_ffffff"
         android:gravity="center_vertical"
         android:text=""
-        android:textColor="@color/color_fa716f"
+        android:textColor="@color/color_ffb321"
         android:textSize="@dimen/sp_13" />
 
     <TextView
@@ -201,10 +224,20 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/color_999999"
+            android:background="@color/color_a0a0a0"
             android:gravity="center"
             android:text="拒绝解雇"
             android:textColor="@color/color_ffffff"
             android:textSize="@dimen/sp_15"/>
+        <TextView
+            android:id="@+id/tv_apply"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/color_cccccc"
+            android:gravity="center"
+            android:text="申请介入"
+            android:textColor="@color/color_ffffff"
+            android:textSize="@dimen/sp_15" />
     </LinearLayout>
 </LinearLayout>

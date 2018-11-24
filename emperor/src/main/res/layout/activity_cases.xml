@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f0f0f0"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar_activity" />
+
+    <com.wktx.www.emperor.widget.DropDownMenu
+        android:id="@+id/dropDownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ddmenuTextSize="@dimen/sp_13"
+        app:ddtextSelectedColor="@color/color_ffb321"
+        app:ddtextUnselectedColor="@color/color_5d5d5d"
+        app:ddmenuSelectedIcon="@drawable/down_pull_selected"
+        app:ddmenuUnselectedIcon="@drawable/down_pull_normal"
+        app:ddmaskColor="@color/mask_color"
+        app:ddmenuBackgroundColor="@color/color_f7f7f7"
+        app:ddunderlineColor="@color/gray"
+        app:dddividerColor="@color/gray"
+        app:dddividerHeight="@dimen/px_20"
+        app:ddmenuIconOrientation="right">
+    </com.wktx.www.emperor.widget.DropDownMenu>
+</LinearLayout>

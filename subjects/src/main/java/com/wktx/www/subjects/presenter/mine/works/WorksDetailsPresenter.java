@@ -30,7 +30,7 @@ public class WorksDetailsPresenter extends ABasePresenter<IWorksDetailsView> {
     //获取作品详情
     public void getInfo(String worksId){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("wid", worksId);
 
@@ -48,6 +48,8 @@ public class WorksDetailsPresenter extends ABasePresenter<IWorksDetailsView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }
@@ -108,7 +110,7 @@ public class WorksDetailsPresenter extends ABasePresenter<IWorksDetailsView> {
     //上传图片Base64
     public void getImgUrl(String base64Str){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("base64", base64Str);
 
@@ -126,6 +128,8 @@ public class WorksDetailsPresenter extends ABasePresenter<IWorksDetailsView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onGetImgUrlResult(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onGetImgUrlResult(false,e.getMessage());
                                 }
@@ -151,7 +155,7 @@ public class WorksDetailsPresenter extends ABasePresenter<IWorksDetailsView> {
     //编辑作品（增改）
     public void changeWorks(String resumeId,String worksId){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("rid", resumeId);
         //作品id不为空，说明是编辑请求，则需传递作品id
@@ -182,6 +186,8 @@ public class WorksDetailsPresenter extends ABasePresenter<IWorksDetailsView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onChangeWorksResult(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onChangeWorksResult(false,e.getMessage());
                                 }
@@ -208,7 +214,7 @@ public class WorksDetailsPresenter extends ABasePresenter<IWorksDetailsView> {
     //删除作品
     public void deleteWorks(String resumeId,String worksId){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("rid", resumeId);
         httpParams.put("wid", worksId);
@@ -227,6 +233,8 @@ public class WorksDetailsPresenter extends ABasePresenter<IWorksDetailsView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onChangeWorksResult(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onChangeWorksResult(false,e.getMessage());
                                 }

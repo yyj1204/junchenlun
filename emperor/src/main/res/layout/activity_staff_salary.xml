@@ -74,6 +74,7 @@
                 android:textColor="@color/color_fa716f"
                 android:textSize="@dimen/sp_15" />
             <TextView
+                android:visibility="gone"
                 android:id="@+id/tv_trusteeshipLine"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/px_4"

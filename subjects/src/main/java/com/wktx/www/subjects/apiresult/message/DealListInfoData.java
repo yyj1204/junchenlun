@@ -3,7 +3,7 @@ package com.wktx.www.subjects.apiresult.message;
 /**
  * Created by yyj on 2018/6/9.
  * 交易消息列表内容
- * "id": "8","hire_id": "232","amount": "4000.00","add_time": "2018-05-17 16:38:34","remark": "支付薪资"
+ * "id": "8","hire_id": "232","amount": "4000.00","add_time": "2018-05-17 16:38:34","remark": "支付薪资", "nickname": "阿饭","tow": "客服"
  */
 
 public class DealListInfoData {
@@ -12,6 +12,8 @@ public class DealListInfoData {
     private String amount;//薪资
     private String add_time;//时间
     private String remark;//备注
+    private String nickname;//公司名称
+    private String tow;//工作类型
 
     public String getId() {
         return id;
@@ -53,6 +55,22 @@ public class DealListInfoData {
         this.remark = remark;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getTow() {
+        return tow;
+    }
+
+    public void setTow(String tow) {
+        this.tow = tow;
+    }
+
     @Override
     public String toString() {
         return "DealListInfoData{" +
@@ -61,6 +79,8 @@ public class DealListInfoData {
                 ", amount='" + amount + '\'' +
                 ", add_time='" + add_time + '\'' +
                 ", remark='" + remark + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", tow='" + tow + '\'' +
                 '}';
     }
 }

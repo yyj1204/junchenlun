@@ -1,6 +1,7 @@
 package com.wktx.www.subjects.ui.adapter.message;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -44,7 +45,7 @@ public class TaskAdapter extends BaseQuickAdapter<TaskListInfoData, BaseViewHold
 
         //头像
         CircleImageView ivHead = helper.getView(R.id.iv_head);
-        if (item.getShop_logo()==null||item.getShop_logo().equals("")){
+        if (TextUtils.isEmpty(item.getShop_logo())){
             ivHead.setImageResource(R.drawable.img_mine_head);
         }else {
             GlideUtil.loadImage(item.getShop_logo(),R.drawable.img_mine_head,ivHead);

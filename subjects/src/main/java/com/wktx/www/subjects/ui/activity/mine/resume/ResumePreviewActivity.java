@@ -1,7 +1,9 @@
 package com.wktx.www.subjects.ui.activity.mine.resume;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -9,19 +11,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.subjects.R;
-import com.wktx.www.subjects.apiresult.login.AccountInfoData;
 import com.wktx.www.subjects.apiresult.mine.resume.ResumePreviewInfoData;
 import com.wktx.www.subjects.basemvp.ABaseActivity;
 import com.wktx.www.subjects.presenter.mine.PreviewResumePresenter;
+import com.wktx.www.subjects.ui.activity.ImageActivity;
 import com.wktx.www.subjects.ui.adapter.mine.PreviewResumeAdapter;
 import com.wktx.www.subjects.ui.view.IView;
 import com.wktx.www.subjects.utils.ConstantUtil;
 import com.wktx.www.subjects.utils.GlideUtil;
-import com.wktx.www.subjects.utils.LoginUtil;
 import com.wktx.www.subjects.utils.MyUtils;
 import com.wktx.www.subjects.widget.MyLayoutManager;
 import com.wktx.www.subjects.utils.ToastUtil;
 
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +41,7 @@ public class ResumePreviewActivity extends ABaseActivity<IView,PreviewResumePres
 
     private PreviewResumeAdapter adapter;
 
+    private List<String> imageUrlList = new ArrayList<>();//图片url集合
 
     @OnClick({R.id.tb_IvReturn})
     public void MyOnclick(View view) {
@@ -103,10 +108,10 @@ public class ResumePreviewActivity extends ABaseActivity<IView,PreviewResumePres
         TextView tvName = (TextView) hvResume1.findViewById(R.id.tv_name);
         TextView tvJob = (TextView) hvResume1.findViewById(R.id.tv_staffJob);
         TextView tvSalary = (TextView) hvResume1.findViewById(R.id.tv_salary);
-        LinearLayout llCategory = (LinearLayout) hvResume1.findViewById(R.id.linear_category);
+        TextView tvCategory = (TextView) hvResume1.findViewById(R.id.tv_category);
+        TextView tvPlatform = (TextView) hvResume1.findViewById(R.id.tv_platform);
         LinearLayout llStyle = (LinearLayout) hvResume1.findViewById(R.id.linear_style);
         LinearLayout llSpeed = (LinearLayout) hvResume1.findViewById(R.id.linear_speed);
-        TextView tvCategory = (TextView) hvResume1.findViewById(R.id.tv_category);
         TextView tvStyle = (TextView) hvResume1.findViewById(R.id.tv_style);
         TextView tvSpeed = (TextView) hvResume1.findViewById(R.id.tv_speed);
 
@@ -115,10 +120,11 @@ public class ResumePreviewActivity extends ABaseActivity<IView,PreviewResumePres
         tvJob.setText(resumeInfoData.getTow_name());
         tvSalary.setText(resumeInfoData.getMonthly_money());
         tvCategory.setText(resumeInfoData.getBgat());
+        tvPlatform.setText(resumeInfoData.getBgap());
         tvStyle.setText(resumeInfoData.getBgas());
         tvSpeed.setText(resumeInfoData.getTyping_speed());
         //头像
-        if (resumeInfoData.getPicture()==null||resumeInfoData.getPicture().equals("")){
+        if (TextUtils.isEmpty(resumeInfoData.getPicture())){
             if (resumeInfoData.getSex().equals("1")){
                 ivHead.setImageResource(R.drawable.img_head_man);
             }else if (resumeInfoData.getSex().equals("2")){
@@ -140,15 +146,12 @@ public class ResumePreviewActivity extends ABaseActivity<IView,PreviewResumePres
         //根据工作类型，显示对应擅长内容
         String tow = resumeInfoData.getTow();
         if (tow.equals("1")){//美工
-            llCategory.setVisibility(View.VISIBLE);
             llStyle.setVisibility(View.VISIBLE);
             llSpeed.setVisibility(View.GONE);
         }else if (tow.equals("2")){//客服
-            llCategory.setVisibility(View.VISIBLE);
             llStyle.setVisibility(View.GONE);
             llSpeed.setVisibility(View.VISIBLE);
         }else {//其他职位类型
-            llCategory.setVisibility(View.VISIBLE);
             llStyle.setVisibility(View.GONE);
             llSpeed.setVisibility(View.GONE);
         }
@@ -159,37 +162,86 @@ public class ResumePreviewActivity extends ABaseActivity<IView,PreviewResumePres
         TextView tvWorkYears = (TextView) hvResume2.findViewById(R.id.tv_workYears);
         TextView tvBirthDate = (TextView) hvResume2.findViewById(R.id.tv_birthDate);
         TextView tvCity = (TextView) hvResume2.findViewById(R.id.tv_city);
+        TextView tvTags = (TextView) hvResume2.findViewById(R.id.tv_tags);
+        TextView tvExperience = (TextView) hvResume2.findViewById(R.id.tv_experience);
         TextView tvCharacterIntroduce = (TextView) hvResume2.findViewById(R.id.tv_characterIntroduce);
         LinearLayout llResumeMaking = (LinearLayout) hvResume2.findViewById(R.id.linear_resumeMaking);
         ImageView ivResume = (ImageView) hvResume2.findViewById(R.id.iv_resume);
 
         //控件数据
         tvHighestEducation.setText(resumeInfoData.getHighest_education());
-        tvWorkYears.setText(resumeInfoData.getWorking_years());
-        tvBirthDate.setText(resumeInfoData.getDate_of_birth());
-        tvCity.setText(resumeInfoData.getResidential_city());
-        tvCharacterIntroduce.setText(resumeInfoData.getCharacter_introduction());
+        if (TextUtils.isEmpty(resumeInfoData.getWorking_years())){
+            tvWorkYears.setText("无经验");
+        }else {
+            tvWorkYears.setText(resumeInfoData.getWorking_years());
+        }
+        if (TextUtils.isEmpty(resumeInfoData.getDate_of_birth())){
+            tvBirthDate.setText("未设置");
+        }else {
+            tvBirthDate.setText(resumeInfoData.getDate_of_birth());
+        }
+        if (TextUtils.isEmpty(resumeInfoData.getResidential_city())){
+            tvCity.setText("未设置");
+        }else {
+            tvCity.setText(resumeInfoData.getResidential_city());
+        }
+        if (TextUtils.isEmpty(resumeInfoData.getCharacter_introduction())){
+            tvCharacterIntroduce.setText("无");
+        }else {
+            tvCharacterIntroduce.setText(resumeInfoData.getCharacter_introduction());
+        }
+        if (resumeInfoData.getWork_experience()==null||resumeInfoData.getWork_experience().size()==0){
+            tvExperience.setText("暂无工作经历");
+        }else {
+            tvExperience.setText("工作经历");
+        }
+        //个人标签
+        List<String> tags = resumeInfoData.getTags();
+        String tagsStr = "";
+        if (tags.size()==0){
+            tagsStr="无";
+        }else {
+            for (int i = 0; i <tags.size() ; i++) {
+                if (i==0){
+                    tagsStr=tags.get(i);
+                }else {
+                    tagsStr+="/"+tags.get(i);
+                }
+            }
+        }
+        tvTags.setText(tagsStr);
         //个性简历
         String resume_content = resumeInfoData.getResume_content();
-        if (resume_content==null||resume_content.equals("")){
+        if (TextUtils.isEmpty(resume_content)){
             llResumeMaking.setVisibility(View.VISIBLE);
             ivResume.setVisibility(View.GONE);
         }else {
+            imageUrlList.add(resume_content);
             llResumeMaking.setVisibility(View.GONE);
             ivResume.setVisibility(View.VISIBLE);
             GlideUtil.loadImage(resume_content,R.drawable.img_loading,ivResume);
         }
+
+        ivResume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (MyUtils.isFastClick()){
+                    return;
+                }
+                //查看大图
+                String[] imageUrls = imageUrlList.toArray(new String[imageUrlList.size()]);
+                Intent intent = new Intent(ResumePreviewActivity.this, ImageActivity.class);
+                intent.putExtra(ConstantUtil.KEY_DATA, imageUrls);
+                intent.putExtra(ConstantUtil.KEY_POSITION, 0);
+                startActivity(intent);
+            }
+        });
     }
 
 
     /***
      * IView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
     @Override
     public void onRequestSuccess(ResumePreviewInfoData tData) {
         adapter.setNewData(tData.getWork_experience());

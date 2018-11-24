@@ -1,6 +1,7 @@
 package com.wktx.www.emperor.ui.adapter.recruit;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,16 +27,25 @@ public class ResumeAdapter extends BaseQuickAdapter<ResumeInfoData.WorkExperienc
         String end_date = item.getWork_date().getEnd_date();
         helper.setText(R.id.tv_workDate,start_date+"-"+end_date);//工作时间
         helper.setText(R.id.tv_workCompany,item.getCompany());//公司名称
+        //擅长平台
+        TextView tvPlatform = helper.getView(R.id.tv_workPlatform);
+        if (TextUtils.isEmpty(item.getBgap())||item.getBgap().equals("0")){
+            tvPlatform.setVisibility(View.GONE);
+        }else {
+            tvPlatform.setText(item.getBgap());
+            tvPlatform.setVisibility(View.VISIBLE);
+        }
         //擅长类目
-        String category = item.getBgat();
         TextView tvCategory = helper.getView(R.id.tv_workCategory);
-        tvCategory.setText(category);
-        if (category.equals("0")){
+        if (TextUtils.isEmpty(item.getBgat())||item.getBgat().equals("0")){
             tvCategory.setVisibility(View.GONE);
         }else {
+            tvCategory.setText(item.getBgat());
             tvCategory.setVisibility(View.VISIBLE);
         }
-        helper.setText(R.id.tv_workType,item.getPosition());//工作类型
-        helper.setText(R.id.tv_workIntroduction,item.getIntroduction());//工作内容
+        helper.setText(R.id.tv_storeUrl,"公司网址:"+item.getStore());//公司网址
+        helper.setText(R.id.tv_workType,"职位:"+item.getPosition());//工作类型
+        helper.setText(R.id.tv_workSalary,"薪资:"+item.getMonthly_money()+"元/月");//工作类型
+        helper.setText(R.id.tv_workIntroduction,"工作内容:"+item.getIntroduction());//工作内容
     }
 }

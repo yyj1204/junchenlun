@@ -17,9 +17,9 @@ import java.lang.Override;
 public class MyResumeActivity_ViewBinding implements Unbinder {
   private MyResumeActivity target;
 
-  private View view2131231164;
+  private View view2131689766;
 
-  private View view2131230778;
+  private View view2131689789;
 
   @UiThread
   public MyResumeActivity_ViewBinding(MyResumeActivity target) {
@@ -35,7 +35,7 @@ public class MyResumeActivity_ViewBinding implements Unbinder {
     target.swipeRefreshLayout = Utils.findRequiredViewAsType(source, R.id.swipeRefreshLayout, "field 'swipeRefreshLayout'", SwipeRefreshLayout.class);
     target.recyclerView = Utils.findRequiredViewAsType(source, R.id.recyclerView, "field 'recyclerView'", RecyclerView.class);
     view = Utils.findRequiredView(source, R.id.tb_IvReturn, "method 'MyOnclick'");
-    view2131231164 = view;
+    view2131689766 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -43,7 +43,7 @@ public class MyResumeActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.bt_previewResume, "method 'MyOnclick'");
-    view2131230778 = view;
+    view2131689789 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -63,9 +63,9 @@ public class MyResumeActivity_ViewBinding implements Unbinder {
     target.swipeRefreshLayout = null;
     target.recyclerView = null;
 
-    view2131231164.setOnClickListener(null);
-    view2131231164 = null;
-    view2131230778.setOnClickListener(null);
-    view2131230778 = null;
+    view2131689766.setOnClickListener(null);
+    view2131689766 = null;
+    view2131689789.setOnClickListener(null);
+    view2131689789 = null;
   }
 }

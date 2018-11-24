@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_f0f0f0"
+    android:fitsSystemWindows="true"
+    tools:context="com.wktx.www.subjects.ui.activity.mine.purse.MyPurseActivity">
+
+    <include layout="@layout/include_toolbar_activity"/>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/linear_recharge"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_96"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:gravity="center_vertical"
+        android:background="@drawable/selector_mine_linearlayout"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="充值"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_13"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="支持支付宝和微信充值"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/color_999999"
+            android:layout_marginLeft="@dimen/px_14"
+            android:layout_weight="1"/>
+        <ImageView
+            android:layout_width="@dimen/px_16"
+            android:layout_height="@dimen/px_20"
+            android:src="@drawable/ic_purse_arrow_right_gray"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_withdrawal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_96"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:layout_marginTop="@dimen/px_1"
+        android:gravity="center_vertical"
+        android:background="@drawable/selector_mine_linearlayout"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="提现"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_13"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="支持支付宝提现"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/color_999999"
+            android:layout_marginLeft="@dimen/px_14"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/tv_alipayState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_14"
+            android:background="@drawable/shape_solid_cccccc_10"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/color_ffffff"
+            android:gravity="center"
+            android:text="认证状态"/>
+        <ImageView
+            android:layout_width="@dimen/px_16"
+            android:layout_height="@dimen/px_20"
+            android:layout_marginLeft="@dimen/px_14"
+            android:src="@drawable/ic_purse_arrow_right_gray"/>
+    </LinearLayout>
+</LinearLayout>

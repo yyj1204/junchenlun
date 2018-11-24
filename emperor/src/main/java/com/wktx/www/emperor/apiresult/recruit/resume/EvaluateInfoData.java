@@ -5,23 +5,20 @@ import java.util.List;
 /**
  * Created by yyj on 2018/2/8.
  * 简历---评价列表内容
- * "id":"1","uid":"2648","type":"1","design_pattern":"0","service_attitude":"1",
- * "ability":"2","response_speed":"3","evaluation_content":"123456","name":"8b******eb",
- * "images":[]
+ * "username": "ph_da92e307ae9ce43843c563119cdd00e7","nickname": "阿饭","id": "11","uid": "2649",
+ * "service_attitude": "5","ability": "4","response_speed": "3","images": [],"evaluation_content": "很后悔","add_time": "1531813392"
  */
 
 public class EvaluateInfoData {
     private String id;//评价id
     private String uid;//雇主id
-    private String type;//1:包月服务 2:定制服务
-    //设计模式 0:其他设计 1:详情页模板设计 2:首页设计 3:直通车设计
-    // 4:营销活动设计 5:海报BANNERE设计 6:钻石展位设计 7:爆款策划设计
-    private String design_pattern;
-    private String service_attitude;//服务态度星级
-    private String ability;//能力星级
-    private String response_speed;//响应速度星级
+    private String username;//雇主名
+    private String nickname;//雇主昵称
+    private String service_attitude;//工作态度星级
+    private String ability;//工作能力星级
+    private String response_speed;//工作效率星级
     private String evaluation_content;//评价内容
-    private String name;//雇主昵称
+    private String add_time;//评价时间
     private List<String> images;//评价图片
 
     public String getId() {
@@ -40,20 +37,20 @@ public class EvaluateInfoData {
         this.uid = uid;
     }
 
-    public String getType() {
-        return type;
+    public String getUsername() {
+        return username;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getDesign_pattern() {
-        return design_pattern;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setDesign_pattern(String design_pattern) {
-        this.design_pattern = design_pattern;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getService_attitude() {
@@ -88,12 +85,12 @@ public class EvaluateInfoData {
         this.evaluation_content = evaluation_content;
     }
 
-    public String getName() {
-        return name;
+    public String getAdd_time() {
+        return add_time;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAdd_time(String add_time) {
+        this.add_time = add_time;
     }
 
     public List<String> getImages() {
@@ -104,19 +101,18 @@ public class EvaluateInfoData {
         this.images = images;
     }
 
-
     @Override
     public String toString() {
         return "EvaluateInfoData{" +
                 "id='" + id + '\'' +
                 ", uid='" + uid + '\'' +
-                ", type='" + type + '\'' +
-                ", design_pattern='" + design_pattern + '\'' +
+                ", username='" + username + '\'' +
+                ", nickname='" + nickname + '\'' +
                 ", service_attitude='" + service_attitude + '\'' +
                 ", ability='" + ability + '\'' +
                 ", response_speed='" + response_speed + '\'' +
                 ", evaluation_content='" + evaluation_content + '\'' +
-                ", name='" + name + '\'' +
+                ", add_time='" + add_time + '\'' +
                 ", images=" + images +
                 '}';
     }

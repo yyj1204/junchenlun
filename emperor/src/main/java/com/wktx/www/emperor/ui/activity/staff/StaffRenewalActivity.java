@@ -13,10 +13,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.recruit.hire.HireInfoData;
 import com.wktx.www.emperor.apiresult.recruit.resume.ResumeInfoData;
 import com.wktx.www.emperor.apiresult.staff.manage.StaffManageInfoData;
@@ -27,7 +25,6 @@ import com.wktx.www.emperor.utils.ArithUtil;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.DateUtil;
 import com.wktx.www.emperor.utils.GlideUtil;
-import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.staff.IStaffRenewalView;
 import com.wktx.www.emperor.utils.ToastUtil;
@@ -163,7 +160,7 @@ public class StaffRenewalActivity extends ABaseActivity<IStaffRenewalView,StaffR
 
     private void initUI() {
         //头像
-        if (manageInfoData.getPicture()==null||manageInfoData.getPicture().equals("")){
+        if (TextUtils.isEmpty(manageInfoData.getPicture())){
             if (manageInfoData.getSex().equals("1")){
                 ivHead.setImageResource(R.drawable.img_head_man);
             }else if (manageInfoData.getSex().equals("2")){
@@ -190,28 +187,36 @@ public class StaffRenewalActivity extends ABaseActivity<IStaffRenewalView,StaffR
         String beginTime = DateUtil.getTimestamp2CustomType(manageInfoData.getProject_start_time(), "yyyy.MM.dd");
         String endTime = DateUtil.getTimestamp2CustomType(manageInfoData.getProject_end_time(), "yyyy.MM.dd");
         tvHireTime.setText(beginTime+"-"+endTime);
-        //雇佣状态
+        //雇佣状态 0:全部状态 1:合作中(雇佣成功) 2:请假中 3:暂停中 4:投诉中 5:被解雇 6:完结 7:退款 8:已取消 9:续约中 10:待入职
         String hireState = manageInfoData.getType();
-        if (hireState.equals("1")){//合作中
-            ivHireState.setImageResource(R.drawable.ic_hirerecord_state1);
-        }else if (hireState.equals("2")){//请假中
-            ivHireState.setImageResource(R.drawable.ic_hirerecord_state2);
-        }else if (hireState.equals("3")){//暂停中
-            ivHireState.setImageResource(R.drawable.ic_hirerecord_state3);
-        }else if (hireState.equals("4")){//投诉中
-            ivHireState.setImageResource(R.drawable.ic_hirerecord_state4);
-        }else if (hireState.equals("5")){//被解雇
-            ivHireState.setImageResource(R.drawable.ic_hirerecord_state5);
-        }else if (hireState.equals("6")){//完结
-            ivHireState.setImageResource(R.drawable.ic_hirerecord_state6);
-        }else if (hireState.equals("7")){//退款
-            ivHireState.setImageResource(R.drawable.ic_hirerecord_state7);
-        }else if (hireState.equals("8")){//未付款到期
-            ivHireState.setImageResource(R.drawable.ic_hirerecord_state8);
-        }else if (hireState.equals("9")){//续约中
-            ivHireState.setImageResource(R.drawable.ic_hirerecord_state9);
-        }else if (hireState.equals("10")){//待入职
-            ivHireState.setImageResource(R.drawable.ic_hirerecord_state10);
+        if (!manageInfoData.getDismissal_id().equals("0")){//被解雇或者解雇中
+            if (hireState.equals("5")){
+                ivHireState.setImageResource(R.drawable.ic_hirerecord_state5);
+            }else {
+                ivHireState.setImageResource(R.drawable.ic_hirerecord_state5ing);
+            }
+        }else {
+            if (hireState.equals("1")) {//合作中
+                ivHireState.setImageResource(R.drawable.ic_hirerecord_state1);
+            } else if (hireState.equals("2")) {//请假中
+                ivHireState.setImageResource(R.drawable.ic_hirerecord_state2);
+            } else if (hireState.equals("3")) {//暂停中
+                ivHireState.setImageResource(R.drawable.ic_hirerecord_state3);
+            } else if (hireState.equals("4")) {//投诉中
+                ivHireState.setImageResource(R.drawable.ic_hirerecord_state4);
+            } else if (hireState.equals("5")) {//被解雇
+                ivHireState.setImageResource(R.drawable.ic_hirerecord_state5);
+            } else if (hireState.equals("6")) {//完结
+                ivHireState.setImageResource(R.drawable.ic_hirerecord_state6);
+            } else if (hireState.equals("7")) {//退款
+                ivHireState.setImageResource(R.drawable.ic_hirerecord_state7);
+            } else if (hireState.equals("8")) {//未付款到期
+                ivHireState.setImageResource(R.drawable.ic_hirerecord_state8_1);
+            } else if (hireState.equals("9")) {//续约中
+                ivHireState.setImageResource(R.drawable.ic_hirerecord_state9);
+            } else if (hireState.equals("10")) {//待入职
+                ivHireState.setImageResource(R.drawable.ic_hirerecord_state10);
+            }
         }
         //月薪要求
         tvStaffSalary.setText(salaryStr+"元/月");
@@ -287,11 +292,6 @@ public class StaffRenewalActivity extends ABaseActivity<IStaffRenewalView,StaffR
     /**
      * IStaffRenewalView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
     @Override
     public String getRenewalTime() {
         return tvRenewalTimeCount.getText().toString().trim();

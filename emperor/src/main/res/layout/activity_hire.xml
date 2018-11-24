@@ -359,7 +359,7 @@
                     android:hint="点击输入约定好的业绩分成"
                     android:inputType="numberDecimal"
                     android:singleLine="true"
-                    android:maxLength="20"
+                    android:maxLength="3"
                     android:background="@null" />
                 <TextView
                     android:layout_width="wrap_content"

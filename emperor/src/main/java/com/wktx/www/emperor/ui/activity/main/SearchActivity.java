@@ -15,9 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.recruit.recruitlist.RecruitListInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.main.SearchPresenter;
@@ -171,7 +169,7 @@ public class SearchActivity extends ABaseActivity<ISearchView,SearchPresenter> i
         swipeRefreshLayout.setVisibility(View.GONE);
         llHistory.setVisibility(View.VISIBLE);
         //本地历史搜索记录为空，不显示删除按钮
-        if (historyList.size() == 0 || historyList == null) {
+        if ( historyList == null||historyList.size() == 0) {
             llHistory.setBackgroundResource(R.drawable.img_nothing);
             tvDelete.setVisibility(View.GONE);
             tagflowHistory.setVisibility(View.GONE);
@@ -304,10 +302,6 @@ public class SearchActivity extends ABaseActivity<ISearchView,SearchPresenter> i
     /**
      * ISearchView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        return null;
-    }
     @Override
     public String getKeyStrStr() {
         return etSearch.getText().toString().trim();

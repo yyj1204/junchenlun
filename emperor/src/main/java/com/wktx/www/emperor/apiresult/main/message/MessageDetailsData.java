@@ -2,7 +2,7 @@ package com.wktx.www.emperor.apiresult.main.message;
 
 /**
  * Created by yyj on 2018/2/12.
- * 消息通知详情
+ * 系统消息通知详情
  * {
  *  "ret": 200,"msg": ""，
  *  "data": {

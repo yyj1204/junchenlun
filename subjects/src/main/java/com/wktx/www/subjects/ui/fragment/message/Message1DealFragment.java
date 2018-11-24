@@ -1,9 +1,11 @@
 package com.wktx.www.subjects.ui.fragment.message;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +18,9 @@ import com.wktx.www.subjects.apiresult.login.AccountInfoData;
 import com.wktx.www.subjects.apiresult.message.DealListInfoData;
 import com.wktx.www.subjects.basemvp.ALazyLoadBaseFragment;
 import com.wktx.www.subjects.presenter.message.DealPresenter;
+import com.wktx.www.subjects.ui.activity.manage.ManageActivity;
 import com.wktx.www.subjects.ui.view.IView;
+import com.wktx.www.subjects.utils.ConstantUtil;
 import com.wktx.www.subjects.utils.LoginUtil;
 import com.wktx.www.subjects.utils.MyUtils;
 import com.wktx.www.subjects.widget.MyLayoutManager;
@@ -113,11 +117,13 @@ public class Message1DealFragment extends ALazyLoadBaseFragment<IView,DealPresen
         mAdapter = new BaseQuickAdapter<DealListInfoData, BaseViewHolder>(R.layout.item_rv_tradingrecord, null) {
             @Override
             protected void convert(BaseViewHolder helper, DealListInfoData item) {
-                if (item.getRemark()==null||item.getRemark().equals("")){
-                    helper.setText(R.id.tv_remark,"无备注");
+                //交易内容
+                if (TextUtils.isEmpty(item.getRemark())){
+                    helper.setText(R.id.tv_remark,"无");
                 }else {
                     helper.setText(R.id.tv_remark,item.getRemark());
                 }
+                helper.setText(R.id.tv_companyName, "雇主:"+item.getNickname()+",工作类型:"+item.getTow());
                 helper.setText(R.id.tv_time, item.getAdd_time());
                 //判断金额格式，小数点后为"00"，直接取整
                 String money = item.getAmount();
@@ -128,7 +134,7 @@ public class Message1DealFragment extends ALazyLoadBaseFragment<IView,DealPresen
                 }else {
                     moneyStr=money;
                 }
-                helper.setText(R.id.tv_money,moneyStr);
+                helper.setText(R.id.tv_money,moneyStr+"元");
             }
         };
         mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
@@ -138,6 +144,20 @@ public class Message1DealFragment extends ALazyLoadBaseFragment<IView,DealPresen
             }
         });
         recyclerView.setAdapter(mAdapter);
+        //子控件点击事件
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (MyUtils.isFastClick1()){
+                    return;
+                }
+
+                //传递 雇佣id 到 工作管理界面
+                Intent intent = new Intent(getActivity(), ManageActivity.class);
+                intent.putExtra(ConstantUtil.KEY_DATA,mAdapter.getData().get(position).getHire_id());
+                startActivity(intent);
+            }
+        });
     }
 
     /**
@@ -192,7 +212,7 @@ public class Message1DealFragment extends ALazyLoadBaseFragment<IView,DealPresen
         if (isRefresh){
             if (result.equals("")){
 //                toastStr="暂无任何交易消息！";
-                recyclerView.setBackgroundResource(R.drawable.img_nothing_transaction);
+                recyclerView.setBackgroundResource(R.drawable.img_nothing);
             }else {
                 recyclerView.setBackgroundResource(R.drawable.img_nothing_net);
                  ToastUtil.myToast(toastStr);

@@ -29,7 +29,7 @@ public class StoreInfoEditPresenter extends ABasePresenter<IStoreInfoEditView> {
     //获取店铺信息
     public void onGetStoreInfo(String storeId){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("id", storeId);
 
@@ -46,6 +46,8 @@ public class StoreInfoEditPresenter extends ABasePresenter<IStoreInfoEditView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }
@@ -104,7 +106,7 @@ public class StoreInfoEditPresenter extends ABasePresenter<IStoreInfoEditView> {
     //编辑（添加）店铺
     public void onStoreEdit(final String storeId, String platformId, String categoryId){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("id", storeId);
         if (!getmMvpView().getLogoPic().equals("")){
@@ -129,6 +131,8 @@ public class StoreInfoEditPresenter extends ABasePresenter<IStoreInfoEditView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onStoreInfoEditResult(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onStoreInfoEditResult(false,e.getMessage());
                                 }

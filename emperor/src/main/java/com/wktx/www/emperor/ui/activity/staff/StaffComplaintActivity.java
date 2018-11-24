@@ -11,13 +11,11 @@ import android.widget.TextView;
 
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.staff.complaint.ComplaintInfoData;
 import com.wktx.www.emperor.apiresult.staff.pause.PauseInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.staff.StaffComplaintPresenter;
 import com.wktx.www.emperor.utils.ConstantUtil;
-import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.staff.IStaffPauseWorkView;
 import com.wktx.www.emperor.utils.ToastUtil;
@@ -119,11 +117,6 @@ public class StaffComplaintActivity extends ABaseActivity<IStaffPauseWorkView,St
     /**
      * IStaffPauseWorkView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
     @Override
     public String getPauseCause() {
         return etQuestion.getText().toString().trim();

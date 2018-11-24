@@ -5,12 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.subjects.R;
-import com.wktx.www.subjects.apiresult.login.AccountInfoData;
 import com.wktx.www.subjects.apiresult.message.InviteDetailsInfoData;
 import com.wktx.www.subjects.basemvp.ABaseActivity;
 import com.wktx.www.subjects.presenter.message.InviteDetailsPresenter;
@@ -18,7 +18,6 @@ import com.wktx.www.subjects.ui.view.message.IInviteDetailsView;
 import com.wktx.www.subjects.utils.ConstantUtil;
 import com.wktx.www.subjects.utils.DateUtil;
 import com.wktx.www.subjects.utils.GlideUtil;
-import com.wktx.www.subjects.utils.LoginUtil;
 import com.wktx.www.subjects.utils.MyUtils;
 import com.wktx.www.subjects.utils.ToastUtil;
 import com.wktx.www.subjects.widget.PopupContact;
@@ -114,8 +113,8 @@ public class InviteDetailsActivity extends ABaseActivity<IInviteDetailsView,Invi
             public void getInterviewWay(ConstantUtil.InterviewWay way) {
                 switch (way){
                     case PHONE://手机联系
-                        if (phoneStr.equals("")||phoneStr.equals("0")){
-                             ToastUtil.myToast("该招聘者未留下手机号！");
+                        if (TextUtils.isEmpty(phoneStr)||phoneStr.equals("0")){
+                            ToastUtil.myToast("该招聘者未留下手机号！");
                         }else {
                             Intent intent = new Intent(Intent.ACTION_DIAL);
                             Uri data = Uri.parse("tel:" + phoneStr);
@@ -124,25 +123,25 @@ public class InviteDetailsActivity extends ABaseActivity<IInviteDetailsView,Invi
                         }
                         break;
                     case QQ://QQ联系
-                        if (qqStr.equals("")){
-                             ToastUtil.myToast("该招聘者未留下QQ号！");
+                        if (TextUtils.isEmpty(qqStr)){
+                            ToastUtil.myToast("该招聘者未留下QQ号！");
                         }else {
                             if (checkQQApkExist(InviteDetailsActivity.this, "com.tencent.mobileqq")){
                                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("mqqwpa://im/chat?chat_type=wpa&uin="+qqStr+"&version=1")));
                             }else{
-                                 ToastUtil.myToast("本机未安装QQ应用！");
+                                ToastUtil.myToast("本机未安装QQ应用！");
                             }
                         }
                         break;
                     case WX://微信联系
-                        if (wechatStr.equals("")){
-                             ToastUtil.myToast("该招聘者未留下微信号！");
+                        if (TextUtils.isEmpty(wechatStr)){
+                            ToastUtil.myToast("该招聘者未留下微信号！");
                         }else {
                             //将微信号复制
                             ClipboardManager copy = (ClipboardManager) InviteDetailsActivity.this.getSystemService(Context.CLIPBOARD_SERVICE);
                             //将文本内容放到系统剪贴板里
                             copy.setText(wechatStr);
-                             ToastUtil.myToast("该招聘者微信号复制成功，快去添加好友吧！");
+                            ToastUtil.myToast("该招聘者微信号复制成功，快去添加好友吧！");
                         }
                         break;
                     default:
@@ -169,7 +168,7 @@ public class InviteDetailsActivity extends ABaseActivity<IInviteDetailsView,Invi
     }
 
     /**
-     * 接收 Message2InviteFragment 传递过来的 雇佣id
+     * 接收 Message2InviteFragment、ManageFragment、HireRecordActivity、TradingRecordActivity 传递过来的 雇佣id
      */
     private void initData() {
         hireId = getIntent().getStringExtra(ConstantUtil.KEY_DATA);
@@ -179,17 +178,12 @@ public class InviteDetailsActivity extends ABaseActivity<IInviteDetailsView,Invi
     /**
      * IInviteDetailsView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
     @Override//接受（拒绝）邀请回调
     public void onInviteResult(boolean isSuccess, String result) {
         tvContact.setEnabled(true);
         tvAccept.setEnabled(true);
         tvRefuse.setEnabled(true);
-         ToastUtil.myToast(result);
+        ToastUtil.myToast(result);
         if (isSuccess){
             finish();
         }
@@ -216,13 +210,13 @@ public class InviteDetailsActivity extends ABaseActivity<IInviteDetailsView,Invi
         tvHireTime.setText(startTimeStr+"-"+endTimeStr);
         tvTime.setText(tData.getAdd_time());
         //公司头像
-        if (tData.getHead_pic()==null||tData.getHead_pic().equals("")){
+        if (TextUtils.isEmpty(tData.getHead_pic())){
             ivHead.setImageResource(R.drawable.img_mine_head);
         }else {
             GlideUtil.loadImage(tData.getHead_pic(),R.drawable.img_mine_head,ivHead);
         }
         //提成
-        if (pushMoney.equals("0")){
+        if (TextUtils.isEmpty(pushMoney)||pushMoney.equals("0")){
             tvPushMoney.setVisibility(View.GONE);
         }else {
             tvPushMoney.setVisibility(View.VISIBLE);
@@ -230,7 +224,7 @@ public class InviteDetailsActivity extends ABaseActivity<IInviteDetailsView,Invi
     }
     @Override
     public void onRequestFailure(String result) {
-         ToastUtil.myToast(result);
+        ToastUtil.myToast(result);
         finish();
     }
     @Override

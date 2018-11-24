@@ -35,7 +35,7 @@
             android:drawableLeft="@drawable/ic_search"
             android:drawablePadding="@dimen/px_14"
             android:gravity="center|left"
-            android:hint="搜索臣民昵称"
+            android:hint="搜索臣子昵称"
             android:singleLine="true"
             android:textColor="@color/color_000000"
             android:textColorHint="@color/color_888888"

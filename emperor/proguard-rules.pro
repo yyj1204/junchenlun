@@ -50,7 +50,7 @@
 -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
     rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
-#rxandroid-1.2.1
+###rxandroid-1.2.1
 -keepclassmembers class rx.android.**{*;}
 
 # Gson
@@ -95,7 +95,7 @@
 -keep class com.yalantis.ucrop** { *; }
 -keep interface com.yalantis.ucrop** { *; }
 
-#rxjava rxandroid
+ #rxjava
 -dontwarn sun.misc.**
 -keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
  long producerIndex;
@@ -108,6 +108,19 @@
  rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
 
+#rxandroid
+-dontwarn sun.misc.**
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+   long producerIndex;
+   long consumerIndex;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode producerNode;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
+
 #glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public class * extends com.bumptech.glide.AppGlideModule
@@ -118,7 +131,6 @@
 
 # for DexGuard only
 -keepresourcexmlelements manifest/application/meta-data@value=GlideModule
-
 #----------------------------------------------------------------------------------
 
 
@@ -128,4 +140,11 @@
 **[] $VALUES;
 public *;
 }
+#----------------------------------------------------------------------------------
+
+#-----------------------------------/*Bugly热更新5*/--------------------------------
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}
+#如果使用了support-v4包
+-keep class android.support.**{*;}
 #----------------------------------------------------------------------------------

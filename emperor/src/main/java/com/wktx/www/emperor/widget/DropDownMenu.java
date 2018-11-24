@@ -168,7 +168,7 @@ public class DropDownMenu extends LinearLayout {
     }
 
     private void addTab(@NonNull List<String> tabTexts, final int i) {
-        final View tab = inflate(getContext(), R.layout.item_tab, null);
+        final View tab = inflate(getContext(), R.layout.item_dropdown_tab, null);
         tab.setLayoutParams(new LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f));
         final TextView textView = getTabTextView(tab);
         textView.setText(tabTexts.get(i));

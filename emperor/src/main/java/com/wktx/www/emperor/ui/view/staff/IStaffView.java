@@ -31,4 +31,9 @@ public interface IStaffView extends IView<List<StaffInfoData>> {
      * 获取列表检索条件失败的回调
      */
     void onGetConditionFailureResult(String result);
+
+    /**
+     * 取消雇佣订单是否成功的回调
+     */
+    void onCancelOrdersResult(boolean isSuccess, String result);
 }

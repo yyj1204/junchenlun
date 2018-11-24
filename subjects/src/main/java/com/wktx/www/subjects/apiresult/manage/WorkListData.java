@@ -5,14 +5,15 @@ import java.util.List;
 
 /**
  * Created by yyj on 2018/2/8.
- * 我的工作(公司邀请)列表
+ * 我的工作、雇佣记录列表
  * {
  * "ret": 200,"msg": "",
  * "data": {
  *         "code":0,"msg":"",
  *         "info":[{
- *                    "hire_id": "392","nickname": "尚仁网络有限公司","address_from": "江苏省-常州市-武进区", "add_time": "2018-06-08 08:58:57",
- *                    "status": "1", "dismissal_id": "0","head_pic": "http://shop.jcl.55085.cn/public/upload/head_pic/2018/04-12/201804121827586819.jpg"
+ *                    "hire_id": "392","nickname": "尚仁网络有限公司","address_from": "江苏省-常州市-武进区","status": "1","status_desc": "臣民拒绝邀请",
+ *                    "dismissal_id": "0","head_pic": "http://shop.jcl.55085.cn/public/upload/head_pic/2018/04-12/201804121827586819.jpg",
+ *                    "trusteeship_wages": "0.00","commission": "20", "project_start_time": "2018-07-02","project_end_time": "2018-08-01","tow": "客服"
  *                }]
  *          }
  * }

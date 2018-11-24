@@ -18,22 +18,22 @@ import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.listener.CustomListener;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.wktx.www.subjects.R;
-import com.wktx.www.subjects.apiresult.login.AccountInfoData;
 import com.wktx.www.subjects.apiresult.main.condition.ConditionBean;
 import com.wktx.www.subjects.apiresult.mine.works.WorksDetailsInfoData;
 import com.wktx.www.subjects.apiresult.mine.works.condition.WorksConditionInfoData;
 import com.wktx.www.subjects.basemvp.ABaseActivity;
 import com.wktx.www.subjects.presenter.mine.works.WorksDetailsPresenter;
+import com.wktx.www.subjects.ui.activity.ImageActivity;
 import com.wktx.www.subjects.ui.activity.mine.resume.CategoryPickActivity;
 import com.wktx.www.subjects.ui.adapter.mine.WorksDetailsAdapter;
 import com.wktx.www.subjects.ui.view.mine.resume.IWorksDetailsView;
 import com.wktx.www.subjects.utils.ConstantUtil;
-import com.wktx.www.subjects.utils.LoginUtil;
 import com.wktx.www.subjects.utils.MyUtils;
 import com.wktx.www.subjects.widget.MyLayoutManager;
 import com.wktx.www.subjects.utils.ToastUtil;
@@ -64,6 +64,8 @@ public class WorksDetailsActivity extends ABaseActivity<IWorksDetailsView,WorksD
     EditText etWorksTitle;
     @BindView(R.id.et_worksIntro)
     EditText etWorksIntro;
+    @BindView(R.id.tv_imgNum)
+    TextView tvImgNum;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
@@ -82,6 +84,8 @@ public class WorksDetailsActivity extends ABaseActivity<IWorksDetailsView,WorksD
     private String categoryIds;//类目ID（多个）
     private String categoryStr="";//类目名称（多个）
     private String designPatternId;//设计类型ID
+
+    private ArrayList<ConditionBean> categoryList = new ArrayList<>();//选中的类目名称
     private ArrayList<ConditionBean> categoryBeans = new ArrayList<>();//类目名称
     private ArrayList<ConditionBean> designPatternBeans = new ArrayList<>();//设计类型名称
 
@@ -95,7 +99,10 @@ public class WorksDetailsActivity extends ABaseActivity<IWorksDetailsView,WorksD
      */
     private PopupPhoto popupPhoto;
     private int themeId;
+    //全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
     private int chooseMode = PictureMimeType.ofImage();
+    //多选 or 单选 PictureConfig.MULTIPLE or PictureConfig.SINGLE
+    private int selectionMode = PictureConfig.MULTIPLE;
     private static List<LocalMedia> selectList = new ArrayList<>();
 
 
@@ -113,7 +120,7 @@ public class WorksDetailsActivity extends ABaseActivity<IWorksDetailsView,WorksD
                 ShowCustomPickerView(tvDesignPattern,designPatternBeans);
                 break;
             case R.id.linear_category://类目
-                startPickActivity(categoryBeans,ConstantUtil.REQUESTCODE_CATEGORY);
+                startPickActivity(categoryList,categoryBeans,ConstantUtil.REQUESTCODE_CATEGORY);
                 break;
             case R.id.linear_imgAdd://添加作品图片
                 //触发展示相片来源popuwindow
@@ -125,17 +132,17 @@ public class WorksDetailsActivity extends ABaseActivity<IWorksDetailsView,WorksD
                 }
                 //判断输入框格式
                 if (TextUtils.isEmpty(getWorksTitle())){
-                     ToastUtil.myToast("请填写标题！");
+                    ToastUtil.myToast("请填写标题！");
                     etWorksTitle.requestFocus();
                 }else if (TextUtils.isEmpty(categoryIds)){
-                     ToastUtil.myToast("请选择类目！");
+                    ToastUtil.myToast("请选择类目！");
                 }else if (TextUtils.isEmpty(designPatternId)){
-                     ToastUtil.myToast("请选择设计类型！");
+                    ToastUtil.myToast("请选择设计类型！");
                 }else if (TextUtils.isEmpty(getIntro())){
-                     ToastUtil.myToast("请填写简介！");
+                    ToastUtil.myToast("请填写简介！");
                     etWorksIntro.requestFocus();
                 }else if (getWorksImgUrls().size()==0) {
-                     ToastUtil.myToast( "请上传作品图片！");
+                    ToastUtil.myToast( "请上传作品图片！");
                 }else {
                     btSave.setEnabled(false);
                     getPresenter().changeWorks(resumeId,worksId);
@@ -157,11 +164,12 @@ public class WorksDetailsActivity extends ABaseActivity<IWorksDetailsView,WorksD
     /**
      * 打开多项选择弹窗界面
      */
-    private void startPickActivity(ArrayList<ConditionBean> beans, int requestCode) {
+    private void startPickActivity(ArrayList<ConditionBean> selectBeans,ArrayList<ConditionBean> beans, int requestCode) {
         if (MyUtils.isFastClick1()){
             return;
         }
         Intent intent = new Intent(WorksDetailsActivity.this, CategoryPickActivity.class);
+        intent.putExtra(ConstantUtil.KEY_POSITION, selectBeans);
         intent.putExtra(ConstantUtil.KEY_DATA, beans);
         startActivityForResult(intent,requestCode);
     }
@@ -196,6 +204,7 @@ public class WorksDetailsActivity extends ABaseActivity<IWorksDetailsView,WorksD
             tvTitle.setText(R.string.title_works_upload);
             btSave.setText("上传");
             btDelete.setVisibility(View.GONE);
+            setTvImgNum();
         }else {//编辑作品---获取作品信息
             tvTitle.setText(R.string.title_works_details);
             btSave.setText("保存");
@@ -203,6 +212,11 @@ public class WorksDetailsActivity extends ABaseActivity<IWorksDetailsView,WorksD
             //获取作品详情
             getPresenter().getInfo(worksId);
         }
+    }
+
+    //全局设置张数显示
+    private void setTvImgNum() {
+        tvImgNum.setText("作品内容（"+worksImgUrls.size()+"张）");
     }
 
     /**
@@ -219,6 +233,21 @@ public class WorksDetailsActivity extends ABaseActivity<IWorksDetailsView,WorksD
             public void onDeleteImg(int position) {
                 worksImgUrls.remove(position);
                 hzAdapter.setNewData(worksImgUrls);
+                setTvImgNum();
+            }
+        });
+        hzAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (MyUtils.isFastClick1()){
+                    return;
+                }
+                //查看大图
+                String[] imageUrls = worksImgUrls.toArray(new String[worksImgUrls.size()]);
+                Intent intent = new Intent(WorksDetailsActivity.this, ImageActivity.class);
+                intent.putExtra(ConstantUtil.KEY_DATA, imageUrls);
+                intent.putExtra(ConstantUtil.KEY_POSITION, position);
+                startActivity(intent);
             }
         });
     }
@@ -227,7 +256,7 @@ public class WorksDetailsActivity extends ABaseActivity<IWorksDetailsView,WorksD
      * 照片弹窗---选择：相册||拍照
      */
     private void showPhotoPopupWindow() {
-        popupPhoto = new PopupPhoto(WorksDetailsActivity.this, WorksDetailsActivity.this, selectList.size());
+        popupPhoto = new PopupPhoto(WorksDetailsActivity.this, WorksDetailsActivity.this);
         popupPhoto.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         popupPhoto.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         popupPhoto.setClippingEnabled(false);
@@ -252,9 +281,10 @@ public class WorksDetailsActivity extends ABaseActivity<IWorksDetailsView,WorksD
             PictureSelector.create(WorksDetailsActivity.this)
                     .openGallery(chooseMode)// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
                     .theme(themeId)// 主题样式设置 具体参考 values/styles   用法：R.style.picture.white.style
-                    .maxSelectNum(1)// 最大图片选择数量
+                    .maxSelectNum(9)// 最大图片选择数量
                     .minSelectNum(1)// 最小选择数量
                     .imageSpanCount(4)// 每行显示个数
+                    .selectionMode(selectionMode)// 多选 or 单选 PictureConfig.MULTIPLE or PictureConfig.SINGLE
                     .previewImage(true)// 是否可预览图片
                     .isZoomAnim(true)// 图片列表点击 缩放效果 默认true
                     .enableCrop(true)// 是否裁剪 true or false
@@ -268,6 +298,7 @@ public class WorksDetailsActivity extends ABaseActivity<IWorksDetailsView,WorksD
                     .showCropGrid(true)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
                     .cropCompressQuality(90)// 裁剪压缩质量 默认90 int
                     .selectionMedia(null)// 是否传入已选图片
+                    .previewEggs(true)// 预览图片时 是否增强左右滑动图片体验(图片滑动一半即可看到上一张是否选中) true or false
                     .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
         } else {//单独拍照
             PictureSelector.create(WorksDetailsActivity.this)
@@ -342,11 +373,6 @@ public class WorksDetailsActivity extends ABaseActivity<IWorksDetailsView,WorksD
      * IWorksDetailsView
      */
     @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
-    @Override
     public String getWorksTitle() {
         return etWorksTitle.getText().toString().trim();
     }
@@ -378,22 +404,23 @@ public class WorksDetailsActivity extends ABaseActivity<IWorksDetailsView,WorksD
     @Override
     public void onGetConditionFailure(String result) {
         finish();
-         ToastUtil.myToast(result);
+        ToastUtil.myToast(result);
     }
     @Override//获取图片路径回调
     public void onGetImgUrlResult(boolean isSuccess, String result) {
         if (isSuccess){
             worksImgUrls.add(result);
             hzAdapter.setNewData(worksImgUrls);
+            setTvImgNum();
         }else {
-             ToastUtil.myToast(result);
+            ToastUtil.myToast(result);
         }
     }
     @Override//编辑作品回调（增删改）
     public void onChangeWorksResult(boolean isSuccess, String result) {
         btSave.setEnabled(true);
         btDelete.setEnabled(true);
-         ToastUtil.myToast(result);
+        ToastUtil.myToast(result);
         //成功-关闭界面
         if (isSuccess){
             finish();
@@ -404,15 +431,15 @@ public class WorksDetailsActivity extends ABaseActivity<IWorksDetailsView,WorksD
         etWorksTitle.setText(tData.getTitle());
         etWorksIntro.setText(tData.getBrief_intro());
         //类目(多个)
-        List<ConditionBean> categoryList = tData.getBgatList();
+        categoryList = tData.getBgatList();
         if (categoryList.size()!=0){
-            for (int i = 0; i <categoryList.size() ; i++) {
+            for (int i = 0; i < categoryList.size() ; i++) {
                 if (i==0){
                     categoryIds = categoryList.get(i).getId();
                     categoryStr = categoryList.get(i).getName();
                 }else {
-                    categoryIds = categoryIds+","+categoryList.get(i).getId();
-                    categoryStr = categoryStr +"/"+categoryList.get(i).getName();
+                    categoryIds = categoryIds+","+ categoryList.get(i).getId();
+                    categoryStr = categoryStr +"/"+ categoryList.get(i).getName();
                 }
             }
         }
@@ -424,11 +451,12 @@ public class WorksDetailsActivity extends ABaseActivity<IWorksDetailsView,WorksD
         //多张作品图片
         worksImgUrls = tData.getContent();
         hzAdapter.setNewData(worksImgUrls);
+        setTvImgNum();
     }
     @Override
     public void onRequestFailure(String result) {
         finish();
-         ToastUtil.myToast(result);
+        ToastUtil.myToast(result);
     }
 
 
@@ -446,13 +474,15 @@ public class WorksDetailsActivity extends ABaseActivity<IWorksDetailsView,WorksD
                         // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true（音频除外）
                         // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
                         if (selectList != null) {
-                            LocalMedia media = selectList.get(0);
-                            String path = media.getCompressPath();
-                            Bitmap bitmap = BitmapFactory.decodeFile(path);
-                            if (bitmap != null) {
-                                String base64Str = MyUtils.Bitmap2StrByBase64(bitmap);
-                                //获取图片路径
-                                getPresenter().getImgUrl(base64Str);
+                            for (int i = 0; i < selectList.size(); i++) {
+                                LocalMedia media = selectList.get(i);
+                                String path = media.getCompressPath();
+                                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                                if (bitmap != null) {
+                                    String base64Str = MyUtils.Bitmap2StrByBase64(bitmap);
+                                    //获取图片路径
+                                    getPresenter().getImgUrl(base64Str);
+                                }
                             }
                         }
                         break;
@@ -460,14 +490,14 @@ public class WorksDetailsActivity extends ABaseActivity<IWorksDetailsView,WorksD
                         break;
                 }
             }else if (resultCode==ConstantUtil.RESULTCODE_PICK){//类目
-                ArrayList<ConditionBean> content = (ArrayList<ConditionBean>) data.getSerializableExtra(ConstantUtil.KEY_DATA);
-                for (int i = 0; i <content.size() ; i++) {
+                categoryList = (ArrayList<ConditionBean>) data.getSerializableExtra(ConstantUtil.KEY_DATA);
+                for (int i = 0; i <categoryList.size() ; i++) {
                     if (i==0){
-                        categoryIds = content.get(i).getId();
-                        categoryStr = content.get(i).getName();
+                        categoryIds = categoryList.get(i).getId();
+                        categoryStr = categoryList.get(i).getName();
                     }else {
-                        categoryIds = categoryIds+","+content.get(i).getId();
-                        categoryStr = categoryStr +"/"+content.get(i).getName();
+                        categoryIds = categoryIds+","+categoryList.get(i).getId();
+                        categoryStr = categoryStr +"/"+categoryList.get(i).getName();
                     }
                 }
                 tvCategory.setText(categoryStr);

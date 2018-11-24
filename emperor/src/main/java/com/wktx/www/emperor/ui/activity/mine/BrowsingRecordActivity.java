@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.mine.browsingrecord.BrowsingRecordInfoData;
 import com.wktx.www.emperor.apiresult.mine.condition.ConditionBean;
 import com.wktx.www.emperor.apiresult.mine.condition.ConditionInfoData;
@@ -25,7 +24,6 @@ import com.wktx.www.emperor.ui.activity.recruit.resume.ResumeActivity;
 import com.wktx.www.emperor.ui.adapter.DropDownListAdapter;
 import com.wktx.www.emperor.ui.adapter.mine.BrowsingListAdapter;
 import com.wktx.www.emperor.utils.ConstantUtil;
-import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.mine.IMyCollectView;
 import com.wktx.www.emperor.utils.ToastUtil;
@@ -53,7 +51,7 @@ public class BrowsingRecordActivity extends ABaseActivity<IMyCollectView,Browsin
     private DropDownListAdapter jobTypeAdapter;//条件筛选适配器
     private BrowsingListAdapter adapter;//RecyclerView 适配器
 
-    private String tabTexts[] = {"工作类型"};
+    private String[] tabTexts = {"工作类型"};
     private List<ConditionBean> jobTypeBeans = new ArrayList<>();//工作类型集合
     private List<String> jobTypeStrs = new ArrayList<>();//工作类型名称
     private String jobTypeId="0";//工作类型 0:全部岗位 1:美工 2:客服 3:运营
@@ -198,11 +196,6 @@ public class BrowsingRecordActivity extends ABaseActivity<IMyCollectView,Browsin
     /**
      * IBrowsingRecordView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
     @Override
     public String getJobType() {
         return jobTypeId;

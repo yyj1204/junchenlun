@@ -9,7 +9,8 @@ import java.util.List;
  * Created by yyj on 2018/6/25.
  * 我的工作详情内容
  * "hire_id": "410","nickname": "尚仁网络旗舰店","head_pic": "/public/upload/head_pic/2018/05-21/201805211507309664.jpeg",
- * "sales_id": "0",* "project_start_time": "2018-06-23 00:00:00","project_end_time": "2018-07-22 23:59:59",
+ * "commission": "0","sw_id": "26","sales_id": "0",* "project_start_time": "2018-06-23 00:00:00",
+ * "project_end_time": "2018-07-22 23:59:59",dismissal_id": "28",tow:"客服",
  * "paid_wages": "0.00","status": "1",,"signIn": "1","reportNum": "0",
  * "arrangementWork": [{
  *         "id": "4","report_id":"18","demand_title": "测试安排工作标题","demand_content": "测试安排工内容","shop_name": "安时代的",
@@ -21,6 +22,10 @@ public class WorkDetailsInfoData implements Serializable{
     private String hire_id;//雇佣id
     private String nickname;//姓名
     private String head_pic;//照片
+    private String commission;//提成
+    private String sw_id;//暂停工作id
+    private String dismissal_id;//解雇id
+    private String tow;//工作类型
     private String project_start_time;//项目开始时间
     private String project_end_time;//项目结束时间
     private String paid_wages;//已发工资
@@ -52,6 +57,38 @@ public class WorkDetailsInfoData implements Serializable{
 
     public void setHead_pic(String head_pic) {
         this.head_pic = head_pic;
+    }
+
+    public String getCommission() {
+        return commission;
+    }
+
+    public void setCommission(String commission) {
+        this.commission = commission;
+    }
+
+    public String getSw_id() {
+        return sw_id;
+    }
+
+    public void setSw_id(String sw_id) {
+        this.sw_id = sw_id;
+    }
+
+    public String getDismissal_id() {
+        return dismissal_id;
+    }
+
+    public void setDismissal_id(String dismissal_id) {
+        this.dismissal_id = dismissal_id;
+    }
+
+    public String getTow() {
+        return tow;
+    }
+
+    public void setTow(String tow) {
+        this.tow = tow;
     }
 
     public String getProject_start_time() {
@@ -124,6 +161,10 @@ public class WorkDetailsInfoData implements Serializable{
                 "hire_id='" + hire_id + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", head_pic='" + head_pic + '\'' +
+                ", commission='" + commission + '\'' +
+                ", sw_id='" + sw_id + '\'' +
+                ", dismissal_id='" + dismissal_id + '\'' +
+                ", tow='" + tow + '\'' +
                 ", project_start_time='" + project_start_time + '\'' +
                 ", project_end_time='" + project_end_time + '\'' +
                 ", paid_wages='" + paid_wages + '\'' +

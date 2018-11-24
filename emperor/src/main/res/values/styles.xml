@@ -46,4 +46,10 @@
         <item name="android:windowEnterAnimation">@anim/popup_in</item>
         <item name="android:windowExitAnimation">@anim/popup_out</item>
     </style>
+
+    <!--解决部分手机Activity跳转可以看到桌面：把MainActivity中的windowIsTranslucent设置为false-->
+    <style name="MainTheme" parent="@style/AppTheme">
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
+
 </resources>

@@ -19,13 +19,15 @@ import java.lang.Override;
 public class ResumeUploadActivity_ViewBinding implements Unbinder {
   private ResumeUploadActivity target;
 
-  private View view2131230943;
+  private View view2131689885;
 
-  private View view2131230786;
+  private View view2131689883;
 
-  private View view2131231164;
+  private View view2131689882;
 
-  private View view2131230903;
+  private View view2131689766;
+
+  private View view2131689884;
 
   @UiThread
   public ResumeUploadActivity_ViewBinding(ResumeUploadActivity target) {
@@ -40,7 +42,7 @@ public class ResumeUploadActivity_ViewBinding implements Unbinder {
     target.tvTitle = Utils.findRequiredViewAsType(source, R.id.tb_TvBarTitle, "field 'tvTitle'", TextView.class);
     view = Utils.findRequiredView(source, R.id.linear_add_resume, "field 'llResume' and method 'MyOnclick'");
     target.llResume = Utils.castView(view, R.id.linear_add_resume, "field 'llResume'", LinearLayout.class);
-    view2131230943 = view;
+    view2131689885 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -48,10 +50,18 @@ public class ResumeUploadActivity_ViewBinding implements Unbinder {
       }
     });
     target.rlResume = Utils.findRequiredViewAsType(source, R.id.rela_resume, "field 'rlResume'", RelativeLayout.class);
-    target.ivResume = Utils.findRequiredViewAsType(source, R.id.iv_resume, "field 'ivResume'", ImageView.class);
+    view = Utils.findRequiredView(source, R.id.iv_resume, "field 'ivResume' and method 'MyOnclick'");
+    target.ivResume = Utils.castView(view, R.id.iv_resume, "field 'ivResume'", ImageView.class);
+    view2131689883 = view;
+    view.setOnClickListener(new DebouncingOnClickListener() {
+      @Override
+      public void doClick(View p0) {
+        target.MyOnclick(p0);
+      }
+    });
     view = Utils.findRequiredView(source, R.id.bt_sureUpload, "field 'btSureUpload' and method 'MyOnclick'");
     target.btSureUpload = Utils.castView(view, R.id.bt_sureUpload, "field 'btSureUpload'", Button.class);
-    view2131230786 = view;
+    view2131689882 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -59,7 +69,7 @@ public class ResumeUploadActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.tb_IvReturn, "method 'MyOnclick'");
-    view2131231164 = view;
+    view2131689766 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -67,7 +77,7 @@ public class ResumeUploadActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.iv_delete_resume, "method 'MyOnclick'");
-    view2131230903 = view;
+    view2131689884 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -89,13 +99,15 @@ public class ResumeUploadActivity_ViewBinding implements Unbinder {
     target.ivResume = null;
     target.btSureUpload = null;
 
-    view2131230943.setOnClickListener(null);
-    view2131230943 = null;
-    view2131230786.setOnClickListener(null);
-    view2131230786 = null;
-    view2131231164.setOnClickListener(null);
-    view2131231164 = null;
-    view2131230903.setOnClickListener(null);
-    view2131230903 = null;
+    view2131689885.setOnClickListener(null);
+    view2131689885 = null;
+    view2131689883.setOnClickListener(null);
+    view2131689883 = null;
+    view2131689882.setOnClickListener(null);
+    view2131689882 = null;
+    view2131689766.setOnClickListener(null);
+    view2131689766 = null;
+    view2131689884.setOnClickListener(null);
+    view2131689884 = null;
   }
 }

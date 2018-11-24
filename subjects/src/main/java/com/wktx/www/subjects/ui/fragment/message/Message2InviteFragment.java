@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.wktx.www.subjects.R;
 import com.wktx.www.subjects.apiresult.login.AccountInfoData;
-import com.wktx.www.subjects.apiresult.manage.WorkListInfoData;
+import com.wktx.www.subjects.apiresult.message.InviteListInfoData;
 import com.wktx.www.subjects.basemvp.ALazyLoadBaseFragment;
 import com.wktx.www.subjects.presenter.message.InvitePresenter;
 import com.wktx.www.subjects.ui.activity.message.InviteDetailsActivity;
@@ -33,7 +33,7 @@ import butterknife.ButterKnife;
 /**
  * 消息片段---互动---邀请函
  */
-public class Message2InviteFragment extends ALazyLoadBaseFragment<IView,InvitePresenter> implements IView<List<WorkListInfoData>>  {
+public class Message2InviteFragment extends ALazyLoadBaseFragment<IView,InvitePresenter> implements IView<List<InviteListInfoData>>  {
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.recyclerView)
@@ -153,7 +153,7 @@ public class Message2InviteFragment extends ALazyLoadBaseFragment<IView,InvitePr
         return userInfo;
     }
     @Override
-    public void onRequestSuccess(List<WorkListInfoData> tData) {
+    public void onRequestSuccess(List<InviteListInfoData> tData) {
         recyclerView.setBackgroundResource(R.color.color_f0f0f0);
         mAdapter.setNewData(tData);
         swipeRefreshLayout.setRefreshing(false);

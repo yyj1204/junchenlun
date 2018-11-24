@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="com.jaeger.statusbarutil:library-1.4.0">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-1.4.0.aar/91db7c50eae2a3c33a88d0c7c5b39ac6/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-1.4.0.aar/91db7c50eae2a3c33a88d0c7c5b39ac6/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-1.4.0.aar/32aa65c9e00b6078635b406fed7835b8/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-1.4.0.aar/32aa65c9e00b6078635b406fed7835b8/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

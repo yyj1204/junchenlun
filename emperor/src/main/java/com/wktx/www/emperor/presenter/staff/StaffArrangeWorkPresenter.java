@@ -28,7 +28,7 @@ public class StaffArrangeWorkPresenter extends ABasePresenter<IStaffArrangeWorkV
     //获取店铺检索条件
     public void onGetStoreCondition(){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
 
         EasyHttp.post(ApiURL.COMMON_URL)
@@ -43,6 +43,8 @@ public class StaffArrangeWorkPresenter extends ABasePresenter<IStaffArrangeWorkV
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }
@@ -55,6 +57,8 @@ public class StaffArrangeWorkPresenter extends ABasePresenter<IStaffArrangeWorkV
 
                                     if (result.getCode()==0){//获取店铺检索条件成功
                                         getmMvpView().onRequestSuccess(result.getInfo());
+                                    }else if (result.getCode()==1){//获取店铺检索条件失败(无数据)
+                                        getmMvpView().onRequestFailure("");
                                     }else {//获取店铺检索条件失败
                                         getmMvpView().onRequestFailure(result.getMsg());
                                     }
@@ -69,13 +73,13 @@ public class StaffArrangeWorkPresenter extends ABasePresenter<IStaffArrangeWorkV
     //安排工作
     public void onArrangeWork(String hireId){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("hire_id", hireId);
         httpParams.put("title", getmMvpView().getDemandTitle());
         httpParams.put("content", getmMvpView().getDemandContent());
         httpParams.put("sid", getmMvpView().getStoreId());
-        httpParams.put("end_time", DateUtil.getCustomType2Timestamp(getmMvpView().getEndTime(),"yyyy-MM-dd"));
+        httpParams.put("end_time", DateUtil.getCustomType2Timestamp(getmMvpView().getEndTime(),"yyyy-MM-dd HH:mm"));
 
         LogUtil.error("安排工作","json==="+httpParams.toString());
 
@@ -91,6 +95,8 @@ public class StaffArrangeWorkPresenter extends ABasePresenter<IStaffArrangeWorkV
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onArrangeWorkResult(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onArrangeWorkResult(false,e.getMessage());
                                 }

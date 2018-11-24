@@ -3,21 +3,20 @@ package com.wktx.www.subjects.ui.activity.mine;
 
 import android.support.annotation.CallSuper;
 import android.support.annotation.UiThread;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.TextView;
 import butterknife.Unbinder;
 import butterknife.internal.DebouncingOnClickListener;
 import butterknife.internal.Utils;
 import com.wktx.www.subjects.R;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
+import com.wktx.www.subjects.widget.DropDownMenu;
 import java.lang.IllegalStateException;
 import java.lang.Override;
 
 public class MyCollectActivity_ViewBinding implements Unbinder {
   private MyCollectActivity target;
 
-  private View view2131231164;
+  private View view2131689766;
 
   @UiThread
   public MyCollectActivity_ViewBinding(MyCollectActivity target) {
@@ -30,10 +29,9 @@ public class MyCollectActivity_ViewBinding implements Unbinder {
 
     View view;
     target.tvTitle = Utils.findRequiredViewAsType(source, R.id.tb_TvBarTitle, "field 'tvTitle'", TextView.class);
-    target.swipeRefreshLayout = Utils.findRequiredViewAsType(source, R.id.swipeRefreshLayout, "field 'swipeRefreshLayout'", SwipeRefreshLayout.class);
-    target.recyclerView = Utils.findRequiredViewAsType(source, R.id.recyclerView, "field 'recyclerView'", SwipeMenuRecyclerView.class);
+    target.dropDownMenu = Utils.findRequiredViewAsType(source, R.id.dropDownMenu, "field 'dropDownMenu'", DropDownMenu.class);
     view = Utils.findRequiredView(source, R.id.tb_IvReturn, "method 'MyOnclick'");
-    view2131231164 = view;
+    view2131689766 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -50,10 +48,9 @@ public class MyCollectActivity_ViewBinding implements Unbinder {
     this.target = null;
 
     target.tvTitle = null;
-    target.swipeRefreshLayout = null;
-    target.recyclerView = null;
+    target.dropDownMenu = null;
 
-    view2131231164.setOnClickListener(null);
-    view2131231164 = null;
+    view2131689766.setOnClickListener(null);
+    view2131689766 = null;
   }
 }

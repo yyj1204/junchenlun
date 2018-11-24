@@ -20,15 +20,15 @@ import java.lang.Override;
 public class SearchActivity_ViewBinding implements Unbinder {
   private SearchActivity target;
 
-  private View view2131231225;
+  private View view2131689911;
 
-  private View view2131231164;
+  private View view2131689766;
 
-  private View view2131231094;
+  private View view2131689905;
 
-  private View view2131231090;
+  private View view2131689907;
 
-  private View view2131231290;
+  private View view2131689903;
 
   @UiThread
   public SearchActivity_ViewBinding(SearchActivity target) {
@@ -51,7 +51,7 @@ public class SearchActivity_ViewBinding implements Unbinder {
     target.tagflowHistory = Utils.findRequiredViewAsType(source, R.id.tagflow_history, "field 'tagflowHistory'", TagFlowLayout.class);
     view = Utils.findRequiredView(source, R.id.tv_delete, "field 'tvDelete' and method 'MyOnclick'");
     target.tvDelete = Utils.castView(view, R.id.tv_delete, "field 'tvDelete'", TextView.class);
-    view2131231225 = view;
+    view2131689911 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -59,7 +59,7 @@ public class SearchActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.tb_IvReturn, "method 'MyOnclick'");
-    view2131231164 = view;
+    view2131689766 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -67,7 +67,7 @@ public class SearchActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.rela_position, "method 'MyOnclick'");
-    view2131231094 = view;
+    view2131689905 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -75,7 +75,7 @@ public class SearchActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.rela_company, "method 'MyOnclick'");
-    view2131231090 = view;
+    view2131689907 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -83,7 +83,7 @@ public class SearchActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.tv_search, "method 'MyOnclick'");
-    view2131231290 = view;
+    view2131689903 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -110,15 +110,15 @@ public class SearchActivity_ViewBinding implements Unbinder {
     target.tagflowHistory = null;
     target.tvDelete = null;
 
-    view2131231225.setOnClickListener(null);
-    view2131231225 = null;
-    view2131231164.setOnClickListener(null);
-    view2131231164 = null;
-    view2131231094.setOnClickListener(null);
-    view2131231094 = null;
-    view2131231090.setOnClickListener(null);
-    view2131231090 = null;
-    view2131231290.setOnClickListener(null);
-    view2131231290 = null;
+    view2131689911.setOnClickListener(null);
+    view2131689911 = null;
+    view2131689766.setOnClickListener(null);
+    view2131689766 = null;
+    view2131689905.setOnClickListener(null);
+    view2131689905 = null;
+    view2131689907.setOnClickListener(null);
+    view2131689907 = null;
+    view2131689903.setOnClickListener(null);
+    view2131689903 = null;
   }
 }

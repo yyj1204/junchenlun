@@ -7,13 +7,11 @@ import android.widget.TextView;
 
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.staff.attendance.AttendanceRecordInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.staff.StaffAttendancePresenter;
-import com.wktx.www.emperor.ui.activity.staff.report.StaffReportActivity;
+import com.wktx.www.emperor.ui.activity.staff.report.StaffWorkListActivity;
 import com.wktx.www.emperor.utils.ConstantUtil;
-import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.IView;
 import com.wktx.www.emperor.utils.ToastUtil;
@@ -48,8 +46,9 @@ public class StaffAttendanceActivity extends ABaseActivity<IView,StaffAttendance
                 if (MyUtils.isFastClick1()){
                     return;
                 }
-                Intent intent = new Intent(this, StaffReportActivity.class);
+                Intent intent = new Intent(this, StaffWorkListActivity.class);
                 intent.putExtra(ConstantUtil.KEY_POSITION,hireId);
+                intent.putExtra(ConstantUtil.KEY_ISOK,false);
                 startActivity(intent);
                 break;
             default:
@@ -94,11 +93,6 @@ public class StaffAttendanceActivity extends ABaseActivity<IView,StaffAttendance
     /**
      * IView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
     @Override
     public void onRequestSuccess(AttendanceRecordInfoData tData) {
         tvChuqin.setText(tData.getAttendance_count());

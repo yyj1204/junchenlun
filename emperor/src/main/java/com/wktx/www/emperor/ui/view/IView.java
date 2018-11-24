@@ -32,11 +32,6 @@ public interface IView<T> extends IBaseView {
 //    void disimissProgress();
 
     /**
-     * 获取用户的token与user_id
-     */
-    AccountInfoData getUserInfo();
-
-    /**
      * 请求数据成功
      */
     void onRequestSuccess(T tData);

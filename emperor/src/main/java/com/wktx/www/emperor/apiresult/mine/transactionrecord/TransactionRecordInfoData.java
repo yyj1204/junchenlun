@@ -6,7 +6,8 @@ import java.util.List;
  * Created by yyj on 2018/3/8.
  * 交易记录内容
  * "transa_amount": "7000.00","trusteeship_amount": "63351.89",
- * "list": [{"id": "151","add_time": "1520049697","amount": "0.01","remark": ""}]
+ * "list": [{"id": "151", "hire_id": "410","add_time": "1520049697",
+ *           "amount": "0.01","remark": "" ,"name": "","status": "5","tow": "客服"}]
  */
 
 public class TransactionRecordInfoData {

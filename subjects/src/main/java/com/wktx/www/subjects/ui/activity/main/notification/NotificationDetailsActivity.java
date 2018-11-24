@@ -6,14 +6,12 @@ import android.widget.TextView;
 
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.subjects.R;
-import com.wktx.www.subjects.apiresult.main.message.MessageDetailsInfoData;
-import com.wktx.www.subjects.apiresult.login.AccountInfoData;
+import com.wktx.www.subjects.apiresult.main.notification.MessageDetailsInfoData;
 import com.wktx.www.subjects.basemvp.ABaseActivity;
-import com.wktx.www.subjects.presenter.main.NotificationPresenter;
+import com.wktx.www.subjects.presenter.main.NotificationDetailsPresenter;
 import com.wktx.www.subjects.ui.view.IView;
 import com.wktx.www.subjects.utils.ConstantUtil;
 import com.wktx.www.subjects.utils.DateUtil;
-import com.wktx.www.subjects.utils.LoginUtil;
 import com.wktx.www.subjects.utils.ToastUtil;
 
 import butterknife.BindView;
@@ -21,9 +19,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 消息通知---详情
+ * 系统消息通知---详情
  */
-public class NotificationDetailsActivity extends ABaseActivity<IView,NotificationPresenter> implements IView<MessageDetailsInfoData> {
+public class NotificationDetailsActivity extends ABaseActivity<IView,NotificationDetailsPresenter> implements IView<MessageDetailsInfoData> {
     @BindView(R.id.tb_TvBarTitle)
     TextView tvTitle;
     @BindView(R.id.tv_title)
@@ -55,8 +53,8 @@ public class NotificationDetailsActivity extends ABaseActivity<IView,Notificatio
     }
 
     @Override
-    protected NotificationPresenter createPresenter() {
-        return new NotificationPresenter();
+    protected NotificationDetailsPresenter createPresenter() {
+        return new NotificationDetailsPresenter();
     }
 
 
@@ -77,11 +75,6 @@ public class NotificationDetailsActivity extends ABaseActivity<IView,Notificatio
     /**
      * IView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
     @Override
     public void onRequestSuccess(MessageDetailsInfoData tData) {
         tvMessageTitle.setText(tData.getTitle());

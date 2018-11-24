@@ -10,7 +10,7 @@ import com.wktx.www.subjects.ui.view.IView;
 public interface IFireDetailsView extends IView<FireDetailsInfoData> {
 
     /**
-     * 接受解雇（拒绝解雇）是否成功的回调
+     * 接受解雇（拒绝解雇、申请介入）是否成功的回调
      */
     void onFireResult(boolean isSuccess, String result);
 }

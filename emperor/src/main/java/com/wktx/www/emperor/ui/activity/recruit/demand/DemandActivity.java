@@ -13,13 +13,11 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.recruit.demand.DemandListInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.recruit.demand.DemandPresenter;
 import com.wktx.www.emperor.ui.adapter.recruit.DemandListAdapter;
 import com.wktx.www.emperor.utils.ConstantUtil;
-import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.IView;
 import com.wktx.www.emperor.utils.ToastUtil;
@@ -165,11 +163,6 @@ public class DemandActivity extends ABaseActivity<IView,DemandPresenter> impleme
     /**
      * IView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
     @Override
     public void onRequestSuccess(List<DemandListInfoData> tData) {
         setData(tData);

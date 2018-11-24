@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
 
+import com.tencent.tinker.loader.app.TinkerApplication;
+import com.tencent.tinker.loader.shareutil.ShareConstants;
 import com.wktx.www.subjects.utils.ApiURL;
 import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.cache.converter.SerializableDiskConverter;
@@ -19,13 +21,27 @@ import javax.net.ssl.SSLSession;
 /**
  * @ClassName: MyApplication
  * @Description: TODO(这里用一句话描述这个类的作用)
+ * 热更新：tinker-support.gradle文件里的配置参数 enableProxyApplication = false 的情况
  */
-public class MyApplication extends Application {
+public class MyApplication extends TinkerApplication {
     // 默认存放图片的路径
     public final static String DEFAULT_SAVE_IMAGE_PATH = Environment.getExternalStorageDirectory() + File.separator + "CircleDemo" + File.separator + "Images"
             + File.separator;
     private static Context mContext;
     private static MyApplication instance;
+
+
+    /**
+     * 参数解析
+     * tinkerFlags 表示Tinker支持的类型 dex only、library only or all suuport，default: TINKER_ENABLE_ALL
+     * delegateClassName Application代理类 这里填写你自定义的ApplicationLike
+     * loaderClassName Tinker的加载器，使用默认即可
+     * tinkerLoadVerifyFlag 加载dex或者lib是否验证md5，默认为false
+     */
+    public MyApplication() {
+        super(ShareConstants.TINKER_ENABLE_ALL, MyApplicationLike.class.getCanonicalName(),  "com.tencent.tinker.loader.TinkerLoader", false);
+    }
+
 
     @Override
     public void onCreate() {
@@ -59,7 +75,7 @@ public class MyApplication extends Application {
 
                 // 打开该调试开关并设置TAG,不需要就不要加入该行
                 // 最后的true表示是否打印okgo的内部异常，一般打开方便调试错误
-                .debug("RxEasyHttp", true)
+                .debug("RxEasyHttp", false)
 
                 //如果使用默认的60秒,以下三行也不需要设置
 //                .setReadTimeOut(60 * 1000)

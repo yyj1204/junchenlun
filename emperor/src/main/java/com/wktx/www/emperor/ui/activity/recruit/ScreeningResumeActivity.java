@@ -12,7 +12,6 @@ import com.wktx.www.emperor.R;
 import com.wktx.www.emperor.apiresult.recruit.retrievalcondition.Bean;
 import com.wktx.www.emperor.apiresult.recruit.retrievalcondition.RetrievalConditionInfoData;
 import com.wktx.www.emperor.utils.ConstantUtil;
-import com.wktx.www.emperor.utils.LogUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.zhy.autolayout.AutoLayoutActivity;
 import com.zhy.view.flowlayout.FlowLayout;
@@ -33,6 +32,8 @@ public class ScreeningResumeActivity extends AutoLayoutActivity {
     TextView tvJobName;
     @BindView(R.id.tagflow_experience)
     TagFlowLayout tagflowExperience;
+    @BindView(R.id.tv_sexAll)
+    TextView tvSexAll;
     @BindView(R.id.tv_sexMan)
     TextView tvMan;
     @BindView(R.id.tv_sexWoman)
@@ -44,7 +45,7 @@ public class ScreeningResumeActivity extends AutoLayoutActivity {
     private String experienceId;//工作经验ID
     private String sexId;//性别ID
 
-    @OnClick({R.id.tv,R.id.tv_sexMan,R.id.tv_sexWoman,R.id.tv_cancel,R.id.tv_sure})
+    @OnClick({R.id.tv,R.id.tv_sexAll,R.id.tv_sexMan,R.id.tv_sexWoman,R.id.tv_cancel,R.id.tv_sure})
     public void MyOnclick(View view) {
         switch (view.getId()) {
             case R.id.tv:
@@ -52,15 +53,14 @@ public class ScreeningResumeActivity extends AutoLayoutActivity {
                 finish();
                 overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                 break;
+            case R.id.tv_sexAll://性别不限
+                setSexState("0");
+                break;
             case R.id.tv_sexMan://男
-                sexId="1";
-                tvMan.setSelected(true);
-                tvWoman.setSelected(false);
+                setSexState("1");
                 break;
             case R.id.tv_sexWoman://女
-                sexId="2";
-                tvMan.setSelected(false);
-                tvWoman.setSelected(true);
+                setSexState("2");
                 break;
             case R.id.tv_sure:
                 if (MyUtils.isFastClick1()){
@@ -73,6 +73,32 @@ public class ScreeningResumeActivity extends AutoLayoutActivity {
                 setResult(ConstantUtil.RESULTCODE_SCREENING,intent);
                 finish();
                 overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * 设置性别选中状态
+     */
+    private void setSexState(String sexState) {
+        sexId = sexState;
+        switch (sexState){
+            case "0"://不限
+                tvSexAll.setSelected(true);
+                tvMan.setSelected(false);
+                tvWoman.setSelected(false);
+                break;
+            case "1"://男
+                tvSexAll.setSelected(false);
+                tvMan.setSelected(true);
+                tvWoman.setSelected(false);
+                break;
+            case "2"://女
+                tvSexAll.setSelected(false);
+                tvMan.setSelected(false);
+                tvWoman.setSelected(true);
                 break;
             default:
                 break;
@@ -105,18 +131,15 @@ public class ScreeningResumeActivity extends AutoLayoutActivity {
         sexId = bundle.getString("sex");
         conditionInfoData = (RetrievalConditionInfoData) bundle.getSerializable(ConstantUtil.KEY_DATA);
         experienceBeans = conditionInfoData.getBottom().getWorking_years();
+        //增加"不限"
+        Bean cotitionBean = new Bean("0", "不限");
+        experienceBeans.add(0,cotitionBean);
     }
 
     private void initView() {
         tvJobName.setText(conditionInfoData.getTop().getTow().get(jobTypePosition).getName()+"筛选");
         //性别预先设置选中状态
-        if(sexId.equals("1")){
-            tvMan.setSelected(true);
-            tvWoman.setSelected(false);
-        }else if (sexId.equals("2")){
-            tvMan.setSelected(false);
-            tvWoman.setSelected(true);
-        }
+        setSexState(sexId);
     }
 
     /**

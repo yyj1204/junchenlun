@@ -16,14 +16,13 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.wktx.www.subjects.R;
-import com.wktx.www.subjects.apiresult.login.AccountInfoData;
 import com.wktx.www.subjects.apiresult.main.CompanyListInfoData;
-import com.wktx.www.subjects.apiresult.main.position.PositionListInfoData;
+import com.wktx.www.subjects.apiresult.main.demand.DemandListInfoData;
 import com.wktx.www.subjects.basemvp.ABaseActivity;
 import com.wktx.www.subjects.presenter.main.SearchPresenter;
-import com.wktx.www.subjects.ui.activity.message.CompanyRecruitActivity;
+import com.wktx.www.subjects.ui.activity.message.CompanyDemandActivity;
 import com.wktx.www.subjects.ui.adapter.main.CompanyAdapter;
-import com.wktx.www.subjects.ui.adapter.main.PositionAdapter;
+import com.wktx.www.subjects.ui.adapter.main.DemandAdapter;
 import com.wktx.www.subjects.ui.view.main.ISearchView;
 import com.wktx.www.subjects.utils.ConstantUtil;
 import com.wktx.www.subjects.utils.MyUtils;
@@ -78,7 +77,7 @@ public class SearchActivity extends ABaseActivity<ISearchView,SearchPresenter> i
     private String historystrs;//历史搜索记录的字符串
 
     //RecyclerView 适配器
-    private PositionAdapter mPositionAdapter;//职位招聘列表适配器
+    private DemandAdapter mPositionAdapter;//职位招聘列表适配器
     private CompanyAdapter mCompanyAdapter;//公司列表适配器
 
     private boolean isSearchPosition;//true:职位 false:公司
@@ -211,7 +210,7 @@ public class SearchActivity extends ABaseActivity<ISearchView,SearchPresenter> i
         swipeRefreshLayout.setVisibility(View.GONE);
         llHistory.setVisibility(View.VISIBLE);
         //本地历史搜索记录为空，不显示删除按钮
-        if (historyList.size() == 0 || historyList == null) {
+        if ( historyList == null||historyList.size() == 0) {
             llHistory.setBackgroundResource(R.drawable.img_nothing);
             tvDelete.setVisibility(View.GONE);
             tagflowHistory.setVisibility(View.GONE);
@@ -289,7 +288,7 @@ public class SearchActivity extends ABaseActivity<ISearchView,SearchPresenter> i
      * 为 RecyclerView 加载 Adapter
      */
     private void initAdapter() {
-        mPositionAdapter = new PositionAdapter(SearchActivity.this);
+        mPositionAdapter = new DemandAdapter(SearchActivity.this);
         mCompanyAdapter = new CompanyAdapter(SearchActivity.this);
         mPositionAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
@@ -325,7 +324,7 @@ public class SearchActivity extends ABaseActivity<ISearchView,SearchPresenter> i
                     return;
                 }
                 //打开公司职位招聘列表界面（传递公司id）
-                Intent intent = new Intent(SearchActivity.this, CompanyRecruitActivity.class);
+                Intent intent = new Intent(SearchActivity.this, CompanyDemandActivity.class);
                 intent.putExtra(ConstantUtil.KEY_DATA,mCompanyAdapter.getData().get(position).getUser_id());
                 startActivity(intent);
             }
@@ -375,10 +374,6 @@ public class SearchActivity extends ABaseActivity<ISearchView,SearchPresenter> i
      * ISearchView
      */
     @Override
-    public AccountInfoData getUserInfo() {
-        return null;
-    }
-    @Override
     public String getKeyStrStr() {
         return etSearch.getText().toString().trim();
     }
@@ -416,7 +411,7 @@ public class SearchActivity extends ABaseActivity<ISearchView,SearchPresenter> i
         ToastUtil.myToast(toastStr);
     }
     @Override//获取职位招聘搜索列表回调
-    public void onRequestSuccess(List<PositionListInfoData> tData) {
+    public void onRequestSuccess(List<DemandListInfoData> tData) {
         recyclerView.setBackgroundResource(R.color.color_f0f0f0);
         setPositionData(tData);
         if (isRefresh){//停止刷新

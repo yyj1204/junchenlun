@@ -1,5 +1,6 @@
 package com.wktx.www.emperor.ui.activity.staff.report;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -10,31 +11,30 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hedgehog.ratingbar.RatingBar;
-import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.staff.report.ReportDetailsInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.staff.report.ReportDetailsPresenter;
+import com.wktx.www.emperor.ui.activity.ImageActivity;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.DateUtil;
 import com.wktx.www.emperor.utils.GlideUtil;
-import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.staff.report.IReportDetailsView;
 import com.wktx.www.emperor.utils.ToastUtil;
 import com.wktx.www.emperor.widget.MyLayoutManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 /**
- * 管理我的员工---工作报告---评价报告
+ * 管理我的员工---工作报告---评价报告（报告详情）
  */
 public class ReportDetailsActivity extends ABaseActivity<IReportDetailsView,ReportDetailsPresenter> implements IReportDetailsView {
     @BindView(R.id.tb_TvBarTitle)
@@ -52,6 +52,8 @@ public class ReportDetailsActivity extends ABaseActivity<IReportDetailsView,Repo
     TextView tvOperationPlan;
     @BindView(R.id.tv_needHelp)
     TextView tvNeedHelp;
+    @BindView(R.id.tv_imgNum)
+    TextView tvImgNum;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     //评价
@@ -65,17 +67,18 @@ public class ReportDetailsActivity extends ABaseActivity<IReportDetailsView,Repo
     EditText etEvaluate;
     @BindView(R.id.bt_sureEvaluate)
     Button btSureEvaluate;
-    
-    
+
+
     private BaseQuickAdapter<String, BaseViewHolder> mAdapter;//数据表现适配器
 
-    private String evaluateState;//评价状态
+    private String evaluateTime;//评价时间
     private String reportId;//报告id
 
-    private String attitudeStar="0";//服务态度星星数
+    private String attitudeStar="0";//工作态度星星数
     private String abilityStar="0";//工作能力星星数
-    private String speedStar="0";//响应速度星星数
+    private String speedStar="0";//工作效率星星数
 
+    private List<String> imageUrlList = new ArrayList<>();//图片url集合
 
     @OnClick({R.id.tb_IvReturn,R.id.bt_sureEvaluate})
     public void MyOnclick(View view) {
@@ -91,7 +94,13 @@ public class ReportDetailsActivity extends ABaseActivity<IReportDetailsView,Repo
                     return;
                 }
                 //判断输入框格式
-                if (TextUtils.isEmpty(getEvaluateContent())){
+                if (getAttitude().equals("0")) {
+                    ToastUtil.myToast("请给工作态度评分！");
+                }else if (getAbility().equals("0")) {
+                    ToastUtil.myToast("请给工作能力评分！");
+                }else if (getSpeed().equals("0")){
+                    ToastUtil.myToast("请给工作效率评分！");
+                }else if (TextUtils.isEmpty(getEvaluateContent())){
                     ToastUtil.myToast("请输入评价留言！");
                     etEvaluate.requestFocus();
                 }else {//确认评价
@@ -109,8 +118,6 @@ public class ReportDetailsActivity extends ABaseActivity<IReportDetailsView,Repo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_details);
         ButterKnife.bind(this);
-        // 设置右滑动返回
-//        Slidr.attach(this);
         initData();
         initUI();
         initRbListener();
@@ -123,11 +130,11 @@ public class ReportDetailsActivity extends ABaseActivity<IReportDetailsView,Repo
     }
 
     /**
-     * 接收 ReportListActivity 传递过来的报告id、评价状态
+     * 接收 StaffReportListActivity 传递过来的报告id、评价状态
      */
     private void initData() {
         reportId = getIntent().getStringExtra(ConstantUtil.KEY_POSITION);
-        evaluateState = getIntent().getStringExtra(ConstantUtil.KEY_ISOK);
+        evaluateTime = getIntent().getStringExtra(ConstantUtil.KEY_ISOK);
         getPresenter().onGetReportInfo(reportId);
     }
 
@@ -135,14 +142,14 @@ public class ReportDetailsActivity extends ABaseActivity<IReportDetailsView,Repo
      * 初始化控件（待评价可编辑，已评价不可编辑）
      */
     private void initUI() {
-        if (evaluateState.equals("0")){//待评价
+        if (evaluateTime.equals("0")){//评价时间为0，待评价
             tvTitle.setText(R.string.title_report_evaluate);
             rbServiceAttitude.setmClickable(true);
             rbWorkAbility.setmClickable(true);
             rbResponseSpeed.setmClickable(true);
             etEvaluate.setEnabled(true);
             btSureEvaluate.setVisibility(View.VISIBLE);
-        }else if (evaluateState.equals("1")) {//已评价
+        }else {//评价时间不为0，已评价
             tvTitle.setText(R.string.title_report_details);
             rbServiceAttitude.setmClickable(false);
             rbWorkAbility.setmClickable(false);
@@ -185,10 +192,25 @@ public class ReportDetailsActivity extends ABaseActivity<IReportDetailsView,Repo
         recyclerView.setLayoutManager(myLayoutManager);
         mAdapter = new BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_rv_reportdetails, null) {
             @Override
-            protected void convert(BaseViewHolder helper, String item) {
+            protected void convert(final BaseViewHolder helper, String item) {
                 if (!item.equals("")){
                     ImageView ivImage = helper.getView(R.id.iv_img);
                     GlideUtil.loadImage(item,R.drawable.img_loading,ivImage);
+
+                    ivImage.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (MyUtils.isFastClick1()){
+                                return;
+                            }
+                            //查看大图
+                            String[] imageUrls = imageUrlList.toArray(new String[imageUrlList.size()]);
+                            Intent intent = new Intent(ReportDetailsActivity.this, ImageActivity.class);
+                            intent.putExtra(ConstantUtil.KEY_DATA, imageUrls);
+                            intent.putExtra(ConstantUtil.KEY_POSITION, helper.getLayoutPosition());
+                            startActivity(intent);
+                        }
+                    });
                 }
             }
         };
@@ -199,11 +221,6 @@ public class ReportDetailsActivity extends ABaseActivity<IReportDetailsView,Repo
     /**
      * IReportDetailsView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
     @Override
     public String getAttitude() {
         return attitudeStar;
@@ -240,7 +257,10 @@ public class ReportDetailsActivity extends ABaseActivity<IReportDetailsView,Repo
         rbWorkAbility.setStar(Float.parseFloat(tData.getWorking_ability()));
         rbResponseSpeed.setStar(Float.parseFloat(tData.getResponse_speed()));
         etEvaluate.setText(tData.getEvaluation_content());
-        mAdapter.setNewData(tData.getData_representation());
+
+        imageUrlList = tData.getData_representation();
+        mAdapter.setNewData(imageUrlList);
+        tvImgNum.setText("数据表现（"+imageUrlList.size()+"张）");
     }
     @Override
     public void onRequestFailure(String result) {

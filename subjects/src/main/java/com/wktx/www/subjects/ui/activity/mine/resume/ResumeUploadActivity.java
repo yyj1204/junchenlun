@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -12,25 +13,31 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.subjects.R;
-import com.wktx.www.subjects.apiresult.login.AccountInfoData;
 import com.wktx.www.subjects.apiresult.mine.resume.ResumeInfoData;
 import com.wktx.www.subjects.basemvp.ABaseActivity;
 import com.wktx.www.subjects.presenter.mine.resume.ResumeUploadPresenter;
+import com.wktx.www.subjects.ui.activity.ImageActivity;
+import com.wktx.www.subjects.ui.activity.mine.PersonInfoActivity;
+import com.wktx.www.subjects.ui.activity.mine.works.WorksDetailsActivity;
 import com.wktx.www.subjects.ui.view.mine.resume.IResumeUploadView;
 import com.wktx.www.subjects.utils.ConstantUtil;
 import com.wktx.www.subjects.utils.GlideUtil;
-import com.wktx.www.subjects.utils.LoginUtil;
 import com.wktx.www.subjects.utils.MyUtils;
 import com.wktx.www.subjects.utils.ToastUtil;
 import com.wktx.www.subjects.widget.PopupPhoto;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +65,8 @@ public class ResumeUploadActivity extends ABaseActivity<IResumeUploadView,Resume
     @BindView(R.id.bt_sureUpload)
     Button btSureUpload;//确认上传
 
+    private List<String> imageUrlList = new ArrayList<>();//图片url集合
+
     /**
      * 照片
      */
@@ -70,7 +79,7 @@ public class ResumeUploadActivity extends ABaseActivity<IResumeUploadView,Resume
     private ResumeInfoData resumeInfoData;//简历信息
     private String resumeImgUrl;//简历图片地址
 
-    @OnClick({R.id.tb_IvReturn, R.id.linear_add_resume,R.id.iv_delete_resume,R.id.bt_sureUpload})
+    @OnClick({R.id.tb_IvReturn, R.id.linear_add_resume,R.id.iv_resume,R.id.iv_delete_resume,R.id.bt_sureUpload})
     public void MyOnclick(View view) {
         switch (view.getId()) {
             case R.id.tb_IvReturn:
@@ -79,6 +88,20 @@ public class ResumeUploadActivity extends ABaseActivity<IResumeUploadView,Resume
             case R.id.linear_add_resume://添加简历图片
                 //触发展示相片来源popuwindow
                 showPhotoPopupWindow();
+                break;
+            case R.id.iv_resume://预览图片
+                if (TextUtils.isEmpty(base64Str)){//网络图片
+                    if (imageUrlList.size()==0){
+                        return;
+                    }
+                    String[] imageUrls = imageUrlList.toArray(new String[imageUrlList.size()]);
+                    Intent intent = new Intent(ResumeUploadActivity.this, ImageActivity.class);
+                    intent.putExtra(ConstantUtil.KEY_DATA, imageUrls);
+                    intent.putExtra(ConstantUtil.KEY_POSITION, 0);
+                    startActivity(intent);
+                }else {//本地裁剪后的图片
+                    PictureSelector.create(ResumeUploadActivity.this).themeStyle(themeId).openExternalPreview(0, selectList);
+                }
                 break;
             case R.id.iv_delete_resume://删除简历图片
                 llResume.setVisibility(View.VISIBLE);
@@ -92,12 +115,12 @@ public class ResumeUploadActivity extends ABaseActivity<IResumeUploadView,Resume
                 }
 
                 //如果base64Str为空，说明不传图片，即传空路径。
-                if (base64Str.equals("")){
-                    if (resumeImgUrl.equals("")){
+                if (TextUtils.isEmpty(base64Str)){
+                    if (TextUtils.isEmpty(resumeImgUrl)){
                         btSureUpload.setEnabled(false);
                         getPresenter().changeImgUrl(resumeInfoData.getId(),"");
                     }else {
-                         ToastUtil.myToast("个性简历未改变，无法重复上传！");
+                        ToastUtil.myToast("个性简历未改变，无法重复上传！");
                     }
                 }else {//如果base64Str不为空,先获取图片路径再上传
                     btSureUpload.setEnabled(false);
@@ -114,8 +137,6 @@ public class ResumeUploadActivity extends ABaseActivity<IResumeUploadView,Resume
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resume_upload);
         ButterKnife.bind(this);
-        // 设置右滑动返回
-        Slidr.attach(this);
         tvTitle.setText(R.string.title_resume_upload);
         //照片选择主题样式
         themeId = R.style.picture_default_style;
@@ -134,13 +155,14 @@ public class ResumeUploadActivity extends ABaseActivity<IResumeUploadView,Resume
         resumeInfoData = (ResumeInfoData) getIntent().getSerializableExtra(ConstantUtil.KEY_DATA);
         resumeImgUrl = resumeInfoData.getResume_content();
 
-        if (resumeImgUrl==null||resumeImgUrl.equals("")){
+        if (TextUtils.isEmpty(resumeImgUrl)){
             llResume.setVisibility(View.VISIBLE);
             rlResume.setVisibility(View.GONE);
         }else {
+            imageUrlList.add(resumeImgUrl);
             llResume.setVisibility(View.GONE);
             rlResume.setVisibility(View.VISIBLE);
-            GlideUtil.loadImage(resumeImgUrl,R.drawable.img_loading,ivResume);
+            GlideUtil.loadImageAuto(resumeImgUrl,R.drawable.img_loading,R.drawable.img_load_error,ivResume);
         }
     }
 
@@ -148,7 +170,7 @@ public class ResumeUploadActivity extends ABaseActivity<IResumeUploadView,Resume
      * 照片弹窗---选择：相册||拍照
      */
     private void showPhotoPopupWindow() {
-        popupPhoto = new PopupPhoto(ResumeUploadActivity.this, ResumeUploadActivity.this, selectList.size());
+        popupPhoto = new PopupPhoto(ResumeUploadActivity.this, ResumeUploadActivity.this);
         popupPhoto.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         popupPhoto.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         popupPhoto.setClippingEnabled(false);
@@ -189,6 +211,7 @@ public class ResumeUploadActivity extends ABaseActivity<IResumeUploadView,Resume
                     .showCropGrid(true)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
                     .cropCompressQuality(90)// 裁剪压缩质量 默认90 int
                     .selectionMedia(null)// 是否传入已选图片
+                    .previewEggs(true)// 预览图片时 是否增强左右滑动图片体验(图片滑动一半即可看到上一张是否选中) true or false
                     .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
         } else {//单独拍照
             PictureSelector.create(ResumeUploadActivity.this)
@@ -213,11 +236,6 @@ public class ResumeUploadActivity extends ABaseActivity<IResumeUploadView,Resume
     /**
      * IResumeUploadView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
     @Override//获取图片路径回调
     public void onRequestSuccess(String tData) {
         getPresenter().changeImgUrl(resumeInfoData.getId(),tData);
@@ -225,12 +243,12 @@ public class ResumeUploadActivity extends ABaseActivity<IResumeUploadView,Resume
     @Override
     public void onRequestFailure(String result) {
         btSureUpload.setEnabled(true);
-         ToastUtil.myToast(result);
+        ToastUtil.myToast(result);
     }
     @Override//上传个性简历回调
     public void onChangeResumeImgResult(boolean isSuccess, String result) {
         btSureUpload.setEnabled(true);
-         ToastUtil.myToast(result);
+        ToastUtil.myToast(result);
         //成功-关闭界面
         if (isSuccess){
             finish();

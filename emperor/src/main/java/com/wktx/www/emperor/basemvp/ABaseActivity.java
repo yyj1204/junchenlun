@@ -1,11 +1,17 @@
 package com.wktx.www.emperor.basemvp;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.jaeger.library.StatusBarUtil;
 import com.wktx.www.emperor.R;
+import com.wktx.www.emperor.apiresult.login.AccountInfoData;
+import com.wktx.www.emperor.ui.activity.login.LoginActivity;
+import com.wktx.www.emperor.utils.ConstantUtil;
+import com.wktx.www.emperor.utils.LoginUtil;
+import com.wktx.www.emperor.utils.MyUtils;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 /**
@@ -68,4 +74,21 @@ public abstract class ABaseActivity<V extends IBaseView,P extends ABasePresenter
         return presenter;
     }
 
+
+
+    @Override
+    public AccountInfoData getUserInfo() {
+        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
+        return userInfo;
+    }
+    @Override
+    public void onLoginFailure(String msg) {
+        MyUtils.showToast(this,msg);
+        if (getUserInfo()!=null){
+            LoginUtil.getinit().logout();//将本地登录信息清除
+        }
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.putExtra(ConstantUtil.KEY_ISOK,true);
+        startActivity(intent);
+    }
 }

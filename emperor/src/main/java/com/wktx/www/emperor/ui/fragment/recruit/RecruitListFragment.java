@@ -15,7 +15,6 @@ import android.widget.ListView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.wktx.www.emperor.apiresult.recruit.recruitlist.RecruitListInfoData;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.basemvp.ALazyLoadFragment;
 import com.wktx.www.emperor.presenter.recruit.recruit.RecruitListPresenter;
 import com.wktx.www.emperor.ui.activity.recruit.ScreeningResumeActivity;
@@ -50,8 +49,8 @@ public class RecruitListFragment extends ALazyLoadFragment<IRecruitListView,Recr
     private boolean isServiceType;//是否是客服类型
     private RetrievalConditionInfoData conditionInfoData;//检索条件
 
-    private String tabTexts1[] = {"擅长类目", "擅长平台"};
-    private String tabTexts2[] = {"擅长类目", "客服类型"};
+    private String[] tabTexts1 = {"擅长类目", "擅长平台"};
+//    private String tabTexts2[] = {"擅长类目", "客服类型"};
     private List<Bean> categoryBeans = new ArrayList<>();//类目集合
     private List<Bean> platformBeans = new ArrayList<>();//平台（客服类型）共用集合
     private List<String> categoryStrs = new ArrayList<>();//类目名称
@@ -67,7 +66,7 @@ public class RecruitListFragment extends ALazyLoadFragment<IRecruitListView,Recr
     private DropDownListAdapter categoryAdapter;//类目
     private DropDownListAdapter platformAdapter;//平台（客服类型）共用
     //RecyclerView 适配器
-    private RecruitListAdapter adapter;
+    private RecruitListAdapter mAdapter;
 
     private int page = 1;
     private static final int PAGE_SIZE = 10;//请求每页的数据量
@@ -135,12 +134,13 @@ public class RecruitListFragment extends ALazyLoadFragment<IRecruitListView,Recr
         conditionInfoData = (RetrievalConditionInfoData) bundle.getSerializable(ConstantUtil.KEY_DATA);
         //类目
         categoryBeans = conditionInfoData.getBottom().getBgat();
+        platformBeans = conditionInfoData.getBottom().getBgap();
         isServiceType = conditionInfoData.getTop().getTow().get(jobTypePosition).getId().equals("2");
-        if (isServiceType){//客服类型
-            platformBeans = conditionInfoData.getBottom().getCust_service_type();
-        }else {//平台
-            platformBeans = conditionInfoData.getBottom().getBgap();
-        }
+//        if (isServiceType){//客服类型
+//            platformBeans = conditionInfoData.getBottom().getCust_service_type();
+//        }else {//平台
+//            platformBeans = conditionInfoData.getBottom().getBgap();
+//        }
         for (int c = 0; c < categoryBeans.size() ; c++) {
             categoryStrs.add(categoryBeans.get(c).getName());
         }
@@ -205,11 +205,12 @@ public class RecruitListFragment extends ALazyLoadFragment<IRecruitListView,Recr
         //List<String> tabTexts 所有标题,
         // List<View> popupViews 所有菜单,
         // View contentView内容
-        if (isServiceType){//客服类型
-            dropDownMenu.setDropDownMenu(Arrays.asList(tabTexts2), popupViews, contentView);
-        }else {//平台
-            dropDownMenu.setDropDownMenu(Arrays.asList(tabTexts1), popupViews, contentView);
-        }
+        dropDownMenu.setDropDownMenu(Arrays.asList(tabTexts1), popupViews, contentView);
+//        if (isServiceType){//客服类型
+//            dropDownMenu.setDropDownMenu(Arrays.asList(tabTexts2), popupViews, contentView);
+//        }else {//平台
+//            dropDownMenu.setDropDownMenu(Arrays.asList(tabTexts1), popupViews, contentView);
+//        }
         //添加自定义的tabView(筛选)
         dropDownMenu.addTab(screenView, 2);
         screenView.setOnClickListener(new View.OnClickListener() {
@@ -253,23 +254,23 @@ public class RecruitListFragment extends ALazyLoadFragment<IRecruitListView,Recr
      * 为 RecyclerView 加载 Adapter
      */
     private void initAdapter() {
-        adapter = new RecruitListAdapter(getContext());
-        adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+        mAdapter = new RecruitListAdapter(getContext());
+        mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
                 loadMore();
             }
         });
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(mAdapter);
         //子控件点击事件
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 if (MyUtils.isFastClick1()){
                     return;
                 }
                 //将简历ID 传递给 ResumeActivity
-                RecruitListInfoData info = (RecruitListInfoData) adapter.getData().get(position);
+                RecruitListInfoData info = (RecruitListInfoData) mAdapter.getData().get(position);
                 Intent intent = new Intent(getActivity(), ResumeActivity.class);
                 intent.putExtra(ConstantUtil.KEY_POSITION,info.getId());
                 startActivity(intent);
@@ -294,7 +295,7 @@ public class RecruitListFragment extends ALazyLoadFragment<IRecruitListView,Recr
         page = 1;
         isRefresh=true;
         //这里的作用是防止下拉刷新的时候还可以上拉加载
-        adapter.setEnableLoadMore(false);
+        mAdapter.setEnableLoadMore(false);
         getPresenter().onGetRecruitList(page);
     }
     //加载更多
@@ -307,10 +308,6 @@ public class RecruitListFragment extends ALazyLoadFragment<IRecruitListView,Recr
      * IRecruitListView
      */
     @Override
-    public AccountInfoData getUserInfo() {
-        return null;
-    }
-    @Override
     public String getJobTypeId() {
         return conditionInfoData.getTop().getTow().get(jobTypePosition).getId();
     }
@@ -320,12 +317,13 @@ public class RecruitListFragment extends ALazyLoadFragment<IRecruitListView,Recr
     }
     @Override
     public String getPlatformId() {
-        if (isServiceType){
-            return "0";
-        }else {
-            //平台&客服类型共用一个参数
-            return platformId;
-        }
+        return platformId;
+//        if (isServiceType){
+//            return "0";
+//        }else {
+//            //平台&客服类型共用一个参数
+//            return platformId;
+//        }
     }
     @Override
     public String getServiceId() {
@@ -349,7 +347,7 @@ public class RecruitListFragment extends ALazyLoadFragment<IRecruitListView,Recr
         recyclerView.setBackgroundResource(R.color.color_f0f0f0);
         setData(tData);
         if (isRefresh){//停止刷新
-            adapter.setEnableLoadMore(true);
+            mAdapter.setEnableLoadMore(true);
             swipeRefreshLayout.setRefreshing(false);
         }
     }
@@ -360,22 +358,23 @@ public class RecruitListFragment extends ALazyLoadFragment<IRecruitListView,Recr
         //如果是刷新，没数据代表全部没数据
         if (isRefresh){
             if (result.equals("")){
-                toastStr="暂无任何简历！";
+//                toastStr="暂无任何简历！";
                 recyclerView.setBackgroundResource(R.drawable.img_nothing);
             }else {
                 recyclerView.setBackgroundResource(R.drawable.img_nothing_net);
+                ToastUtil.myToast(toastStr);
             }
-            adapter.setEnableLoadMore(true);
+            mAdapter.setEnableLoadMore(true);
             swipeRefreshLayout.setRefreshing(false);
         }else {//如果是加载，没数据代表加载完毕
             if (result.equals("")){//没数据
                 toastStr="已经到底了哦！";
-                adapter.loadMoreEnd();
+                mAdapter.loadMoreEnd();
             }else {//请求出错
-                adapter.loadMoreFail();
+                mAdapter.loadMoreFail();
             }
+            ToastUtil.myToast(toastStr);
         }
-        ToastUtil.myToast(toastStr);
     }
 
     /**
@@ -385,17 +384,17 @@ public class RecruitListFragment extends ALazyLoadFragment<IRecruitListView,Recr
         page++;
         final int size = data == null ? 0 : data.size();
         if (isRefresh) {
-            adapter.setNewData(data);
+            mAdapter.setNewData(data);
         } else {
             if (size > 0) {
-                adapter.addData(data);
+                mAdapter.addData(data);
             }
         }
         if (size < PAGE_SIZE) {
             //第一页如果不够一页就不显示没有更多数据布局
-            adapter.loadMoreEnd(isRefresh);
+            mAdapter.loadMoreEnd(isRefresh);
         } else {
-            adapter.loadMoreComplete();
+            mAdapter.loadMoreComplete();
         }
     }
 

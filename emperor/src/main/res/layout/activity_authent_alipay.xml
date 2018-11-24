@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="@color/color_f0f0f0"
+    tools:context="com.wktx.www.emperor.ui.activity.mine.security.AuthentAlipayActivity">
+
+    <include layout="@layout/include_toolbar_activity"/>
+
+    <LinearLayout
+        android:id="@+id/linear_cause"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_ffffff"
+        android:orientation="horizontal"
+        android:padding="@dimen/px_30">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="未通过原因:"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_15" />
+        <TextView
+            android:id="@+id/tv_cause"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_10"
+            android:maxLines="10"
+            android:textColor="@color/color_fa716f"
+            android:textSize="@dimen/sp_13" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_62"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:gravity="center_vertical"
+        android:text="支付宝账户"
+        android:textColor="@color/color_5d5d5d"
+        android:textSize="@dimen/sp_12" />
+    <EditText
+        android:id="@+id/et_alipayNum"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_72"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:background="@color/color_ffffff"
+        android:gravity="center_vertical"
+        android:hint="请填写您的支付宝账户"
+        android:singleLine="true"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_14" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_62"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:background="@color/color_f0f0f0"
+        android:gravity="center_vertical"
+        android:text="支付宝真实姓名"
+        android:textColor="@color/color_5d5d5d"
+        android:textSize="@dimen/sp_12" />
+    <EditText
+        android:id="@+id/et_alipayName"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_72"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:background="@color/color_ffffff"
+        android:gravity="center_vertical"
+        android:hint="请填写支付宝真实姓名"
+        android:singleLine="true"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_14" />
+
+    <Button
+        android:id="@+id/bt_sure"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_90"
+        android:layout_marginTop="@dimen/px_200"
+        android:layout_marginLeft="@dimen/px_30"
+        android:layout_marginRight="@dimen/px_30"
+        android:background="@drawable/selector_submit_selected_10"
+        android:gravity="center"
+        android:text="提交认证"
+        android:textColor="@color/color_ffffff"
+        android:textSize="@dimen/sp_15"/>
+</LinearLayout>

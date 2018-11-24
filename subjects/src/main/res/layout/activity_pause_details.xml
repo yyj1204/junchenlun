@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="@color/color_f0f0f0"
+    tools:context="com.wktx.www.subjects.ui.activity.manage.PauseDetailsActivity">
+
+    <include layout="@layout/include_toolbar_activity" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/color_ffffff"
+        android:padding="@dimen/px_30"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂停开始时间："
+            android:layout_weight="1"
+            android:textSize="@dimen/sp_13"
+            android:textColor="@color/color_a0a0a0"/>
+        <TextView
+            android:id="@+id/tv_pauseBeginTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/color_ffb321"
+            android:textSize="@dimen/sp_13"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/color_ffffff"
+        android:padding="@dimen/px_30"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/px_1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂停结束时间："
+            android:layout_weight="1"
+            android:textSize="@dimen/sp_13"
+            android:textColor="@color/color_a0a0a0"/>
+        <TextView
+            android:id="@+id/tv_pauseEndTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/color_ffb321"
+            android:textSize="@dimen/sp_13"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/px_30"
+        android:orientation="horizontal"
+        android:background="@color/color_ffffff"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/px_1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂停天数："
+            android:layout_weight="1"
+            android:textSize="@dimen/sp_13"
+            android:textColor="@color/color_a0a0a0"/>
+        <TextView
+            android:id="@+id/tv_pauseTimeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0天"
+            android:textColor="@color/color_ffb321"
+            android:textSize="@dimen/sp_13"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_72"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:gravity="center_vertical"
+        android:text="暂停原因"
+        android:textColor="@color/color_5d5d5d"
+        android:textSize="@dimen/sp_13" />
+    <TextView
+        android:id="@+id/tv_pauseCause"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/px_30"
+        android:background="@color/color_ffffff"
+        android:gravity="center_vertical"
+        android:text=""
+        android:textColor="@color/color_ffb321"
+        android:textSize="@dimen/sp_13" />
+
+</LinearLayout>

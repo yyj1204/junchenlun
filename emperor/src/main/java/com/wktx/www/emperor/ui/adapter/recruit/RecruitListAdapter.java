@@ -2,6 +2,7 @@ package com.wktx.www.emperor.ui.adapter.recruit;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -33,24 +34,26 @@ public class RecruitListAdapter extends BaseQuickAdapter<RecruitListInfoData, Ba
 
     @Override
     protected void convert(final BaseViewHolder helper, RecruitListInfoData item) {
-        helper.setText(R.id.tv_name,item.getName());
+        if (TextUtils.isEmpty(item.getName())){
+            helper.setText(R.id.tv_name,"匿名用户");
+        }else {
+            helper.setText(R.id.tv_name,item.getName());
+        }
         helper.setText(R.id.tv_salary,item.getMonthly_money());
         helper.setText(R.id.tv_category,item.getBgat());
+        helper.setText(R.id.tv_platform,item.getBgap());
         helper.setText(R.id.tv_style,item.getBgas());
         helper.setText(R.id.tv_speed,item.getTyping_speed());
         helper.setText(R.id.tv_staffJob,item.getTow_name());
         //根据工作类型，显示对应擅长内容
         String tow = item.getTow();
         if (tow.equals("1")) {//美工
-            helper.setGone(R.id.linear_category, true);
             helper.setGone(R.id.linear_style, true);
             helper.setGone(R.id.linear_speed, false);
         }else if (tow.equals("2")){//客服
-            helper.setGone(R.id.linear_category,true);
             helper.setGone(R.id.linear_style,false);
             helper.setGone(R.id.linear_speed,true);
         }else{//其他职位类型
-            helper.setGone(R.id.linear_category,true);
             helper.setGone(R.id.linear_style,false);
             helper.setGone(R.id.linear_speed,false);
         }
@@ -66,8 +69,8 @@ public class RecruitListAdapter extends BaseQuickAdapter<RecruitListInfoData, Ba
             helper.setText(R.id.tv_workYears,"一年");
             helper.setText(R.id.tv_workExperience,"一年");
         }else if (working_years.equals("3")){
-            helper.setText(R.id.tv_workYears,"两年");
-            helper.setText(R.id.tv_workExperience,"两年");
+            helper.setText(R.id.tv_workYears,"二年");
+            helper.setText(R.id.tv_workExperience,"二年");
         }else if (working_years.equals("4")){
             helper.setText(R.id.tv_workYears,"三年");
             helper.setText(R.id.tv_workExperience,"三年");
@@ -89,7 +92,7 @@ public class RecruitListAdapter extends BaseQuickAdapter<RecruitListInfoData, Ba
         }
         //头像
         CircleImageView ivHead = helper.getView(R.id.iv_head);
-        if (item.getPicture()==null||item.getPicture().equals("")){
+        if (TextUtils.isEmpty(item.getPicture())){
             if (item.getSex().equals("1")){
                 ivHead.setImageResource(R.drawable.img_head_man);
             }else if (item.getSex().equals("2")){
@@ -113,8 +116,9 @@ public class RecruitListAdapter extends BaseQuickAdapter<RecruitListInfoData, Ba
         }
         //作品展示
         final List<RecruitListInfoData.ResumeWorksBean> workBeans = item.getResume_works();
+        NineGridImageView nglWorks = helper.getView(R.id.ngl_works);
         if (workBeans.size()!=0){
-            NineGridImageView nglWorks = helper.getView(R.id.ngl_works);
+            nglWorks.setVisibility(View.VISIBLE);
             NineGridImageViewAdapter<RecruitListInfoData.ResumeWorksBean> adapter = new NineGridImageViewAdapter<RecruitListInfoData.ResumeWorksBean>() {
                 @Override
                 protected void onDisplayImage(Context context, ImageView imageView, RecruitListInfoData.ResumeWorksBean s) {
@@ -139,6 +143,8 @@ public class RecruitListAdapter extends BaseQuickAdapter<RecruitListInfoData, Ba
             nglWorks.setAdapter(adapter);
             nglWorks.setImagesData(workBeans);
             nglWorks.setSingleImgSize(450);
+        }else {
+            nglWorks.setVisibility(View.GONE);
         }
     }
 }

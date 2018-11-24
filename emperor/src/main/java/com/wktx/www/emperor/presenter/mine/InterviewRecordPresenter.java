@@ -63,7 +63,7 @@ public class InterviewRecordPresenter extends ABasePresenter<IMyCollectView> {
     //获取面试记录
     public void onGetInterviewRecord(int page){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("tow", getmMvpView().getJobType());
         httpParams.put("page",page+"");
@@ -82,6 +82,8 @@ public class InterviewRecordPresenter extends ABasePresenter<IMyCollectView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }

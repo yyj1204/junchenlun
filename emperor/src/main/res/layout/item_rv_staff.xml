@@ -2,13 +2,11 @@
 <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/selector_mine_linearlayout"
-    android:orientation="horizontal">
+    android:background="@drawable/selector_mine_linearlayout">
 
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:padding="@dimen/px_30"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -19,7 +17,8 @@
             android:src="@drawable/img_mine_head" />
 
         <com.zhy.autolayout.AutoLinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginLeft="@dimen/px_20">
@@ -31,9 +30,8 @@
                 android:orientation="horizontal">
                 <TextView
                     android:id="@+id/tv_name"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:singleLine="true"
                     android:text="姓名"
                     android:textStyle="bold"

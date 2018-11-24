@@ -11,13 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.mine.coupon.CouponInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.mine.MyCouponPresenter;
 import com.wktx.www.emperor.ui.adapter.mine.CouponListAdapter;
 import com.wktx.www.emperor.utils.ConstantUtil;
-import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.IView;
 import com.wktx.www.emperor.utils.ToastUtil;
@@ -129,14 +127,10 @@ public class MyCouponActivity extends ABaseActivity<IView,MyCouponPresenter> imp
     private void refresh() {
         getPresenter().onGetCouponList();
     }
+
     /**
      * IView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
     @Override
     public void onRequestSuccess(List<CouponInfoData> tData) {
         recyclerView.setBackgroundResource(R.color.color_f0f0f0);

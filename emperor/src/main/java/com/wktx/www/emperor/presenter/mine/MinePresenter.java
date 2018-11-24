@@ -27,7 +27,7 @@ public class MinePresenter extends ABasePresenter<IMineView> {
     //获取个人中心信息
     public void onGetCenterInfo(){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
 
         LogUtil.error("获取个人中心信息","json==="+httpParams.toString());
@@ -43,6 +43,8 @@ public class MinePresenter extends ABasePresenter<IMineView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }
@@ -73,7 +75,7 @@ public class MinePresenter extends ABasePresenter<IMineView> {
 
         EasyHttp.post(ApiURL.COMMON_URL)
                 .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_LOGOUT)
-                .params("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()))
+                .params("user_id", getmMvpView().getUserInfo().getUser_id())
                 .params("token", getmMvpView().getUserInfo().getToken())
                 .execute(new CallBackProxy<CustomApiResult<String>, String>
                         (new ProgressDialogCallBack<String>(mProgressDialog) {
@@ -84,6 +86,8 @@ public class MinePresenter extends ABasePresenter<IMineView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onLogout(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onLogout(false,e.getMessage());
                                 }

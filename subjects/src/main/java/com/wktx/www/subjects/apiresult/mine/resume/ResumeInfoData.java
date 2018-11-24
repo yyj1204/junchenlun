@@ -23,6 +23,7 @@ import java.util.List;
  * bgasList : [{"id":"1","name":"日韩小清新"},{"id":"2","name":"中国风"},{"id":"3","name":"时尚简约"}]
  * bgatList : [{"id":"1","name":"服装内衣"},{"id":"2","name":"母婴玩具"},{"id":"3","name":"精品鞋包"}]
  * working_years : {"id":"2","years":"一年"}
+ * "tags": []
  * work_experience : [{
  *                     "work_date":{"start_date":"2018/05","end_date":"2018/06"},
  *                     "company":"尚仁","bgat":0,"store":"http://www.sr35.com/","position":"客服性格介绍性格介绍性格介绍",
@@ -42,8 +43,9 @@ public class ResumeInfoData implements Serializable {
     private ConditionBean tow;//职位
     private ConditionBean bgap;//平台信息
     private ConditionBean working_years;//工作经验
-    private List<ConditionBean> bgatList;//擅长类目
-    private List<ConditionBean> bgasList;//风格
+    private ArrayList<ConditionBean> bgatList;//擅长类目
+    private ArrayList<ConditionBean> bgasList;//风格
+    private ArrayList<String> tags;//个人标签
     private ArrayList<WorkExperienceBean> work_experience;//工作经历
 
     public String getId() {
@@ -52,14 +54,6 @@ public class ResumeInfoData implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public ConditionBean getTow() {
-        return tow;
-    }
-
-    public void setTow(ConditionBean tow) {
-        this.tow = tow;
     }
 
     public String getName() {
@@ -76,22 +70,6 @@ public class ResumeInfoData implements Serializable {
 
     public void setPicture(String picture) {
         this.picture = picture;
-    }
-
-    public ConditionBean getBgap() {
-        return bgap;
-    }
-
-    public void setBgap(ConditionBean bgap) {
-        this.bgap = bgap;
-    }
-
-    public ConditionBean getWorking_years() {
-        return working_years;
-    }
-
-    public void setWorking_years(ConditionBean working_years) {
-        this.working_years = working_years;
     }
 
     public String getSex() {
@@ -134,28 +112,60 @@ public class ResumeInfoData implements Serializable {
         this.is_job_hunting = is_job_hunting;
     }
 
+    public ConditionBean getTow() {
+        return tow;
+    }
+
+    public void setTow(ConditionBean tow) {
+        this.tow = tow;
+    }
+
+    public ConditionBean getBgap() {
+        return bgap;
+    }
+
+    public void setBgap(ConditionBean bgap) {
+        this.bgap = bgap;
+    }
+
+    public ConditionBean getWorking_years() {
+        return working_years;
+    }
+
+    public void setWorking_years(ConditionBean working_years) {
+        this.working_years = working_years;
+    }
+
+    public ArrayList<ConditionBean> getBgatList() {
+        return bgatList;
+    }
+
+    public void setBgatList(ArrayList<ConditionBean> bgatList) {
+        this.bgatList = bgatList;
+    }
+
+    public ArrayList<ConditionBean> getBgasList() {
+        return bgasList;
+    }
+
+    public void setBgasList(ArrayList<ConditionBean> bgasList) {
+        this.bgasList = bgasList;
+    }
+
+    public ArrayList<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(ArrayList<String> tags) {
+        this.tags = tags;
+    }
+
     public ArrayList<WorkExperienceBean> getWork_experience() {
         return work_experience;
     }
 
     public void setWork_experience(ArrayList<WorkExperienceBean> work_experience) {
         this.work_experience = work_experience;
-    }
-
-    public List<ConditionBean> getBgasList() {
-        return bgasList;
-    }
-
-    public void setBgasList(List<ConditionBean> bgasList) {
-        this.bgasList = bgasList;
-    }
-
-    public List<ConditionBean> getBgatList() {
-        return bgatList;
-    }
-
-    public void setBgatList(List<ConditionBean> bgatList) {
-        this.bgatList = bgatList;
     }
 
     @Override
@@ -171,9 +181,10 @@ public class ResumeInfoData implements Serializable {
                 ", is_job_hunting='" + is_job_hunting + '\'' +
                 ", tow=" + tow +
                 ", bgap=" + bgap +
+                ", working_years=" + working_years +
                 ", bgatList=" + bgatList +
                 ", bgasList=" + bgasList +
-                ", working_years=" + working_years +
+                ", tags=" + tags +
                 ", work_experience=" + work_experience +
                 '}';
     }

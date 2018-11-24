@@ -46,7 +46,7 @@ public class StaffFireData {
 
     @Override
     public String toString() {
-        return "PauseData{" +
+        return "StaffFireData{" +
                 "code=" + code +
                 ", msg='" + msg + '\'' +
                 ", info=" + info +

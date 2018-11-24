@@ -13,13 +13,14 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/px_100"
         android:layout_marginRight="@dimen/px_100"
-        android:paddingTop="@dimen/px_30"
         android:gravity="center"
         android:orientation="vertical"
         android:background="@color/color_ffffff">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingLeft="@dimen/px_50"
+            android:paddingRight="@dimen/px_50"
             android:layout_height="@dimen/px_600"
             android:background="@color/color_ffffff">
         </android.support.v7.widget.RecyclerView>

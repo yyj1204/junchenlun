@@ -22,6 +22,7 @@ import com.wktx.www.subjects.ui.activity.manage.FireDetailsActivity;
 import com.wktx.www.subjects.ui.activity.manage.ManageActivity;
 import com.wktx.www.subjects.ui.activity.login.LoginActivity;
 import com.wktx.www.subjects.R;
+import com.wktx.www.subjects.ui.activity.message.InviteDetailsActivity;
 import com.wktx.www.subjects.ui.adapter.manage.WorkListAdapter;
 import com.wktx.www.subjects.ui.view.IView;
 import com.wktx.www.subjects.utils.ConstantUtil;
@@ -212,27 +213,36 @@ public class ManageFragment extends ALazyLoadBaseFragment<IView,ManagePresenter>
                     return;
                 }
 
-                //雇佣状态 0:未开始 1:合作中 2:请假中 3:暂停中 4:投诉中 5:被解雇 6:已完结 7:已退款 8:已取消 9:续约中
+                //雇佣状态 0:未开始 1:合作中 2:请假中 3:暂停中 4:投诉中 5:被解雇 6:已完结 7:已退款 8:已取消 9:续约中 10:待入职
                 String hireStatus = mAdapter.getData().get(position).getStatus();
                 switch (hireStatus){
                     case "1":
                     case "2":
                     case "3":
                     case "4":
-                    case "9"://传递 WorkListInfoData(雇佣id,解雇id)，前往管理我的工作界面
-                        toActivity(ManageActivity.class,position);
-                        break;
-                    case "5"://如果雇佣状态=被解雇，WorkListInfoData 传递给 FireDetailsActivity
-                        toActivity(FireDetailsActivity.class,position);
-                        break;
+                    case "5":
                     case "6":
-                         ToastUtil.myToast("该订单已完结！");
-                        break;
                     case "7":
-                         ToastUtil.myToast("该订单已退款！");
+                    case "9"://雇佣id 传递给 ManageActivity
+                        toActivity(ManageActivity.class,mAdapter.getData().get(position).getHire_id());
                         break;
-                    case "8":
-                         ToastUtil.myToast("该订单已取消！");
+                    case "8"://已取消（支付超时、取消、拒绝）
+                        switch (mAdapter.getData().get(position).getStatus_desc()){
+                            case ConstantUtil.HIRESTATE_OVERTIME:
+                                ToastUtil.myToast("该订单超时未支付已取消！");
+                                break;
+                            case ConstantUtil.HIRESTATE_CANCEL:
+                                ToastUtil.myToast("该雇主已取消该订单！");
+                                break;
+                            case ConstantUtil.HIRESTATE_REFUSED:
+                                ToastUtil.myToast("您已拒绝该雇主的入职邀请！");
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    case "10"://打开邀请详情界面
+                        toActivity(InviteDetailsActivity.class,mAdapter.getData().get(position).getHire_id());
                         break;
                     default:
                         break;
@@ -244,18 +254,18 @@ public class ManageFragment extends ALazyLoadBaseFragment<IView,ManagePresenter>
         mAdapter.setOnFireDetailsListener(new WorkListAdapter.OnFireDetailsListener() {
             @Override
             public void onFireDetails(int position) {
-                //如果解雇id不为0，WorkListInfoData 传递给 FireDetailsActivity
-                toActivity(FireDetailsActivity.class,position);
+                //如果解雇id不为0，解雇id 传递给 FireDetailsActivity
+                toActivity(FireDetailsActivity.class,mAdapter.getData().get(position).getDismissal_id());
             }
         });
     }
 
     /**
-     * 传递 WorkListInfoData 到相关界面
+     * 传递 雇佣id(解雇id) 到相关界面
      */
-    private void toActivity(Class<?> clazz,int position) {
+    private void toActivity(Class<?> clazz,String id) {
         Intent intent = new Intent(getActivity(),clazz );
-        intent.putExtra(ConstantUtil.KEY_DATA,mAdapter.getData().get(position));
+        intent.putExtra(ConstantUtil.KEY_DATA,id);
         startActivity(intent);
     }
 

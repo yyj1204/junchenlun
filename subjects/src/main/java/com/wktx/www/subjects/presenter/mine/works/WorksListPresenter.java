@@ -25,11 +25,11 @@ public class WorksListPresenter extends ABasePresenter<IView> {
     //获取作品列表
     public void getInfo(String resumeId,int page){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("id", resumeId);
         httpParams.put("page",page+"");
-        httpParams.put("limit","10");
+        httpParams.put("pageSize","10");
 
         LogUtil.error("获取作品列表","json==="+httpParams.toString());
 
@@ -45,6 +45,8 @@ public class WorksListPresenter extends ABasePresenter<IView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }

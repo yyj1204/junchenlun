@@ -109,6 +109,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/px_12"
                     android:text=""
+                    android:singleLine="true"
                     android:textColor="@color/color_000000"
                     android:textSize="@dimen/sp_13" />
             </com.zhy.autolayout.AutoLinearLayout>

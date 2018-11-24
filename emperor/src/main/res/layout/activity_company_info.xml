@@ -89,12 +89,13 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/color_999999"
                     android:singleLine="true"
+                    android:hint="请选择"
                     android:gravity="right"
                     android:textSize="@dimen/sp_14"/>
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/px_30"
+                    android:layout_width="@dimen/px_16"
+                    android:layout_height="@dimen/px_20"
+                    android:layout_marginLeft="@dimen/px_14"
                     android:src="@drawable/ic_demand_arrow_right_gray"/>
             </LinearLayout>
             <LinearLayout

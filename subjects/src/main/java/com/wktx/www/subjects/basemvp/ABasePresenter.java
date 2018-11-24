@@ -35,7 +35,11 @@ public abstract class ABasePresenter<V extends IBaseView> {
      * @return
      */
     public V getmMvpView() {
-        return mMvpView;
+        if (!isViewAttached()) {
+            throw new IllegalStateException("view 不能为空!");
+        }else {
+            return mMvpView;
+        }
     }
 
     /**

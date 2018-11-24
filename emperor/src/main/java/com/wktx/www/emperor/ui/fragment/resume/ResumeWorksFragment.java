@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.wktx.www.emperor.ui.activity.recruit.resume.WorksDetailsActivity;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.recruit.resume.WorksListInfoData;
 import com.wktx.www.emperor.basemvp.ALazyLoadFragment;
 import com.wktx.www.emperor.presenter.recruit.resume.WorksListPresenter;
@@ -167,11 +166,6 @@ public class ResumeWorksFragment extends ALazyLoadFragment<IView,WorksListPresen
     /**
      * IView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        return null;
-    }
-
     @Override
     public void onRequestSuccess(List<WorksListInfoData> tData) {
         recyclerView.setBackgroundResource(R.color.color_ffffff);

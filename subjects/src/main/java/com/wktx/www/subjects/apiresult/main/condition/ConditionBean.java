@@ -11,6 +11,7 @@ import java.io.Serializable;
 public class ConditionBean implements Serializable{
     private String id;
     private String name;
+    private boolean isSelected;//是否被选中
 
     public ConditionBean(String id, String name) {
         this.id = id;
@@ -31,6 +32,14 @@ public class ConditionBean implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     @Override

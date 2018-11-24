@@ -27,7 +27,7 @@ public class PurseRechargePresenter extends ABasePresenter<IPurseRechargeView> {
     //获取支付宝充值订单号金额
     public void getAliPayInfo(){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("amount", getmMvpView().getMoneyStr());
         httpParams.put("pay_method", "alipay");//支付方式
@@ -46,6 +46,8 @@ public class PurseRechargePresenter extends ABasePresenter<IPurseRechargeView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onAlipaySuccessResult(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onAlipaySuccessResult(false,e.getMessage());
                                 }
@@ -72,7 +74,7 @@ public class PurseRechargePresenter extends ABasePresenter<IPurseRechargeView> {
     //获取微信充值订单号金额
     public void getWeChatPayInfo(){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("amount", getmMvpView().getMoneyStr());
         httpParams.put("pay_method", "wxpay");//支付方式
@@ -91,6 +93,8 @@ public class PurseRechargePresenter extends ABasePresenter<IPurseRechargeView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }

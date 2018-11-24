@@ -10,9 +10,8 @@ import java.util.List;
  * "data": {
  *         "code":0,"msg":"",
  *         "info":[{
- *                "id":"1","uid":"2648","type":"1","design_pattern":"0","service_attitude":"1",
- *                "ability":"2","response_speed":"3","evaluation_content":"123456","name":"8b******eb",
- *                "images":[]
+ *                 "username": "ph_da92e307ae9ce43843c563119cdd00e7","nickname": "阿饭","id": "11","uid": "2649","service_attitude": "5",
+ *                 "ability": "4","response_speed": "3","images": [],"evaluation_content": "很后悔","add_time": "1531813392"
  *                }]
  *          }
  * }

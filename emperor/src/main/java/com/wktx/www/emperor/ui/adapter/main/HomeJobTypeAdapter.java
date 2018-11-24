@@ -1,6 +1,8 @@
 package com.wktx.www.emperor.ui.adapter.main;
 
 import android.content.Context;
+import android.text.TextUtils;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.wktx.www.emperor.R;
@@ -26,9 +28,9 @@ public class HomeJobTypeAdapter extends BaseQuickAdapter<JobTypeInfoData, BaseVi
         helper.setText(R.id.tv_name, item.getName());
         //职业图标（最后两个案例、招聘指南图标是写死的）
         CircleImageView ivImg = helper.getView(R.id.iv_img);
-        if (item.getPicture()==null||item.getPicture().equals("")){
-            if (item.getName().equals("美工案例")){
-                ivImg.setImageResource(R.drawable.ic_home_example);
+        if (TextUtils.isEmpty(item.getPicture())){
+            if (item.getName().equals("案例")){
+                ivImg.setImageResource(R.drawable.ic_home_cases);
             }else if (item.getName().equals("招聘指南")){
                 ivImg.setImageResource(R.drawable.ic_home_guide);
             }else {

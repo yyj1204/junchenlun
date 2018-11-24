@@ -15,23 +15,21 @@ import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.listener.CustomListener;
-import com.bumptech.glide.Glide;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.mine.store.StoreConditionBean;
 import com.wktx.www.emperor.apiresult.mine.store.StoreConditionInfoData;
 import com.wktx.www.emperor.apiresult.mine.store.StoreInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.mine.store.StoreInfoEditPresenter;
+import com.wktx.www.emperor.ui.activity.ImageActivity;
 import com.wktx.www.emperor.ui.activity.mine.CompanyInfoActivity;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.GlideUtil;
-import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.mine.IStoreInfoEditView;
 import com.wktx.www.emperor.utils.ToastUtil;
@@ -89,8 +87,9 @@ public class StoreInfoEditActivity extends ABaseActivity<IStoreInfoEditView,Stor
 
     private ArrayList<String> optionsItemStrs = new ArrayList<>();//选择器字符串集合
 
+    private List<String> imageUrlList = new ArrayList<>();//图片url集合
 
-    @OnClick({R.id.tb_IvReturn,R.id.linear_storeLogo,R.id.linear_storePlatform,R.id.linear_storeCategory,R.id.bt_save})
+    @OnClick({R.id.tb_IvReturn,R.id.linear_storeLogo,R.id.civ_storeLogo,R.id.linear_storePlatform,R.id.linear_storeCategory,R.id.bt_save})
     public void MyOnclick(View view) {
         //将输入法隐藏
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -102,6 +101,20 @@ public class StoreInfoEditActivity extends ABaseActivity<IStoreInfoEditView,Stor
             case R.id.linear_storeLogo://店铺头像
                 //触发展示相片来源popuwindow
                 showLogoPopup();
+                break;
+            case R.id.civ_storeLogo://查看店铺头像大图
+                if (TextUtils.isEmpty(logoBase64Str)){//网络图片
+                    if (imageUrlList.size()==0){
+                        return;
+                    }
+                    String[] imageUrls = imageUrlList.toArray(new String[imageUrlList.size()]);
+                    Intent intent = new Intent(StoreInfoEditActivity.this, ImageActivity.class);
+                    intent.putExtra(ConstantUtil.KEY_DATA, imageUrls);
+                    intent.putExtra(ConstantUtil.KEY_POSITION, 0);
+                    startActivity(intent);
+                }else {//本地裁剪后的图片
+                    PictureSelector.create(StoreInfoEditActivity.this).themeStyle(themeId).openExternalPreview(0, selectList);
+                }
                 break;
             case R.id.linear_storePlatform://选择平台
                 if (platformBeans.size()!=0){
@@ -157,7 +170,7 @@ public class StoreInfoEditActivity extends ABaseActivity<IStoreInfoEditView,Stor
     }
 
     /**
-     * 接收 StoreInfoActivity 传过来店铺ID
+     * 接收 StoreInfoActivity 、DemandReleaseActivity、StaffArrangeWorkActivity传过来店铺ID
      */
     private void initData() {
         storeId = getIntent().getStringExtra(ConstantUtil.KEY_POSITION);
@@ -176,7 +189,7 @@ public class StoreInfoEditActivity extends ABaseActivity<IStoreInfoEditView,Stor
      * 更换公司logo弹窗
      */
     private void showLogoPopup() {
-        popupPhoto = new PopupPhoto(StoreInfoEditActivity.this, StoreInfoEditActivity.this, selectList.size());
+        popupPhoto = new PopupPhoto(StoreInfoEditActivity.this, StoreInfoEditActivity.this);
         popupPhoto.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         popupPhoto.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         popupPhoto.setClippingEnabled(false);
@@ -220,6 +233,8 @@ public class StoreInfoEditActivity extends ABaseActivity<IStoreInfoEditView,Stor
                     .showCropGrid(false)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
                     .cropCompressQuality(90)// 裁剪压缩质量 默认90 int
                     .selectionMedia(null)// 是否传入已选图片
+                    .withAspectRatio(1,1)// int 裁剪比例 如16:9 3:2 3:4 1:1 可自定义
+                    .previewEggs(true)// 预览图片时 是否增强左右滑动图片体验(图片滑动一半即可看到上一张是否选中) true or false
                     .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
         } else {//单独拍照
             PictureSelector.create(StoreInfoEditActivity.this)
@@ -237,6 +252,7 @@ public class StoreInfoEditActivity extends ABaseActivity<IStoreInfoEditView,Stor
                     .showCropFrame(false)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false   true or false
                     .showCropGrid(false)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
                     .cropCompressQuality(90)// 裁剪压缩质量 默认90 int
+                    .withAspectRatio(1,1)// int 裁剪比例 如16:9 3:2 3:4 1:1 可自定义
                     .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
         }
     }
@@ -244,11 +260,6 @@ public class StoreInfoEditActivity extends ABaseActivity<IStoreInfoEditView,Stor
     /**
      * IStoreInfoEditView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
     @Override
     public String getLogoPic() {
         return logoBase64Str;
@@ -266,9 +277,10 @@ public class StoreInfoEditActivity extends ABaseActivity<IStoreInfoEditView,Stor
         platformId = tData.getBgap();
         categoryId = tData.getBgat();
         //设置圆形店铺logo
-        if (tData.getShop_logo()==null||tData.getShop_logo().equals("")) {
+        if (TextUtils.isEmpty(tData.getShop_logo())) {
             ivLogo.setImageResource(R.drawable.img_mine_head);
         }else {
+            imageUrlList.add(tData.getShop_logo());
             GlideUtil.loadImage(tData.getShop_logo(),R.drawable.img_mine_head,ivLogo);
         }
         tvPlatform.setText(tData.getBgap_name());

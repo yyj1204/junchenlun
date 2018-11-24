@@ -9,7 +9,9 @@ package com.wktx.www.emperor.apiresult.mine.transactionrecord;
  * "data": {
  *         "code":0,"msg":"",
  *         "info": {"transa_amount": "7000.00","trusteeship_amount": "63351.89",
- *         "list": [{"id": "151","add_time": "1520049697","amount": "0.01","remark": ""}]}
+ *                  "list": [{"id": "151", "hire_id": "410","add_time": "1520049697",
+ *                  "amount": "0.01","remark": "" ,"name": "","status": "5","tow": "客服"}]
+ *                  }
  *         }
  * }
  */

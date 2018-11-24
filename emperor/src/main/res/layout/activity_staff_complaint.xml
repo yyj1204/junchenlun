@@ -27,11 +27,10 @@
         android:layout_height="@dimen/px_72"
         android:paddingLeft="@dimen/px_30"
         android:paddingRight="@dimen/px_30"
-        android:maxLength="10"
         android:background="@color/color_ffffff"
         android:gravity="center_vertical"
         android:singleLine="true"
-        android:hint="请填写问题(10字之内)"
+        android:hint="请填写问题"
         android:textColor="@color/color_999999"
         android:textSize="@dimen/sp_14" />
     <TextView
@@ -54,11 +53,9 @@
         android:paddingRight="@dimen/px_30"
         android:background="@color/color_ffffff"
         android:gravity="top|left"
-        android:maxLength="100"
-        android:hint="请描述具体内容(100字之内)"
+        android:hint="请描述具体内容"
         android:textColor="@color/color_999999"
         android:textSize="@dimen/sp_14" />
-
     <Button
         android:id="@+id/bt_sureComplaint"
         android:layout_width="match_parent"

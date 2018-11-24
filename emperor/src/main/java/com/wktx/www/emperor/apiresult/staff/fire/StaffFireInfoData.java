@@ -119,9 +119,9 @@ public class StaffFireInfoData {
 
     @Override
     public String toString() {
-        return "PauseInfoData{" +
+        return "StaffFireInfoData{" +
                 "rid='" + rid + '\'' +
-                ",name='" + name + '\'' +
+                ", name='" + name + '\'' +
                 ", picture='" + picture + '\'' +
                 ", sex='" + sex + '\'' +
                 ", tow='" + tow + '\'' +

@@ -13,6 +13,11 @@ public class ConstantUtil {
     public static final String TOAST_LOGOUT= "请先登录！";
     public static final String TOAST_ERROR= "请求出错了~";
 
+    //雇佣状态status_desc字符串
+    public static final String HIRESTATE_OVERTIME= "订单超时未支付已自动取消";
+    public static final String HIRESTATE_CANCEL= "手动取消订单";
+    public static final String HIRESTATE_REFUSED= "臣民拒绝邀请";
+
     //退出登录弹窗
     public static final String LOGOUT = "退出";
 
@@ -34,7 +39,7 @@ public class ConstantUtil {
      * 区分是哪个片段进入消息详情界面的
      */
     public static final String  ACTIVITY_ZPXQ= "PositionDetailsActivity";//招聘详情
-    public static final String  ACTIVITY_ZPLB= "CompanyRecruitActivity";//招聘列表
+    public static final String  ACTIVITY_ZPLB= "CompanyDemandActivity";//公司招聘列表
     public static final String  ACTIVITY_GG= "NotificationNoticeFragment";//公告
     public static final String  ACTIVITY_TX= "NotificationRemindFragment";//提醒
 
@@ -61,6 +66,17 @@ public class ConstantUtil {
     public static enum Type {
         PHONE, CAMERA
     }
+
+    /**
+     * 支付宝支付结果
+     */
+    public static final int SDK_PAY_FLAG = 1;
+    public static final int SDK_AUTH_FLAG = 2;
+    /**
+     * 微信支付
+     */
+    //微信APPId
+    public static final String WX_APP_ID = "wxdfb137b9c34a5a28";
 
 
     /**

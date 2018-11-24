@@ -12,8 +12,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.r0adkll.slidr.Slidr;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.mine.browsingrecord.BrowsingRecordInfoData;
 import com.wktx.www.emperor.apiresult.mine.condition.ConditionBean;
 import com.wktx.www.emperor.apiresult.mine.condition.ConditionInfoData;
@@ -24,7 +22,6 @@ import com.wktx.www.emperor.ui.adapter.DropDownListAdapter;
 import com.wktx.www.emperor.R;
 import com.wktx.www.emperor.ui.adapter.mine.CollectListAdapter;
 import com.wktx.www.emperor.utils.ConstantUtil;
-import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.mine.IMyCollectView;
 import com.wktx.www.emperor.utils.ToastUtil;
@@ -59,7 +56,7 @@ public class MyCollectActivity extends ABaseActivity<IMyCollectView,MyCollectPre
     private DropDownListAdapter jobTypeAdapter;//条件筛选适配器
     private CollectListAdapter adapter;//RecyclerView 适配器
 
-    private String tabTexts[] = {"工作类型"};
+    private String[] tabTexts = {"工作类型"};
     private List<ConditionBean> jobTypeBeans = new ArrayList<>();//工作类型集合
     private List<String> jobTypeStrs = new ArrayList<>();//工作类型名称
     private String jobTypeId="0";//工作类型 0:全部岗位 1:美工 2:客服 3:运营
@@ -93,8 +90,6 @@ public class MyCollectActivity extends ABaseActivity<IMyCollectView,MyCollectPre
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_collect);
         ButterKnife.bind(this);
-        // 设置右滑动返回
-        Slidr.attach(this);
         tvTitle.setText(R.string.title_my_collect);
         initData();
         initView();
@@ -102,7 +97,6 @@ public class MyCollectActivity extends ABaseActivity<IMyCollectView,MyCollectPre
         initAdapter();
         initRefreshLayout();
     }
-
 
     @Override
     protected MyCollectPresenter createPresenter() {
@@ -263,11 +257,6 @@ public class MyCollectActivity extends ABaseActivity<IMyCollectView,MyCollectPre
     /**
      * IBrowsingRecordView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
     @Override
     public String getJobType() {
         return jobTypeId;

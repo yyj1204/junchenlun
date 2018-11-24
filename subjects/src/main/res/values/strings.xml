@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">君臣论臣民端</string>
+    <string name="app_name">君臣论-臣子</string>
+    <!--<string name="app_name">君臣论臣子版</string>-->
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -9,30 +10,44 @@
     <string name="title_message">消息通知</string>
     <string name="title_notice_details">公告详情</string>
     <string name="title_remind_details">提醒详情</string>
+    <string name="title_browsing_record">浏览记录</string>
 
     <!--管理-->
     <string name="title_tab_manager">我的工作</string>
     <string name="title_manage">管理我的工作</string>
+    <string name="title_company_storelist">店铺列表</string>
+    <string name="title_manage_leave">请假申请</string>
+    <string name="title_leave_list">请假记录</string>
+    <string name="title_leave_details">请假详情</string>
     <string name="title_fire_details">解雇详情</string>
+    <string name="title_pause_details">暂停工作详情</string>
+    <string name="title_complaint_details">投诉详情</string>
     <string name="title_manage_salary">我的工资</string>
     <string name="title_manage_attendance">签到记录</string>
     <string name="title_manage_saleroom">销售额</string>
-    <string name="title_manage_report">工作安排</string>
+    <string name="title_work_arrange">工作安排</string>
     <string name="title_report_list">工作报告</string>
     <string name="title_report_details">报告详情</string>
     <string name="title_report_release">提交报告</string>
 
     <!--消息-->
-    <string name="title_company_recruit">招聘列表</string>
+    <string name="title_company_demand">招聘需求列表</string>
     <string name="title_invite_details">邀请详情</string>
 
     <!--我的账户-->
     <string name="title_tab_mine">我的账户</string>
     <string name="title_person_info">个人信息</string>
-    <string name="title_certification">个人认证</string>
+    <string name="title_account_authent">账户认证</string>
+    <string name="title_authent_personal">个人认证</string>
+    <string name="title_authent_studio">工作室认证</string>
+    <string name="title_my_purse">我的钱包</string>
+    <string name="title_purse_recharge">钱包充值</string>
+    <string name="title_purse_withdraw">钱包提现</string>
+    <string name="title_withdraw_list">提现记录</string>
     <string name="title_my_resume">我的简历</string>
     <string name="title_resume_upload">上传简历</string>
     <string name="title_resume_preview">预览简历</string>
+    <string name="title_resume_tags">个人标签</string>
     <string name="title_work_experience">工作经历</string>
     <string name="title_experience_add">新增工作经历</string>
     <string name="title_experience_edit">编辑工作经历</string>
@@ -44,8 +59,13 @@
     <string name="title_my_collect">我的收藏</string>
     <string name="title_trading_record">交易记录</string>
     <string name="title_interview_record">面试记录</string>
-    <string name="title_account_security">账号安全</string>
-    <string name="title_pwd_edit">修改登录密码</string>
+    <string name="title_hire_record">雇佣记录</string>
+    <string name="title_account_security">账户安全</string>
+    <string name="title_edit_loginpwd">修改登录密码</string>
+    <string name="title_edit_paypwd">修改支付密码</string>
+    <string name="title_edit_loginphone">修改手机号码</string>
+    <string name="title_authent_alipay">支付宝认证</string>
+    <string name="title_about_us">关于我们</string>
     <string name="title_contact_service">联系客服</string>
 
     <!-- 登录注册 -->
@@ -55,9 +75,15 @@
 
 
     <!--密码输入限制-->
-    <string name="string_pwd">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="string_pwd_login">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="string_pwd_pay">0123456789</string>
 
     <!--管理tab 没有工作提示语-->
     <string name="string_manage_hint1">在线全职办公管理</string>
     <string name="string_manage_hint2">在线入职and移动办公</string>
+
+    <!--关于我们-->
+    <string name="string_aboutus_content">    《君臣论》平台隶属于泉州劲氏软件科技有限公司，是互联网及电商运营技术人才云端工作方式的威客和众包服务平台。企业通过平台可以快速雇佣、管理、工资托管互联网人才，提升企业竞争力；
+        互联网人才可以通过平台云端工作、提交工作报告，实现高效、自由的工作方式。平台自正式运营以来，互联网企业雇主数超过30000家，经过实名认证的互联网人才数超过10000人次。\n    云端全职作为一种工作模式，不仅降低了互联网企业用人成本，还解决了企业当地互联网技术人才资源问题，提高了工作效率，而且让互联网人才的专业能力得到更大的发挥，收入得到明显提高。</string>
+    <string name="string_aboutus_web">官网：www.junchenlun.com</string>
 </resources>

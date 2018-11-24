@@ -80,7 +80,7 @@
                 android:text="  选择雇佣时间"
                 android:textSize="12sp"
                 android:layout_marginLeft="23dp"
-                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:drawableLeft="@drawable/ic_position_circle_disable"
                 android:textColor="@color/color_999999"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -89,7 +89,7 @@
                 android:text="  发送入职邀请"
                 android:textSize="12sp"
                 android:layout_marginLeft="23dp"
-                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:drawableLeft="@drawable/ic_position_circle_disable"
                 android:textColor="@color/color_999999"/>
         </LinearLayout>
 
@@ -126,7 +126,7 @@
                 android:text="  支付宝支付"
                 android:textSize="12sp"
                 android:layout_marginLeft="23dp"
-                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:drawableLeft="@drawable/ic_position_circle_disable"
                 android:textColor="@color/color_999999"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -135,7 +135,7 @@
                 android:text="  微信支付"
                 android:textSize="12sp"
                 android:layout_marginLeft="23dp"
-                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:drawableLeft="@drawable/ic_position_circle_disable"
                 android:textColor="@color/color_999999"/>
         </LinearLayout>
     </LinearLayout>
@@ -186,7 +186,7 @@
                 android:text="  第三方担保交易"
                 android:textSize="12sp"
                 android:layout_marginLeft="23dp"
-                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:drawableLeft="@drawable/ic_position_circle_disable"
                 android:textColor="@color/color_999999"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -195,7 +195,7 @@
                 android:text="  员工按雇佣时间确定入职"
                 android:textSize="12sp"
                 android:layout_marginLeft="23dp"
-                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:drawableLeft="@drawable/ic_position_circle_disable"
                 android:textColor="@color/color_999999"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -204,7 +204,7 @@
                 android:text="  确认工作满意后发放工资"
                 android:textSize="12sp"
                 android:layout_marginLeft="23dp"
-                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:drawableLeft="@drawable/ic_position_circle_disable"
                 android:textColor="@color/color_999999"/>
         </LinearLayout>
 
@@ -241,7 +241,7 @@
                 android:text="  雇主全程可以在工作"
                 android:textSize="12sp"
                 android:layout_marginLeft="23dp"
-                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:drawableLeft="@drawable/ic_position_circle_disable"
                 android:textColor="@color/color_999999"/>
             <TextView
                 android:layout_width="wrap_content"

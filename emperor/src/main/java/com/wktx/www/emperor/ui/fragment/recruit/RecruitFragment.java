@@ -18,6 +18,7 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
+import com.wktx.www.emperor.apiresult.recruit.retrievalcondition.BottomBean;
 import com.wktx.www.emperor.basemvp.ABaseFragment;
 import com.wktx.www.emperor.ui.activity.main.SearchActivity;
 import com.wktx.www.emperor.ui.activity.login.LoginActivity;
@@ -25,12 +26,10 @@ import com.wktx.www.emperor.ui.activity.mine.BrowsingRecordActivity;
 import com.wktx.www.emperor.ui.activity.recruit.demand.DemandActivity;
 import com.wktx.www.emperor.ui.activity.main.message.MessageActivity;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.recruit.retrievalcondition.Bean;
 import com.wktx.www.emperor.apiresult.recruit.retrievalcondition.RetrievalConditionInfoData;
 import com.wktx.www.emperor.presenter.recruit.recruit.RecruitPresenter;
 import com.wktx.www.emperor.utils.ConstantUtil;
-import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.IView;
 import com.wktx.www.emperor.utils.ToastUtil;
@@ -191,12 +190,12 @@ public class RecruitFragment extends ABaseFragment<IView,RecruitPresenter> imple
      * IRecruitListView
      */
     @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
-    @Override
     public void onRequestSuccess(RetrievalConditionInfoData tData) {
+        BottomBean bottomBean = tData.getBottom();
+        //增加"不限"
+        Bean cotitionBean = new Bean("0", "不限");
+        bottomBean.getBgat().add(0,cotitionBean);//类目
+        bottomBean.getBgap().add(0,cotitionBean);//平台
         initSmartVp(tData);
     }
     @Override

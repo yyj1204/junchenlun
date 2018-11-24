@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.subjects.R;
-import com.wktx.www.subjects.apiresult.login.AccountInfoData;
 import com.wktx.www.subjects.basemvp.ABaseActivity;
 import com.wktx.www.subjects.presenter.login.ForgetPwdPresenter;
 import com.wktx.www.subjects.ui.view.login.IForgetPwdView;
@@ -65,14 +64,14 @@ public class ForgetPwdActivity extends ABaseActivity<IForgetPwdView,ForgetPwdPre
         //将输入法隐藏
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(tvTitle.getWindowToken(), 0);
+        if (MyUtils.isFastClick()){
+            return;
+        }
         switch (view.getId()) {
             case R.id.tb_IvReturn:
                 finish();
                 break;
             case R.id.tv_getcode://获取验证码
-                if (MyUtils.isFastClick()){
-                    return;
-                }
                 if (TextUtils.isEmpty(getPhoneStr())){
                     ToastUtil.myToast("请输入手机号！");
                     etPhone.requestFocus();
@@ -84,9 +83,6 @@ public class ForgetPwdActivity extends ABaseActivity<IForgetPwdView,ForgetPwdPre
                 }
                 break;
             case R.id.bt_reset://重置密码
-                if (MyUtils.isFastClick()){
-                    return;
-                }
                 //判断输入框格式
                 if (TextUtils.isEmpty(getPhoneStr())){
                     ToastUtil.myToast("请输入手机号！");
@@ -100,13 +96,13 @@ public class ForgetPwdActivity extends ABaseActivity<IForgetPwdView,ForgetPwdPre
                 }else if (TextUtils.isEmpty(getPwd1Str())){
                    ToastUtil.myToast("请输入新密码！");
                     etPwd1.requestFocus();
-                }else if (getPwd1Str().length()<6||getPwd1Str().length()>12){
+                }else if (getPwd1Str().length()<6||getPwd1Str().length()>20){
                     MyUtils.showToast(this,"新密码输入不正确！");
                     etPwd1.requestFocus();
                 }else if (TextUtils.isEmpty(getPwd2Str())){
                    ToastUtil.myToast("请输入确认密码！");
                     etPwd2.requestFocus();
-                }else if (getPwd2Str().length()<6||getPwd2Str().length()>12||!getPwd1Str().equals(getPwd2Str())){
+                }else if (getPwd2Str().length()<6||getPwd2Str().length()>20||!getPwd1Str().equals(getPwd2Str())){
                     MyUtils.showToast(this,"确认密码输入不正确！");
                     etPwd2.requestFocus();
                 }else {//重置密码
@@ -137,10 +133,6 @@ public class ForgetPwdActivity extends ABaseActivity<IForgetPwdView,ForgetPwdPre
     /**
      * IForgetPwdView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        return null;
-    }
     @Override
     public String getPhoneStr() {
         return etPhone.getText().toString().trim();

@@ -13,8 +13,9 @@
     <LinearLayout
         android:id="@+id/linear_recharge"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/px_30"
+        android:layout_height="@dimen/px_96"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
         android:gravity="center_vertical"
         android:background="@drawable/selector_mine_linearlayout"
         android:orientation="horizontal">
@@ -41,9 +42,10 @@
     <LinearLayout
         android:id="@+id/linear_withdrawal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/px_96"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
         android:layout_marginTop="@dimen/px_1"
-        android:padding="@dimen/px_30"
         android:gravity="center_vertical"
         android:background="@drawable/selector_mine_linearlayout"
         android:orientation="horizontal">
@@ -56,14 +58,26 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="请联系客服"
+            android:text="支持支付宝提现"
             android:textSize="@dimen/sp_12"
             android:textColor="@color/color_999999"
             android:layout_marginLeft="@dimen/px_14"
             android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/tv_alipayState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_14"
+            android:background="@drawable/shape_solid_cccccc_10"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/color_ffffff"
+            android:gravity="center"
+            android:text="认证状态"/>
         <ImageView
             android:layout_width="@dimen/px_16"
             android:layout_height="@dimen/px_20"
+            android:layout_marginLeft="@dimen/px_14"
             android:src="@drawable/ic_demand_arrow_right_gray"/>
     </LinearLayout>
 </LinearLayout>

@@ -4,7 +4,7 @@ import com.wktx.www.emperor.ui.view.IView;
 
 /**
  * Created by yyj on 2018/1/15.
- * 忘记密码&修改密码&设置支付密码界面
+ * 忘记密码&修改密码&设置支付密码&修改手机号码界面
  */
 
 public interface IForgetPwdView extends IView<String> {

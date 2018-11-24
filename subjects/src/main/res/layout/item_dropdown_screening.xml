@@ -9,17 +9,15 @@
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:drawableRight="@drawable/ic_dropdown_normal"
+        android:drawablePadding="@dimen/px_14"
+        android:singleLine="true"
         android:gravity="center"
-        android:paddingTop="@dimen/px_24"
-        android:paddingBottom="@dimen/px_20"
+        android:paddingBottom="@dimen/px_24"
+        android:paddingLeft="@dimen/px_10"
         android:paddingRight="@dimen/px_10"
-        android:text="期望薪资"
-        android:textSize="@dimen/sp_15"
+        android:paddingTop="@dimen/px_24"
+        android:text="薪资"
+        android:textSize="@dimen/sp_13"
         android:textColor="@color/color_5d5d5d" />
-
-    <ImageView
-        android:id="@+id/img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_dropdown_normal" />
 </com.zhy.autolayout.AutoLinearLayout>

@@ -23,7 +23,6 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.wktx.www.emperor.ui.activity.recruit.hire.PayResultActivity;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.mine.pay.WechatPayInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.payutil.IPayView;
@@ -32,7 +31,6 @@ import com.wktx.www.emperor.payutil.alipay.PayResult;
 import com.wktx.www.emperor.presenter.mine.purse.PurseRechargePresenter;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.LogUtil;
-import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.mine.purse.IPurseRechargeView;
 import com.wktx.www.emperor.utils.ToastUtil;
@@ -178,11 +176,6 @@ public class PurseRechargeActivity extends ABaseActivity<IPurseRechargeView,Purs
     /**
      * IPurseRechargeView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
     @Override
     public String getMoneyStr() {
         return etRecharge.getText().toString().trim();

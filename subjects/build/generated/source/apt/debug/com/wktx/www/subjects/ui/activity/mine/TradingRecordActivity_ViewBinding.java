@@ -17,7 +17,11 @@ import java.lang.Override;
 public class TradingRecordActivity_ViewBinding implements Unbinder {
   private TradingRecordActivity target;
 
-  private View view2131231164;
+  private View view2131689766;
+
+  private View view2131689912;
+
+  private View view2131689887;
 
   @UiThread
   public TradingRecordActivity_ViewBinding(TradingRecordActivity target) {
@@ -37,7 +41,23 @@ public class TradingRecordActivity_ViewBinding implements Unbinder {
     target.swipeRefreshLayout = Utils.findRequiredViewAsType(source, R.id.swipeRefreshLayout, "field 'swipeRefreshLayout'", SwipeRefreshLayout.class);
     target.recyclerView = Utils.findRequiredViewAsType(source, R.id.recyclerView, "field 'recyclerView'", RecyclerView.class);
     view = Utils.findRequiredView(source, R.id.tb_IvReturn, "method 'MyOnclick'");
-    view2131231164 = view;
+    view2131689766 = view;
+    view.setOnClickListener(new DebouncingOnClickListener() {
+      @Override
+      public void doClick(View p0) {
+        target.MyOnclick(p0);
+      }
+    });
+    view = Utils.findRequiredView(source, R.id.linear_balance, "method 'MyOnclick'");
+    view2131689912 = view;
+    view.setOnClickListener(new DebouncingOnClickListener() {
+      @Override
+      public void doClick(View p0) {
+        target.MyOnclick(p0);
+      }
+    });
+    view = Utils.findRequiredView(source, R.id.linear_trusteeship, "method 'MyOnclick'");
+    view2131689887 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -61,7 +81,11 @@ public class TradingRecordActivity_ViewBinding implements Unbinder {
     target.swipeRefreshLayout = null;
     target.recyclerView = null;
 
-    view2131231164.setOnClickListener(null);
-    view2131231164 = null;
+    view2131689766.setOnClickListener(null);
+    view2131689766 = null;
+    view2131689912.setOnClickListener(null);
+    view2131689912 = null;
+    view2131689887.setOnClickListener(null);
+    view2131689887 = null;
   }
 }

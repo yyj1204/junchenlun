@@ -15,9 +15,9 @@ import java.lang.Override;
 public class CategoryPickActivity_ViewBinding implements Unbinder {
   private CategoryPickActivity target;
 
-  private View view2131231210;
+  private View view2131689687;
 
-  private View view2131231303;
+  private View view2131689688;
 
   @UiThread
   public CategoryPickActivity_ViewBinding(CategoryPickActivity target) {
@@ -31,7 +31,7 @@ public class CategoryPickActivity_ViewBinding implements Unbinder {
     View view;
     target.recyclerView = Utils.findRequiredViewAsType(source, R.id.recyclerView, "field 'recyclerView'", RecyclerView.class);
     view = Utils.findRequiredView(source, R.id.tv_cancel, "method 'MyOnclick'");
-    view2131231210 = view;
+    view2131689687 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -39,7 +39,7 @@ public class CategoryPickActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.tv_sure, "method 'MyOnclick'");
-    view2131231303 = view;
+    view2131689688 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -57,9 +57,9 @@ public class CategoryPickActivity_ViewBinding implements Unbinder {
 
     target.recyclerView = null;
 
-    view2131231210.setOnClickListener(null);
-    view2131231210 = null;
-    view2131231303.setOnClickListener(null);
-    view2131231303 = null;
+    view2131689687.setOnClickListener(null);
+    view2131689687 = null;
+    view2131689688.setOnClickListener(null);
+    view2131689688 = null;
   }
 }

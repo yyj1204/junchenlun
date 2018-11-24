@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zhy="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/color_f0f0f0"
+    android:orientation="vertical"
+    tools:context="com.wktx.www.subjects.ui.activity.mine.resume.EditTagsActivity">
+
+    <include layout="@layout/include_toolbar_activity" />
+
+    <EditText
+        android:id="@+id/et_tag"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_96"
+        android:background="@color/color_ffffff"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:singleLine="true"
+        android:hint="最多10个标签，每个不超过6个字"
+        android:maxLength="6"
+        android:textSize="@dimen/sp_13"/>
+
+    <Button
+        android:id="@+id/bt_save"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_90"
+        android:layout_marginTop="@dimen/px_100"
+        android:layout_marginBottom="@dimen/px_50"
+        android:layout_marginLeft="@dimen/px_30"
+        android:layout_marginRight="@dimen/px_30"
+        android:background="@drawable/selector_submit_selected_10"
+        android:gravity="center"
+        android:text="修改"
+        android:textColor="@color/color_ffffff"
+        android:textSize="@dimen/sp_15"/>
+
+    <Button
+        android:id="@+id/bt_delete"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_90"
+        android:layout_marginLeft="@dimen/px_30"
+        android:layout_marginRight="@dimen/px_30"
+        android:layout_marginBottom="@dimen/px_50"
+        android:background="@drawable/shape_buttom_e1e1e1_10"
+        android:gravity="center"
+        android:text="删除"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_15"/>
+</LinearLayout>

@@ -21,22 +21,22 @@ import com.wktx.www.emperor.utils.ScreenUtil;
 
 import java.io.File;
 
-
+/**
+ * 自定义拍照相册弹窗
+ */
 public class PopupPhoto extends PopupWindow implements OnClickListener {
 
     public Context mContext;
     private ConstantUtil.Type type;
     public Activity mActivity;
     private File file;
-    private int size;
 
     private TextView mTakePhoto, mAlbumPhoto, mCancel;
     private TextView mImgNum;
 
-    public PopupPhoto(Context context, Activity mActivity, int size) {
+    public PopupPhoto(Context context, Activity mActivity) {
         initView(context);
         this.mActivity = mActivity;
-        this.size = size;
     }
 
     private void initView(Context mContext) {

@@ -15,11 +15,11 @@ import com.wktx.www.emperor.apiresult.main.home.BannerBean;
 import com.wktx.www.emperor.apiresult.main.home.HomeInfoData;
 import com.wktx.www.emperor.apiresult.main.home.JobTypeInfoData;
 import com.wktx.www.emperor.apiresult.main.home.ResumeListBean;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.basemvp.ALazyLoadFragment;
 import com.wktx.www.emperor.presenter.main.HomePresenter;
+import com.wktx.www.emperor.ui.activity.ImageActivity;
 import com.wktx.www.emperor.ui.activity.login.LoginActivity;
-import com.wktx.www.emperor.ui.activity.main.artistcase.ArtistCaseActivity;
+import com.wktx.www.emperor.ui.activity.main.artistcase.CasesActivity;
 import com.wktx.www.emperor.ui.activity.recruit.resume.ResumeActivity;
 import com.wktx.www.emperor.ui.activity.main.RecruitGuideActivity;
 import com.wktx.www.emperor.ui.activity.main.message.MessageActivity;
@@ -29,7 +29,6 @@ import com.wktx.www.emperor.ui.adapter.main.HomeJobTypeAdapter;
 import com.wktx.www.emperor.ui.adapter.main.HomeListAdapter;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.GlideImageLoader;
-import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.main.IHomeView;
 import com.wktx.www.emperor.utils.ToastUtil;
@@ -37,6 +36,7 @@ import com.wktx.www.emperor.widget.MyLayoutManager;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -218,7 +218,7 @@ public class HomeFragment extends ALazyLoadFragment<IHomeView,HomePresenter> imp
                 if (position==adapter.getData().size()-1){//招聘指南
                     startActivity(new Intent(getActivity(), RecruitGuideActivity.class));
                 }else  if (position==adapter.getData().size()-2){//案例库
-                    startActivity(new Intent(getActivity(), ArtistCaseActivity.class));
+                    startActivity(new Intent(getActivity(), CasesActivity.class));
                 } else {
                     //将选中的职业类型id传给 MainActivity，MainActivity 再传给 RecruitFragment
                     JobTypeInfoData jobTypeInfoData = (JobTypeInfoData) adapter.getData().get(position);
@@ -264,15 +264,10 @@ public class HomeFragment extends ALazyLoadFragment<IHomeView,HomePresenter> imp
     /**
      * IHomeView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
     @Override//获取职业类型
     public void onGetJobTypeSuccessResult(List<JobTypeInfoData> result) {
         //添加案例、招聘指南两个类型
-        result.add(new JobTypeInfoData("","美工案例",""));
+        result.add(new JobTypeInfoData("","案例",""));
         result.add(new JobTypeInfoData("","招聘指南",""));
         hzAdapter.setNewData(result);
     }
@@ -311,7 +306,7 @@ public class HomeFragment extends ALazyLoadFragment<IHomeView,HomePresenter> imp
         Banner banner = (Banner) hvBanner.findViewById(R.id.banner); /*设置banner样式*/
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE);
         //遍历图片
-        List<String> images = new ArrayList<>();
+        final List<String> images = new ArrayList<>();
         for (int i = 0; i < bannerBeans.size(); i++) {
             images.add(bannerBeans.get(i).getAd_code());
         }
@@ -329,6 +324,22 @@ public class HomeFragment extends ALazyLoadFragment<IHomeView,HomePresenter> imp
         banner.setIndicatorGravity(BannerConfig.CENTER);
         //banner设置方法全部调用完毕时最后调用
         banner.start();
+
+        banner.setOnBannerClickListener(new OnBannerClickListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                if (MyUtils.isFastClick()){
+                    return;
+                }
+                //查看大图
+                String[] imageUrls = images.toArray(new String[images.size()]);
+                Intent intent = new Intent(getContext(), ImageActivity.class);
+                intent.putExtra(ConstantUtil.KEY_DATA, imageUrls);
+                //这里的position是从1开始的，所以位标要-1
+                intent.putExtra(ConstantUtil.KEY_POSITION, position-1);
+                startActivity(intent);
+            }
+        });
     }
 
     /**

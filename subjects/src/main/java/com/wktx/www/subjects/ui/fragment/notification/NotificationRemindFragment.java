@@ -10,41 +10,80 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.bigkoo.pickerview.TimePickerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.wktx.www.subjects.apiresult.main.message.MessageListInfoData;
+import com.wktx.www.subjects.apiresult.main.notification.MessageListInfoData;
 import com.wktx.www.subjects.ui.activity.main.notification.NotificationDetailsActivity;
 import com.wktx.www.subjects.R;
 import com.wktx.www.subjects.apiresult.login.AccountInfoData;
 import com.wktx.www.subjects.basemvp.ALazyLoadBaseFragment;
 import com.wktx.www.subjects.presenter.main.NotificationPresenter;
 import com.wktx.www.subjects.ui.adapter.main.NotificationRemindListAdapter;
+import com.wktx.www.subjects.ui.view.INotificationView;
 import com.wktx.www.subjects.ui.view.IView;
 import com.wktx.www.subjects.utils.ConstantUtil;
+import com.wktx.www.subjects.utils.DateUtil;
 import com.wktx.www.subjects.utils.LoginUtil;
 import com.wktx.www.subjects.utils.MyUtils;
 import com.wktx.www.subjects.widget.MyLayoutManager;
 import com.wktx.www.subjects.utils.ToastUtil;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 消息通知---提醒
  */
-public class NotificationRemindFragment extends ALazyLoadBaseFragment<IView,NotificationPresenter> implements IView<List<MessageListInfoData>> {
+public class NotificationRemindFragment extends ALazyLoadBaseFragment<INotificationView,NotificationPresenter> implements INotificationView {
 
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.tv_beginTime)
+    TextView tvBeginTime;
+    @BindView(R.id.tv_endTime)
+    TextView tvEndTime;
+    @BindView(R.id.tv_query)
+    TextView tvQuery;
 
     //RecyclerView 适配器
     private NotificationRemindListAdapter adapter;
 
     private boolean isFirstVisible;//是否第一次创建可见
+
+    //系统日历控件
+    private Calendar curCalendar = Calendar.getInstance();
+    private String beginDateStr;//项目开始时间"yyyy-MM-dd"格式
+    private String endDateStr;//项目结束时间"yyyy-MM-dd"格式
+    private long beginDateLong;//项目开始时间的时间戳
+    private long endDateLong;//项目结束时间的时间戳
+
+
+    @OnClick({R.id.tv_beginTime,R.id.tv_endTime,R.id.tv_query})
+    public void MyOnclick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_beginTime://开始时间
+                pickDate(tvBeginTime,true,"选择开始时间");
+                break;
+            case R.id.tv_endTime://结束时间
+                pickDate(tvEndTime,false,"选择结束时间");
+                break;
+            case R.id.tv_query://查询
+                refresh();
+                break;
+            default:
+                break;
+        }
+    }
 
     /**
      * 片段是否可见
@@ -84,6 +123,8 @@ public class NotificationRemindFragment extends ALazyLoadBaseFragment<IView,Noti
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notification_common, container, false);
         ButterKnife.bind(this, view);
+        //初始化开始结束时间
+        initTime();
         initRecycleView();
         initAdapter();
         initRefreshLayout();
@@ -148,12 +189,82 @@ public class NotificationRemindFragment extends ALazyLoadBaseFragment<IView,Noti
     }
 
     /**
-     * IView
+     * 初始化项目开始结束时间
+     */
+    private void initTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        //结束时间---推迟日历一天
+        curCalendar.add(Calendar.DAY_OF_MONTH,+1);
+        Date endDate = curCalendar.getTime();
+        endDateStr = sdf.format(endDate);
+        //将结束时间转为时间戳(只转日期不转时间，方便pickDate方法做判断)
+        endDateLong = Long.parseLong(DateUtil.getCustomType2Timestamp(endDateStr,"yyyy-MM-dd"))* 1000L;
+        tvEndTime.setText(endDateStr);
+
+        //开始时间---往前日历一个月
+        curCalendar.add(Calendar.MONTH,-1);
+        Date beginDate = curCalendar.getTime();
+        beginDateStr = sdf.format(beginDate);
+        //将开始时间转为时间戳(只转日期不转时间，方便pickDate方法做判断)
+        beginDateLong = Long.parseLong(DateUtil.getCustomType2Timestamp(beginDateStr,"yyyy-MM-dd"))* 1000L;
+        tvBeginTime.setText(beginDateStr);
+    }
+
+    //选择项目开始结束时间
+    private void  pickDate(final TextView tvDate, final boolean isBegin, String titleStr) {
+        TimePickerView pvTime = new TimePickerView.Builder(getContext(), new TimePickerView.OnTimeSelectListener() {
+            @Override
+            public void onTimeSelect(Date date, View v) {//选中事件回调
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String selectDateStr = sdf.format(date);
+                long selectDateLong = date.getTime();
+
+                //如果是开始时间，则选中的日期不能在结束时间之后
+                if (isBegin){
+                    if (selectDateLong > endDateLong){
+                        ToastUtil.myToast("开始时间需在结束时间之前!");
+                    }else {
+                        beginDateLong = selectDateLong;//赋值，用在结束时间做判断
+                        tvDate.setText(selectDateStr);
+                    }
+                }else {//如果是结束时间，则选中的日期不能在开始时间之前
+                    if(selectDateLong >= beginDateLong) {
+                        endDateLong = selectDateLong;//赋值，用在开始日期做判断
+                        tvDate.setText(selectDateStr);
+                    }else {
+                        ToastUtil.myToast("结束时间需在开始时间之后!");
+                    }
+                }
+            }
+        })
+                .setType(new boolean[]{true, true, true, false, false, false})//默认全部显示,年月日时分秒
+                .setTitleText(titleStr)//标题文字
+                .setTitleSize(16)//标题文字大小
+                .setContentSize(14)//滚轮文字大小
+                .setSubmitColor(getContext().getResources().getColor(R.color.color_ffb321))
+                .setCancelColor(Color.GRAY)
+                .isCenterLabel(false)
+                .setOutSideCancelable(false)
+                .build();
+        pvTime.setDate(DateUtil.getNYR2Calendar(tvDate.getText().toString()));
+        pvTime.show();
+    }
+
+    /**
+     * INotificationView
      */
     @Override
     public AccountInfoData getUserInfo() {
         AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
         return userInfo;
+    }
+    @Override
+    public String getBeginTime() {
+        return tvBeginTime.getText().toString().trim();
+    }
+    @Override
+    public String getEndTime() {
+        return tvEndTime.getText().toString().trim();
     }
     @Override
     public void onRequestSuccess(List<MessageListInfoData> tData) {

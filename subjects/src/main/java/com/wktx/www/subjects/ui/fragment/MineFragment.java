@@ -1,21 +1,26 @@
 package com.wktx.www.subjects.ui.fragment;
 
-
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.wktx.www.subjects.apiresult.mine.CertificationInfoData;
+
+import com.wktx.www.subjects.ui.activity.mine.AboutUsActivity;
+import com.wktx.www.subjects.ui.activity.mine.HireRecordActivity;
 import com.wktx.www.subjects.ui.activity.mine.InterviewRecordActivity;
-import com.wktx.www.subjects.ui.activity.mine.certification.CertificationDetailsActivity;
+import com.wktx.www.subjects.ui.activity.mine.authent.AccountAuthentActivity;
+import com.wktx.www.subjects.ui.activity.mine.authent.AuthentPersonalDetailsActivity;
+import com.wktx.www.subjects.ui.activity.mine.authent.AuthentStudioDetailsActivity;
+import com.wktx.www.subjects.ui.activity.mine.purse.MyPurseActivity;
+import com.wktx.www.subjects.ui.activity.mine.purse.WithdrawListActivity;
 import com.wktx.www.subjects.ui.activity.mine.resume.MyResumeActivity;
-import com.wktx.www.subjects.ui.activity.mine.certification.CertificationActivity;
 import com.wktx.www.subjects.ui.activity.mine.security.AccountSecurityActivity;
 import com.wktx.www.subjects.ui.activity.mine.WebExplainActivity;
 import com.wktx.www.subjects.ui.activity.mine.MyCollectActivity;
@@ -36,6 +41,7 @@ import com.wktx.www.subjects.utils.GlideUtil;
 import com.wktx.www.subjects.utils.LoginUtil;
 import com.wktx.www.subjects.utils.MyUtils;
 import com.wktx.www.subjects.ui.view.mine.IMineView;
+import com.wktx.www.subjects.widget.CustomDialog;
 import com.wktx.www.subjects.widget.MyScrollView;
 import com.wktx.www.subjects.utils.ToastUtil;
 import com.wktx.www.subjects.widget.PopupLogout;
@@ -43,6 +49,7 @@ import com.wktx.www.subjects.widget.PopupLogout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * 我的账户片段
@@ -55,7 +62,7 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
     @BindView(R.id.rela_top)
     RelativeLayout relaTop;
     @BindView(R.id.civ_head)
-    ImageView ivHead;
+    CircleImageView ivHead;
     @BindView(R.id.tv_userName)
     TextView tvUserName;
     //认证布局
@@ -67,6 +74,8 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
     TextView tvCertificationState;
     @BindView(R.id.tv_balance)
     TextView tvBalance;
+    @BindView(R.id.tv_frozenMoney)
+    TextView tvFrozenMoney;
     @BindView(R.id.linear_account)
     LinearLayout llAccount;//已登录布局
     @BindView(R.id.linear_login)
@@ -75,47 +84,61 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
     Button btLogout;//退出登录
 
     private PopupLogout popupLogout;//退出登录弹窗
+    private CustomDialog customDialog;
 
     private boolean isLogin;//是否登录
-    private String authentState;//认证状态
-    private String authentStateStr;//已提交的认证状态(字符串)
+    private CenterInfoData centerInfoData;//个人中心信息
+    private String authentType;//认证方式：1：个人认证 2：工作室认证
+    private String authentId;//认证Id
+    private String authentState;//已提交的认证状态(字符串)
 
     @OnClick({R.id.iv_message,R.id.civ_head,R.id.tv_userName,R.id.linear_certification,R.id.linear_certification1,
-            R.id.linear_balance, R.id.tv_login,R.id.tv_register,R.id.linear_myResume,R.id.linear_myCollect,
-            R.id.linear_tradeRecord, R.id.linear_interviewRecord, R.id.linear_aboutApp,R.id.linear_accountSecurity,
+            R.id.linear_balance, R.id.linear_frozenMoney, R.id.tv_login,R.id.tv_register,R.id.linear_myResume,R.id.linear_myCollect,
+            R.id.linear_tradeRecord, R.id.linear_interviewRecord,R.id.linear_employRecord, R.id.linear_aboutApp,R.id.linear_accountSecurity,
             R.id.linear_contactService,R.id.bt_logout})
     public void MyOnclick(View view) {
         if (MyUtils.isFastClick1()){
             return;
         }
-
+        Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.iv_message://消息通知
-                startActivity(new Intent(getActivity(), NotificationActivity.class));
+                isLoginStartActivity(NotificationActivity.class);
                 break;
             case R.id.civ_head://用户头像
             case R.id.tv_userName://用户名
-                if (isLogin){//已登录
-                    startActivity(new Intent(getActivity(), PersonInfoActivity.class));
-                }else {//未登录
-                    startActivity(new Intent(getActivity(), LoginActivity.class));
-                }
+                isLoginStartActivity(PersonInfoActivity.class);
                 break;
             case R.id.linear_certification://申请认证
-                startActivity(new Intent(getActivity(), CertificationActivity.class));
+                startActivity(new Intent(getActivity(), AccountAuthentActivity.class));
                 break;
             case R.id.linear_certification1://已提交认证
-                llCertification1.setEnabled(false);
-                getPresenter().getCertificationInfo(authentState);
-                break;
-            case R.id.linear_balance://余额
-                ToastUtil.myToast("请联系客服进行提现！");
+                //如果认证失败状态，则可以进入认证详情界面
+                if (authentState.equals("认证失败")){
+                    if (authentType.equals("1")){//个人认证详情
+                        startAuthentActivity(AuthentPersonalDetailsActivity.class);
+                    }else {//工作室认证详情
+                        startAuthentActivity(AuthentStudioDetailsActivity.class);
+                    }
+                }
                 break;
             case R.id.tv_login://登录
                 startActivity(new Intent(getActivity(), LoginActivity.class));
                 break;
             case R.id.tv_register://注册
                 startActivity(new Intent(getActivity(), RegisterActivity.class));
+                break;
+            case R.id.linear_balance://余额
+                if (isLogin){
+                    intent.setClass(getActivity(), MyPurseActivity.class);
+                    intent.putExtra(ConstantUtil.KEY_DATA,centerInfoData);
+                    startActivity(intent);
+                }else {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
+                break;
+            case R.id.linear_frozenMoney://冻结余额
+                isLoginStartActivity(WithdrawListActivity.class);
                 break;
             case R.id.linear_myResume://我的简历
                 isLoginStartActivity(MyResumeActivity.class);
@@ -129,19 +152,29 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
             case R.id.linear_interviewRecord://面试记录
                 isLoginStartActivity(InterviewRecordActivity.class);
                 break;
+            case R.id.linear_employRecord://雇佣记录
+                isLoginStartActivity(HireRecordActivity.class);
+                break;
             case R.id.linear_aboutApp://关于我们
-                Intent intent = new Intent(getActivity(), WebExplainActivity.class);
-                intent.putExtra(ConstantUtil.KEY_WEB_EXPLAIN,ConstantUtil.EX_ABOUT);
-                startActivity(intent);
+//                intent.setClass(getActivity(), WebExplainActivity.class);
+//                intent.putExtra(ConstantUtil.KEY_WEB_EXPLAIN,ConstantUtil.EX_ABOUT);
+//                startActivity(intent);
+                startActivity(new Intent(getActivity(), AboutUsActivity.class));
                 break;
             case R.id.linear_accountSecurity://账号安全
-                isLoginStartActivity(AccountSecurityActivity.class);
+                if (isLogin){
+                    intent.setClass(getActivity(), AccountSecurityActivity.class);
+                    intent.putExtra(ConstantUtil.KEY_DATA,centerInfoData);
+                    startActivity(intent);
+                }else {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
                 break;
             case R.id.linear_contactService://联系客服
                 startActivity(new Intent(getActivity(), ContactServiceActivity.class));
                 break;
             case R.id.bt_logout://退出登录
-                showLogoutPopup();
+                showLogoutDialog();
                 break;
             default:
                 break;
@@ -157,6 +190,16 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
         }else {
             startActivity(new Intent(getActivity(), LoginActivity.class));
         }
+    }
+
+    /**
+     * 才能打开对应的认证详情界面（个人、工作室）
+     * 传递认证id
+     */
+    private void startAuthentActivity(Class<?> clazz) {
+        Intent intent = new Intent(getActivity(), clazz);
+        intent.putExtra(ConstantUtil.KEY_DATA,authentId);
+        startActivity(intent);
     }
 
     /**
@@ -182,6 +225,32 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
         });
     }
 
+    /**
+     * 退出登录对话框
+     */
+    private void showLogoutDialog() {
+        CustomDialog.Builder builder = new CustomDialog.Builder(getContext());
+        builder.setTitle("系统提示");
+        builder.setMessage("您确定退出登录吗？");
+        builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("退出登录",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        getPresenter().onLogout();
+                    }
+                });
+
+        customDialog = builder.create();
+        customDialog.setCanceledOnTouchOutside(false);
+        customDialog.show();
+    }
 
     //根据登录状态获取用户信息，更新界面
     @Override
@@ -212,7 +281,6 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
         return new MinePresenter();
     }
 
-
     private void initUI() {
         if (getUserInfo()!=null){//已登录
             isLogin=true;
@@ -224,6 +292,7 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
             isLogin=false;
             ivHead.setImageResource(R.drawable.img_mine_head);
             tvBalance.setText("0.00");
+            tvFrozenMoney.setText("0.00");
             llAccount.setVisibility(View.GONE);
             llLogin.setVisibility(View.VISIBLE);
             btLogout.setVisibility(View.GONE);
@@ -259,15 +328,16 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
     }
     @Override//获取个人中心信息回调
     public void onRequestSuccess(CenterInfoData tData) {
+        centerInfoData = tData;
         UserInfoBean userinfo = tData.getUserinfo();
         //昵称
-        if (userinfo.getNickname()==null||userinfo.getNickname().equals("")){
-            tvUserName.setText(getUserInfo().getPhone());
+        if (TextUtils.isEmpty(userinfo.getNickname())){
+            tvUserName.setText(MyUtils.setPhone(getUserInfo().getPhone()));
         }else {
             tvUserName.setText(userinfo.getNickname());
         }
         //头像(根据性别显示对应头像图片)
-        if (userinfo.getHead_pic()==null||userinfo.getHead_pic().equals("")){
+        if (TextUtils.isEmpty(userinfo.getHead_pic())){
             if (userinfo.getSex().equals("1")){
                 ivHead.setImageResource(R.drawable.img_head_man);
             }else if (userinfo.getSex().equals("2")){
@@ -279,34 +349,31 @@ public class MineFragment extends ABaseFragment<IMineView,MinePresenter> impleme
             GlideUtil.loadImage(userinfo.getHead_pic(),R.drawable.img_mine_head,ivHead);
         }
         //余额
-        tvBalance.setText("¥"+userinfo.getUser_money());
-        //认证状态(0:未提交，1:已提交认证)
-        authentState = userinfo.getPersonal_authent();
-        authentStateStr = userinfo.getPersonal_authent_status();
-        if (authentState.equals("0")){//未提交认证
+        tvBalance.setText(userinfo.getUser_money());
+        //冻结金额
+        tvFrozenMoney.setText(userinfo.getFrozen_money());
+
+        //账户认证方式： 0：未认证  1：个人认证 2：工作室认证
+        authentType = tData.getAuthent_type();
+        //认证id(0:未提交，其他:已提交认证)
+        authentId = tData.getAuthent();
+        //已提交的认证状态 '未认证','审核中','认证失败','已认证'
+        authentState = tData.getAuthent_status();
+        if (TextUtils.isEmpty(authentType)||authentType.equals("0")){//未提交认证
             llCertification.setVisibility(View.VISIBLE);
             llCertification1.setVisibility(View.GONE);
-        }else{//已提交认证('审核中','认证失败','已认证')
+        }else{//已提交认证 1：个人认证 2：工作室认证 ('审核中','认证失败','已认证')
             llCertification.setVisibility(View.GONE);
             llCertification1.setVisibility(View.VISIBLE);
-            tvCertificationState.setText(authentStateStr);
+            if (authentType.equals("1")){
+                tvCertificationState.setText("个人"+authentState);
+            }else {
+                tvCertificationState.setText("工作室"+authentState);
+            }
         }
     }
     @Override
     public void onRequestFailure(String result) {
-        ToastUtil.myToast(result);
-    }
-    @Override//获取认证详情回调
-    public void onGetCertificationSuccess(CertificationInfoData result) {
-        llCertification1.setEnabled(true);
-        //打开认证详情界面
-        Intent intent = new Intent(getActivity(), CertificationDetailsActivity.class);
-        intent.putExtra(ConstantUtil.KEY_DATA,result);
-        startActivity(intent);
-    }
-    @Override
-    public void onGetCertificationFailure(String result) {
-        llCertification1.setEnabled(true);
         ToastUtil.myToast(result);
     }
     @Override//退出登录回调

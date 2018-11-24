@@ -1,11 +1,18 @@
 package com.wktx.www.emperor.basemvp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.jaeger.library.StatusBarUtil;
 import com.wktx.www.emperor.R;
+import com.wktx.www.emperor.apiresult.login.AccountInfoData;
+import com.wktx.www.emperor.ui.activity.login.LoginActivity;
+import com.wktx.www.emperor.utils.ConstantUtil;
+import com.wktx.www.emperor.utils.LoginUtil;
+import com.wktx.www.emperor.utils.MyUtils;
+import com.wktx.www.emperor.utils.ToastUtil;
 
 
 /**
@@ -64,6 +71,25 @@ public abstract class ABaseFragment<V extends IBaseView,P extends ABasePresenter
      */
     public P getPresenter() {
         return presenter;
+    }
+
+
+
+    @Override
+    public AccountInfoData getUserInfo() {
+        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
+        return userInfo;
+    }
+    @Override
+    public void onLoginFailure(String msg) {
+        MyUtils.showToast(getContext(),msg);
+        if (getUserInfo()!=null){
+            LoginUtil.getinit().logout();//将本地登录信息清除
+        }
+
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        intent.putExtra(ConstantUtil.KEY_ISOK,true);
+        startActivity(intent);
     }
 
 }

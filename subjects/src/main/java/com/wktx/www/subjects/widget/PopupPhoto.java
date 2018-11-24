@@ -30,15 +30,13 @@ public class PopupPhoto extends PopupWindow implements OnClickListener {
     private ConstantUtil.Type type;
     public Activity mActivity;
     private File file;
-    private int size;
 
     private TextView mTakePhoto, mAlbumPhoto, mCancel;
     private TextView mImgNum;
 
-    public PopupPhoto(Context context, Activity mActivity, int size) {
+    public PopupPhoto(Context context, Activity mActivity) {
         initView(context);
         this.mActivity = mActivity;
-        this.size = size;
     }
 
     private void initView(Context mContext) {

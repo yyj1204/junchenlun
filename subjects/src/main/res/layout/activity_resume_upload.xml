@@ -11,15 +11,16 @@
         android:visibility="gone"
         android:id="@+id/rela_resume"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/px_500"
+        android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
+        android:layout_above="@+id/bt_sureUpload"
         android:layout_margin="@dimen/px_30"
         android:background="@color/color_ffffff">
         <ImageView
             android:id="@+id/iv_resume"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"/>
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"/>
         <ImageView
             android:id="@+id/iv_delete_resume"
             android:layout_width="wrap_content"

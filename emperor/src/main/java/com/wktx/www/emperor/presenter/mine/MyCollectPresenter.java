@@ -64,7 +64,7 @@ public class MyCollectPresenter extends ABasePresenter<IMyCollectView> {
     //获取收藏列表
     public void onGetCollectList(int page){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("tow", getmMvpView().getJobType());
         httpParams.put("page",page+"");
@@ -83,6 +83,8 @@ public class MyCollectPresenter extends ABasePresenter<IMyCollectView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }
@@ -109,7 +111,7 @@ public class MyCollectPresenter extends ABasePresenter<IMyCollectView> {
     //取消收藏简历
     public void onCancelCollectResume(String resumeId){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("rid", resumeId);
 
@@ -127,6 +129,8 @@ public class MyCollectPresenter extends ABasePresenter<IMyCollectView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onCancelCollectResumeResult(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onCancelCollectResumeResult(false,e.getMessage());
                                 }

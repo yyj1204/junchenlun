@@ -1,5 +1,7 @@
 package com.wktx.www.subjects.ui.fragment;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
@@ -7,29 +9,33 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.wktx.www.subjects.apiresult.main.condition.ConditionBean;
 import com.wktx.www.subjects.apiresult.main.condition.ConditionInfoData;
-import com.wktx.www.subjects.apiresult.main.position.BannerInfoData;
-import com.wktx.www.subjects.apiresult.main.position.PositionListInfoData;
+import com.wktx.www.subjects.apiresult.main.demand.BannerInfoData;
+import com.wktx.www.subjects.apiresult.main.demand.DemandListInfoData;
+import com.wktx.www.subjects.ui.activity.ImageActivity;
 import com.wktx.www.subjects.ui.activity.main.ScreeningSalaryActivity;
 import com.wktx.www.subjects.ui.activity.main.notification.NotificationActivity;
 import com.wktx.www.subjects.ui.activity.main.SearchActivity;
 import com.wktx.www.subjects.ui.activity.main.PositionDetailsActivity;
-import com.wktx.www.subjects.apiresult.main.position.BannerBean;
+import com.wktx.www.subjects.apiresult.main.demand.BannerBean;
 import com.wktx.www.subjects.apiresult.login.AccountInfoData;
 import com.wktx.www.subjects.basemvp.ALazyLoadBaseFragment;
 import com.wktx.www.subjects.presenter.main.MainPresenter;
 import com.wktx.www.subjects.ui.activity.login.LoginActivity;
+import com.wktx.www.subjects.ui.activity.main.BrowsingRecordActivity;
 import com.wktx.www.subjects.ui.adapter.DropDownListAdapter;
 import com.wktx.www.subjects.R;
-import com.wktx.www.subjects.ui.adapter.main.PositionAdapter;
+import com.wktx.www.subjects.ui.adapter.main.DemandAdapter;
 import com.wktx.www.subjects.ui.view.main.IMainView;
 import com.wktx.www.subjects.utils.ConstantUtil;
 import com.wktx.www.subjects.utils.GlideImageLoader;
@@ -41,6 +47,7 @@ import com.wktx.www.subjects.utils.ToastUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerClickListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,34 +63,46 @@ import butterknife.OnClick;
 public class MainFragment extends ALazyLoadBaseFragment<IMainView,MainPresenter> implements IMainView {
     @BindView(R.id.dropDownMenu)
     DropDownMenu dropDownMenu;
+    @BindView(R.id.iv_browsingHistory)
+    ImageView ivBrowsingHistory;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private Banner banner;//轮播图
 
     //条件筛选适配器
+    private DropDownListAdapter positionAdapter;//工作类型
     private DropDownListAdapter categoryAdapter;//类目
     private DropDownListAdapter platformAdapter;//平台
-    private PositionAdapter mAdapter;//RecyclerView 适配器
+    private DropDownListAdapter experienceAdapter;//工作经验
+    private DemandAdapter mAdapter;//RecyclerView 适配器
 
-    private String tabTexts[] = {"招聘类目", "招聘平台"};
+    private String tabTexts[] = {"岗位","类目", "平台","经验"};
+    private List<ConditionBean> positionBeans = new ArrayList<>();//工作类型集合
     private List<ConditionBean> categoryBeans = new ArrayList<>();//类目集合
     private List<ConditionBean> platformBeans = new ArrayList<>();//平台集合
+    private List<ConditionBean> experienceBeans = new ArrayList<>();//工作经验集合
+    private List<String> positionStrs = new ArrayList<>();//工作类型名称
     private List<String> categoryStrs = new ArrayList<>();//类目名称
     private List<String> platformStrs = new ArrayList<>();//平台名称
+    private List<String> experienceStrs = new ArrayList<>();//工作经验名称
+    private String positionId="0";//工作类型Id
     private String categoryId="0";//类目Id
     private String platformId="0";//平台Id
+    private String experienceId="0";//工作经验Id
     private String minSalary="";//最低薪资
     private String maxSalary="";//最高薪资
 
     private List<View> popupViews = new ArrayList<>();//多条件筛选的弹窗集合
+    private ListView positionView;
     private ListView categoryView;
     private ListView platformView;
+    private ListView experienceView;
 
     private int page = 1;
     private static final int PAGE_SIZE = 10;//请求每页的数据量
     private boolean isRefresh;//是下拉刷新还是加载更多  false：加载更多，true：下拉刷新
 
-    @OnClick({R.id.linear_titleSearch, R.id.iv_titleRight})
+    @OnClick({R.id.linear_titleSearch, R.id.iv_titleRight,R.id.iv_browsingHistory})
     public void MyOnclick(View view) {
         if (MyUtils.isFastClick1()){
             return;
@@ -94,6 +113,9 @@ public class MainFragment extends ALazyLoadBaseFragment<IMainView,MainPresenter>
                 break;
             case R.id.iv_titleRight://消息通知
                 isLoginStartActivity(NotificationActivity.class);
+                break;
+            case R.id.iv_browsingHistory://浏览记录
+                isLoginStartActivity(BrowsingRecordActivity.class);
                 break;
             default:
                 break;
@@ -123,7 +145,6 @@ public class MainFragment extends ALazyLoadBaseFragment<IMainView,MainPresenter>
         if (isVisible){
             if (!isRefresh){
                 initData();
-                refresh();
             }
         }else {
             if (isRefresh){
@@ -140,8 +161,7 @@ public class MainFragment extends ALazyLoadBaseFragment<IMainView,MainPresenter>
      */
     @Override
     protected void onFragmentFirstVisible() {
-            initData();
-            refresh();
+        initData();
     }
 
     public MainFragment() {
@@ -157,6 +177,7 @@ public class MainFragment extends ALazyLoadBaseFragment<IMainView,MainPresenter>
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, view);
+        initFloat();//浏览记录
         initView();
         initRecycleView();
         initAdapter();
@@ -171,8 +192,49 @@ public class MainFragment extends ALazyLoadBaseFragment<IMainView,MainPresenter>
     }
 
     private void initData() {
-        getPresenter().getConditionInfo();//获取检索条件
-        getPresenter().getBannerInfo();//获取轮播图
+        //获取检索条件
+        getPresenter().getConditionInfo();
+        //获取轮播图
+        getPresenter().getBannerInfo();
+        refresh();
+
+    }
+
+    /**
+     * 浏览记录---按压动画效果
+     */
+    @SuppressLint("ClickableViewAccessibility")
+    private void initFloat() {
+        ivBrowsingHistory.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                ObjectAnimator ofFloatX = null;
+                ObjectAnimator ofFloatY = null;
+                AnimatorSet animatorSet = null;
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN://按下
+                        ofFloatX = ObjectAnimator.ofFloat(ivBrowsingHistory, "scaleX", 1, 0.7f);
+                        ofFloatX.setDuration(500).start();
+                        ofFloatY = ObjectAnimator.ofFloat(ivBrowsingHistory, "scaleY", 1, 0.7f);
+                        ofFloatY.setDuration(500).start();
+                        animatorSet = new AnimatorSet();
+                        animatorSet.playTogether(ofFloatX, ofFloatY);
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                    case MotionEvent.ACTION_UP://放开
+                        ofFloatX = ObjectAnimator.ofFloat(ivBrowsingHistory, "scaleX", 0.7f, 1);
+                        ofFloatX.setDuration(500).start();
+                        ofFloatY = ObjectAnimator.ofFloat(ivBrowsingHistory, "scaleY", 0.7f, 1);
+                        ofFloatY.setDuration(500).start();
+                        animatorSet = new AnimatorSet();
+                        animatorSet.playTogether(ofFloatX, ofFloatY);
+                        break;
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     private void initView() {
@@ -180,7 +242,24 @@ public class MainFragment extends ALazyLoadBaseFragment<IMainView,MainPresenter>
         @SuppressLint("RestrictedApi") View screenView = getLayoutInflater(new Bundle()).inflate(R.layout.item_dropdown_screening, null);
         screenView.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f));
 
-        //招聘类目
+        //工作类型
+        positionView = new ListView(getContext());
+        positionView.setDividerHeight(0);
+        positionView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (MyUtils.isFastClick1()){
+                    return;
+                }
+                positionId = positionBeans.get(position).getId();
+                positionAdapter.setCheckItem(position);
+                dropDownMenu.setTabText(positionStrs.get(position));
+                dropDownMenu.closeMenu();
+                refresh();
+            }
+        });
+
+        //擅长类目
         categoryView = new ListView(getContext());
         categoryView.setDividerHeight(0);
         categoryView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -197,7 +276,7 @@ public class MainFragment extends ALazyLoadBaseFragment<IMainView,MainPresenter>
             }
         });
 
-        //招聘平台
+        //擅长平台
         platformView = new ListView(getContext());
         platformView.setDividerHeight(0);
         platformView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -214,10 +293,28 @@ public class MainFragment extends ALazyLoadBaseFragment<IMainView,MainPresenter>
             }
         });
 
+        //工作经验
+        experienceView = new ListView(getContext());
+        experienceView.setDividerHeight(0);
+        experienceView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (MyUtils.isFastClick1()){
+                    return;
+                }
+                experienceId = experienceBeans.get(position).getId();
+                experienceAdapter.setCheckItem(position);
+                dropDownMenu.setTabText(experienceStrs.get(position));
+                dropDownMenu.closeMenu();
+                refresh();
+            }
+        });
 
         //添加
+        popupViews.add(positionView);
         popupViews.add(categoryView);
         popupViews.add(platformView);
+        popupViews.add(experienceView);
         //展示条件筛选结果的内容控件
         @SuppressLint("RestrictedApi") View contentView =  getLayoutInflater(new Bundle()).inflate(R.layout.include_recyclerview_refresh, null);
         contentView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -225,7 +322,7 @@ public class MainFragment extends ALazyLoadBaseFragment<IMainView,MainPresenter>
         recyclerView = (RecyclerView) contentView.findViewById(R.id.recyclerView);
         dropDownMenu.setDropDownMenu(Arrays.asList(tabTexts), popupViews, contentView);
         //添加自定义的tabView(筛选)
-        dropDownMenu.addTab(screenView, 2);
+        dropDownMenu.addTab(screenView, popupViews.size());
         screenView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -265,7 +362,7 @@ public class MainFragment extends ALazyLoadBaseFragment<IMainView,MainPresenter>
      * 为 RecyclerView 加载 Adapter
      */
     private void initAdapter() {
-        mAdapter = new PositionAdapter(getContext());
+        mAdapter = new DemandAdapter(getContext());
         mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
@@ -305,7 +402,6 @@ public class MainFragment extends ALazyLoadBaseFragment<IMainView,MainPresenter>
             @Override
             public void onRefresh() {
                 initData();
-                refresh();
             }
         });
     }
@@ -333,12 +429,20 @@ public class MainFragment extends ALazyLoadBaseFragment<IMainView,MainPresenter>
         return userInfo;
     }
     @Override
+    public String getPositionId() {
+        return positionId;
+    }
+    @Override
     public String getCategoryId() {
         return categoryId;
     }
     @Override
     public String getPlatformId() {
         return platformId;
+    }
+    @Override
+    public String getExperienceId() {
+        return experienceId;
     }
     @Override
     public String getMinSalary() {
@@ -350,28 +454,46 @@ public class MainFragment extends ALazyLoadBaseFragment<IMainView,MainPresenter>
     }
     @Override//获取职位检索条件
     public void onGetConditionSuccessResult(ConditionInfoData result) {
+        ArrayList<ConditionBean> positionList = result.getTowList();
         ArrayList<ConditionBean> categoryList = result.getBgatList();
         ArrayList<ConditionBean> platformList = result.getBgapList();
+        ArrayList<ConditionBean> experienceList = result.getWorkingYearsList();
+        positionList.add(0,new ConditionBean("0","全部"));
         categoryList.add(0,new ConditionBean("0","全部"));
         platformList.add(0,new ConditionBean("0","全部"));
+        experienceList.set(0,new ConditionBean("0","全部"));
+        positionBeans = positionList;
         categoryBeans = categoryList;
         platformBeans = platformList;
+        experienceBeans = experienceList;
+        positionStrs.clear();
         categoryStrs.clear();
         platformStrs.clear();
+        experienceStrs.clear();
+        for (int i = 0; i < positionBeans.size() ; i++) {
+            positionStrs.add(positionBeans.get(i).getName());
+        }
         for (int i = 0; i < categoryBeans.size() ; i++) {
             categoryStrs.add(categoryBeans.get(i).getName());
         }
         for (int i = 0; i < platformBeans.size() ; i++) {
             platformStrs.add(platformBeans.get(i).getName());
         }
+        for (int i = 0; i < experienceBeans.size() ; i++) {
+            experienceStrs.add(experienceBeans.get(i).getName());
+        }
+        positionAdapter = new DropDownListAdapter(getContext(),  positionStrs);
         categoryAdapter = new DropDownListAdapter(getContext(), categoryStrs);
         platformAdapter = new DropDownListAdapter(getContext(), platformStrs);
+        experienceAdapter = new DropDownListAdapter(getContext(), experienceStrs);
+        positionView.setAdapter(positionAdapter);
         categoryView.setAdapter(categoryAdapter);
         platformView.setAdapter(platformAdapter);
+        experienceView.setAdapter(experienceAdapter);
     }
     @Override
     public void onGetConditionFailureResult(String result) {
-         ToastUtil.myToast(result);
+        ToastUtil.myToast(result);
     }
     @Override//获取轮播图
     public void onGetBannerSuccessResult(BannerInfoData result) {
@@ -382,11 +504,11 @@ public class MainFragment extends ALazyLoadBaseFragment<IMainView,MainPresenter>
     public void onGetBannerFailureResult(String result) {
         banner.setVisibility(View.GONE);
         if (!result.equals("")){
-             ToastUtil.myToast(result);
+            ToastUtil.myToast(result);
         }
     }
     @Override//获取职位招聘列表
-    public void onRequestSuccess(List<PositionListInfoData> tData) {
+    public void onRequestSuccess(List<DemandListInfoData> tData) {
         setData(tData);
         if (isRefresh){//停止刷新
             mAdapter.setEnableLoadMore(true);
@@ -413,7 +535,7 @@ public class MainFragment extends ALazyLoadBaseFragment<IMainView,MainPresenter>
                 mAdapter.loadMoreFail();
             }
         }
-         ToastUtil.myToast(toastStr);
+        ToastUtil.myToast(toastStr);
     }
 
     /**
@@ -423,7 +545,7 @@ public class MainFragment extends ALazyLoadBaseFragment<IMainView,MainPresenter>
         /*设置banner样式*/
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE);
         //遍历图片
-        List<String> images = new ArrayList<>();
+        final List<String> images = new ArrayList<>();
         for (int i = 0; i < bannerBeans.size(); i++) {
             images.add(bannerBeans.get(i).getAd_code());
         }
@@ -441,6 +563,22 @@ public class MainFragment extends ALazyLoadBaseFragment<IMainView,MainPresenter>
         banner.setIndicatorGravity(BannerConfig.CENTER);
         //banner设置方法全部调用完毕时最后调用
         banner.start();
+
+        banner.setOnBannerClickListener(new OnBannerClickListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                if (MyUtils.isFastClick()){
+                    return;
+                }
+                //查看大图
+                String[] imageUrls = images.toArray(new String[images.size()]);
+                Intent intent = new Intent(getContext(), ImageActivity.class);
+                intent.putExtra(ConstantUtil.KEY_DATA, imageUrls);
+                //这里的position是从1开始的，所以位标要-1
+                intent.putExtra(ConstantUtil.KEY_POSITION, position-1);
+                startActivity(intent);
+            }
+        });
     }
 
     /**
@@ -488,12 +626,16 @@ public class MainFragment extends ALazyLoadBaseFragment<IMainView,MainPresenter>
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        positionStrs.clear();
         categoryStrs.clear();
         platformStrs.clear();
+        experienceStrs.clear();
         popupViews.clear();
 
+        positionId="0";//工作类型Id
         categoryId="0";//类目Id
         platformId="0";//平台Id
+        experienceId="0";//工作经验Id
         minSalary="";//最低薪资
         maxSalary="";//最高薪资
     }

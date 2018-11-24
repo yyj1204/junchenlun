@@ -1,6 +1,8 @@
 package com.wktx.www.emperor.ui.activity.staff.report;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -8,17 +10,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.staff.report.ReportSaleroomInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.staff.report.ReportSaleroomPresenter;
+import com.wktx.www.emperor.ui.activity.ImageActivity;
 import com.wktx.www.emperor.ui.adapter.DropDownListAdapter;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.GlideUtil;
-import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.IView;
 import com.wktx.www.emperor.utils.ToastUtil;
@@ -45,7 +45,7 @@ public class ReportSaleroomActivity extends ABaseActivity<IView,ReportSaleroomPr
     private String monthId="0";//月份Id
 
     private DropDownListAdapter monthListAdapter;//条件筛选适配器
-    private String tabTexts[] = {"月份选择"};
+    private String[] tabTexts = {"月份选择"};
     private List<ReportSaleroomInfoData.ListBean> monthListBeans = new ArrayList<>();//月份集合
 
     private List<String> monthListStrs = new ArrayList<>();//月份名称
@@ -56,6 +56,7 @@ public class ReportSaleroomActivity extends ABaseActivity<IView,ReportSaleroomPr
     private ImageView ivImage;
 
     private boolean isFirst=true;//是否第一次请求
+    private List<String> imageUrlList = new ArrayList<>();//图片url集合
 
     @OnClick({R.id.tb_IvReturn})
     public void MyOnclick(View view) {
@@ -86,7 +87,7 @@ public class ReportSaleroomActivity extends ABaseActivity<IView,ReportSaleroomPr
     }
 
     /**
-     * 接收 StaffReportActivity 传递过来的雇佣id
+     * 接收 StaffWorkListActivity 传递过来的雇佣id
      */
     private void initData() {
         hireId = getIntent().getStringExtra(ConstantUtil.KEY_POSITION);
@@ -114,11 +115,25 @@ public class ReportSaleroomActivity extends ABaseActivity<IView,ReportSaleroomPr
         //添加
         popupViews.add(monthListView);
         //展示条件筛选结果的内容控件
-        View contentView =  getLayoutInflater().inflate(R.layout.include_report_saleroom, null);
+        View contentView =  getLayoutInflater().inflate(R.layout.layout_report_saleroom, null);
         contentView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         tvTotal = (TextView) contentView.findViewById(R.id.tv_saleroomTotal);
         tvLastmonth = (TextView) contentView.findViewById(R.id.tv_saleroomLastmonth);
         ivImage = (ImageView) contentView.findViewById(R.id.iv_img);
+        ivImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (MyUtils.isFastClick1()){
+                    return;
+                }
+                //预览图片
+                String[] imageUrls = imageUrlList.toArray(new String[imageUrlList.size()]);
+                Intent intent = new Intent(ReportSaleroomActivity.this, ImageActivity.class);
+                intent.putExtra(ConstantUtil.KEY_DATA, imageUrls);
+                intent.putExtra(ConstantUtil.KEY_POSITION, 0);
+                startActivity(intent);
+            }
+        });
         dropDownMenu.setDropDownMenu(Arrays.asList(tabTexts), popupViews, contentView);
     }
 
@@ -126,27 +141,24 @@ public class ReportSaleroomActivity extends ABaseActivity<IView,ReportSaleroomPr
      * IView
      */
     @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
-
-    @Override
     public void onRequestSuccess(ReportSaleroomInfoData tData) {
         //字符串数据都为空，说明上月没数据，即该员工是当月雇佣的
-        if (tData.getTotal_sales()==null||tData.getTotal_sales().equals("")){
+        if (TextUtils.isEmpty(tData.getTotal_sales())){
             tvTotal.setText("0");
         }else {
             tvTotal.setText(tData.getTotal_sales());
         }
-        if (tData.getLast_month_sales()==null||tData.getLast_month_sales().equals("")){
+        if (TextUtils.isEmpty(tData.getLast_month_sales())){
             tvLastmonth.setText("0");
         }else {
             tvLastmonth.setText(tData.getLast_month_sales());
         }
-        if (tData.getLast_sales_data()==null||tData.getLast_sales_data().equals("")){
+        //数据图片
+        if (TextUtils.isEmpty(tData.getLast_sales_data())){
             ivImage.setImageResource(R.drawable.img_nothing);
         }else {
+            imageUrlList.clear();
+            imageUrlList.add(tData.getLast_sales_data());
             GlideUtil.loadImage(tData.getLast_sales_data(),R.drawable.img_loading,ivImage);
         }
         //第一次请求时才更新月份列表

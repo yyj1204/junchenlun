@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:hedgehog="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -151,9 +152,10 @@
                 android:gravity="center_vertical"
                 android:background="@color/color_ffffff">
                 <TextView
+                    android:id="@+id/tv_imgNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="数据表现"
+                    android:text="数据表现（0张）"
                     android:layout_marginBottom="@dimen/px_12"
                     android:textColor="@color/color_000000"
                     android:textSize="@dimen/sp_14"/>
@@ -176,13 +178,13 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/px_12"
+                    android:layout_marginTop="@dimen/px_20"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="服务态度"
+                        android:text="工作态度"
                         android:textColor="@color/color_999999"
                         android:textSize="13sp"/>
                     <com.hedgehog.ratingbar.RatingBar
@@ -193,17 +195,18 @@
                         hedgehog:clickable="true"
                         hedgehog:halfstart="false"
                         hedgehog:starCount="5"
-                        hedgehog:starEmpty="@drawable/ic_resume_star_unselected"
-                        hedgehog:starFill="@drawable/ic_resume_star_selected"
+                        hedgehog:starEmpty="@drawable/ic_star_normal"
+                        hedgehog:starFill="@drawable/ic_star_selected"
                         hedgehog:starHalf="@drawable/ic_resume_star_half"
-                        hedgehog:starImageHeight="@dimen/px_40"
-                        hedgehog:starImageWidth="@dimen/px_70"
-                        hedgehog:starImagePadding="@dimen/px_20"/>
+                        hedgehog:starImageHeight="@dimen/px_80"
+                        hedgehog:starImageWidth="@dimen/px_80"
+                        hedgehog:starImagePadding="@dimen/px_30"/>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/px_12"
+                    android:layout_marginTop="@dimen/px_20"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <TextView
@@ -220,23 +223,23 @@
                         hedgehog:clickable="true"
                         hedgehog:halfstart="false"
                         hedgehog:starCount="5"
-                        hedgehog:starEmpty="@drawable/ic_resume_star_unselected"
-                        hedgehog:starFill="@drawable/ic_resume_star_selected"
+                        hedgehog:starEmpty="@drawable/ic_star_normal"
+                        hedgehog:starFill="@drawable/ic_star_selected"
                         hedgehog:starHalf="@drawable/ic_resume_star_half"
-                        hedgehog:starImageHeight="@dimen/px_40"
-                        hedgehog:starImageWidth="@dimen/px_70"
-                        hedgehog:starImagePadding="@dimen/px_20"/>
+                        hedgehog:starImageHeight="@dimen/px_80"
+                        hedgehog:starImageWidth="@dimen/px_80"
+                        hedgehog:starImagePadding="@dimen/px_30"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/px_12"
+                    android:layout_marginTop="@dimen/px_20"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="响应速度"
+                        android:text="工作效率"
                         android:textColor="@color/color_999999"
                         android:textSize="13sp"/>
                     <com.hedgehog.ratingbar.RatingBar
@@ -247,12 +250,12 @@
                         hedgehog:clickable="true"
                         hedgehog:halfstart="false"
                         hedgehog:starCount="5"
-                        hedgehog:starEmpty="@drawable/ic_resume_star_unselected"
-                        hedgehog:starFill="@drawable/ic_resume_star_selected"
+                        hedgehog:starEmpty="@drawable/ic_star_normal"
+                        hedgehog:starFill="@drawable/ic_star_selected"
                         hedgehog:starHalf="@drawable/ic_resume_star_half"
-                        hedgehog:starImageHeight="@dimen/px_40"
-                        hedgehog:starImageWidth="@dimen/px_70"
-                        hedgehog:starImagePadding="@dimen/px_20"/>
+                        hedgehog:starImageHeight="@dimen/px_80"
+                        hedgehog:starImageWidth="@dimen/px_80"
+                        hedgehog:starImagePadding="@dimen/px_30"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -268,7 +271,7 @@
                     android:layout_height="wrap_content"
                     android:text="评价留言"
                     android:textSize="@dimen/sp_14"
-                    android:textColor="@color/color_000000"/>/>
+                    android:textColor="@color/color_000000"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/px_144"
@@ -282,7 +285,8 @@
                         android:textColor="@color/color_000000"
                         android:lineSpacingExtra="@dimen/px_15"
                         android:maxLength="60"
-                        android:textSize="@dimen/sp_14"
+                        android:hint="请输入您的评价"
+                        android:textSize="@dimen/sp_13"
                         android:background="@null"
                         android:gravity="top|left"/>
                     <TextView

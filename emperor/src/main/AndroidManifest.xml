@@ -27,10 +27,19 @@
     //图片选择器 请求权限
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     //图片加载
+    <!-- <uses-permission android:name="android.permission.INTERNET" /> -->
+    <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
+
+    <!--Bugly热更新4-1-->
+    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
     <!--<uses-permission android:name="android.permission.INTERNET" />-->
+    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
+    <!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />-->
+    <uses-permission android:name="android.permission.READ_LOGS" />
     <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
+    <!--<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>-->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
         android:name=".application.MyApplication"
@@ -39,11 +48,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true">
 
         <!-- 欢迎界面 (解决点击桌面图标，APP重启问题) -->
         <activity
-            android:name=".ui.activity.main.WelcomeActivity"
+            android:name=".ui.activity.WelcomeActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,23 +71,30 @@
                 <data android:scheme="wxdfb137b9c34a5a28" /> <!-- 微信APPId -->
             </intent-filter>
         </activity>
-        //首页
-        <!-- 首页、搜索、美工案例(排序筛选)、招聘指南、消息（详情） -->
         <activity
-            android:name=".ui.activity.main.MainActivity"
+            android:name=".ui.activity.GuideActivity"
             android:launchMode="singleTask" />
+        //首页
+        <!-- 首页、查看大图、搜索、美工案例(排序筛选)、招聘指南、消息（详情） -->
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name=".ui.activity.ImageActivity"
+            android:theme="@android:style/Animation.Dialog" />
         <activity
             android:name=".ui.activity.main.SearchActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-        <activity android:name=".ui.activity.main.artistcase.ArtistCaseActivity" />
-        <activity android:name=".ui.activity.main.artistcase.ScreeningArtistActivity" />
+        <activity android:name=".ui.activity.main.artistcase.CasesActivity" />
+        <activity android:name=".ui.activity.main.artistcase.ScreeningCasesActivity" />
         <activity android:name=".ui.activity.main.RecruitGuideActivity" />
         <activity android:name=".ui.activity.main.message.MessageActivity" />
         <activity android:name=".ui.activity.main.message.MessageDetailsActivity" />
         //招聘
         <!-- 筛选（工作经验、性别） -->
         <activity android:name=".ui.activity.recruit.ScreeningResumeActivity" />
-        <!-- 发布需求 -->
+        <!-- 需求（需求列表、发布需求、需求详情） -->
         <activity android:name=".ui.activity.recruit.demand.DemandActivity" />
         <activity
             android:name=".ui.activity.recruit.demand.DemandReleaseActivity"
@@ -96,21 +114,30 @@
             android:name=".ui.activity.recruit.hire.InputPayPwdActivity"
             android:theme="@style/PasswordTheme" />
         //员工
-        <!-- 管理、续签、工资、考勤记录、安排工作、暂停工作、发起投诉、发起解雇、工作报告、销售额 -->
+        <!-- 管理、考核指标、续签、工资、考勤记录、安排工作、暂停工作、发起投诉、发起解雇、解雇详情、工作报告、销售额 、评价员工、请假 -->
         <activity android:name=".ui.activity.staff.StaffManageActivity" />
+        <activity android:name=".ui.activity.staff.StaffKPIActivity" />
         <activity android:name=".ui.activity.staff.StaffRenewalActivity" />
         <activity android:name=".ui.activity.staff.StaffSalaryActivity" />
         <activity android:name=".ui.activity.staff.StaffAttendanceActivity" />
         <activity android:name=".ui.activity.staff.StaffArrangeWorkActivity" />
         <activity android:name=".ui.activity.staff.StaffPauseWorkActivity" />
         <activity android:name=".ui.activity.staff.StaffComplaintActivity" />
-        <activity android:name=".ui.activity.staff.StaffFireActivity" />
-        <activity android:name=".ui.activity.staff.report.StaffReportActivity" />
-        <activity android:name=".ui.activity.staff.report.ReportListActivity" />
+        <activity android:name=".ui.activity.staff.fire.StaffFireActivity" />
+        <activity android:name=".ui.activity.staff.fire.StaffFireDetailsActivity" />
+        <!-- 工作报告（安排工作列表、报告列表、报告详情） -->
+        <activity android:name=".ui.activity.staff.report.StaffWorkListActivity" />
+        <activity android:name=".ui.activity.staff.report.StaffReportListActivity" />
         <activity
             android:name=".ui.activity.staff.report.ReportDetailsActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity android:name=".ui.activity.staff.report.ReportSaleroomActivity" />
+        <activity
+            android:name=".ui.activity.staff.StaffEvaluateActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- 请假（请假列表、请假详情） -->
+        <activity android:name=".ui.activity.staff.leave.LeaveListActivity" />
+        <activity android:name=".ui.activity.staff.leave.LeaveDetailsActivity" />
         //我的账户
         <!-- 登录、注册、忘记密码 -->
         <activity android:name=".ui.activity.login.LoginActivity" />
@@ -118,19 +145,30 @@
         <activity android:name=".ui.activity.login.ForgetPwdActivity" />
         <!-- 公司信息 -->
         <activity android:name=".ui.activity.mine.CompanyInfoActivity" />
-        <!-- 账户认证（个人、店铺） -->
-        <activity android:name=".ui.activity.mine.certification.AccountCertificationActivity" />
-        <activity android:name=".ui.activity.mine.certification.CertificationPersonalActivity" />
+        <!-- 账户认证（个人、店铺及详情） -->
+        <activity android:name=".ui.activity.mine.authent.AccountAuthentActivity" />
         <activity
-            android:name=".ui.activity.mine.certification.CertificationStoreActivity"
+            android:name=".ui.activity.mine.authent.AuthentPersonalActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-        <!-- 设置（修改密码） -->
+        <activity
+            android:name=".ui.activity.mine.authent.AuthentPersonalDetailsActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity
+            android:name=".ui.activity.mine.authent.AuthentStoreActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity
+            android:name=".ui.activity.mine.authent.AuthentStoreDetailsActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- 设置 -->
         <activity android:name=".ui.activity.mine.SettingActivity" />
-        <!-- 我的钱包（钱包充值、钱包提现） -->
+        <!-- 我的钱包（提现记录、钱包充值、钱包提现） -->
         <activity android:name=".ui.activity.mine.purse.MyPurseActivity" />
+        <activity android:name=".ui.activity.mine.purse.WithdrawListActivity" />
         <activity android:name=".ui.activity.mine.purse.PurseRechargeActivity" />
-        <activity android:name=".ui.activity.mine.purse.PurseWithdrawalActivity" />
-        <!-- 浏览记录、店铺信息(编辑添加)、我的收藏、交易记录、面试记录、雇佣记录、我的红包、账号安全、联系客服 -->
+        <activity
+            android:name=".ui.activity.mine.purse.PurseWithdrawActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- 浏览记录、店铺信息(编辑添加)、我的收藏、交易记录、面试记录、雇佣记录、我的红包、账户安全、联系客服 -->
         <activity android:name=".ui.activity.mine.BrowsingRecordActivity" />
         <activity android:name=".ui.activity.mine.store.StoreInfoActivity" />
         <activity android:name=".ui.activity.mine.store.StoreInfoEditActivity" />
@@ -139,10 +177,14 @@
         <activity android:name=".ui.activity.mine.InterviewRecordActivity" />
         <activity android:name=".ui.activity.mine.HireRecordActivity" />
         <activity android:name=".ui.activity.mine.MyCouponActivity" />
-        <!--账号安全（修改登录密码、支付密码）-->
-        <activity android:name=".ui.activity.mine.security.AccountSecurityActivity"/>
-        <activity android:name=".ui.activity.mine.security.LoginPwdActivity" />
-        <activity android:name=".ui.activity.mine.security.PayPwdActivity" />
+        <!-- 账户安全（修改登录密码、支付密码、手机号、支付宝认证） -->
+        <activity android:name=".ui.activity.mine.security.AccountSecurityActivity" />
+        <activity android:name=".ui.activity.mine.security.EditLoginPwdActivity" />
+        <activity android:name=".ui.activity.mine.security.EditPayPwdActivity" />
+        <activity android:name=".ui.activity.mine.security.EditPhoneActivity" />
+        <activity android:name=".ui.activity.mine.security.AuthentAlipayActivity" />
+        <!-- 关于我们、联系客服 -->
+        <activity android:name=".ui.activity.mine.AboutUsActivity" />
         <activity android:name=".ui.activity.mine.ContactServiceActivity" />
         <!-- 相关协议说明（关于我们、红包使用规则） -->
         <activity android:name=".ui.activity.mine.WebExplainActivity" />
@@ -180,7 +222,15 @@
             android:launchMode="singleTop" />
         <!-- 微信支付 》 -->
 
+        <!--Bugly热更新4-2-->
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
+        <!--Bugly热更新4-2-->
 
+
+        <activity android:name=".ui.activity.recruit.resume.WorksDetails1Activity"></activity>
     </application>
 
 </manifest>

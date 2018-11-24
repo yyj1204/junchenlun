@@ -3,6 +3,7 @@ package com.wktx.www.emperor.ui.activity.recruit.hire;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,7 +14,6 @@ import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.listener.CustomListener;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.recruit.hire.CouponBalanceInfoData;
 import com.wktx.www.emperor.apiresult.recruit.hire.HireInfoData;
 import com.wktx.www.emperor.apiresult.recruit.resume.ResumeInfoData;
@@ -22,7 +22,6 @@ import com.wktx.www.emperor.presenter.recruit.hire.OrdersInfoPresenter;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.DateUtil;
 import com.wktx.www.emperor.utils.GlideUtil;
-import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.recruit.hire.IOrdersInfoView;
 import com.wktx.www.emperor.utils.ToastUtil;
@@ -142,15 +141,15 @@ public class OrdersInfoActivity extends ABaseActivity<IOrdersInfoView,OrdersInfo
     private void showCancelOrdersDialog() {
         CustomDialog.Builder builder = new CustomDialog.Builder(this);
         builder.setTitle("系统提示");
-        builder.setMessage("您是否要取消这笔雇佣订单？");
-        builder.setPositiveButton("不，再等等", new DialogInterface.OnClickListener() {
+        builder.setMessage("您是否要返回上一步？");
+        builder.setPositiveButton("不，继续", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
         });
 
-        builder.setNegativeButton("确认取消",
+        builder.setNegativeButton("返回",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -218,7 +217,7 @@ public class OrdersInfoActivity extends ABaseActivity<IOrdersInfoView,OrdersInfo
 
     private void initUI() {
         //头像
-        if (resumeInfoData.getPicture()==null||resumeInfoData.getPicture().equals("")){
+        if (TextUtils.isEmpty(resumeInfoData.getPicture())){
             if (resumeInfoData.getSex().equals("1")){
                 ivHead.setImageResource(R.drawable.img_head_man);
             }else if (resumeInfoData.getSex().equals("2")){
@@ -375,11 +374,6 @@ public class OrdersInfoActivity extends ABaseActivity<IOrdersInfoView,OrdersInfo
      * IOrdersView
      */
     @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
-    @Override
     public String getCouponId() {
         return couponId;
     }
@@ -393,9 +387,10 @@ public class OrdersInfoActivity extends ABaseActivity<IOrdersInfoView,OrdersInfo
     }
     @Override
     public void onCancelOrdersResult(boolean isSuccess, String result) {
-        ToastUtil.myToast(result);
         if (isSuccess){
             finish();
+        }else {
+            ToastUtil.myToast(result);
         }
     }
     @Override

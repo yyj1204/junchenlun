@@ -21,6 +21,16 @@ public interface IWorkExperienceView extends IView<ConditionInfoData> {
     String getCompanyName();
 
     /**
+     * 获取公司网址
+     */
+    String getCompanyURL();
+
+    /**
+     * 获取薪资
+     */
+    String getSalary();
+
+    /**
      * 获取开始时间
      */
     String getBeginTime();

@@ -84,10 +84,10 @@
                     android:id="@+id/tv_renewal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/px_12"
-                    android:paddingBottom="@dimen/px_12"
-                    android:paddingLeft="@dimen/px_46"
-                    android:paddingRight="@dimen/px_46"
+                    android:paddingTop="@dimen/px_10"
+                    android:paddingBottom="@dimen/px_10"
+                    android:paddingLeft="@dimen/px_30"
+                    android:paddingRight="@dimen/px_30"
                     android:text="续签"
                     android:textColor="@color/color_ffffff"
                     android:background="@drawable/selector_submit_selected_10"/>
@@ -106,6 +106,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/px_1"
+        android:layout_marginBottom="@dimen/px_20"
         android:background="@color/color_ffffff"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -129,7 +130,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="工资"
+                    android:text="财务"
                     android:textColor="@color/color_999999"
                     android:textSize="@dimen/sp_13" />
                 <TextView
@@ -248,11 +249,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linear_arrangeWork"
+        android:id="@+id/linear_evaluate"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/px_30"
-        android:layout_marginTop="@dimen/px_10"
+        android:layout_height="@dimen/px_96"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
         android:background="@drawable/selector_mine_linearlayout"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -260,63 +261,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="安排工作"
+            android:text="评价员工"
             android:textColor="@color/color_000000"
             android:textSize="@dimen/sp_14" />
-        <ImageView
-            android:layout_width="@dimen/px_16"
-            android:layout_height="@dimen/px_20"
-            android:src="@drawable/ic_demand_arrow_right_gray" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linear_pauseWork"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/px_30"
-        android:layout_marginTop="@dimen/px_1"
-        android:background="@drawable/selector_mine_linearlayout"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
         <TextView
-            android:id="@+id/tv_pauseWork"
+            android:id="@+id/tv_evaluateState"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="暂停工作"
-            android:textColor="@color/color_000000"
-            android:textSize="@dimen/sp_14" />
+            android:background="@drawable/shape_solid_ffb321_10"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/color_ffffff"
+            android:gravity="center"
+            android:text="未评价"/>
         <ImageView
             android:layout_width="@dimen/px_16"
             android:layout_height="@dimen/px_20"
+            android:layout_marginLeft="@dimen/px_14"
             android:src="@drawable/ic_demand_arrow_right_gray" />
     </LinearLayout>
+
     <LinearLayout
-        android:id="@+id/linear_launchComplaint"
+        android:id="@+id/linear_fireDetails"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/px_30"
-        android:layout_marginTop="@dimen/px_1"
-        android:background="@drawable/selector_mine_linearlayout"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/tv_launchComplaint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="发起投诉"
-            android:textColor="@color/color_000000"
-            android:textSize="@dimen/sp_14" />
-        <ImageView
-            android:layout_width="@dimen/px_16"
-            android:layout_height="@dimen/px_20"
-            android:src="@drawable/ic_demand_arrow_right_gray" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linear_launchFire"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/px_30"
+        android:layout_height="@dimen/px_96"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
         android:layout_marginTop="@dimen/px_1"
         android:background="@drawable/selector_mine_linearlayout"
         android:gravity="center_vertical"
@@ -325,13 +294,144 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="发起解雇"
+            android:text="解雇详情"
             android:textColor="@color/color_000000"
             android:textSize="@dimen/sp_14" />
         <ImageView
             android:layout_width="@dimen/px_16"
             android:layout_height="@dimen/px_20"
+            android:layout_marginLeft="@dimen/px_14"
             android:src="@drawable/ic_demand_arrow_right_gray" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_leavelist"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_96"
+        android:paddingLeft="@dimen/px_30"
+        android:paddingRight="@dimen/px_30"
+        android:layout_marginTop="@dimen/px_1"
+        android:background="@drawable/selector_mine_linearlayout"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="请假记录"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_14" />
+        <TextView
+            android:id="@+id/tv_leave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0条未审批"
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/px_14"
+            android:textColor="@color/color_ffb321"
+            android:textSize="@dimen/sp_13" />
+        <ImageView
+            android:layout_width="@dimen/px_16"
+            android:layout_height="@dimen/px_20"
+            android:src="@drawable/ic_demand_arrow_right_gray" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_normal"
+        android:layout_marginTop="@dimen/px_20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/linear_arrangeWork"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_96"
+            android:paddingLeft="@dimen/px_30"
+            android:paddingRight="@dimen/px_30"
+            android:background="@drawable/selector_mine_linearlayout"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="安排工作"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_14" />
+            <ImageView
+                android:layout_width="@dimen/px_16"
+                android:layout_height="@dimen/px_20"
+                android:src="@drawable/ic_demand_arrow_right_gray" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linear_pauseWork"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_96"
+            android:paddingLeft="@dimen/px_30"
+            android:paddingRight="@dimen/px_30"
+            android:layout_marginTop="@dimen/px_1"
+            android:background="@drawable/selector_mine_linearlayout"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_pauseWork"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="暂停工作"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_14" />
+            <ImageView
+                android:layout_width="@dimen/px_16"
+                android:layout_height="@dimen/px_20"
+                android:src="@drawable/ic_demand_arrow_right_gray" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linear_launchComplaint"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_96"
+            android:paddingLeft="@dimen/px_30"
+            android:paddingRight="@dimen/px_30"
+            android:layout_marginTop="@dimen/px_1"
+            android:background="@drawable/selector_mine_linearlayout"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_launchComplaint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="发起投诉"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_14" />
+            <ImageView
+                android:layout_width="@dimen/px_16"
+                android:layout_height="@dimen/px_20"
+                android:src="@drawable/ic_demand_arrow_right_gray" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linear_launchFire"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_96"
+            android:paddingLeft="@dimen/px_30"
+            android:paddingRight="@dimen/px_30"
+            android:layout_marginTop="@dimen/px_1"
+            android:background="@drawable/selector_mine_linearlayout"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_launchFire"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="发起解雇"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_14" />
+            <ImageView
+                android:layout_width="@dimen/px_16"
+                android:layout_height="@dimen/px_20"
+                android:src="@drawable/ic_demand_arrow_right_gray" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,28 +8,27 @@
     android:padding="@dimen/px_30">
     <TextView
         android:id="@+id/tv_demandTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:gravity="center_vertical"
-        android:layout_centerVertical="true"
+        android:singleLine="true"
+        android:text="需求标题"
         android:textColor="@color/color_000000"
-        android:textSize="@dimen/sp_13" />
+        android:textSize="@dimen/sp_15" />
     <TextView
         android:id="@+id/tv_demandStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/tv_demandTitle"
         android:layout_marginLeft="@dimen/px_14"
-        android:background="@drawable/shape_solid_fa716f_10"
+        android:background="@drawable/shape_solid_ffb321_10"
         android:textSize="@dimen/sp_12"
         android:textColor="@color/color_ffffff"
         android:gravity="center"
-        android:layout_centerVertical="true"
         android:text="待响应"/>
     <ImageView
         android:layout_width="@dimen/px_16"
         android:layout_height="@dimen/px_20"
-        android:src="@drawable/ic_demand_arrow_right_gray"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"/>
-</com.zhy.autolayout.AutoRelativeLayout>
+        android:layout_marginLeft="@dimen/px_14"
+        android:src="@drawable/ic_demand_arrow_right_gray"/>
+</com.zhy.autolayout.AutoLinearLayout>

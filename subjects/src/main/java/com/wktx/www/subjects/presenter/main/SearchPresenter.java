@@ -1,7 +1,7 @@
 package com.wktx.www.subjects.presenter.main;
 import com.wktx.www.subjects.apiresult.CustomApiResult;
 import com.wktx.www.subjects.apiresult.main.CompanyListData;
-import com.wktx.www.subjects.apiresult.main.position.PositionListData;
+import com.wktx.www.subjects.apiresult.main.demand.DemandListData;
 import com.wktx.www.subjects.basemvp.ABasePresenter;
 import com.wktx.www.subjects.ui.view.main.ISearchView;
 import com.wktx.www.subjects.utils.ApiURL;
@@ -10,7 +10,6 @@ import com.wktx.www.subjects.utils.LogUtil;
 import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.callback.CallBackProxy;
 import com.zhouyou.http.callback.ProgressDialogCallBack;
-import com.zhouyou.http.callback.SimpleCallBack;
 import com.zhouyou.http.exception.ApiException;
 import com.zhouyou.http.model.HttpParams;
 
@@ -36,8 +35,8 @@ public class SearchPresenter extends ABasePresenter<ISearchView> {
         EasyHttp.post(ApiURL.COMMON_URL)
                 .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_POSITION_LIST)
                 .params(httpParams)
-                .execute(new CallBackProxy<CustomApiResult<PositionListData>, PositionListData>
-                        (new ProgressDialogCallBack<PositionListData>(mProgressDialog) {
+                .execute(new CallBackProxy<CustomApiResult<DemandListData>, DemandListData>
+                        (new ProgressDialogCallBack<DemandListData>(mProgressDialog) {
                             @Override
                             public void onError(ApiException e) {
                                 super.onError(e);
@@ -50,7 +49,7 @@ public class SearchPresenter extends ABasePresenter<ISearchView> {
                                 }
                             }
                             @Override
-                            public void onSuccess(PositionListData result) {
+                            public void onSuccess(DemandListData result) {
                                 if (result != null) {
                                     LogUtil.error("获取搜索职位招聘列表","result=="+result.toString());
 

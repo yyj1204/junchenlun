@@ -18,11 +18,13 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/px_14"
         android:text="精品鞋包"
+        android:singleLine="true"
         android:textColor="@color/color_000000"
         android:textSize="@dimen/sp_13"
         android:layout_weight="1"/>
     <ImageView
         android:layout_width="@dimen/px_16"
         android:layout_height="@dimen/px_20"
+        android:layout_marginLeft="@dimen/px_14"
         android:src="@drawable/ic_demand_arrow_right_gray"/>
 </com.zhy.autolayout.AutoLinearLayout>

@@ -16,7 +16,7 @@ import java.lang.Override;
 public class WebExplainActivity_ViewBinding implements Unbinder {
   private WebExplainActivity target;
 
-  private View view2131231164;
+  private View view2131689766;
 
   @UiThread
   public WebExplainActivity_ViewBinding(WebExplainActivity target) {
@@ -31,7 +31,7 @@ public class WebExplainActivity_ViewBinding implements Unbinder {
     target.tvTitle = Utils.findRequiredViewAsType(source, R.id.tb_TvBarTitle, "field 'tvTitle'", TextView.class);
     target.webView = Utils.findRequiredViewAsType(source, R.id.webview, "field 'webView'", WebView.class);
     view = Utils.findRequiredView(source, R.id.tb_IvReturn, "method 'MyOnclick'");
-    view2131231164 = view;
+    view2131689766 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -50,7 +50,7 @@ public class WebExplainActivity_ViewBinding implements Unbinder {
     target.tvTitle = null;
     target.webView = null;
 
-    view2131231164.setOnClickListener(null);
-    view2131231164 = null;
+    view2131689766.setOnClickListener(null);
+    view2131689766 = null;
   }
 }

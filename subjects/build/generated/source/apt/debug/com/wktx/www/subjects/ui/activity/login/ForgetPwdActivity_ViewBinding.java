@@ -17,11 +17,11 @@ import java.lang.Override;
 public class ForgetPwdActivity_ViewBinding implements Unbinder {
   private ForgetPwdActivity target;
 
-  private View view2131231245;
+  private View view2131689709;
 
-  private View view2131230781;
+  private View view2131689739;
 
-  private View view2131231164;
+  private View view2131689766;
 
   @UiThread
   public ForgetPwdActivity_ViewBinding(ForgetPwdActivity target) {
@@ -36,7 +36,7 @@ public class ForgetPwdActivity_ViewBinding implements Unbinder {
     target.tvTitle = Utils.findRequiredViewAsType(source, R.id.tb_TvBarTitle, "field 'tvTitle'", TextView.class);
     view = Utils.findRequiredView(source, R.id.tv_getcode, "field 'tvGetCode' and method 'MyOnclick'");
     target.tvGetCode = Utils.castView(view, R.id.tv_getcode, "field 'tvGetCode'", TextView.class);
-    view2131231245 = view;
+    view2131689709 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -49,7 +49,7 @@ public class ForgetPwdActivity_ViewBinding implements Unbinder {
     target.etPwd2 = Utils.findRequiredViewAsType(source, R.id.et_pwd2, "field 'etPwd2'", EditText.class);
     view = Utils.findRequiredView(source, R.id.bt_reset, "field 'btReset' and method 'MyOnclick'");
     target.btReset = Utils.castView(view, R.id.bt_reset, "field 'btReset'", Button.class);
-    view2131230781 = view;
+    view2131689739 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -57,7 +57,7 @@ public class ForgetPwdActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.tb_IvReturn, "method 'MyOnclick'");
-    view2131231164 = view;
+    view2131689766 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -81,11 +81,11 @@ public class ForgetPwdActivity_ViewBinding implements Unbinder {
     target.etPwd2 = null;
     target.btReset = null;
 
-    view2131231245.setOnClickListener(null);
-    view2131231245 = null;
-    view2131230781.setOnClickListener(null);
-    view2131230781 = null;
-    view2131231164.setOnClickListener(null);
-    view2131231164 = null;
+    view2131689709.setOnClickListener(null);
+    view2131689709 = null;
+    view2131689739.setOnClickListener(null);
+    view2131689739 = null;
+    view2131689766.setOnClickListener(null);
+    view2131689766 = null;
   }
 }

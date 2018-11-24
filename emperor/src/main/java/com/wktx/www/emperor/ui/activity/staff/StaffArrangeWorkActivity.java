@@ -1,6 +1,8 @@
 package com.wktx.www.emperor.ui.activity.staff;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,18 +15,18 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.bigkoo.pickerview.listener.CustomListener;
-import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.mine.store.StoreListInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
 import com.wktx.www.emperor.presenter.staff.StaffArrangeWorkPresenter;
+import com.wktx.www.emperor.ui.activity.mine.store.StoreInfoEditActivity;
+import com.wktx.www.emperor.ui.activity.recruit.demand.DemandReleaseActivity;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.DateUtil;
-import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.staff.IStaffArrangeWorkView;
 import com.wktx.www.emperor.utils.ToastUtil;
+import com.wktx.www.emperor.widget.CustomDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -63,8 +65,10 @@ public class StaffArrangeWorkActivity extends ABaseActivity<IStaffArrangeWorkVie
 
     //系统日历控件
     private Calendar curCalendar = Calendar.getInstance();
-    private String endDateStr;//工作截止日期"yyyy-MM-dd"格式
+    private String endDateStr;//工作截止日期"yyyy-MM-dd HH:mm"格式
     private long curDateLong;//当前时间的时间戳
+
+    private CustomDialog customDialog;
 
     @OnClick({R.id.tb_IvReturn,R.id.linear_store,R.id.linear_endTime,R.id.bt_sureArrange})
     public void MyOnclick(View view) {
@@ -107,12 +111,15 @@ public class StaffArrangeWorkActivity extends ABaseActivity<IStaffArrangeWorkVie
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        getPresenter().onGetStoreCondition();
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff_arrangework);
         ButterKnife.bind(this);
-        // 设置右滑动返回
-        Slidr.attach(this);
         tvTitle.setText(R.string.title_staff_arrangework);
         initData();
         initUI();
@@ -128,19 +135,18 @@ public class StaffArrangeWorkActivity extends ABaseActivity<IStaffArrangeWorkVie
      */
     private void initData() {
         hireId = getIntent().getStringExtra(ConstantUtil.KEY_POSITION);
-        getPresenter().onGetStoreCondition();//获取店铺检索条件
     }
 
     /**
      * 初始化控件
      */
     private void initUI() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         //截止日期
         Date endDate = curCalendar.getTime();
         endDateStr = sdf.format(endDate);
         //将截止日期转为时间戳(只转日期不转时间，方便pickDate方法做判断)
-        curDateLong = Long.parseLong(DateUtil.getCustomType2Timestamp(endDateStr,"yyyy-MM-dd"))* 1000L;
+        curDateLong = Long.parseLong(DateUtil.getCustomType2Timestamp(endDateStr,"yyyy-MM-dd HH:mm"))* 1000L;
         tvEndTime.setText(endDateStr);
     }
 
@@ -148,11 +154,6 @@ public class StaffArrangeWorkActivity extends ABaseActivity<IStaffArrangeWorkVie
     /**
      * IStaffArrangeWorkView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
     @Override
     public String getDemandTitle() {
         return etTitle.getText().toString().trim();
@@ -183,10 +184,45 @@ public class StaffArrangeWorkActivity extends ABaseActivity<IStaffArrangeWorkVie
     }
     @Override
     public void onRequestFailure(String result) {
-        ToastUtil.myToast(result);
-        finish();
+        if (result.equals("")){
+            showAddStoreDialog();
+        }else {
+            ToastUtil.myToast(result);
+            finish();
+        }
     }
 
+    /**
+     * 添加店铺对话框
+     */
+    private void showAddStoreDialog() {
+        CustomDialog.Builder builder = new CustomDialog.Builder(this);
+        builder.setTitle("系统提示");
+        builder.setMessage("暂无任何店铺，是否添加？");
+        builder.setPositiveButton("添加店铺", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                //打开店铺详情界面
+                Intent intent = new Intent(StaffArrangeWorkActivity.this, StoreInfoEditActivity.class);
+                intent.putExtra(ConstantUtil.KEY_POSITION,"0");
+                startActivity(intent);
+            }
+        });
+
+        builder.setNegativeButton("取消安排",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                });
+
+        customDialog = builder.create();
+        customDialog.setCanceledOnTouchOutside(false);
+        customDialog.show();
+    }
 
     /**
      * 自定义选择器
@@ -245,17 +281,17 @@ public class StaffArrangeWorkActivity extends ABaseActivity<IStaffArrangeWorkVie
         TimePickerView pvTime = new TimePickerView.Builder(StaffArrangeWorkActivity.this, new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {//选中事件回调
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 String selectDateStr = sdf.format(date);
                 long selectDateLong = date.getTime();
                 if(selectDateLong >= curDateLong) {
                     tvDate.setText(selectDateStr);
                 }else {
-                    ToastUtil.myToast("截止日期需在今日之后!");
+                    ToastUtil.myToast("截止日期需在当前时间之后!");
                 }
             }
         })
-                .setType(new boolean[]{true, true, true, false, false, false})//默认全部显示,年月日时分秒
+                .setType(new boolean[]{true, true, true, true, true, false})//默认全部显示,年月日时分秒
                 .setTitleText(titleStr)//标题文字
                 .setTitleSize(16)//标题文字大小
                 .setContentSize(14)//滚轮文字大小
@@ -265,12 +301,17 @@ public class StaffArrangeWorkActivity extends ABaseActivity<IStaffArrangeWorkVie
                 .setOutSideCancelable(false)
                 .build();
 
-        pvTime.setDate(DateUtil.getNYR2Calendar(tvDate.getText().toString()));
+        pvTime.setDate(DateUtil.getCustomType2Calendar(tvDate.getText().toString(),"yyyy-MM-dd HH:mm"));
         pvTime.show();
     }
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+        if (customDialog!=null){
+            customDialog.dismiss();
+            customDialog=null;
+        }
         ToastUtil.cancleMyToast();
     }
 

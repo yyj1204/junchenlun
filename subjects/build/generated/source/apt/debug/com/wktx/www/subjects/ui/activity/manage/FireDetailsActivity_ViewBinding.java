@@ -17,11 +17,13 @@ import java.lang.Override;
 public class FireDetailsActivity_ViewBinding implements Unbinder {
   private FireDetailsActivity target;
 
-  private View view2131231198;
+  private View view2131689731;
 
-  private View view2131231280;
+  private View view2131689732;
 
-  private View view2131231164;
+  private View view2131689733;
+
+  private View view2131689766;
 
   @UiThread
   public FireDetailsActivity_ViewBinding(FireDetailsActivity target) {
@@ -38,6 +40,7 @@ public class FireDetailsActivity_ViewBinding implements Unbinder {
     target.tvCompanyName = Utils.findRequiredViewAsType(source, R.id.tv_companyName, "field 'tvCompanyName'", TextView.class);
     target.tvFireState = Utils.findRequiredViewAsType(source, R.id.tv_fireState, "field 'tvFireState'", TextView.class);
     target.tvFireTime = Utils.findRequiredViewAsType(source, R.id.tv_fireTime, "field 'tvFireTime'", TextView.class);
+    target.tvWorkDay = Utils.findRequiredViewAsType(source, R.id.tv_workDay, "field 'tvWorkDay'", TextView.class);
     target.tvSalary = Utils.findRequiredViewAsType(source, R.id.tv_salary, "field 'tvSalary'", TextView.class);
     target.tvSalaryPay = Utils.findRequiredViewAsType(source, R.id.tv_salaryPay, "field 'tvSalaryPay'", TextView.class);
     target.tvFireCause = Utils.findRequiredViewAsType(source, R.id.tv_fireCause, "field 'tvFireCause'", TextView.class);
@@ -45,7 +48,7 @@ public class FireDetailsActivity_ViewBinding implements Unbinder {
     target.llFire = Utils.findRequiredViewAsType(source, R.id.linear_fire, "field 'llFire'", LinearLayout.class);
     view = Utils.findRequiredView(source, R.id.tv_accept, "field 'tvAccept' and method 'MyOnclick'");
     target.tvAccept = Utils.castView(view, R.id.tv_accept, "field 'tvAccept'", TextView.class);
-    view2131231198 = view;
+    view2131689731 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -54,7 +57,16 @@ public class FireDetailsActivity_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.tv_refuse, "field 'tvRefuse' and method 'MyOnclick'");
     target.tvRefuse = Utils.castView(view, R.id.tv_refuse, "field 'tvRefuse'", TextView.class);
-    view2131231280 = view;
+    view2131689732 = view;
+    view.setOnClickListener(new DebouncingOnClickListener() {
+      @Override
+      public void doClick(View p0) {
+        target.MyOnclick(p0);
+      }
+    });
+    view = Utils.findRequiredView(source, R.id.tv_apply, "field 'tvApply' and method 'MyOnclick'");
+    target.tvApply = Utils.castView(view, R.id.tv_apply, "field 'tvApply'", TextView.class);
+    view2131689733 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -62,7 +74,7 @@ public class FireDetailsActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.tb_IvReturn, "method 'MyOnclick'");
-    view2131231164 = view;
+    view2131689766 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -83,6 +95,7 @@ public class FireDetailsActivity_ViewBinding implements Unbinder {
     target.tvCompanyName = null;
     target.tvFireState = null;
     target.tvFireTime = null;
+    target.tvWorkDay = null;
     target.tvSalary = null;
     target.tvSalaryPay = null;
     target.tvFireCause = null;
@@ -90,12 +103,15 @@ public class FireDetailsActivity_ViewBinding implements Unbinder {
     target.llFire = null;
     target.tvAccept = null;
     target.tvRefuse = null;
+    target.tvApply = null;
 
-    view2131231198.setOnClickListener(null);
-    view2131231198 = null;
-    view2131231280.setOnClickListener(null);
-    view2131231280 = null;
-    view2131231164.setOnClickListener(null);
-    view2131231164 = null;
+    view2131689731.setOnClickListener(null);
+    view2131689731 = null;
+    view2131689732.setOnClickListener(null);
+    view2131689732 = null;
+    view2131689733.setOnClickListener(null);
+    view2131689733 = null;
+    view2131689766.setOnClickListener(null);
+    view2131689766 = null;
   }
 }

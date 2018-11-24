@@ -5,9 +5,9 @@ import java.util.List;
 /**
  * Created by yyj on 2018/1/29.
  * 招聘片段---职位检索结果列表详情
- *  {"id": "2","name": "啊西歌", "tow": "2","tow_name": "客服","picture": "","working_years": "5","sex": "1","monthly_money": "4800.00",
- *  "is_job_hunting": "1","bgat": "母婴玩具/精品鞋包/生活百货","bgas": "中国风/时尚简约/质感炫酷","typing_speed":"95字/分"
- *  "resume_works": []}
+ *  {"id": "2","name": "啊西歌", "tow": "2","tow_name": "客服","picture": "","working_years": "5","sex": "1",
+ *  "monthly_money": "4800.00","is_job_hunting": "1","bgat": "母婴玩具/精品鞋包/生活百货","hire_id": 0,"tags": [],
+ *   "bgap": "淘宝","bgas": "中国风/时尚简约/质感炫酷","typing_speed":"95字/分""resume_works": []}
  *
  */
 
@@ -21,9 +21,12 @@ public class RecruitListInfoData {
     private String sex;//性别 1:男 2:女
     private String monthly_money;//包月金额
     private String is_job_hunting;//找工作中 0:否 1:是
+    private String hire_id;//雇佣订单id 0:没有被我雇佣，不为0代表已雇佣
+    private String bgap;//擅长平台
     private String bgat;//擅长类目
     private String bgas;//擅长风格
     private String typing_speed;//打字速度
+    private List<String> tags;//个人标签
     private List<ResumeWorksBean> resume_works;//作品
 
     public String getId() {
@@ -98,6 +101,22 @@ public class RecruitListInfoData {
         this.is_job_hunting = is_job_hunting;
     }
 
+    public String getHire_id() {
+        return hire_id;
+    }
+
+    public void setHire_id(String hire_id) {
+        this.hire_id = hire_id;
+    }
+
+    public String getBgap() {
+        return bgap;
+    }
+
+    public void setBgap(String bgap) {
+        this.bgap = bgap;
+    }
+
     public String getBgat() {
         return bgat;
     }
@@ -122,6 +141,14 @@ public class RecruitListInfoData {
         this.typing_speed = typing_speed;
     }
 
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
     public List<ResumeWorksBean> getResume_works() {
         return resume_works;
     }
@@ -143,9 +170,12 @@ public class RecruitListInfoData {
                 ", sex='" + sex + '\'' +
                 ", monthly_money='" + monthly_money + '\'' +
                 ", is_job_hunting='" + is_job_hunting + '\'' +
+                ", hire_id='" + hire_id + '\'' +
+                ", bgap='" + bgap + '\'' +
                 ", bgat='" + bgat + '\'' +
                 ", bgas='" + bgas + '\'' +
                 ", typing_speed='" + typing_speed + '\'' +
+                ", tags='" + tags + '\'' +
                 ", resume_works=" + resume_works +
                 '}';
     }

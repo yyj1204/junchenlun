@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="@color/color_f0f0f0"
+    tools:context="com.wktx.www.subjects.ui.activity.manage.ComplaintDetailsActivity">
+
+    <include layout="@layout/include_toolbar_activity" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_72"
+                android:paddingLeft="@dimen/px_30"
+                android:paddingRight="@dimen/px_30"
+                android:gravity="center_vertical"
+                android:text="投诉问题"
+                android:textColor="@color/color_5d5d5d"
+                android:textSize="@dimen/sp_13" />
+            <TextView
+                android:id="@+id/tv_complaintQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/px_30"
+                android:background="@color/color_ffffff"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_13" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_72"
+                android:paddingLeft="@dimen/px_30"
+                android:paddingRight="@dimen/px_30"
+                android:gravity="center_vertical"
+                android:text="投诉原因"
+                android:textColor="@color/color_5d5d5d"
+                android:textSize="@dimen/sp_13" />
+            <TextView
+                android:id="@+id/tv_complaintContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/px_30"
+                android:background="@color/color_ffffff"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_13" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_72"
+                android:paddingLeft="@dimen/px_30"
+                android:paddingRight="@dimen/px_30"
+                android:gravity="center_vertical"
+                android:text="后台处理结果"
+                android:textColor="@color/color_5d5d5d"
+                android:textSize="@dimen/sp_13" />
+            <TextView
+                android:id="@+id/tv_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/px_30"
+                android:background="@color/color_ffffff"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textColor="@color/color_ffb321"
+                android:textSize="@dimen/sp_13" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/bt_sure"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_90"
+        android:background="@drawable/selector_submit_selected"
+        android:gravity="center"
+        android:text="申诉"
+        android:textColor="@color/color_ffffff"
+        android:textSize="@dimen/sp_15" />
+</LinearLayout>

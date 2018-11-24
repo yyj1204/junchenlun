@@ -18,13 +18,13 @@ import java.lang.Override;
 public class MessageFragment_ViewBinding implements Unbinder {
   private MessageFragment target;
 
-  private View view2131231166;
+  private View view2131689948;
 
-  private View view2131231167;
+  private View view2131689949;
 
-  private View view2131231254;
+  private View view2131689853;
 
-  private View view2131231291;
+  private View view2131689947;
 
   @UiThread
   public MessageFragment_ViewBinding(final MessageFragment target, View source) {
@@ -33,7 +33,7 @@ public class MessageFragment_ViewBinding implements Unbinder {
     View view;
     view = Utils.findRequiredView(source, R.id.tb_TvBarTitle1, "field 'tv_title1' and method 'MyOnclick'");
     target.tv_title1 = Utils.castView(view, R.id.tb_TvBarTitle1, "field 'tv_title1'", TextView.class);
-    view2131231166 = view;
+    view2131689948 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -42,7 +42,7 @@ public class MessageFragment_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.tb_TvBarTitle2, "field 'tv_title2' and method 'MyOnclick'");
     target.tv_title2 = Utils.castView(view, R.id.tb_TvBarTitle2, "field 'tv_title2'", TextView.class);
-    view2131231167 = view;
+    view2131689949 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -57,7 +57,7 @@ public class MessageFragment_ViewBinding implements Unbinder {
     target.smartTab2 = Utils.findRequiredViewAsType(source, R.id.layout_smartTab2, "field 'smartTab2'", SmartTabLayout.class);
     target.viewPager2 = Utils.findRequiredViewAsType(source, R.id.viewpager2, "field 'viewPager2'", ViewPager.class);
     view = Utils.findRequiredView(source, R.id.tv_login, "method 'MyOnclick'");
-    view2131231254 = view;
+    view2131689853 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -65,7 +65,7 @@ public class MessageFragment_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.tv_selectWork, "method 'MyOnclick'");
-    view2131231291 = view;
+    view2131689947 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -91,13 +91,13 @@ public class MessageFragment_ViewBinding implements Unbinder {
     target.smartTab2 = null;
     target.viewPager2 = null;
 
-    view2131231166.setOnClickListener(null);
-    view2131231166 = null;
-    view2131231167.setOnClickListener(null);
-    view2131231167 = null;
-    view2131231254.setOnClickListener(null);
-    view2131231254 = null;
-    view2131231291.setOnClickListener(null);
-    view2131231291 = null;
+    view2131689948.setOnClickListener(null);
+    view2131689948 = null;
+    view2131689949.setOnClickListener(null);
+    view2131689949 = null;
+    view2131689853.setOnClickListener(null);
+    view2131689853 = null;
+    view2131689947.setOnClickListener(null);
+    view2131689947 = null;
   }
 }

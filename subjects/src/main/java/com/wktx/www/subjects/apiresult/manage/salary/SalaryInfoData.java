@@ -13,10 +13,10 @@ import java.util.List;
  */
 
 public class SalaryInfoData {
-    private String hire_price;//雇佣薪资
+    private String hire_price;//雇佣薪资总额
     private String trusteeship_wages;//托管工资
     private String paid_wages;//已发工资
-    private List<SalaryPayBean> payList;//支付列表
+    private List<SalaryPayBean> payList;//薪资发放记录列表
 
     public String getHire_price() {
         return hire_price;

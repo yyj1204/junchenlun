@@ -27,7 +27,7 @@ public class HirePresenter extends ABasePresenter<IHireView> {
     //获取雇佣信息
     public void onGetHireInfo(String resumeId){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("rid", resumeId);
         httpParams.put("hire_type", getmMvpView().getHireWay());//雇佣方式 1:包月,2:定制, 3:雇佣单人（班次）
@@ -35,12 +35,12 @@ public class HirePresenter extends ABasePresenter<IHireView> {
         httpParams.put("qq", getmMvpView().getQQNumber());
         httpParams.put("wechat", getmMvpView().getWeChatNumber());
         httpParams.put("project_start_time", DateUtil.getCustomType2Timestamp(getmMvpView().getBeginTime(),"yyyy-MM-dd"));
+        httpParams.put("commission", getmMvpView().getPushMoney());//提成（雇佣单人必填，建议1~15%）
 
         if (getmMvpView().getHireWay().equals("3")){//客服类型
             httpParams.put("hire_time", getmMvpView().getHireTime());//雇佣时间（月）（包月、雇佣单人必填）
             httpParams.put("work_shift_id", "1");//上班班次（id）（雇佣必填，填1）
             httpParams.put("work_shift", getmMvpView().getServiceShifts());
-            httpParams.put("commission", getmMvpView().getPushMoney());//提成（雇佣单人必填，建议1~15%）
         }else {//其他职业类型
             if (getmMvpView().getHireWay().equals("1")){//包月
                 httpParams.put("hire_time", getmMvpView().getHireTime());
@@ -63,6 +63,8 @@ public class HirePresenter extends ABasePresenter<IHireView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }

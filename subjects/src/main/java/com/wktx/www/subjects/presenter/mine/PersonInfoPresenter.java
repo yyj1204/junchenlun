@@ -28,7 +28,7 @@ public class PersonInfoPresenter extends ABasePresenter<IPersonInfoView> {
     //获取个人信息
     public void getInfo(){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
 
         LogUtil.error("获取个人信息","json==="+httpParams.toString());
@@ -45,6 +45,8 @@ public class PersonInfoPresenter extends ABasePresenter<IPersonInfoView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }
@@ -105,7 +107,7 @@ public class PersonInfoPresenter extends ABasePresenter<IPersonInfoView> {
     //上传图片Base64
     public void getImgUrl(String base64Str){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("base64", base64Str);
 
@@ -123,6 +125,8 @@ public class PersonInfoPresenter extends ABasePresenter<IPersonInfoView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onGetImgUrlResult(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onGetImgUrlResult(false,e.getMessage());
                                 }
@@ -148,7 +152,7 @@ public class PersonInfoPresenter extends ABasePresenter<IPersonInfoView> {
     //修改个人信息
     public void changePersonInfo(){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("picture", getmMvpView().getHeadPic());
         httpParams.put("name", getmMvpView().getNickName());
@@ -175,6 +179,8 @@ public class PersonInfoPresenter extends ABasePresenter<IPersonInfoView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onChangePersonInfoResult(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onChangePersonInfoResult(false,e.getMessage());
                                 }

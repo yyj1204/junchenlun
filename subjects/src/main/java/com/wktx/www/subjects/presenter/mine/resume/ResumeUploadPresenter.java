@@ -26,7 +26,7 @@ public class ResumeUploadPresenter extends ABasePresenter<IResumeUploadView> {
     //上传图片Base64
     public void getInfo(String base64Str){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("base64", base64Str);
 
@@ -44,6 +44,8 @@ public class ResumeUploadPresenter extends ABasePresenter<IResumeUploadView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }
@@ -69,7 +71,7 @@ public class ResumeUploadPresenter extends ABasePresenter<IResumeUploadView> {
     //修改个性简历图片
     public void changeImgUrl(String resumeId,String imgUrl){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("id", resumeId);
         httpParams.put("resume_content", imgUrl);
@@ -88,6 +90,8 @@ public class ResumeUploadPresenter extends ABasePresenter<IResumeUploadView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onChangeResumeImgResult(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onChangeResumeImgResult(false,e.getMessage());
                                 }

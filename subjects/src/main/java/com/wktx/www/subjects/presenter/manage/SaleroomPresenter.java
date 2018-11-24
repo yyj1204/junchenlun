@@ -27,7 +27,7 @@ public class SaleroomPresenter extends ABasePresenter<ISaleroomView> {
     //获取销售额详情
     public void getInfo(String salesId){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("id", salesId);
 
@@ -45,6 +45,8 @@ public class SaleroomPresenter extends ABasePresenter<ISaleroomView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }
@@ -71,7 +73,7 @@ public class SaleroomPresenter extends ABasePresenter<ISaleroomView> {
     //上传图片Base64
     public void getImgUrl(String base64Str){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("base64", base64Str);
 
@@ -89,6 +91,8 @@ public class SaleroomPresenter extends ABasePresenter<ISaleroomView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onGetImgUrlResult(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onGetImgUrlResult(false,e.getMessage());
                                 }
@@ -114,7 +118,7 @@ public class SaleroomPresenter extends ABasePresenter<ISaleroomView> {
     //编辑销售额（增改）
     public void changeSales(String hireId,String salesId){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("hid", hireId);
         //销售额id不为0，说明是编辑请求，则需传递销售额id
@@ -139,6 +143,8 @@ public class SaleroomPresenter extends ABasePresenter<ISaleroomView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onChangeSalesResult(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onChangeSalesResult(false,e.getMessage());
                                 }

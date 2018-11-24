@@ -62,7 +62,7 @@ public class ResumePositionPresenter extends ABasePresenter<IResumePositionView>
     //编辑应聘职位（增改）
     public void changeApplyPosition(String resumeId){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("id", resumeId);
         httpParams.put("tow", getmMvpView().getPositionId());
@@ -92,6 +92,8 @@ public class ResumePositionPresenter extends ABasePresenter<IResumePositionView>
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onChangeApplyPositionResult(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onChangeApplyPositionResult(false,e.getMessage());
                                 }
@@ -118,7 +120,7 @@ public class ResumePositionPresenter extends ABasePresenter<IResumePositionView>
     //删除应聘职位
     public void deleteApplyPosition(String resumeId){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id",  getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("id", resumeId);
 
@@ -136,6 +138,8 @@ public class ResumePositionPresenter extends ABasePresenter<IResumePositionView>
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onChangeApplyPositionResult(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onChangeApplyPositionResult(false,e.getMessage());
                                 }

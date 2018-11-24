@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,7 +14,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.subjects.R;
-import com.wktx.www.subjects.apiresult.login.AccountInfoData;
 import com.wktx.www.subjects.apiresult.mine.resume.ResumeInfoData;
 import com.wktx.www.subjects.apiresult.mine.works.WorksListInfoData;
 import com.wktx.www.subjects.basemvp.ABaseActivity;
@@ -21,10 +21,8 @@ import com.wktx.www.subjects.presenter.mine.works.WorksListPresenter;
 import com.wktx.www.subjects.ui.view.IView;
 import com.wktx.www.subjects.utils.ConstantUtil;
 import com.wktx.www.subjects.utils.GlideUtil;
-import com.wktx.www.subjects.utils.LoginUtil;
 import com.wktx.www.subjects.utils.MyUtils;
 import com.wktx.www.subjects.utils.ToastUtil;
-
 import java.util.List;
 
 import butterknife.BindView;
@@ -136,7 +134,7 @@ public class MyWorksActivity extends ABaseActivity<IView,WorksListPresenter> imp
             protected void convert(BaseViewHolder helper, WorksListInfoData item) {
                 helper.setText(R.id.tv_worksTitle,item.getTitle());
                 ImageView ivWorksImage = helper.getView(R.id.iv_worksImage);
-                if (item.getImage()==null||item.getImage().equals("")){
+                if (TextUtils.isEmpty(item.getImage())){
                     ivWorksImage.setImageResource(R.drawable.img_load_error);
                 }else {
                     GlideUtil.loadImage(item.getImage(),R.drawable.img_loading,ivWorksImage);
@@ -194,11 +192,6 @@ public class MyWorksActivity extends ABaseActivity<IView,WorksListPresenter> imp
     /**
      * IView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
     @Override
     public void onRequestSuccess(List<WorksListInfoData> tData) {
         recyclerView.setBackgroundResource(R.color.color_f0f0f0);

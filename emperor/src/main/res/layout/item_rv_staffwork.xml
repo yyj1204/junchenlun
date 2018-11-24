@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:background="@drawable/selector_mine_linearlayout">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/px_30">
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_demandTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="需求标题"
+                android:singleLine="true"
+                android:textColor="@color/color_000000"
+                android:textStyle="bold"
+                android:textSize="@dimen/sp_15" />
+            <TextView
+                android:id="@+id/tv_demandContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/px_14"
+                android:lineSpacingExtra="@dimen/px_20"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/sp_13"
+                android:text="需求详情"/>
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_14"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_evaluateNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_solid_ffb321_10"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/color_ffffff"
+                android:gravity="center"
+                android:text="查看待评价"/>
+            <TextView
+                android:id="@+id/tv_evaluate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/px_30"
+                android:background="@drawable/shape_solid_cccccc_10"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/color_ffffff"
+                android:gravity="center"
+                android:text="查看已评价"/>
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_1"
+        android:background="@color/color_f0f0f0"/>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="@dimen/px_30"
+        android:orientation="horizontal">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_storeLogo"
+            android:layout_width="@dimen/px_60"
+            android:layout_height="@dimen/px_60"
+            android:src="@drawable/img_mine_head" />
+        <TextView
+            android:id="@+id/tv_storeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/px_14"
+            android:text="店铺名称"
+            android:textColor="@color/color_ffb321"
+            android:textSize="@dimen/sp_13" />
+        <TextView
+            android:id="@+id/tv_endTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_14"
+            android:text="截止时间"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/sp_12" />
+    </com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

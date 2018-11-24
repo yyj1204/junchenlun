@@ -5,8 +5,9 @@ import java.io.Serializable;
 /**
  * Created by yyj on 2018/3/6.
  * 我的员工---管理员工内容
- * "hire_id": "151","rid": "1","tow": "1","tow_name": "客服","project_start_time": "1520006400","project_end_time": "1522684799","hire_price": "0.01",
- * "type": "1","name": "胡图图","picture": "","sex": "2","report_count": 0,"attendance_count": 0,"absence_from_duty_count": 0
+ * "hire_id": "151","rid": "1","tow": "1","tow_name": "客服","project_start_time": "1520006400","project_end_time": "1522684799",
+ * "hire_price": "0.01","dismissal_id": "0",* "type": "1","name": "胡图图","picture": "","sex": "2",
+ * "report_count": 0,"attendance_count": 0,"absence_from_duty_count": 0,"evaluate_id": "11"
  */
 
 public class StaffManageInfoData implements Serializable{
@@ -24,6 +25,8 @@ public class StaffManageInfoData implements Serializable{
     private int report_count;//报告数
     private int attendance_count;//出勤数
     private int absence_from_duty_count;//缺勤数
+    private String evaluate_id;//订单评价id
+    private String dismissal_id;//解雇id
 
     public String getHire_id() {
         return hire_id;
@@ -137,6 +140,22 @@ public class StaffManageInfoData implements Serializable{
         this.absence_from_duty_count = absence_from_duty_count;
     }
 
+    public String getEvaluate_id() {
+        return evaluate_id;
+    }
+
+    public void setEvaluate_id(String evaluate_id) {
+        this.evaluate_id = evaluate_id;
+    }
+
+    public String getDismissal_id() {
+        return dismissal_id;
+    }
+
+    public void setDismissal_id(String dismissal_id) {
+        this.dismissal_id = dismissal_id;
+    }
+
     @Override
     public String toString() {
         return "StaffManageInfoData{" +
@@ -154,6 +173,8 @@ public class StaffManageInfoData implements Serializable{
                 ", report_count=" + report_count +
                 ", attendance_count=" + attendance_count +
                 ", absence_from_duty_count=" + absence_from_duty_count +
+                ", dismissal_id=" + dismissal_id +
+                ", evaluate_id=" + evaluate_id +
                 '}';
     }
 }

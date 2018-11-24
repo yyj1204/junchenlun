@@ -15,13 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alipay.sdk.app.PayTask;
-import com.bumptech.glide.Glide;
 import com.r0adkll.slidr.Slidr;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.mine.pay.WechatPayInfoData;
 import com.wktx.www.emperor.apiresult.recruit.hire.TrusteeshipSalaryInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
@@ -29,12 +27,12 @@ import com.wktx.www.emperor.payutil.IPayView;
 import com.wktx.www.emperor.payutil.alipay.AuthResult;
 import com.wktx.www.emperor.payutil.alipay.PayResult;
 import com.wktx.www.emperor.presenter.recruit.hire.TrusteeshipSalaryPresenter;
-import com.wktx.www.emperor.ui.activity.main.MainActivity;
+import com.wktx.www.emperor.ui.activity.MainActivity;
+import com.wktx.www.emperor.ui.activity.mine.security.EditPayPwdActivity;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.DateUtil;
 import com.wktx.www.emperor.utils.GlideUtil;
 import com.wktx.www.emperor.utils.LogUtil;
-import com.wktx.www.emperor.utils.LoginUtil;
 import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.recruit.hire.ITrusteeshipSalaryView;
 import com.wktx.www.emperor.utils.ToastUtil;
@@ -131,10 +129,8 @@ public class TrusteeshipSalaryActivity extends ABaseActivity<ITrusteeshipSalaryV
 
                 btSurePay.setEnabled(false);
                 if (isBalancePay){//余额支付
-                    //打开输入支付密码界面
-                    Intent intent = new Intent(TrusteeshipSalaryActivity.this, InputPayPwdActivity.class);
-                    intent.putExtra(ConstantUtil.KEY_DATA,balanceMoney);
-                    startActivityForResult(intent,ConstantUtil.REQUESTCODE_BALANCEPAY);
+                    //打开输入余额支付密码界面
+                    startPayPwdActivity();
                 }else {
                     if (isSelectWechat){//微信支付
                         getPresenter().getWeChatPayInfo();
@@ -146,6 +142,13 @@ public class TrusteeshipSalaryActivity extends ABaseActivity<ITrusteeshipSalaryV
             default:
                 break;
         }
+    }
+
+    //打开输入支付密码界面
+    private void startPayPwdActivity() {
+        Intent intent = new Intent(TrusteeshipSalaryActivity.this, InputPayPwdActivity.class);
+        intent.putExtra(ConstantUtil.KEY_DATA,balanceMoney);
+        startActivityForResult(intent,ConstantUtil.REQUESTCODE_BALANCEPAY);
     }
 
     /**
@@ -169,6 +172,36 @@ public class TrusteeshipSalaryActivity extends ABaseActivity<ITrusteeshipSalaryV
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         getPresenter().onCancelOrders();
+                    }
+                });
+
+        customDialog = builder.create();
+        customDialog.setCanceledOnTouchOutside(false);
+        customDialog.show();
+    }
+
+    /**
+     * 余额支付失败对话框
+     */
+    private void showBalanceFailureDialog() {
+        CustomDialog.Builder builder = new CustomDialog.Builder(this);
+        builder.setTitle("系统提示");
+        builder.setMessage("余额支付失败，请重试");
+        builder.setPositiveButton("重试", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                startPayPwdActivity();
+            }
+        });
+
+        builder.setNegativeButton("忘记支付密码",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        //打开修改支付密码界面
+                        startActivity(new Intent(TrusteeshipSalaryActivity.this, EditPayPwdActivity.class));
                     }
                 });
 
@@ -214,11 +247,6 @@ public class TrusteeshipSalaryActivity extends ABaseActivity<ITrusteeshipSalaryV
      * ITrusteeshipSalaryView
      */
     @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
-    @Override
     public String getHireId() {
         return hireId;
     }
@@ -240,6 +268,7 @@ public class TrusteeshipSalaryActivity extends ABaseActivity<ITrusteeshipSalaryV
         }else {
             btSurePay.setEnabled(true);
             ToastUtil.myToast(result);
+            showBalanceFailureDialog();
         }
     }
     @Override
@@ -302,7 +331,7 @@ public class TrusteeshipSalaryActivity extends ABaseActivity<ITrusteeshipSalaryV
             btSurePay.setText("确认余额支付");
         }
         //头像
-        if (tData.getPicture()==null||tData.getPicture().equals("")){
+        if (TextUtils.isEmpty(tData.getPicture())){
             if (tData.getSex().equals("1")){
                 ivHead.setImageResource(R.drawable.img_head_man);
             }else if (tData.getSex().equals("2")){

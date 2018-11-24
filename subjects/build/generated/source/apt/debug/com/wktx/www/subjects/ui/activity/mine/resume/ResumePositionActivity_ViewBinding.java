@@ -18,21 +18,21 @@ import java.lang.Override;
 public class ResumePositionActivity_ViewBinding implements Unbinder {
   private ResumePositionActivity target;
 
-  private View view2131230991;
+  private View view2131689876;
 
-  private View view2131230782;
+  private View view2131689719;
 
-  private View view2131230773;
+  private View view2131689720;
 
-  private View view2131231164;
+  private View view2131689766;
 
-  private View view2131230981;
+  private View view2131689872;
 
-  private View view2131230948;
+  private View view2131689873;
 
-  private View view2131230980;
+  private View view2131689874;
 
-  private View view2131230960;
+  private View view2131689875;
 
   @UiThread
   public ResumePositionActivity_ViewBinding(ResumePositionActivity target) {
@@ -51,7 +51,7 @@ public class ResumePositionActivity_ViewBinding implements Unbinder {
     target.tvExperience = Utils.findRequiredViewAsType(source, R.id.tv_experience, "field 'tvExperience'", TextView.class);
     view = Utils.findRequiredView(source, R.id.linear_style, "field 'llStyle' and method 'MyOnclick'");
     target.llStyle = Utils.castView(view, R.id.linear_style, "field 'llStyle'", LinearLayout.class);
-    view2131230991 = view;
+    view2131689876 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -64,7 +64,7 @@ public class ResumePositionActivity_ViewBinding implements Unbinder {
     target.etSalary = Utils.findRequiredViewAsType(source, R.id.et_salary, "field 'etSalary'", EditText.class);
     view = Utils.findRequiredView(source, R.id.bt_save, "field 'btSave' and method 'MyOnclick'");
     target.btSave = Utils.castView(view, R.id.bt_save, "field 'btSave'", Button.class);
-    view2131230782 = view;
+    view2131689719 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -73,7 +73,7 @@ public class ResumePositionActivity_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.bt_delete, "field 'btDelete' and method 'MyOnclick'");
     target.btDelete = Utils.castView(view, R.id.bt_delete, "field 'btDelete'", Button.class);
-    view2131230773 = view;
+    view2131689720 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -81,7 +81,7 @@ public class ResumePositionActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.tb_IvReturn, "method 'MyOnclick'");
-    view2131231164 = view;
+    view2131689766 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -89,7 +89,7 @@ public class ResumePositionActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.linear_position, "method 'MyOnclick'");
-    view2131230981 = view;
+    view2131689872 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -97,7 +97,7 @@ public class ResumePositionActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.linear_category, "method 'MyOnclick'");
-    view2131230948 = view;
+    view2131689873 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -105,7 +105,7 @@ public class ResumePositionActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.linear_platform, "method 'MyOnclick'");
-    view2131230980 = view;
+    view2131689874 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -113,7 +113,7 @@ public class ResumePositionActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.linear_experience, "method 'MyOnclick'");
-    view2131230960 = view;
+    view2131689875 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -142,21 +142,21 @@ public class ResumePositionActivity_ViewBinding implements Unbinder {
     target.btSave = null;
     target.btDelete = null;
 
-    view2131230991.setOnClickListener(null);
-    view2131230991 = null;
-    view2131230782.setOnClickListener(null);
-    view2131230782 = null;
-    view2131230773.setOnClickListener(null);
-    view2131230773 = null;
-    view2131231164.setOnClickListener(null);
-    view2131231164 = null;
-    view2131230981.setOnClickListener(null);
-    view2131230981 = null;
-    view2131230948.setOnClickListener(null);
-    view2131230948 = null;
-    view2131230980.setOnClickListener(null);
-    view2131230980 = null;
-    view2131230960.setOnClickListener(null);
-    view2131230960 = null;
+    view2131689876.setOnClickListener(null);
+    view2131689876 = null;
+    view2131689719.setOnClickListener(null);
+    view2131689719 = null;
+    view2131689720.setOnClickListener(null);
+    view2131689720 = null;
+    view2131689766.setOnClickListener(null);
+    view2131689766 = null;
+    view2131689872.setOnClickListener(null);
+    view2131689872 = null;
+    view2131689873.setOnClickListener(null);
+    view2131689873 = null;
+    view2131689874.setOnClickListener(null);
+    view2131689874 = null;
+    view2131689875.setOnClickListener(null);
+    view2131689875 = null;
   }
 }

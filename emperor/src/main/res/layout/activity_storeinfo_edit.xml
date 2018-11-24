@@ -54,6 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
+            android:hint="请选择"
             android:textColor="@color/color_999999"
             android:textSize="@dimen/sp_13" />
         <ImageView
@@ -86,6 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
+            android:hint="请选择"
             android:textColor="@color/color_999999"
             android:textSize="@dimen/sp_13" />
         <ImageView
@@ -115,9 +117,11 @@
             android:id="@+id/et_storeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_30"
             android:minWidth="@dimen/px_200"
             android:gravity="right"
             android:hint="如：xxx旗舰店"
+            android:singleLine="true"
             android:textColor="@color/color_ffb321"
             android:textColorHint="@color/color_999999"
             android:background="@null"
@@ -139,13 +143,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="网址"
+            android:text="店铺网址"
             android:textColor="@color/color_000000"
             android:textSize="@dimen/sp_13"/>
         <EditText
             android:id="@+id/et_storeUrl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_30"
+            android:singleLine="true"
             android:minWidth="@dimen/px_200"
             android:gravity="right"
             android:hint="www.xxx.com"

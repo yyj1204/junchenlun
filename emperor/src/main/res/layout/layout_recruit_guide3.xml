@@ -80,7 +80,7 @@
                 android:text="  添加工作，安排工作"
                 android:textSize="12sp"
                 android:layout_marginLeft="23dp"
-                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:drawableLeft="@drawable/ic_position_circle_disable"
                 android:textColor="@color/color_999999"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -89,7 +89,7 @@
                 android:text="  查看工作，管理进度"
                 android:textSize="12sp"
                 android:layout_marginLeft="23dp"
-                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:drawableLeft="@drawable/ic_position_circle_disable"
                 android:textColor="@color/color_999999"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -98,7 +98,7 @@
                 android:text="  考勤管理，掌握效率"
                 android:textSize="12sp"
                 android:layout_marginLeft="23dp"
-                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:drawableLeft="@drawable/ic_position_circle_disable"
                 android:textColor="@color/color_999999"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -107,7 +107,7 @@
                 android:text="  续签/解雇/投诉"
                 android:textSize="12sp"
                 android:layout_marginLeft="23dp"
-                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:drawableLeft="@drawable/ic_position_circle_disable"
                 android:textColor="@color/color_999999"/>
 
         </LinearLayout>
@@ -145,7 +145,7 @@
                     android:text="  完善信息，智能匹配"
                     android:textSize="12sp"
                     android:layout_marginLeft="23dp"
-                    android:drawableLeft="@drawable/ic_recruitguide_circle"
+                    android:drawableLeft="@drawable/ic_position_circle_disable"
                     android:textColor="@color/color_999999"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -154,7 +154,7 @@
                     android:text="  收藏记录，快速找到员工"
                     android:textSize="12sp"
                     android:layout_marginLeft="23dp"
-                    android:drawableLeft="@drawable/ic_recruitguide_circle"
+                    android:drawableLeft="@drawable/ic_position_circle_disable"
                     android:textColor="@color/color_999999"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -163,7 +163,7 @@
                     android:text="  信息管理，确认无遗漏"
                     android:textSize="12sp"
                     android:layout_marginLeft="23dp"
-                    android:drawableLeft="@drawable/ic_recruitguide_circle"
+                    android:drawableLeft="@drawable/ic_position_circle_disable"
                     android:textColor="@color/color_999999"/>
             </LinearLayout>
     </LinearLayout>
@@ -214,7 +214,7 @@
                 android:text="  发布用人需求"
                 android:textSize="12sp"
                 android:layout_marginLeft="23dp"
-                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:drawableLeft="@drawable/ic_position_circle_disable"
                 android:textColor="@color/color_999999"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -223,7 +223,7 @@
                 android:text="  填写需求信息"
                 android:textSize="12sp"
                 android:layout_marginLeft="23dp"
-                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:drawableLeft="@drawable/ic_position_circle_disable"
                 android:textColor="@color/color_999999"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -232,7 +232,7 @@
                 android:text="  发布后，等待求职者响应"
                 android:textSize="12sp"
                 android:layout_marginLeft="23dp"
-                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:drawableLeft="@drawable/ic_position_circle_disable"
                 android:textColor="@color/color_999999"/>
         </LinearLayout>
 
@@ -269,7 +269,7 @@
                 android:text="  充值提现，雇佣方便"
                 android:textSize="12sp"
                 android:layout_marginLeft="23dp"
-                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:drawableLeft="@drawable/ic_position_circle_disable"
                 android:textColor="@color/color_999999"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -278,7 +278,7 @@
                 android:text="  活动红包送不停，"
                 android:textSize="12sp"
                 android:layout_marginLeft="23dp"
-                android:drawableLeft="@drawable/ic_recruitguide_circle"
+                android:drawableLeft="@drawable/ic_position_circle_disable"
                 android:textColor="@color/color_999999"/>
             <TextView
                 android:layout_width="wrap_content"

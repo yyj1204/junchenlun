@@ -6,14 +6,11 @@ import android.widget.TextView;
 
 import com.r0adkll.slidr.Slidr;
 import com.wktx.www.emperor.R;
-import com.wktx.www.emperor.apiresult.login.AccountInfoData;
 import com.wktx.www.emperor.apiresult.main.message.MessageDetailsInfoData;
 import com.wktx.www.emperor.basemvp.ABaseActivity;
-import com.wktx.www.emperor.presenter.main.MessagePresenter;
+import com.wktx.www.emperor.presenter.main.MessageDetailsPresenter;
 import com.wktx.www.emperor.utils.ConstantUtil;
 import com.wktx.www.emperor.utils.DateUtil;
-import com.wktx.www.emperor.utils.LoginUtil;
-import com.wktx.www.emperor.utils.MyUtils;
 import com.wktx.www.emperor.ui.view.IView;
 import com.wktx.www.emperor.utils.ToastUtil;
 
@@ -24,7 +21,7 @@ import butterknife.OnClick;
 /**
  * 消息通知---详情
  */
-public class MessageDetailsActivity extends ABaseActivity<IView,MessagePresenter> implements IView<MessageDetailsInfoData> {
+public class MessageDetailsActivity extends ABaseActivity<IView,MessageDetailsPresenter> implements IView<MessageDetailsInfoData> {
     @BindView(R.id.tb_TvBarTitle)
     TextView tvTitle;
     @BindView(R.id.tv_title)
@@ -56,8 +53,8 @@ public class MessageDetailsActivity extends ABaseActivity<IView,MessagePresenter
     }
 
     @Override
-    protected MessagePresenter createPresenter() {
-        return new MessagePresenter();
+    protected MessageDetailsPresenter createPresenter() {
+        return new MessageDetailsPresenter();
     }
 
     /**
@@ -77,11 +74,6 @@ public class MessageDetailsActivity extends ABaseActivity<IView,MessagePresenter
     /**
      * IView
      */
-    @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
     @Override
     public void onRequestSuccess(MessageDetailsInfoData tData) {
         tvMessageTitle.setText(tData.getTitle());

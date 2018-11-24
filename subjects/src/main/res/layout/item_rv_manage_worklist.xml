@@ -15,8 +15,8 @@
         android:orientation="horizontal">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_head"
-            android:layout_width="@dimen/px_106"
-            android:layout_height="@dimen/px_106"
+            android:layout_width="@dimen/px_196"
+            android:layout_height="@dimen/px_196"
             android:src="@drawable/img_mine_head" />
 
         <com.zhy.autolayout.AutoLinearLayout
@@ -29,17 +29,70 @@
                 android:id="@+id/tv_companyName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:singleLine="true"
                 android:text="公司名称"
                 android:textColor="@color/color_000000"
                 android:textStyle="bold"
                 android:textSize="@dimen/sp_15" />
 
+            <TextView
+                android:id="@+id/tv_hireTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/px_10"
+                android:drawableLeft="@drawable/ic_manage_time"
+                android:drawablePadding="@dimen/px_12"
+                android:textColor="@color/color_000000"
+                android:singleLine="true"
+                android:textSize="@dimen/sp_13"/>
+
             <com.zhy.autolayout.AutoLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/px_20">
+                android:layout_marginTop="@dimen/px_10">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="工作类型："
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/sp_12" />
+                <TextView
+                    android:id="@+id/tv_position"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:singleLine="true"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_12" />
+            </com.zhy.autolayout.AutoLinearLayout>
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/px_10">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="托管金额(提成)："
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/sp_12" />
+                <TextView
+                    android:id="@+id/tv_trusteeshipMoney"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_000000"
+                    android:singleLine="true"
+                    android:textSize="@dimen/sp_12" />
+            </com.zhy.autolayout.AutoLinearLayout>
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/px_10">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -51,6 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
+                    android:singleLine="true"
                     android:textColor="@color/color_000000"
                     android:textSize="@dimen/sp_12" />
             </com.zhy.autolayout.AutoLinearLayout>

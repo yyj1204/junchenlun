@@ -16,13 +16,13 @@ import java.lang.Override;
 public class InviteDetailsActivity_ViewBinding implements Unbinder {
   private InviteDetailsActivity target;
 
-  private View view2131231223;
+  private View view2131689753;
 
-  private View view2131231198;
+  private View view2131689731;
 
-  private View view2131231280;
+  private View view2131689732;
 
-  private View view2131231164;
+  private View view2131689766;
 
   @UiThread
   public InviteDetailsActivity_ViewBinding(InviteDetailsActivity target) {
@@ -46,7 +46,7 @@ public class InviteDetailsActivity_ViewBinding implements Unbinder {
     target.tvPushMoney = Utils.findRequiredViewAsType(source, R.id.tv_pushMoney, "field 'tvPushMoney'", TextView.class);
     view = Utils.findRequiredView(source, R.id.tv_contact, "field 'tvContact' and method 'MyOnclick'");
     target.tvContact = Utils.castView(view, R.id.tv_contact, "field 'tvContact'", TextView.class);
-    view2131231223 = view;
+    view2131689753 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -55,7 +55,7 @@ public class InviteDetailsActivity_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.tv_accept, "field 'tvAccept' and method 'MyOnclick'");
     target.tvAccept = Utils.castView(view, R.id.tv_accept, "field 'tvAccept'", TextView.class);
-    view2131231198 = view;
+    view2131689731 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -64,7 +64,7 @@ public class InviteDetailsActivity_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.tv_refuse, "field 'tvRefuse' and method 'MyOnclick'");
     target.tvRefuse = Utils.castView(view, R.id.tv_refuse, "field 'tvRefuse'", TextView.class);
-    view2131231280 = view;
+    view2131689732 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -72,7 +72,7 @@ public class InviteDetailsActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.tb_IvReturn, "method 'MyOnclick'");
-    view2131231164 = view;
+    view2131689766 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -102,13 +102,13 @@ public class InviteDetailsActivity_ViewBinding implements Unbinder {
     target.tvAccept = null;
     target.tvRefuse = null;
 
-    view2131231223.setOnClickListener(null);
-    view2131231223 = null;
-    view2131231198.setOnClickListener(null);
-    view2131231198 = null;
-    view2131231280.setOnClickListener(null);
-    view2131231280 = null;
-    view2131231164.setOnClickListener(null);
-    view2131231164 = null;
+    view2131689753.setOnClickListener(null);
+    view2131689753 = null;
+    view2131689731.setOnClickListener(null);
+    view2131689731 = null;
+    view2131689732.setOnClickListener(null);
+    view2131689732 = null;
+    view2131689766.setOnClickListener(null);
+    view2131689766 = null;
   }
 }

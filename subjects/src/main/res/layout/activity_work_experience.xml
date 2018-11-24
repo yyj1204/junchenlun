@@ -72,6 +72,63 @@
                     android:textSize="@dimen/sp_12"/>
             </LinearLayout>
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/px_30"
+                android:layout_marginTop="@dimen/px_1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@color/color_ffffff">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="网址"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_13"/>
+                <EditText
+                    android:id="@+id/et_companyUrl"
+                    android:layout_width="@dimen/px_420"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_999999"
+                    android:singleLine="true"
+                    android:gravity="right"
+                    android:background="@null"
+                    android:hint="请填写公司网址"
+                    android:textSize="@dimen/sp_12"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_platform"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/px_30"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/px_1"
+                android:background="@drawable/selector_mine_linearlayout">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="平台"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_13"/>
+                <TextView
+                    android:id="@+id/tv_platform"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|right"
+                    android:textColor="@color/color_999999"
+                    android:hint="请选择"
+                    android:textSize="@dimen/sp_12" />
+                <ImageView
+                    android:layout_width="@dimen/px_16"
+                    android:layout_height="@dimen/px_20"
+                    android:layout_marginLeft="@dimen/px_14"
+                    android:src="@drawable/ic_mine_arrow_right_gray" />
+            </LinearLayout>
+            <LinearLayout
                 android:id="@+id/linear_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -93,7 +150,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|right"
                     android:textColor="@color/color_999999"
-                    android:hint="点击选择类目"
+                    android:hint="请选择"
                     android:textSize="@dimen/sp_12" />
                 <ImageView
                     android:layout_width="@dimen/px_16"
@@ -101,7 +158,41 @@
                     android:layout_marginLeft="@dimen/px_14"
                     android:src="@drawable/ic_mine_arrow_right_gray" />
             </LinearLayout>
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/px_30"
+                android:layout_marginTop="@dimen/px_1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@color/color_ffffff">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="薪资"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_13"/>
+                <EditText
+                    android:id="@+id/et_salary"
+                    android:layout_width="@dimen/px_420"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_999999"
+                    android:singleLine="true"
+                    android:gravity="right"
+                    android:inputType="numberDecimal"
+                    android:maxLength="20"
+                    android:background="@null"
+                    android:hint="请填写薪资"
+                    android:textSize="@dimen/sp_12"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="元/月"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_13"
+                    android:layout_marginLeft="@dimen/px_14"/>
+            </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/px_60"
@@ -145,7 +236,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/px_60"
-                android:text="工作简介"
+                android:text="工作内容"
                 android:paddingLeft="@dimen/px_30"
                 android:gravity="center_vertical"
                 android:textSize="@dimen/sp_13"
@@ -165,7 +256,7 @@
                 android:id="@+id/bt_save"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/px_90"
-                android:layout_marginTop="@dimen/px_100"
+                android:layout_marginTop="@dimen/px_50"
                 android:layout_marginBottom="@dimen/px_50"
                 android:layout_marginLeft="@dimen/px_30"
                 android:layout_marginRight="@dimen/px_30"

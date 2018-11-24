@@ -19,19 +19,21 @@ import java.lang.Override;
 public class PersonInfoActivity_ViewBinding implements Unbinder {
   private PersonInfoActivity target;
 
-  private View view2131230784;
+  private View view2131689799;
 
-  private View view2131231164;
+  private View view2131689812;
 
-  private View view2131230963;
+  private View view2131689766;
 
-  private View view2131230988;
+  private View view2131689798;
 
-  private View view2131230958;
+  private View view2131689801;
 
-  private View view2131230946;
+  private View view2131689804;
 
-  private View view2131230953;
+  private View view2131689806;
+
+  private View view2131689808;
 
   @UiThread
   public PersonInfoActivity_ViewBinding(PersonInfoActivity target) {
@@ -44,7 +46,15 @@ public class PersonInfoActivity_ViewBinding implements Unbinder {
 
     View view;
     target.tvTitle = Utils.findRequiredViewAsType(source, R.id.tb_TvBarTitle, "field 'tvTitle'", TextView.class);
-    target.ivHead = Utils.findRequiredViewAsType(source, R.id.civ_head, "field 'ivHead'", CircleImageView.class);
+    view = Utils.findRequiredView(source, R.id.civ_head, "field 'ivHead' and method 'MyOnclick'");
+    target.ivHead = Utils.castView(view, R.id.civ_head, "field 'ivHead'", CircleImageView.class);
+    view2131689799 = view;
+    view.setOnClickListener(new DebouncingOnClickListener() {
+      @Override
+      public void doClick(View p0) {
+        target.MyOnclick(p0);
+      }
+    });
     target.ivBoy = Utils.findRequiredViewAsType(source, R.id.iv_sex_boy, "field 'ivBoy'", ImageView.class);
     target.ivGirl = Utils.findRequiredViewAsType(source, R.id.iv_sex_girl, "field 'ivGirl'", ImageView.class);
     target.tvEducation = Utils.findRequiredViewAsType(source, R.id.tv_education, "field 'tvEducation'", TextView.class);
@@ -57,7 +67,7 @@ public class PersonInfoActivity_ViewBinding implements Unbinder {
     target.etCharacter = Utils.findRequiredViewAsType(source, R.id.et_character, "field 'etCharacter'", EditText.class);
     view = Utils.findRequiredView(source, R.id.bt_sureEdit, "field 'btSureEdit' and method 'MyOnclick'");
     target.btSureEdit = Utils.castView(view, R.id.bt_sureEdit, "field 'btSureEdit'", Button.class);
-    view2131230784 = view;
+    view2131689812 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -65,7 +75,7 @@ public class PersonInfoActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.tb_IvReturn, "method 'MyOnclick'");
-    view2131231164 = view;
+    view2131689766 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -73,7 +83,7 @@ public class PersonInfoActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.linear_head, "method 'MyOnclick'");
-    view2131230963 = view;
+    view2131689798 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -81,7 +91,7 @@ public class PersonInfoActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.linear_sex, "method 'MyOnclick'");
-    view2131230988 = view;
+    view2131689801 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -89,7 +99,7 @@ public class PersonInfoActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.linear_education, "method 'MyOnclick'");
-    view2131230958 = view;
+    view2131689804 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -97,7 +107,7 @@ public class PersonInfoActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.linear_birth, "method 'MyOnclick'");
-    view2131230946 = view;
+    view2131689806 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -105,7 +115,7 @@ public class PersonInfoActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.linear_city, "method 'MyOnclick'");
-    view2131230953 = view;
+    view2131689808 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -135,19 +145,21 @@ public class PersonInfoActivity_ViewBinding implements Unbinder {
     target.etCharacter = null;
     target.btSureEdit = null;
 
-    view2131230784.setOnClickListener(null);
-    view2131230784 = null;
-    view2131231164.setOnClickListener(null);
-    view2131231164 = null;
-    view2131230963.setOnClickListener(null);
-    view2131230963 = null;
-    view2131230988.setOnClickListener(null);
-    view2131230988 = null;
-    view2131230958.setOnClickListener(null);
-    view2131230958 = null;
-    view2131230946.setOnClickListener(null);
-    view2131230946 = null;
-    view2131230953.setOnClickListener(null);
-    view2131230953 = null;
+    view2131689799.setOnClickListener(null);
+    view2131689799 = null;
+    view2131689812.setOnClickListener(null);
+    view2131689812 = null;
+    view2131689766.setOnClickListener(null);
+    view2131689766 = null;
+    view2131689798.setOnClickListener(null);
+    view2131689798 = null;
+    view2131689801.setOnClickListener(null);
+    view2131689801 = null;
+    view2131689804.setOnClickListener(null);
+    view2131689804 = null;
+    view2131689806.setOnClickListener(null);
+    view2131689806 = null;
+    view2131689808.setOnClickListener(null);
+    view2131689808 = null;
   }
 }

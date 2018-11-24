@@ -9,5 +9,5 @@
     <include layout="@layout/include_toolbar_activity" />
 
 
-    <include layout="@layout/include_swiperecyclerview_refresh" />
+    <include layout="@layout/include_dropdownmenu" />
 </LinearLayout>

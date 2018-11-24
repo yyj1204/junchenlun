@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:background="@color/color_f0f0f0"
-    tools:context="com.wktx.www.emperor.ui.activity.staff.StaffFireActivity">
+    tools:context="com.wktx.www.emperor.ui.activity.staff.fire.StaffFireActivity">
 
     <include layout="@layout/include_toolbar_activity" />
 
@@ -128,7 +128,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="已合作时间："
+            android:text="已合作天数："
             android:layout_weight="1"
             android:textSize="@dimen/sp_13"
             android:textColor="@color/color_a0a0a0"/>
@@ -176,7 +176,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="应发工资："
+            android:text="应支付工资："
             android:layout_weight="1"
             android:textSize="@dimen/sp_13"
             android:textColor="@color/color_a0a0a0"/>

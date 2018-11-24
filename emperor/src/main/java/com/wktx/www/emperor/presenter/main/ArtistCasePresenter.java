@@ -36,7 +36,7 @@ public class ArtistCasePresenter extends ABasePresenter<IArtistCaseView> {
                                 super.onError(e);
                                 LogUtil.error("获取案例检索条件","e=="+e.getMessage());
 
-                                if (e.getMessage().equals("无法解析该域名")){
+                                if ("无法解析该域名".equals(e.getMessage())){
                                     getmMvpView().onGetConditionFailureResult(ConstantUtil.TOAST_NONET);
                                 }else {
                                     getmMvpView().onGetConditionFailureResult(e.getMessage());
@@ -64,7 +64,7 @@ public class ArtistCasePresenter extends ABasePresenter<IArtistCaseView> {
     public void onGetWorksList(int page){
         HttpParams httpParams = new HttpParams();
         if (getmMvpView().getUserInfo()!=null){
-            httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+            httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
             httpParams.put("token", getmMvpView().getUserInfo().getToken());
         }
         httpParams.put("dp", getmMvpView().getDesignTypeId());
@@ -87,6 +87,8 @@ public class ArtistCasePresenter extends ABasePresenter<IArtistCaseView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }

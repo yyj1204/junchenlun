@@ -6,7 +6,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.wktx.www.subjects.R;
-import com.wktx.www.subjects.apiresult.main.message.MessageListInfoData;
+import com.wktx.www.subjects.apiresult.main.notification.MessageListInfoData;
 import com.wktx.www.subjects.utils.DateUtil;
 
 /**
@@ -28,7 +28,7 @@ public class NotificationRemindListAdapter extends BaseQuickAdapter<MessageListI
         TextView tvState = helper.getView(R.id.tv_state);
         if (item.getStatus().equals("0")){//未查看
             tvState.setTextColor(mContext.getResources().getColor(R.color.color_fa716f));
-        }else if (item.getStatus().equals("0")){//已查看
+        }else if (item.getStatus().equals("1")){//已查看
             tvState.setTextColor(mContext.getResources().getColor(R.color.color_999999));
         }
     }

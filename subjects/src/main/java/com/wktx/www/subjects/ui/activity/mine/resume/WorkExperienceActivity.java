@@ -3,7 +3,9 @@ package com.wktx.www.subjects.ui.activity.mine.resume;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -14,7 +16,6 @@ import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.bigkoo.pickerview.listener.CustomListener;
 import com.wktx.www.subjects.R;
-import com.wktx.www.subjects.apiresult.login.AccountInfoData;
 import com.wktx.www.subjects.apiresult.main.condition.ConditionBean;
 import com.wktx.www.subjects.apiresult.mine.resume.ResumeInfoData;
 import com.wktx.www.subjects.apiresult.mine.resume.WorkExperienceBean;
@@ -24,7 +25,6 @@ import com.wktx.www.subjects.presenter.mine.resume.WorkExperiencePresenter;
 import com.wktx.www.subjects.ui.view.mine.resume.IWorkExperienceView;
 import com.wktx.www.subjects.utils.ConstantUtil;
 import com.wktx.www.subjects.utils.DateUtil;
-import com.wktx.www.subjects.utils.LoginUtil;
 import com.wktx.www.subjects.utils.MyUtils;
 import com.wktx.www.subjects.utils.ToastUtil;
 
@@ -47,6 +47,12 @@ public class WorkExperienceActivity extends ABaseActivity<IWorkExperienceView,Wo
     EditText etPositionName;
     @BindView(R.id.et_companyName)
     EditText etCompanyName;
+    @BindView(R.id.et_companyUrl)
+    EditText etCompanyUrl;
+    @BindView(R.id.et_salary)
+    EditText etSalary;
+    @BindView(R.id.tv_platform)
+    TextView tvPlatform;
     @BindView(R.id.tv_category)
     TextView tvCategory;
     @BindView(R.id.et_workContent)
@@ -74,12 +80,14 @@ public class WorkExperienceActivity extends ABaseActivity<IWorkExperienceView,Wo
     private long endDateLong;//结束时间的时间戳
 
     private OptionsPickerView pvCustomOptions;//自义定选择器
+    private String platformId;//平台ID
     private String categoryId;//类目ID
+    private ArrayList<ConditionBean> platformBeans = new ArrayList<>();//平台名称
     private ArrayList<ConditionBean> categoryBeans = new ArrayList<>();//类目名称
     private ArrayList<String> optionsItemStrs = new ArrayList<>();//选择器字符串集合
 
 
-    @OnClick({R.id.tb_IvReturn,R.id.linear_category,R.id.tv_beginTime,R.id.tv_endTime,R.id.bt_save,R.id.bt_delete})
+    @OnClick({R.id.tb_IvReturn,R.id.linear_platform,R.id.linear_category,R.id.tv_beginTime,R.id.tv_endTime,R.id.bt_save,R.id.bt_delete})
     public void MyOnclick(View view) {
         //将输入法隐藏
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -87,6 +95,9 @@ public class WorkExperienceActivity extends ABaseActivity<IWorkExperienceView,Wo
         switch (view.getId()) {
             case R.id.tb_IvReturn:
                 finish();
+                break;
+            case R.id.linear_platform://平台
+                ShowCustomPickerView(tvPlatform,platformBeans);
                 break;
             case R.id.linear_category://类目
                 ShowCustomPickerView(tvCategory,categoryBeans);
@@ -103,23 +114,34 @@ public class WorkExperienceActivity extends ABaseActivity<IWorkExperienceView,Wo
                 }
                 //判断输入框格式
                 if (TextUtils.isEmpty(getPositionName())){
-                     ToastUtil.myToast("请输入职位名称！");
+                    ToastUtil.myToast("请输入职位名称！");
                     etPositionName.requestFocus();
                 }else if (TextUtils.isEmpty(getCompanyName())){
-                     ToastUtil.myToast("请输入公司名称！");
+                    ToastUtil.myToast("请输入公司名称！");
                     etCompanyName.requestFocus();
+                }else if (TextUtils.isEmpty(getCompanyURL())){
+                    ToastUtil.myToast("请输入公司网址！");
+                    etCompanyUrl.requestFocus();
+                }else if (TextUtils.isEmpty(getSalary())){
+                    ToastUtil.myToast("请输入薪资！");
+                    etSalary.requestFocus();
                 }else if (TextUtils.isEmpty(getWorkContent())){
-                     ToastUtil.myToast("请输入工作简介！");
+                    ToastUtil.myToast("请输入工作简介！");
                     etWorkContent.requestFocus();
+                }else if (TextUtils.isEmpty(platformId)){
+                    ToastUtil.myToast("请选择平台！");
                 }else if (TextUtils.isEmpty(categoryId)){
-                     ToastUtil.myToast("请选择平台！");
+                    ToastUtil.myToast("请选择类目！");
                 }else {
                     //将新增或者编辑后的工作经历实体类，添加到工作经历列表里
                     WorkExperienceBean workExperienceBean = new WorkExperienceBean();
                     WorkExperienceBean.WorkDateBean workDateBean = new WorkExperienceBean.WorkDateBean();
+                    workExperienceBean.setBgap(platformId);
                     workExperienceBean.setBgat(categoryId);
                     workExperienceBean.setPosition(getPositionName());
                     workExperienceBean.setCompany(getCompanyName());
+                    workExperienceBean.setStore(getCompanyURL());
+                    workExperienceBean.setMonthly_money(getSalary());
                     workExperienceBean.setIntroduction(getWorkContent());
                     workDateBean.setStart_date(getBeginTime());
                     workDateBean.setEnd_date(getEndTime());
@@ -155,6 +177,8 @@ public class WorkExperienceActivity extends ABaseActivity<IWorkExperienceView,Wo
         //初始化开始结束时间
         initTime();
         initData();
+        //薪资输入框（小数点限制两位数）
+        setEtListener(etSalary);
     }
 
     @Override
@@ -174,7 +198,7 @@ public class WorkExperienceActivity extends ABaseActivity<IWorkExperienceView,Wo
             tvTitle.setText(R.string.title_experience_add);
             btSave.setText("添加");
             btDelete.setVisibility(View.GONE);
-        }else {//编辑工作经历---获取工作经历信息
+        }else {//编辑工作经历
             tvTitle.setText(R.string.title_experience_edit);
             btSave.setText("保存");
             btDelete.setVisibility(View.VISIBLE);
@@ -183,6 +207,48 @@ public class WorkExperienceActivity extends ABaseActivity<IWorkExperienceView,Wo
         //获取参数信息（平台、风格、类目、职位）
         getPresenter().getInfo();
     }
+
+    //输入框的监听事件
+    private void setEtListener(final EditText et) {
+        et.addTextChangedListener(new TextWatcher() {
+            @Override// 输入文本之前的状态
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override// 输入文字中的状态
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //限制金额输入框格式
+                if (s.toString().contains(".")) {
+                    //判断小数点的位置大于倒3，将输入框的字符串截取到小数点后两位数
+                    if (s.length() - 1 - s.toString().indexOf(".") > 2) {
+                        s = s.toString().subSequence(0, s.toString().indexOf(".") + 3);
+                        et.setText(s);
+                        et.setSelection(s.length());
+                    }
+                }
+
+                //判断字符串的第一位是小数点，则在小数点前面加个0
+                if (s.toString().trim().substring(0).equals(".")) {
+                    s = "0" + s;
+                    et.setText(s);
+                    et.setSelection(2);
+                }
+
+                //判断字符串第一位是0
+                if (s.toString().startsWith("0") && s.toString().trim().length() > 1) {
+                    //如果第二位不是小数点，限制不能输入
+                    if (!s.toString().substring(1, 2).equals(".")) {
+                        et.setText(s.subSequence(0, 1));
+                        et.setSelection(1);
+                        return;
+                    }
+                }
+            }
+            @Override// 输入文字后的状态
+            public void afterTextChanged(Editable s) {
+            }
+        });
+    }
+
 
     /**
      * 初始化开始结束时间
@@ -221,13 +287,13 @@ public class WorkExperienceActivity extends ABaseActivity<IWorkExperienceView,Wo
                     if(selectDateLong <= curDateLong ) {
                         //判断开始日期不能在结束日期之后
                         if (selectDateLong > endDateLong){
-                             ToastUtil.myToast("开始时间需在结束时间之前!");
+                            ToastUtil.myToast("开始时间需在结束时间之前!");
                         }else {
                             beginDateLong = selectDateLong;//赋值，用在结束日期做判断
                             tvDate.setText(selectDateStr);
                         }
                     }else {
-                         ToastUtil.myToast("开始时间不能超过当前日期!");
+                        ToastUtil.myToast("开始时间不能超过当前日期!");
                     }
                 }else {//如果是结束时间，则选中的日期不能在当前日期之后
                     if(selectDateLong <= curDateLong ) {
@@ -236,10 +302,10 @@ public class WorkExperienceActivity extends ABaseActivity<IWorkExperienceView,Wo
                             endDateLong = selectDateLong;//赋值，用在开始日期做判断
                             tvDate.setText(selectDateStr);
                         }else {
-                             ToastUtil.myToast("结束时间需在开始时间之后!");
+                            ToastUtil.myToast("结束时间需在开始时间之后!");
                         }
                     }else {
-                         ToastUtil.myToast("结束时间不能超过当前日期!");
+                        ToastUtil.myToast("结束时间不能超过当前日期!");
                     }
                 }
             }
@@ -273,7 +339,11 @@ public class WorkExperienceActivity extends ABaseActivity<IWorkExperienceView,Wo
                 //返回的分别是三个级别的选中位置
                 String tx = list.get(options1).getName();
                 tv.setText(tx);
-                categoryId = list.get(options1).getId();
+                if (tv == tvPlatform){//平台
+                    platformId = list.get(options1).getId();
+                }else if (tv == tvCategory){//类目
+                    categoryId = list.get(options1).getId();
+                }
             }
         })
                 .setLayoutRes(R.layout.widget_custom_pickerview, new CustomListener() {
@@ -312,17 +382,20 @@ public class WorkExperienceActivity extends ABaseActivity<IWorkExperienceView,Wo
      * IWorkExperienceView
      */
     @Override
-    public AccountInfoData getUserInfo() {
-        AccountInfoData userInfo = LoginUtil.getinit().getUserInfo();
-        return userInfo;
-    }
-    @Override
     public String getPositionName() {
         return etPositionName.getText().toString().trim();
     }
     @Override
     public String getCompanyName() {
         return etCompanyName.getText().toString().trim();
+    }
+    @Override
+    public String getCompanyURL() {
+        return etCompanyUrl.getText().toString().trim();
+    }
+    @Override
+    public String getSalary() {
+        return etSalary.getText().toString().trim();
     }
     @Override
     public String getBeginTime() {
@@ -338,12 +411,22 @@ public class WorkExperienceActivity extends ABaseActivity<IWorkExperienceView,Wo
     }
     @Override
     public void onRequestSuccess(ConditionInfoData tData) {
+        platformBeans = tData.getBgapList();
         categoryBeans = tData.getBgatList();
-        //如果是编辑，则设置控件数据
+        //如果是编辑，则设置控件数据---工作经历信息
         if (!isAdd){
             WorkExperienceBean workExperienceBean = workExperienceList.get(position);
             etPositionName.setText(workExperienceBean.getPosition());
             etCompanyName.setText(workExperienceBean.getCompany());
+            etCompanyUrl.setText(workExperienceBean.getStore());
+            etSalary.setText(workExperienceBean.getMonthly_money());
+            //平台
+            platformId = workExperienceBean.getBgap();
+            for (int i = 0; i <platformBeans.size() ; i++) {
+                if (platformBeans.get(i).getId().equals(platformId)){
+                    tvPlatform.setText(platformBeans.get(i).getName());
+                }
+            }
             //类目
             categoryId = workExperienceBean.getBgat();
             for (int i = 0; i <categoryBeans.size() ; i++) {
@@ -359,13 +442,13 @@ public class WorkExperienceActivity extends ABaseActivity<IWorkExperienceView,Wo
     @Override
     public void onRequestFailure(String result) {
         finish();
-         ToastUtil.myToast(result);
+        ToastUtil.myToast(result);
     }
     @Override
     public void onChangeWorkExperienceResult(boolean isSuccess, String result) {
         btSave.setEnabled(true);
         btDelete.setEnabled(true);
-         ToastUtil.myToast(result);
+        ToastUtil.myToast(result);
         //成功-关闭界面，失败-工作经历列表恢复原来数据
         if (isSuccess){
             finish();

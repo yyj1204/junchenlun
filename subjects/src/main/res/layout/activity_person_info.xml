@@ -136,6 +136,7 @@
                     android:textColor="@color/color_999999"
                     android:singleLine="true"
                     android:gravity="right"
+                    android:hint="请选择"
                     android:textSize="@dimen/sp_12"/>
                 <ImageView
                     android:layout_width="wrap_content"
@@ -167,6 +168,7 @@
                     android:textColor="@color/color_999999"
                     android:singleLine="true"
                     android:gravity="right"
+                    android:hint="请选择"
                     android:textSize="@dimen/sp_12"/>
                 <ImageView
                     android:layout_width="wrap_content"
@@ -198,6 +200,7 @@
                     android:textColor="@color/color_999999"
                     android:singleLine="true"
                     android:gravity="right"
+                    android:hint="请选择"
                     android:textSize="@dimen/sp_12"/>
                 <ImageView
                     android:layout_width="wrap_content"
@@ -292,34 +295,24 @@
                     android:textSize="@dimen/sp_12"/>
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/linear_character"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="性格介绍"
                 android:padding="@dimen/px_30"
-                android:layout_marginTop="@dimen/px_1"
-                android:background="@drawable/selector_mine_linearlayout"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="性格"
-                    android:textColor="@color/color_000000"
-                    android:textSize="@dimen/sp_13"/>
-                <EditText
-                    android:id="@+id/et_character"
-                    android:layout_width="@dimen/px_500"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/color_999999"
-                    android:singleLine="true"
-                    android:gravity="right"
-                    android:background="@null"
-                    android:maxLength="20"
-                    android:hint="请填写性格"
-                    android:textSize="@dimen/sp_12"/>
-            </LinearLayout>
+                android:textSize="@dimen/sp_13"
+                android:textColor="@color/color_000000"/>
+            <EditText
+                android:id="@+id/et_character"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_280"
+                android:background="@color/color_ffffff"
+                android:hint="请填写您的性格"
+                android:textSize="@dimen/sp_13"
+                android:padding="@dimen/px_30"
+                android:gravity="top|left"
+                android:textColor="@color/color_999999"/>
         </LinearLayout>
     </ScrollView>
     <Button

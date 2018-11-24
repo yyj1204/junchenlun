@@ -17,9 +17,9 @@ public abstract class ABasePresenter<V extends IBaseView> {
      * 绑定V层
      * @param view
      */
-    public void attachMvpView(V view,Context Context){
+    public void attachMvpView(V view,Context mContext){
         this.mMvpView = view;
-        this.mContext = Context;
+        this.mContext = mContext;
     }
 
     /**
@@ -34,7 +34,11 @@ public abstract class ABasePresenter<V extends IBaseView> {
      * @return
      */
     public V getmMvpView() {
-        return mMvpView;
+        if (!isViewAttached()) {
+            throw new IllegalStateException("view 不能为空!");
+        }else {
+            return mMvpView;
+        }
     }
 
     /**

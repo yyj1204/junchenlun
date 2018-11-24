@@ -1,5 +1,6 @@
 package com.wktx.www.emperor.presenter.staff;
 
+import com.wktx.www.emperor.apiresult.CommonSimpleData;
 import com.wktx.www.emperor.apiresult.CustomApiResult;
 import com.wktx.www.emperor.apiresult.mine.condition.ConditionData;
 import com.wktx.www.emperor.apiresult.staff.staff.StaffData;
@@ -97,7 +98,7 @@ public class StaffPresenter extends ABasePresenter<IStaffView> {
     //获取我的员工(雇佣记录)列表
     public void onGetStaffList(int page){
         HttpParams httpParams = new HttpParams();
-        httpParams.put("user_id", String.valueOf(getmMvpView().getUserInfo().getUser_id()));
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
         httpParams.put("token", getmMvpView().getUserInfo().getToken());
         httpParams.put("tow", getmMvpView().getJobType());
         httpParams.put("type", getmMvpView().getHireState());
@@ -117,6 +118,8 @@ public class StaffPresenter extends ABasePresenter<IStaffView> {
 
                                 if (e.getMessage().equals("无法解析该域名")){
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
                                 }else {
                                     getmMvpView().onRequestFailure(e.getMessage());
                                 }
@@ -135,6 +138,50 @@ public class StaffPresenter extends ABasePresenter<IStaffView> {
                                     }
                                 }else {
                                     getmMvpView().onRequestFailure(ConstantUtil.TOAST_ERROR);
+                                }
+                            }
+                        }) {});
+    }
+
+    //取消雇佣订单
+    public void onCancelOrders(String hireId){
+        HttpParams httpParams = new HttpParams();
+        httpParams.put("user_id", getmMvpView().getUserInfo().getUser_id());
+        httpParams.put("token", getmMvpView().getUserInfo().getToken());
+        httpParams.put("id", hireId);
+
+        LogUtil.error("取消雇佣订单","json==="+httpParams.toString());
+
+        EasyHttp.post(ApiURL.COMMON_URL)
+                .params(ApiURL.PARAMS_KEY,ApiURL.PARAMS_HIRE_CANCELORDERS)
+                .params(httpParams)
+                .execute(new CallBackProxy<CustomApiResult<CommonSimpleData>, CommonSimpleData>
+                        (new ProgressDialogCallBack<CommonSimpleData>(mProgressDialog) {
+                            @Override
+                            public void onError(ApiException e) {
+                                super.onError(e);
+                                LogUtil.error("取消雇佣订单","e=="+e.getMessage());
+
+                                if (e.getMessage().equals("无法解析该域名")){
+                                    getmMvpView().onCancelOrdersResult(false,ConstantUtil.TOAST_NONET);
+                                }else if (e.getMessage().equals("非法请求：登录信息过期")||e.getMessage().equals("非法请求：未登录")){
+                                    getmMvpView().onLoginFailure(e.getMessage());
+                                }else {
+                                    getmMvpView().onCancelOrdersResult(false,e.getMessage());
+                                }
+                            }
+                            @Override
+                            public void onSuccess(CommonSimpleData result) {
+                                if (result != null) {
+                                    LogUtil.error("取消雇佣订单","result=="+result.toString());
+
+                                    if (result.getCode()==0){//取消雇佣订单成功
+                                        getmMvpView().onCancelOrdersResult(true,result.getMsg());
+                                    }else {//取消雇佣订单失败
+                                        getmMvpView().onCancelOrdersResult(false,result.getMsg());
+                                    }
+                                }else {
+                                    getmMvpView().onCancelOrdersResult(false,ConstantUtil.TOAST_ERROR);
                                 }
                             }
                         }) {});
